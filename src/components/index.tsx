@@ -1,5 +1,4 @@
 import '../theme/index.less';
-// import './styles/index.less';
 
 import Button from "./Button/index";
 import Message from "./Message/index";
@@ -9,6 +8,7 @@ import Modal from "./Modal/index";
 import Drawer from "./Drawer/index";
 import Card from "./Card/index";
 import Select from "./Select/index";
+import SideMenu from "./SideMenu/index";
 import { GlobalContext } from './config/globalContext'
 
 export {
@@ -20,5 +20,6 @@ export {
   Drawer,
   Card,
   Select,
+  SideMenu,
   GlobalContext
 };

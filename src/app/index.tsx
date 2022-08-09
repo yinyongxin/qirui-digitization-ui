@@ -8,18 +8,60 @@ import TabsExemple from './exemples/TabsExemple'
 import CardExemple from './exemples/CardExemple'
 import SelectExemple from './exemples/SelectExemple'
 import './index.less'
+import { SideMenu } from '../components'
 
 function App() {
   return (
     <div className='app'>
-      <ModalExemple />
-      <DrawerExemple />
-      <ButtonExemple />
-      <IconExemple />
-      <MessageExemple />
-      <TabsExemple />
-      <CardExemple />
-      <SelectExemple />
+      <SideMenu
+        defaultOpenKeys={['2', '3']}
+        defaultActiveKeys={['1']}
+        menuTree={[
+          {
+            title: 'title1',
+            activeKey: '1',
+            icon: 'bars',
+          },
+          {
+            title: 'title2',
+            activeKey: '2',
+            icon: 'bars',
+            children: [
+              {
+                title: 'title2-1',
+                activeKey: '2-1',
+              }
+            ]
+          },
+          {
+            title: 'title3',
+            activeKey: '3',
+            icon: 'bars',
+            children: [
+              {
+                title: 'title3-1',
+                activeKey: '3-1',
+                children: [
+                  {
+                    title: 'title3-1-1',
+                    activeKey: '3-1-1',
+                  }
+                ]
+              }
+            ]
+          }
+        ]}
+      />
+      <div>
+        <ModalExemple />
+        <DrawerExemple />
+        <ButtonExemple />
+        <IconExemple />
+        <MessageExemple />
+        <TabsExemple />
+        <CardExemple />
+        <SelectExemple />
+      </div>
     </div>
   )
 }

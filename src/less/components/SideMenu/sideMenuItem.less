@@ -1,0 +1,26 @@
+@prefix-sideMenuItem: ~'@{nameSpace}-sideMenuItem';
+
+.@{prefix-sideMenuItem} {
+  .flex();
+  .align-center();
+  .cursor-pointer();
+  width: 100%;
+  height: 56px;
+  padding: 0 17px 0 24px;
+  color: @design-neutral-color-2;
+  gap: 15px;
+  transition: all var(--animation-time-base);
+  .@{prefix-sideMenuItem}-title {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &:hover {
+    background-color: @design-base-color-10;
+    color: @design-base-color-5;
+  }
+}
+.@{prefix-sideMenuItem}-active {
+  background-color: @design-base-color-10;
+  color: @design-base-color-5;
+}
