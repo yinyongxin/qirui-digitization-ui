@@ -1,5 +1,6 @@
 import React, { } from 'react'
 import ModalExemple from './exemples/ModalExemple'
+import DrawerExemple from './exemples/DrawerExemple'
 import ButtonExemple from './exemples/ButtonExemple'
 import IconExemple from './exemples/IconExemple'
 import MessageExemple from './exemples/MessageExemple'
@@ -12,6 +13,7 @@ function App() {
   return (
     <div className='app'>
       <ModalExemple />
+      <DrawerExemple />
       <ButtonExemple />
       <IconExemple />
       <MessageExemple />
