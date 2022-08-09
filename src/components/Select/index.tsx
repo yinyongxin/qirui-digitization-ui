@@ -34,9 +34,14 @@ const Select: FC<SelectPropsType> = (props) => {
   const selectClassName = getClassNames([
     `${prefixCls}`,
   ])
+
   const selectMainClassName = getClassNames([
     `${prefixCls}-main`,
     optionsVisible ? `${prefixCls}-main-border` : '',
+  ])
+
+  const iconClassName = getClassNames([
+    `${prefixCls}-icon`,
   ])
 
   /**
@@ -80,9 +85,7 @@ const Select: FC<SelectPropsType> = (props) => {
 
   }
 
-  const iconClassName = getClassNames([
-    `${prefixCls}-icon`,
-  ])
+
 
   const contentRender = () => {
 
@@ -109,7 +112,9 @@ const Select: FC<SelectPropsType> = (props) => {
                 <>
                   {valuesItemLabel}
                   <Icon
-                    onClick={() => {
+                    onClick={(event) => {
+                      event.preventDefault()
+                      event.stopPropagation()
                       updataValueFn('delete', {
                         key: valuesMapKey
                       })
@@ -195,7 +200,9 @@ const Select: FC<SelectPropsType> = (props) => {
           return (
             <div
               key={option.value}
-              onClick={() => optionHandleClick(option)}
+              onClick={() => {
+                optionHandleClick(option)
+              }}
               className={getClassNames(optionClassNameArr)}
             >
               {resOption}
@@ -206,7 +213,7 @@ const Select: FC<SelectPropsType> = (props) => {
     )
   }
   const selectHandleClick = () => {
-    !optionsVisible && setOptionsVisible(true)
+    setOptionsVisible(!optionsVisible)
   }
 
   const getValue = () => {
