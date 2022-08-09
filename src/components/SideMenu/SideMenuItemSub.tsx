@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from "react"
+import React, { FC, useContext, useEffect, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
 import Icon from "../Icon"
 import { getClassNames } from "../utils/tools"
@@ -34,10 +34,10 @@ const SideMenuItemSub: FC<SideMenuItemSubPropsType> = (props, ref) => {
     let actives = []
     let newProps = omit(props, ['children'])
     if (isIn) {
-      actives = activeMenuSub.filter(item => item !== activeKey)
+      actives = [...new Set(activeMenuSub.filter(item => item !== activeKey))]
       setOpen(false)
     } else {
-      actives = [...activeMenuSub, activeKey]
+      actives = [...new Set([...activeMenuSub, activeKey])]
       setOpen(true)
     }
     setActiveMenuSub && setActiveMenuSub(actives)
@@ -46,11 +46,14 @@ const SideMenuItemSub: FC<SideMenuItemSubPropsType> = (props, ref) => {
   }
 
 
-  const [open, setOpen] = useState(!!activeMenuSub.find((item) => item === activeKey))
+  const [open, setOpen] = useState(isIn)
 
   const sideMenuItemSubClassName = getClassNames([
     `${prefixCls}`,
   ])
+
+  useEffect(() => {
+  }, [open])
 
   return (
     <div>

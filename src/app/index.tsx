@@ -14,8 +14,8 @@ function App() {
   return (
     <div className='app'>
       <SideMenu
-        defaultOpenKeys={['2', '3']}
         defaultActiveKeys={['1']}
+        allOpen
         menuTree={[
           {
             title: 'title1',

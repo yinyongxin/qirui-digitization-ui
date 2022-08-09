@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from "react"
+import React, { FC, Key, useContext, useEffect, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
 import { getClassNames } from "../utils/tools"
 import { ActiveKeyType, MenuTreeItemType, SideMenuPropsType } from "./interface"
@@ -12,6 +12,8 @@ const SideMenu: FC<SideMenuPropsType> = (props, ref) => {
     classNamePrefix
   } = useContext(GlobalContext);
 
+  const prefixCls = `${classNamePrefix}-sideMenu`
+
   const {
     defaultActiveKeys,
     defaultOpenKeys,
@@ -19,23 +21,30 @@ const SideMenu: FC<SideMenuPropsType> = (props, ref) => {
     activeMenuItemChange,
     activeMenuSubChange,
     onMenuItemClick,
-    onMenuSubClick
+    onMenuSubClick,
+    allOpen = false
   } = props
 
+
+  const getAllMenuSub = (arrs: MenuTreeItemType[], resArr: Key[]) => {
+    let newArr = resArr
+    arrs.forEach(arr => {
+      if (arr.children && arr.children.length !== 0) {
+        newArr.push(arr.activeKey)
+        getAllMenuSub(arr.children, newArr)
+      }
+    })
+    return newArr
+  }
+
   const [activeMenu, setActiveMenu] = useState(defaultActiveKeys || [])
-  const [activeMenuSub, setActiveMenuSub] = useState(defaultOpenKeys || [])
+  const [activeMenuSub, setActiveMenuSub] = useState((allOpen ? getAllMenuSub(menuTree, []) : defaultOpenKeys) || [])
 
-  const prefixCls = `${classNamePrefix}-sideMenu`
-
-  // const activeMenuTiemChangeHandle = (activeKeys: ActiveKeyType[]) => {
-  //   setActiveMenu(activeKeys)
-  //   activeMenuItemChange && activeMenuItemChange(activeKeys)
-  // }
-  // const activeMenuSubChangeHandle = (activeKeys: ActiveKeyType[]) => {
-  //   setActiveMenuSub(activeKeys)
-  //   activeMenuSubChange && activeMenuSubChange(activeKeys)
-  // }
-
+  /**
+   * 
+   * @param arrs 获取组件树递归方法
+   * @returns 
+   */
   const getMenus = (arrs: MenuTreeItemType[]) => {
     return arrs.map(arr => {
       if (arr.children && arr.children.length !== 0) {
@@ -58,6 +67,9 @@ const SideMenu: FC<SideMenuPropsType> = (props, ref) => {
   const sideMenuClassName = getClassNames([
     `${prefixCls}`,
   ])
+
+  useEffect(() => {
+  }, [])
 
   return (
     <SideMenuComtext.Provider

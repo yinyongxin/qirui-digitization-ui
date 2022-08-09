@@ -30,6 +30,10 @@ export interface SideMenuBaseType {
    * MenuSub点击时触发
    */
   onMenuSubClick?: (item: SidePropsType) => void,
+   /**
+  * 是否默认全部展开
+  */
+  allOpen?: boolean,
 }
 
 export type SidePropsType ={
@@ -53,6 +57,7 @@ export type SidePropsType ={
    * 用于onMenuItemClick onMenuSubClick 事件统一处理参数
    */
   values?: Record<string, any>,
+
   render?: (item: SidePropsType, active: boolean) => ReactNode
 }
 

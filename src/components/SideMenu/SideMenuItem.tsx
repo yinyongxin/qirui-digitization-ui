@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from "react"
+import React, { FC, useContext, useEffect, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
 import Icon from "../Icon"
 import { getClassNames } from "../utils/tools"
@@ -26,12 +26,19 @@ const SideMenuItem: FC<SideMenuItemPropsType> = (props, ref) => {
     render
   } = props
 
+
+  /**
+   * menuItem被点击
+   */
   const handleClick = () => {
     setActiveMenu && setActiveMenu([activeKey])
     activeMenuItemChange && activeMenuItemChange([activeKey], props)
     onMenuItemClick && onMenuItemClick(props)
   }
 
+  /**
+   * 当前menuItem是否被选中
+   */
   const isActive = !!activeMenu.find((item) => item === activeKey)
 
   const sideMenuItemClassName = getClassNames([
@@ -40,6 +47,9 @@ const SideMenuItem: FC<SideMenuItemPropsType> = (props, ref) => {
       [`${prefixCls}-active`]: isActive
     }
   ])
+
+  useEffect(() => {
+  }, [])
 
   return (
     <div onClick={handleClick}>
