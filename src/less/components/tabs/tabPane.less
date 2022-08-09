@@ -1,0 +1,156 @@
+@prefix-tabPane: ~'@{nameSpace}-tabPane';
+
+.@{prefix-tabPane} {
+  color: @design-neutral-color;
+  font-size: @design-font-size-14;
+  position: relative;
+  .cursor-pointer();
+  
+}
+.@{prefix-tabPane}-line-base {
+  transition: all 0.3s;
+  border-bottom: @design-border-sm solid @design-neutral-color;
+  color: @design-neutral-color-2;
+  padding: 0 0 10px 0;
+  display: flex;
+  gap: 8px;
+  .@{prefix-tabPane}-line-base-num {
+    .special-number();
+    padding: 0px 4px;
+    background-color: @design-neutral-color-6;
+  }
+}
+.@{prefix-tabPane}-line-checked {
+  border-bottom-color: @design-base-color;
+  color: @design-base-color;
+  .@{prefix-tabPane}-line-checked-num {
+    border-bottom-color: @design-base-color;
+    color: @design-base-color;
+  }
+}
+.@{prefix-tabPane}-line-disabled {
+  .cursor-not-allowed();
+  border-bottom-color: @design-neutral-color-3;
+  color: @design-neutral-color-3;
+  .@{prefix-tabPane}-line-disabled-num {
+    border-bottom-color: @design-neutral-color-3;
+    color: @design-neutral-color-3;
+  }
+}
+
+.@{prefix-tabPane}-card-base {
+  color: @design-neutral-color;
+  height: 80px;
+  padding: 0 16px;
+  transition: color 0.3s;
+  .flex-center();
+}
+.@{prefix-tabPane}-card-checked {
+  color: @design-base-color;
+  background: linear-gradient(180deg, rgba(#18FEFE, 0.05) 0, rgba(#18FEFE, 0.5) 100%);
+  border-bottom: @design-border-base solid @design-base-color;
+}
+.@{prefix-tabPane}-card-disabled {
+  .cursor-not-allowed();
+  color: @design-neutral-color-3;
+}
+
+.@{prefix-tabPane}-miniCard-base {
+  .flex-center();
+  transition: all 0.3s;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  color: @design-neutral-color-2;
+  background-color: @design-neutral-color-6;
+}
+.@{prefix-tabPane}-miniCard-checked {
+  background-color: @design-base-color-10;
+  color: @design-base-color;
+}
+.@{prefix-tabPane}-miniCard-disabled {
+  .cursor-not-allowed();
+  color: @design-neutral-color-3;
+}
+.@{prefix-tabPane}-miniCard-check-border {
+  color: @design-base-color-8;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  .@{prefix-tabPane}-miniCard-check-border-top-left {
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-top: @design-border-sm solid @design-base-color;
+    border-left: @design-border-sm solid @design-base-color;
+  }
+  .@{prefix-tabPane}-miniCard-check-border-top-right {
+    position:absolute;
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    border-top: @design-border-sm solid @design-base-color;
+    border-right: @design-border-sm solid @design-base-color;
+  }
+  .@{prefix-tabPane}-miniCard-check-border-bottom-right {
+    position:absolute;
+    bottom: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    border-bottom: @design-border-sm solid @design-base-color;
+    border-right: @design-border-sm solid @design-base-color;
+  }
+  .@{prefix-tabPane}-miniCard-check-border-bottom-left {
+    position:absolute;
+    bottom: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-bottom: @design-border-sm solid @design-base-color;
+    border-left: @design-border-sm solid @design-base-color;
+  }
+}
+
+
+
+.@{prefix-tabPane}-text-base{
+  transition: all 0.3s;
+  position: relative;
+  color: @design-neutral-color-2;
+  padding: 0 12px;
+}
+.@{prefix-tabPane}-text-checked {
+  color: @design-base-color;
+}
+.@{prefix-tabPane}-text-disabled {
+  .cursor-not-allowed();
+  color: @design-neutral-color-3;
+}
+
+.@{prefix-tabPane}-text-check-left-border {
+  width: 2px;
+  height: calc(100% - 4px);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  bottom: 2px;
+  border-left: @design-border-base solid @design-base-color;
+  border-top: @design-border-base solid @design-base-color;
+  border-bottom: @design-border-base solid @design-base-color;
+}
+.@{prefix-tabPane}-text-check-right-border {
+  width: 2px;
+  height: calc(100% - 4px);
+  position: absolute;
+  right: 0;
+  top: 2px;
+  bottom: 2px;
+  border-right: @design-border-base solid @design-base-color;
+  border-top: @design-border-base solid @design-base-color;
+  border-bottom: @design-border-base solid @design-base-color;
+}

@@ -1,0 +1,111 @@
+@prefix-select: ~'@{nameSpace}-select';
+
+.@{prefix-select} {
+  color: var(--design-neutral-color-2);
+  position: relative;
+
+  .@{prefix-select}-main {
+    min-width: 120px;
+    height: 40px;
+    border: @design-neutral-color-5 solid @design-border-sm;
+    gap: 10px;
+    .flex();
+    .justify-between();
+    .cursor-pointer();
+    &:hover {
+      border: @design-base-color solid @design-border-sm;
+    }
+
+    .@{prefix-select}-placeholder {
+      margin-left: 12px;
+      color: var(--design-neutral-color-3);
+      .flex();
+      .align-center();
+    }
+
+    .@{prefix-select}-value {
+      margin-left: 12px;
+      .flex();
+      .align-center();
+    }
+
+    .@{prefix-select}-values {
+      .flex();
+      .align-center();
+    }
+
+    .@{prefix-select}-icon {
+      margin-right: 12px;
+      .flex();
+      .align-center();
+    }
+  }
+
+  .@{prefix-select}-multiple-values {
+    font-size: @design-font-size-12;
+    overflow: auto;
+    flex: 1;
+    .flex();
+    padding-left: 4px;
+    padding-right: 4px;
+    gap: 4px;
+    .@{prefix-select}-multiple-values-item {
+      .flex();
+      .justify-between();
+      .align-center();
+      gap: 12px;
+      color: @design-base-color;
+      background-color: @design-base-color-10;
+      padding: 0 6px;
+      flex-wrap: nowrap;
+      margin: 4px 0;
+    }
+  }
+
+  .@{prefix-select}-main-border {
+    border: @design-base-color solid @design-border-sm;
+  }
+  
+  .@{prefix-select}-options-centent {
+    position: absolute;
+    left: 0;
+    right: 0;
+    .@{prefix-select}-options {
+      border: @design-base-color solid @design-border-sm;
+      border-top: none;
+      .cursor-pointer();
+      .@{prefix-select}-option {
+        height: 40px;
+        padding: 0 24px;
+        .flex();
+        .align-center();
+
+        &:hover {
+          background-color: @design-neutral-color-7;
+        }
+      }
+
+      .@{prefix-select}-option-selected {
+        color: @design-base-color;
+        background-color: @design-base-color-10  !important;
+      }
+      
+    }
+    .@{prefix-select}-options-overflow-5 {
+      max-height: 240px;
+      overflow: auto;
+      .scrollbar();
+    }
+    .@{prefix-select}-option-end {
+      position: sticky;
+      position: -webkit-sticky;
+      height: 30px;
+      .flex();
+      .flex-center();
+      background-color: @design-base-color-9;
+      border: @design-base-color solid @design-border-sm;
+      bottom: 0;
+      cursor: pointer;
+    }
+  }
+}
