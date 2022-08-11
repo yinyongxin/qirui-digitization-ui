@@ -5,8 +5,8 @@ import styles from './styles.module.less'
 const TitleExemple = () => {
   return (
     <div className={styles.buttonExemple}>
-      <Title title="Title"></Title>
-      <Title type="tooltip" title="Title"></Title>
+      <Title title="基础 text"></Title>
+      <Title type="tooltip" title="带有下边框 tooltip"></Title>
     </div>
   )
 }

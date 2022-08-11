@@ -14,7 +14,10 @@ const Title: FC<TitlePropsType> = (props, ref) => {
   const {
     type = 'text',
     title,
-    tooltip
+    tooltip,
+    children,
+    className,
+    ...rest
   } = props
 
   const titleClassName = getClassNames([
@@ -34,8 +37,26 @@ const Title: FC<TitlePropsType> = (props, ref) => {
     </svg>
   )
 
+  const childrenRender = () => {
+    return children && (
+      <div className={`${prefixCls}-children`}>
+        {children}
+      </div>
+    )
+  }
+
+  const tooltipBorderRender = () => {
+    return type === 'tooltip' && (
+      <div className={`${prefixCls}-bottom-border`}>
+        <div className={`${prefixCls}-bottom-border-left`}></div>
+        <div className={`${prefixCls}-bottom-border-center`}></div>
+        <div className={`${prefixCls}-bottom-border-right`}></div>
+      </div>
+    )
+  }
+
   return (
-    <h3 className={titleClassName}>
+    <h3 {...rest} className={`${titleClassName} ${className}`}>
       <div className={`${prefixCls}-main`}>
         <div className={`${prefixCls}-title`}>{title}</div>
         {type === 'tooltip' && (
@@ -44,13 +65,8 @@ const Title: FC<TitlePropsType> = (props, ref) => {
           </div>
         )}
       </div>
-      {type === 'tooltip' && (
-        <div className={`${prefixCls}-bottom-border`}>
-          <div className={`${prefixCls}-bottom-border-left`}></div>
-          <div className={`${prefixCls}-bottom-border-center`}></div>
-          <div className={`${prefixCls}-bottom-border-right`}></div>
-        </div>
-      )}
+      {tooltipBorderRender()}
+      {childrenRender()}
     </h3>
   )
 }
