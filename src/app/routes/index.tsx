@@ -1,8 +1,9 @@
 import React from 'react';
 import { RouteObject } from 'react-router-dom';
 import App from '../index'
-import ButtonExemple from '../exemples/Button'
+import ButtonExemple from '../exemples/ButtonExemple'
 import IconExemple from '../exemples/IconExemple'
+import TitleExemple from '../exemples/TitleExemple'
 
 export const routes: RouteObject[] = [
   {
@@ -10,12 +11,16 @@ export const routes: RouteObject[] = [
     element: <App />,
     children: [
       {
-        path: 'button',
+        path: 'buttonExemple',
         element: <ButtonExemple />,
       },
       {
-        path: 'icon',
+        path: 'iconExemple',
         element: <IconExemple />,
+      },
+      {
+        path: 'titleExemple',
+        element: <TitleExemple />,
       },
     ],
   },

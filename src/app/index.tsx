@@ -8,12 +8,17 @@ function App() {
   const menuTree = [
     {
       title: 'Button',
-      activeKey: 'button',
+      activeKey: 'buttonExemple',
       icon: 'bars',
     },
     {
       title: 'Icon',
-      activeKey: 'icon',
+      activeKey: 'iconExemple',
+      icon: 'bars',
+    },
+    {
+      title: 'Title',
+      activeKey: 'titleExemple',
       icon: 'bars',
     },
   ]
