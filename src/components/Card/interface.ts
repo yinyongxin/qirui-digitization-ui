@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react"
+import React, { PropsWithChildren, ReactNode } from "react"
 import { DesignTypes } from "../typings";
 
 export interface CardBaseType {
@@ -7,12 +7,15 @@ export interface CardBaseType {
    * 默认：default 成功：success 失败：error 警告：warnning
    */
   status?: DesignTypes['Status'];
-  title?: string
+  title?: ReactNode,
+  header?: ReactNode,
+  footer?: ReactNode,
   headerStyle?: React.CSSProperties,
+  footerStyle?: React.CSSProperties,
   bodyStyle?: React.CSSProperties,
   cardStyle?: React.CSSProperties,
   width?: number,
-  border?: Array<'top' | 'right' | 'bottom' | 'left'>
+  borders?: DesignTypes['Direction'][]
 }
 
 export type CardPropsType = PropsWithChildren<CardBaseType>
