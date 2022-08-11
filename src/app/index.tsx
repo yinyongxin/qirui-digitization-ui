@@ -1,66 +1,34 @@
-import React, { } from 'react'
-import ModalExemple from './exemples/ModalExemple'
-import DrawerExemple from './exemples/DrawerExemple'
-import ButtonExemple from './exemples/ButtonExemple'
-import IconExemple from './exemples/IconExemple'
-import MessageExemple from './exemples/MessageExemple'
-import TabsExemple from './exemples/TabsExemple'
-import CardExemple from './exemples/CardExemple'
-import SelectExemple from './exemples/SelectExemple'
 import './index.less'
+import React, { } from 'react'
 import { SideMenu } from '../components'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 function App() {
+  let navigate = useNavigate();
+  const menuTree = [
+    {
+      title: 'Button',
+      activeKey: 'button',
+      icon: 'bars',
+    },
+    {
+      title: 'Icon',
+      activeKey: 'icon',
+      icon: 'bars',
+    },
+  ]
   return (
     <div className='app'>
       <SideMenu
+        activeMenuItemChange={(menuItems) => {
+          console.log('menuItems', menuItems);
+          navigate(`/${menuItems?.[0]}`)
+        }}
         defaultActiveKeys={['1']}
-        allOpen
-        menuTree={[
-          {
-            title: 'title1',
-            activeKey: '1',
-            icon: 'bars',
-          },
-          {
-            title: 'title2',
-            activeKey: '2',
-            icon: 'bars',
-            children: [
-              {
-                title: 'title2-1',
-                activeKey: '2-1',
-              }
-            ]
-          },
-          {
-            title: 'title3',
-            activeKey: '3',
-            icon: 'bars',
-            children: [
-              {
-                title: 'title3-1',
-                activeKey: '3-1',
-                children: [
-                  {
-                    title: 'title3-1-1',
-                    activeKey: '3-1-1',
-                  }
-                ]
-              }
-            ]
-          }
-        ]}
+        menuTree={menuTree}
       />
-      <div>
-        <ModalExemple />
-        <DrawerExemple />
-        <ButtonExemple />
-        <IconExemple />
-        <MessageExemple />
-        <TabsExemple />
-        <CardExemple />
-        <SelectExemple />
+      <div className='appContent'>
+        <Outlet />
       </div>
     </div>
   )
