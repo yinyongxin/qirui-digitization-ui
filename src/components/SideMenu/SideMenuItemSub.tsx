@@ -25,7 +25,8 @@ const SideMenuItemSub: FC<SideMenuItemSubPropsType> = (props, ref) => {
     icon,
     activeKey,
     children,
-    render
+    render,
+    index
   } = props
 
   const isIn = !!activeMenuSub.find((item) => item === activeKey)
@@ -53,15 +54,19 @@ const SideMenuItemSub: FC<SideMenuItemSubPropsType> = (props, ref) => {
   ])
 
   useEffect(() => {
-  }, [open])
+  }, [])
 
   return (
     <div>
       {render ? (
-        render(props, isIn)
+        render(props, isIn, { index })
       ) : (
         <>
-          <div className={sideMenuItemSubClassName} onClick={handleClick} >
+          <div
+            style={{ paddingLeft: 17 + index * 8 }}
+            className={sideMenuItemSubClassName}
+            onClick={handleClick}
+          >
             {icon && (
               <Icon icon={icon} />
             )}

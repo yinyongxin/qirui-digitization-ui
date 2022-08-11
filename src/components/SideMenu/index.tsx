@@ -1,12 +1,12 @@
-import React, { FC, Key, useContext, useEffect, useState } from "react"
+import React, { FC, forwardRef, ForwardRefRenderFunction, Key, useContext, useEffect, useImperativeHandle, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
 import { getClassNames } from "../utils/tools"
-import { ActiveKeyType, MenuTreeItemType, SideMenuPropsType } from "./interface"
+import { ActiveKeyType, MenuTreeItemType, SideMenuHandleType, SideMenuPropsType } from "./interface"
 import { SideMenuComtext } from "./SideMenuComtext"
 import SideMenuItem from "./SideMenuItem"
 import SideMenuItemSub from "./SideMenuItemSub"
 
-const SideMenu: FC<SideMenuPropsType> = (props, ref) => {
+const SideMenu: ForwardRefRenderFunction<unknown, SideMenuPropsType> = (props, ref) => {
 
   const {
     classNamePrefix
@@ -45,7 +45,8 @@ const SideMenu: FC<SideMenuPropsType> = (props, ref) => {
    * @param arrs 获取组件树递归方法
    * @returns 
    */
-  const getMenus = (arrs: MenuTreeItemType[]) => {
+  const getMenus = (arrs: MenuTreeItemType[], index = 0) => {
+    let newIndex = index + 1
     return arrs.map(arr => {
       if (arr.children && arr.children.length !== 0) {
         const {
@@ -53,13 +54,13 @@ const SideMenu: FC<SideMenuPropsType> = (props, ref) => {
           ...sideMenuItemSubProps
         } = arr
         return (
-          <SideMenuItemSub {...sideMenuItemSubProps} key={sideMenuItemSubProps.activeKey}>
-            {getMenus(children)}
+          <SideMenuItemSub {...sideMenuItemSubProps} key={sideMenuItemSubProps.activeKey} index={index}>
+            {getMenus(children, newIndex)}
           </SideMenuItemSub>
         )
       }
       return (
-        <SideMenuItem {...arr} key={arr.activeKey} />
+        <SideMenuItem {...arr} key={arr.activeKey} index={index} />
       )
     })
   }
@@ -67,6 +68,15 @@ const SideMenu: FC<SideMenuPropsType> = (props, ref) => {
   const sideMenuClassName = getClassNames([
     `${prefixCls}`,
   ])
+
+  useImperativeHandle<unknown, SideMenuHandleType>(
+    ref,
+    () => ({
+      setActiveMenu,
+      setActiveMenuSub
+    }),
+    []
+  )
 
   useEffect(() => {
   }, [])
@@ -91,4 +101,4 @@ const SideMenu: FC<SideMenuPropsType> = (props, ref) => {
 
   )
 }
-export default SideMenu
+export default forwardRef(SideMenu) 

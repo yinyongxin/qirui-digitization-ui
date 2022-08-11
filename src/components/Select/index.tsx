@@ -89,6 +89,10 @@ const Select: FC<SelectPropsType> = (props) => {
 
   const contentRender = () => {
 
+    /**
+     * 当为单选是渲染
+     * @returns ReactNode
+     */
     const valueRender = () => {
       const selectOption = options.find((option) => option.value === value)
       const selectValueLabelShow = typeof selectOption?.label === 'function' ? selectOption?.label(selectOption, true) : selectOption?.label
@@ -96,7 +100,10 @@ const Select: FC<SelectPropsType> = (props) => {
         <div className={`${prefixCls}-value`}>{selectValueLabelShow}</div>
       )
     }
-
+    /**
+     * 当为多选是渲染
+     * @returns ReactNode
+     */
     const valuesItemRenter = () => {
       const valuesMapKeys = [...valuesMap.keys()]
       return (

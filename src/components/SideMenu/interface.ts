@@ -2,7 +2,7 @@ import { Key, PropsWithChildren, ReactNode } from "react"
 
 export type ActiveKeyType = Key
 
-export type MenuTreeItemType<T = SidePropsType> = Omit<T, 'key'> & {
+export type MenuTreeItemType<T = SidePropsType> = Omit<T, 'key' | 'index' > & {
   children?: MenuTreeItemType[],
 }
 
@@ -58,7 +58,17 @@ export type SidePropsType ={
    */
   values?: Record<string, any>,
 
-  render?: (item: SidePropsType, active: boolean) => ReactNode
+  /**
+   * 当前属于第一个层级
+   */
+  index: number,
+
+  render?: (item: SidePropsType, active: boolean, config: Pick<SidePropsType, 'index'>) => ReactNode
+}
+
+export type SideMenuHandleType = {
+  setActiveMenu: React.Dispatch<React.SetStateAction<React.Key[]>>;
+  setActiveMenuSub: React.Dispatch<React.SetStateAction<React.Key[]>>
 }
 
 export type SideMenuItemPropsType = SidePropsType

@@ -23,7 +23,8 @@ const SideMenuItem: FC<SideMenuItemPropsType> = (props, ref) => {
     title,
     icon,
     activeKey,
-    render
+    render,
+    index
   } = props
 
 
@@ -54,9 +55,12 @@ const SideMenuItem: FC<SideMenuItemPropsType> = (props, ref) => {
   return (
     <div onClick={handleClick}>
       {render ? (
-        render(props, isActive)
+        render(props, isActive, { index })
       ) : (
-        <div className={sideMenuItemClassName} >
+        <div
+          style={{ paddingLeft: 17 + index * 8 }}
+          className={sideMenuItemClassName}
+        >
           {icon && (
             <Icon icon={icon} />
           )}
