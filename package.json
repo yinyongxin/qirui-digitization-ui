@@ -19,12 +19,16 @@
       "require": "./dist/style.css"
     },
     "./icons/css": {
-      "import": "./dist/icons/css.less",
-      "require": "./dist/icons/css.less"
+      "import": "./dist/icons/css.css",
+      "require": "./dist/icons/css.css"
     },
     "./icons/less": {
       "import": "./dist/icons/less.less",
       "require": "./dist/icons/less.less"
+    },
+    "./theme": {
+      "import": "./dist/theme/index.css",
+      "require": "./dist/theme/index.css"
     }
   },
   "version": "1.1.4",
