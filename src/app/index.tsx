@@ -21,6 +21,11 @@ function App() {
       activeKey: 'titleExemple',
       icon: 'bars',
     },
+    {
+      title: 'Card',
+      activeKey: 'cardExemple',
+      icon: 'bars',
+    },
   ]
   return (
     <div className='app'>

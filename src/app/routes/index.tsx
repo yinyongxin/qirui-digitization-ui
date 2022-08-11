@@ -4,6 +4,7 @@ import App from '../index'
 import ButtonExemple from '../exemples/ButtonExemple'
 import IconExemple from '../exemples/IconExemple'
 import TitleExemple from '../exemples/TitleExemple'
+import CardExemple from '../exemples/CardExemple'
 
 export const routes: RouteObject[] = [
   {
@@ -21,6 +22,10 @@ export const routes: RouteObject[] = [
       {
         path: 'titleExemple',
         element: <TitleExemple />,
+      },
+      {
+        path: 'cardExemple',
+        element: <CardExemple />,
       },
     ],
   },

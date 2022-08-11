@@ -1,24 +1,66 @@
 import React from "react";
-import { Card } from "../../components";
+import { Card, Title } from "../../components";
 
 const CardExemple = () => {
   return (
-    <div className="exemple">
-      <Card>
-        CardContent
-      </Card>
-      <Card title="title">
-        CardContent
-      </Card>
-      <Card status="success">
-        CardContent
-      </Card>
-      <Card title="title" status="error">
-        CardContent
-      </Card>
-      <Card border={['right']} title="title" status="error">
-        CardContent
-      </Card>
+    <div>
+      <Title type="tooltip" title="基本" >
+        <Card>
+          CardContent
+        </Card>
+      </Title>
+
+      <Title type="tooltip" title="具有头部标题 title" >
+        <Card title={<div>title</div>}>
+          CardContent
+        </Card>
+      </Title>
+
+      <Title type="tooltip" title="具有头部状态 status" >
+        <div className="flex gap10">
+          <Card width={400} status="success">
+            status
+          </Card>
+          <Card width={400} title="title" status="error">
+            title & status
+          </Card>
+        </div>
+      </Title>
+
+      <Title type="tooltip" title="自定义header&footer" >
+        <div className="flex gap10">
+          <Card
+            header={(
+              <div>
+                <div>header1</div>
+                <div>header2</div>
+              </div>
+            )}
+            width={400}
+            status="success"
+          >
+            自定义头部自定义header
+          </Card>
+          <Card
+            footer={(
+              <div>
+                <div>footer1</div>
+                <div>footer2</div>
+              </div>
+            )}
+            width={400}
+          >
+            自定义底部footer
+          </Card>
+        </div>
+      </Title>
+
+      <Title type="tooltip" title="边框配置 borders" >
+        <Card width={500} borders={['right']}>
+          {`border={['right']}`}
+        </Card>
+      </Title>
+
     </div>
   )
 }
