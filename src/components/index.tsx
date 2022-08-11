@@ -9,6 +9,7 @@ import Drawer from "./Drawer/index";
 import Card from "./Card/index";
 import Select from "./Select/index";
 import SideMenu from "./SideMenu/index";
+import Title from "./Title/index";
 import { GlobalContext } from './config/globalContext'
 
 export {
@@ -21,5 +22,6 @@ export {
   Card,
   Select,
   SideMenu,
+  Title,
   GlobalContext
 };
