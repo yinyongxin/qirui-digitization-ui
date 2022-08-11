@@ -30,8 +30,12 @@ export type DesignTypes = {
    * 'zh-CN': 中文
    */
    Locale: 'zh-CN';
+
+
    Option: {
     value: string | number;
     label: ReactNode | ((option: DesignTypes['Option'], isSelected: boolean) => ReactNode);
    }
+
+   Direction: 'top' | 'right' | 'bottom' | 'left' 
 }

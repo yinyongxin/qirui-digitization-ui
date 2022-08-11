@@ -22,7 +22,9 @@ const SideMenu: ForwardRefRenderFunction<unknown, SideMenuPropsType> = (props, r
     activeMenuSubChange,
     onMenuItemClick,
     onMenuSubClick,
-    allOpen = false
+    allOpen = false,
+    width = 220,
+    borders = []
   } = props
 
 
@@ -67,6 +69,7 @@ const SideMenu: ForwardRefRenderFunction<unknown, SideMenuPropsType> = (props, r
 
   const sideMenuClassName = getClassNames([
     `${prefixCls}`,
+    ...borders.map(border => `${prefixCls}-border-${border}`)
   ])
 
   useImperativeHandle<unknown, SideMenuHandleType>(
@@ -94,7 +97,7 @@ const SideMenu: ForwardRefRenderFunction<unknown, SideMenuPropsType> = (props, r
         onMenuSubClick
       }}
     >
-      <aside className={sideMenuClassName}>
+      <aside style={{ width }} className={sideMenuClassName}>
         {getMenus(menuTree)}
       </aside>
     </SideMenuComtext.Provider>

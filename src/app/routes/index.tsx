@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouteObject } from 'react-router-dom';
 import App from '../index'
-import ButtonExemple from '../exemples/ButtonExemple'
+import ButtonExemple from '../exemples/Button'
 import IconExemple from '../exemples/IconExemple'
 
 export const routes: RouteObject[] = [

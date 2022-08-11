@@ -22,10 +22,11 @@ function App() {
       <SideMenu
         activeMenuItemChange={(menuItems) => {
           console.log('menuItems', menuItems);
-          navigate(`/${menuItems?.[0]}`)
+          navigate(`/${menuItems?.[0]}`);
         }}
         defaultActiveKeys={['1']}
         menuTree={menuTree}
+        borders={['right']}
       />
       <div className='appContent'>
         <Outlet />

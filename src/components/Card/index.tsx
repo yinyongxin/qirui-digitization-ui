@@ -18,7 +18,7 @@ const Card: FC<CardPropsType> = (props, ref) => {
     headerStyle = {},
     bodyStyle = {},
     cardStyle = {},
-    width = 377,
+    width,
     border = [
       'top',
       'right',
@@ -51,7 +51,7 @@ const Card: FC<CardPropsType> = (props, ref) => {
   }
 
   return (
-    <div style={{ width, minWidth: width, ...cardStyle }} className={cardClassName}>
+    <div style={{ ...(width ? { width } : {}), ...cardStyle }} className={cardClassName}>
       {footerRender()}
       <main style={bodyStyle} className={`${prefixCls}-body`}>
         {children}

@@ -1,8 +1,9 @@
 import { Key, PropsWithChildren, ReactNode } from "react"
+import { DesignTypes } from "../typings"
 
 export type ActiveKeyType = Key
 
-export type MenuTreeItemType<T = SidePropsType> = Omit<T, 'key' | 'index' > & {
+export type MenuTreeItemType<T = SidePropsType> = Omit<T, 'key' | 'index' | 'borders' > & {
   children?: MenuTreeItemType[],
 }
 
@@ -34,6 +35,9 @@ export interface SideMenuBaseType {
   * 是否默认全部展开
   */
   allOpen?: boolean,
+  width?: number,
+
+  borders: DesignTypes['Direction'][]
 }
 
 export type SidePropsType ={
@@ -86,6 +90,6 @@ export type SideMenuComtextType = {
   activeMenuSub: ActiveKeyType[],
   setActiveMenu?:React.Dispatch<React.SetStateAction<React.Key[]>> 
   setActiveMenuSub?:React.Dispatch<React.SetStateAction<React.Key[]>> 
-} & Omit<SideMenuBaseType, 'menuTree' | 'activeChange'>  
+} & Omit<SideMenuBaseType, 'menuTree' | 'activeChange' | 'borders'>  
 
 export type SideMenuPropsType = SideMenuBaseType

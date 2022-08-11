@@ -1,16 +1,21 @@
 import React from "react";
-import { Button } from "../../components";
+import { Button, Card } from "../../../components";
+import styles from './styles.module.less'
 
 const ButtonExemple = () => {
   return (
-    <div className="exemple">
-      <Button size="small">Small</Button>
-      <Button
-        onClick={() => {
-          console.log('notDisabledBtn');
-        }}
-      >Default</Button>
-      <Button size="large">Large</Button>
+    <div className={styles.buttonExemple}>
+      <Card
+        title="大小"
+      >
+        <Button size="small">Small</Button>
+        <Button
+          onClick={() => {
+            console.log('notDisabledBtn');
+          }}
+        >Default</Button>
+        <Button size="large">Large</Button>
+      </Card>
       <Button level="secondary">Secondary</Button>
       <Button status="success">Success</Button>
       <Button status="error">Error</Button>
