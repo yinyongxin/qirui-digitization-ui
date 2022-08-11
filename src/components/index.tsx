@@ -1,4 +1,5 @@
-import '../theme/index.css';
+// import '../theme/index.css';
+import './styles/index.less';
 
 import Button from "./Button/index";
 import Message from "./Message/index";
