@@ -2,7 +2,8 @@ import { ReactNode } from "react";
 import { TabPaneBaseType } from "../TabPane/interface";
 
 export type TabType = TabPaneBaseType & { 
-  content?: ReactNode | (() => ReactNode)
+  content?: ReactNode | (() => ReactNode),
+  
 }
 
 export interface TabsBaseType {
@@ -18,4 +19,4 @@ export type TabsHandle = {
 
 export type TabsPropsType = TabsBaseType
 
-export type ActiveTabChangeType = (key: any) => void
+export type ActiveTabChangeType = (key: any, tabPaneProps: TabPaneBaseType) => void

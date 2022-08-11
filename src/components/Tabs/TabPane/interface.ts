@@ -5,7 +5,11 @@ export type TabPaneBaseType = {
   current?: any,
   title?: ReactNode | (() => ReactNode),
   num?: number,
-  disabled?: boolean | (() => boolean)
+  disabled?: boolean | (() => boolean),
+  /**
+   * 用于给activeTabChange事件传递参数
+   */
+  values?: Record<string, any>
 }
 
 export type TabPanePropsType = PropsWithChildren<TabPaneBaseType>

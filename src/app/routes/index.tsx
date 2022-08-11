@@ -5,6 +5,7 @@ import ButtonExemple from '../exemples/ButtonExemple'
 import IconExemple from '../exemples/IconExemple'
 import TitleExemple from '../exemples/TitleExemple'
 import CardExemple from '../exemples/CardExemple'
+import TabsExemple from '../exemples/TabsExemple'
 
 export const routes: RouteObject[] = [
   {
@@ -26,6 +27,10 @@ export const routes: RouteObject[] = [
       {
         path: 'cardExemple',
         element: <CardExemple />,
+      },
+      {
+        path: 'tabsExemple',
+        element: <TabsExemple />,
       },
     ],
   },

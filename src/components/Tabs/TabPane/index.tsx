@@ -43,7 +43,7 @@ const TabPane: FC<TabPanePropsType> = (props, ref) => {
   ])
 
   const handleClick: React.MouseEventHandler<HTMLElement> = (event: any): void => {
-    !isDisabled && activeTabChange && activeTabChange(current)
+    !isDisabled && activeTabChange && activeTabChange(current, props)
   };
 
   return (
