@@ -3,6 +3,16 @@
 .@{prefix-table} {
   width: 100%;
   border-spacing: 0;
+  td, th {
+    padding: 0 16px;
+     font-weight: 400;
+  }
+  th {
+    color: var(--design-neutral-color-3);
+  }
+  td {
+    color: var(--design-neutral-color-1);
+  }
   .@{prefix-table}-align-left {
     text-align: left;
   }
@@ -11,15 +21,6 @@
   }
   .@{prefix-table}-align-right {
     text-align: right;
-  }
-  td, th {
-    padding: 0 16px;
-  }
-  th {
-    color: var(--design-neutral-color-3);
-  }
-  td {
-    color: var(--design-neutral-color-1);
   }
   .@{prefix-table}-theadTr {
     background-color: var(--design-neutral-color-7);

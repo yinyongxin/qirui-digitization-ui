@@ -20,11 +20,11 @@ const IconExemple = () => {
                 dataKey: 'data1',
                 headerCellRender(col, index) {
                   return (
-                    <div>
+                    <>
                       {col.title}
                       headerCellRender
                       {index}
-                    </div>
+                    </>
                   )
                 },
                 bodyCellRender(col, record, { dataIndex }) {
