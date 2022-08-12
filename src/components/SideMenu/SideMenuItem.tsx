@@ -5,7 +5,7 @@ import { getClassNames } from "../utils/tools"
 import { SideMenuItemPropsType } from "./interface"
 import { SideMenuComtext } from "./SideMenuComtext"
 
-const SideMenuItem: FC<SideMenuItemPropsType> = (props, ref) => {
+const SideMenuItem: FC<SideMenuItemPropsType> = (props) => {
   const {
     classNamePrefix
   } = useContext(GlobalContext);

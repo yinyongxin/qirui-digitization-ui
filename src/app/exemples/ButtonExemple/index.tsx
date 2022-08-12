@@ -15,7 +15,7 @@ const ButtonExemple = () => {
 
       <Title type="tooltip" title="状态 status" >
         <div className="flex gap10">
-          <Button>default</Button>
+          <Button >default</Button>
           <Button status="success">Success</Button>
           <Button status="error">Error</Button>
           <Button status="warning">Warning</Button>

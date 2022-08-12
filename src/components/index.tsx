@@ -11,6 +11,7 @@ import Card from "./Card/index";
 import Select from "./Select/index";
 import SideMenu from "./SideMenu/index";
 import Title from "./Title/index";
+import Table from "./Table/index";
 import { GlobalContext } from './config/globalContext'
 
 export {
@@ -24,5 +25,6 @@ export {
   Select,
   SideMenu,
   Title,
-  GlobalContext
+  GlobalContext,
+  Table
 };

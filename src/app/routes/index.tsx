@@ -11,6 +11,7 @@ import ModalExemple from '../exemples/ModalExemple'
 import SelectExemple from '../exemples/SelectExemple'
 import DrawerExemple from '../exemples/DrawerExemple'
 import SideMenuExemple from '../exemples/SideMenuExemple'
+import TableExemple from '../exemples/TableExemple'
 
 export const routes: RouteObject[] = [
   {
@@ -56,6 +57,10 @@ export const routes: RouteObject[] = [
       {
         path: 'sideMenuExemple',
         element: <SideMenuExemple />,
+      },
+      {
+        path: 'tableExemple',
+        element: <TableExemple />,
       },
     ],
   },

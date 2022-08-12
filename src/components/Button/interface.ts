@@ -43,4 +43,4 @@ export interface ButtonBaseType {
   textBottomLine?: boolean
 }
 
-export type ButtonPropsType = PropsWithChildren<ButtonBaseType> & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+export type ButtonPropsType = ButtonBaseType & JSX.IntrinsicElements['button']
