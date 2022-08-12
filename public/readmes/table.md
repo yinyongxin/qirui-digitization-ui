@@ -4,11 +4,25 @@
 
 属性
 
-+ columns
++ column
+  + title
+  + key
+  + dataKey
+  + width
   + headerCellRender
+  + onTheadTdCell
   + bodyCellRender
+  + onTbodyTdCell
+  + placeholder
   + align
-+ data
-+ align
-+ rowKey
-+ borders
+
++ tableProps
+  + columns
+  + data
+  + onRow
+  + align
+  + rowKey
+  + borders
+  + placeholder
+  + borders
+  + borderWidth

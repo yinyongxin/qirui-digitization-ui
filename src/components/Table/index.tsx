@@ -18,6 +18,10 @@ const Table = <T,>(props: TablePropsType<T>) => {
     align = "left",
     rowKey,
     borders,
+    onRow,
+    placeholder,
+    borderWidth = 1,
+    style,
     ...rest
   } = props
 
@@ -28,6 +32,7 @@ const Table = <T,>(props: TablePropsType<T>) => {
     left: true,
     thead: true,
     tbody: true,
+    vertical: false,
     ...borders
   }
 
@@ -48,7 +53,7 @@ const Table = <T,>(props: TablePropsType<T>) => {
     theadTr: getClassNames([
       `${prefixCls}-theadTr`,
     ]),
-    theadTh: (className: string[]) => getClassNames([
+    theadTh: (className: ClassNamesType) => getClassNames([
       `${prefixCls}-theadTh`,
       `${prefixCls}-align-${align}`,
       ...className,
@@ -74,14 +79,28 @@ const Table = <T,>(props: TablePropsType<T>) => {
       <thead className={tableClassName.thead}>
         <tr className={tableClassName.theadTr}>
           {columns.map((column, columnIndex) => {
+            const thStyle = {
+              ...(column.width ? { width: column.width } : {}),
+              borderWidth
+            }
             return (
               <th
+                style={thStyle}
                 key={column.key || column.dataKey as Key}
                 className={tableClassName.theadTh([
-                  `${prefixCls}-align-${column.align}`
+                  `${prefixCls}-align-${column.align}`,
+                  {
+                    [`${prefixCls}-border-left`]: tableBorders.vertical && columnIndex !== 0,
+                  }
                 ])}
+                {...column?.onTheadTdCell?.(column, columnIndex)}
               >
-                {column.headerCellRender?.(column, columnIndex) || column.title}
+                {
+                  column.headerCellRender?.(column, columnIndex) ||
+                  column.title ||
+                  placeholder ||
+                  column.placeholder
+                }
               </th>
             )
           })}
@@ -98,18 +117,27 @@ const Table = <T,>(props: TablePropsType<T>) => {
             <tr
               key={isFunction(rowKey) ? rowKey?.(dataItem) : (rowKey && dataItem[rowKey]) || dataIndex}
               className={tableClassName.tbodyTr}
+              {...onRow?.(dataItem, dataIndex)}
             >
               {columns.map((column, columnIndex) => (
                 <td
+                  style={{ borderWidth }}
                   key={column.key || columnIndex}
                   className={tableClassName.tbodyTd([
                     `${prefixCls}-align-${column.align}`,
                     {
                       [`${prefixCls}-border-bottom`]: tableBorders.tbody && (dataIndex + 1) !== data.length,
+                      [`${prefixCls}-border-left`]: tableBorders.vertical && columnIndex !== 0,
                     }
                   ])}
+                  {...column?.onTbodyTdCell?.(dataItem, dataIndex)}
                 >
-                  {column.bodyCellRender?.(column, dataItem, { columnIndex, dataIndex }) || dataItem[column.dataKey]}
+                  {
+                    column.bodyCellRender?.(column, dataItem, { columnIndex, dataIndex }) ||
+                    dataItem[column.dataKey] ||
+                    placeholder ||
+                    column.placeholder
+                  }
                 </td>
               ))}
             </tr>
@@ -121,6 +149,7 @@ const Table = <T,>(props: TablePropsType<T>) => {
 
   return (
     <table
+      style={{ borderWidth, ...style }}
       className={tableClassName.table}
       {...rest}
     >
