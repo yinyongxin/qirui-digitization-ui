@@ -52,6 +52,11 @@ function App() {
       activeKey: 'selectExemple',
       icon: 'bars'
     },
+    {
+      title: 'sideMenu',
+      activeKey: 'sideMenuExemple',
+      icon: 'bars'
+    },
   ]
   return (
     <div className='app'>

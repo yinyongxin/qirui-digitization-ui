@@ -3,7 +3,7 @@ import { DesignTypes } from "../typings"
 
 export type ActiveKeyType = Key
 
-export type MenuTreeItemType<T = SidePropsType> = Omit<T, 'key' | 'index' | 'borders' > & {
+export type MenuTreeItemType<T = SidePropsType> = Omit<T, 'key' | 'index' | 'borders'> & {
   children?: MenuTreeItemType[],
 }
 
@@ -31,16 +31,16 @@ export interface SideMenuBaseType {
    * MenuSub点击时触发
    */
   onMenuSubClick?: (item: SidePropsType) => void,
-   /**
-  * 是否默认全部展开
-  */
+  /**
+ * 是否默认全部展开
+ */
   allOpen?: boolean,
   width?: number,
 
-  borders: DesignTypes['Direction'][]
+  borders?: DesignTypes['Direction'][]
 }
 
-export type SidePropsType ={
+export type SidePropsType = {
   /**
    * 图标
    */
@@ -77,7 +77,7 @@ export type SideMenuHandleType = {
 
 export type SideMenuItemPropsType = SidePropsType
 
-export type SideMenuItemSubPropsType =PropsWithChildren<SidePropsType> 
+export type SideMenuItemSubPropsType = PropsWithChildren<SidePropsType>
 
 export type SideMenuComtextType = {
   /**
@@ -88,8 +88,8 @@ export type SideMenuComtextType = {
    * 选中的menuSub
    */
   activeMenuSub: ActiveKeyType[],
-  setActiveMenu?:React.Dispatch<React.SetStateAction<React.Key[]>> 
-  setActiveMenuSub?:React.Dispatch<React.SetStateAction<React.Key[]>> 
-} & Omit<SideMenuBaseType, 'menuTree' | 'activeChange' | 'borders'>  
+  setActiveMenu?: React.Dispatch<React.SetStateAction<React.Key[]>>
+  setActiveMenuSub?: React.Dispatch<React.SetStateAction<React.Key[]>>
+} & Omit<SideMenuBaseType, 'menuTree' | 'activeChange' | 'borders'>
 
 export type SideMenuPropsType = SideMenuBaseType

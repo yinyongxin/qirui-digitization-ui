@@ -49,7 +49,7 @@ const SideMenu: ForwardRefRenderFunction<unknown, SideMenuPropsType> = (props, r
    */
   function getMenus(arrs: MenuTreeItemType[], index = 0) {
     index += 1
-    return arrs.map(arr => {
+    return arrs?.map(arr => {
       if (arr.children && arr.children.length !== 0) {
         const {
           children,
