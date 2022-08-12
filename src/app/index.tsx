@@ -47,6 +47,11 @@ function App() {
       activeKey: 'drawerExemple',
       icon: 'bars'
     },
+    {
+      title: 'Select',
+      activeKey: 'selectExemple',
+      icon: 'bars'
+    },
   ]
   return (
     <div className='app'>

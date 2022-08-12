@@ -3,7 +3,7 @@ import { GlobalContext } from "../config/globalContext"
 import Icon from "../Icon";
 import { DesignTypes } from "../typings";
 import { getClassNames, isFunction, isNumber, isString } from "../utils/tools";
-import { SelectPropsType } from "./interface"
+import { SelectPropsType, ValueType } from "./interface"
 
 const valuesMap: Map<DesignTypes['Option']['value'], DesignTypes['Option']> = new Map([])
 
@@ -15,8 +15,10 @@ const Select: FC<SelectPropsType> = (props) => {
 
   const prefixCls = `${classNamePrefix}-select`
 
-  const [value, setValue] = useState<DesignTypes['Option']['value'] | DesignTypes['Option']['value'][]>()
+  const [value, setValue] = useState<ValueType>()
   const [optionsVisible, setOptionsVisible] = useState(false)
+  const [mouseHover, setMouseHover] = useState(false)
+
   const [selectRef, setSelectRef] = useState<HTMLDivElement>()
 
 
@@ -44,6 +46,11 @@ const Select: FC<SelectPropsType> = (props) => {
     `${prefixCls}-icon`,
   ])
 
+  const updateValueFn = (newValue: ValueType) => {
+    setValue(newValue)
+    onValueChange && onValueChange(newValue)
+  }
+
   /**
    * 数据更新函数 更新数值并触发onValueChange
    * @param type 更新数值类型
@@ -69,17 +76,14 @@ const Select: FC<SelectPropsType> = (props) => {
         valuesMap.delete(key as DesignTypes['Option']['value'])
       }
       const newUpdateValue = [...valuesMap.values()].map((valuesMapValue) => valuesMapValue.value)
-      setValue(newUpdateValue)
-      onValueChange && onValueChange(newUpdateValue)
+      updateValueFn(newUpdateValue)
     } else {
       if (type === 'add') {
-        setValue(updateValue as DesignTypes['Option']['value'])
-        onValueChange && onValueChange(updateValue as DesignTypes['Option']['value'])
+        updateValueFn(updateValue as DesignTypes['Option']['value'])
         setOptionsVisible(false)
       }
       if (type === 'delete') {
-        setValue(undefined)
-        onValueChange && onValueChange(undefined)
+        updateValueFn(undefined)
       }
     }
 
@@ -154,6 +158,30 @@ const Select: FC<SelectPropsType> = (props) => {
         <div className={`${prefixCls}-placeholder`}>{placeholder}</div>
       )
     }
+  }
+
+  const iconRender = () => {
+    let iconRenderRes = <Icon icon="angle-down" />
+    if (mouseHover && !multiple) {
+      iconRenderRes = (
+        <Icon
+          icon="xmark"
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            if (optionsVisible) {
+              setOptionsVisible(false)
+            }
+            updateValueFn(undefined)
+          }}
+        />
+      )
+    }
+    return (
+      <div className={iconClassName}>
+        {iconRenderRes}
+      </div>
+    )
   }
 
 
@@ -250,12 +278,16 @@ const Select: FC<SelectPropsType> = (props) => {
       />
       <div
         onClick={() => selectHandleClick()}
+        onMouseEnter={() => {
+          setMouseHover(true)
+        }}
+        onMouseLeave={() => {
+          setMouseHover(false)
+        }}
         className={selectMainClassName}
       >
         {contentRender()}
-        <div className={iconClassName}>
-          <Icon icon="angle-down" />
-        </div>
+        {iconRender()}
       </div>
       <div className={`${prefixCls}-options-centent`}>
         {optionsVisible && optionsRender()}

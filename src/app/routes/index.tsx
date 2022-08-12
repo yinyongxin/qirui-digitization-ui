@@ -8,6 +8,7 @@ import CardExemple from '../exemples/CardExemple'
 import TabsExemple from '../exemples/TabsExemple'
 import MessageExemple from '../exemples/MessageExemple'
 import ModalExemple from '../exemples/ModalExemple'
+import SelectExemple from '../exemples/SelectExemple'
 import DrawerExemple from '../exemples/DrawerExemple'
 
 export const routes: RouteObject[] = [
@@ -46,6 +47,10 @@ export const routes: RouteObject[] = [
       {
         path: 'drawerExemple',
         element: <DrawerExemple />,
+      },
+      {
+        path: 'selectExemple',
+        element: <SelectExemple />,
       },
     ],
   },

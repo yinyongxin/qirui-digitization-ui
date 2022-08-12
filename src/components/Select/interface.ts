@@ -7,4 +7,6 @@ export interface SelectBaseType {
   maxShow?: number
 }
 
+export type ValueType = DesignTypes['Option']['value'] | DesignTypes['Option']['value'][] | undefined
+
 export type SelectPropsType = PropsWithChildren<SelectBaseType> & JSX.IntrinsicElements['input']
