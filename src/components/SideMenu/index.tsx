@@ -1,7 +1,7 @@
-import React, { FC, forwardRef, ForwardRefRenderFunction, Key, useContext, useEffect, useImperativeHandle, useState } from "react"
+import { forwardRef, ForwardRefRenderFunction, Key, useContext, useEffect, useImperativeHandle, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
 import { getClassNames } from "../utils/tools"
-import { ActiveKeyType, MenuTreeItemType, SideMenuHandleType, SideMenuPropsType } from "./interface"
+import { MenuTreeItemType, SideMenuHandleType, SideMenuPropsType } from "./interface"
 import { SideMenuComtext } from "./SideMenuComtext"
 import SideMenuItem from "./SideMenuItem"
 import SideMenuItemSub from "./SideMenuItemSub"
@@ -47,8 +47,8 @@ const SideMenu: ForwardRefRenderFunction<unknown, SideMenuPropsType> = (props, r
    * @param arrs 获取组件树递归方法
    * @returns 
    */
-  const getMenus = (arrs: MenuTreeItemType[], index = 0) => {
-    let newIndex = index + 1
+  function getMenus(arrs: MenuTreeItemType[], index = 0) {
+    index += 1
     return arrs.map(arr => {
       if (arr.children && arr.children.length !== 0) {
         const {
@@ -57,7 +57,7 @@ const SideMenu: ForwardRefRenderFunction<unknown, SideMenuPropsType> = (props, r
         } = arr
         return (
           <SideMenuItemSub {...sideMenuItemSubProps} key={sideMenuItemSubProps.activeKey} index={index}>
-            {getMenus(children, newIndex)}
+            {getMenus(children, index)}
           </SideMenuItemSub>
         )
       }
@@ -80,9 +80,6 @@ const SideMenu: ForwardRefRenderFunction<unknown, SideMenuPropsType> = (props, r
     }),
     []
   )
-
-  useEffect(() => {
-  }, [])
 
   return (
     <SideMenuComtext.Provider

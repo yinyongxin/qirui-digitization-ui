@@ -53,9 +53,6 @@ const SideMenuItemSub: FC<SideMenuItemSubPropsType> = (props, ref) => {
     `${prefixCls}`,
   ])
 
-  useEffect(() => {
-  }, [])
-
   return (
     <div>
       {render ? (

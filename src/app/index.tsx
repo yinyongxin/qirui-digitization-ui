@@ -2,10 +2,11 @@ import './index.less'
 import React, { } from 'react'
 import { SideMenu } from '../components'
 import { Outlet, useNavigate } from 'react-router-dom'
+import { MenuTreeItemType, SidePropsType } from '../components/SideMenu/interface';
 
 function App() {
   let navigate = useNavigate();
-  const menuTree = [
+  const menuTree: MenuTreeItemType<SidePropsType>[] = [
     {
       title: 'Button',
       activeKey: 'buttonExemple',
@@ -29,7 +30,7 @@ function App() {
     {
       title: 'Tabs',
       activeKey: 'tabsExemple',
-      icon: 'bars',
+      icon: 'bars'
     },
   ]
   return (

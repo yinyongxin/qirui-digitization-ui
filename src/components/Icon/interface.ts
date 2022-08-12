@@ -12,11 +12,11 @@ export interface IconBaseType {
    * 默认：default 成功：success 失败：error 警告：warnning
    */
   status?: DesignTypes['Status'] | 'primary';
-   /**
-   * 类型
-   * solid：实体
-   * regular：空心
-   */
+  /**
+  * 类型
+  * solid：实体
+  * regular：空心
+  */
   type?: 'solid' | 'regular',
   iconStyle?: React.CSSProperties,
   icon: string,

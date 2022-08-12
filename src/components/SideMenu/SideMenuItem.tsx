@@ -49,9 +49,6 @@ const SideMenuItem: FC<SideMenuItemPropsType> = (props, ref) => {
     }
   ])
 
-  useEffect(() => {
-  }, [])
-
   return (
     <div onClick={handleClick}>
       {render ? (
