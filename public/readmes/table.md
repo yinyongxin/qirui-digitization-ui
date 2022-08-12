@@ -5,6 +5,9 @@
 属性
 
 + columns
+  + headerCellRender
+  + bodyCellRender
+  + align
 + data
 + align
 + rowKey

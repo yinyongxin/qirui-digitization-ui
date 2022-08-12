@@ -95,7 +95,10 @@ const Table = <T,>(props: TablePropsType<T>) => {
       <tbody className={tableClassName.tbody}>
         {data.map((dataItem, dataIndex) => {
           return (
-            <tr key={isFunction(rowKey) ? rowKey?.(dataItem) : (rowKey && dataItem[rowKey]) || dataIndex} className={tableClassName.tbodyTr}>
+            <tr
+              key={isFunction(rowKey) ? rowKey?.(dataItem) : (rowKey && dataItem[rowKey]) || dataIndex}
+              className={tableClassName.tbodyTr}
+            >
               {columns.map((column, columnIndex) => (
                 <td
                   key={column.key || columnIndex}
