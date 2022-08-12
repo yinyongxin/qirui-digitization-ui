@@ -7,6 +7,7 @@ import TitleExemple from '../exemples/TitleExemple'
 import CardExemple from '../exemples/CardExemple'
 import TabsExemple from '../exemples/TabsExemple'
 import MessageExemple from '../exemples/MessageExemple'
+import ModalExemple from '../exemples/ModalExemple'
 
 export const routes: RouteObject[] = [
   {
@@ -36,6 +37,10 @@ export const routes: RouteObject[] = [
       {
         path: 'messageExemple',
         element: <MessageExemple />,
+      },
+      {
+        path: 'modalExemple',
+        element: <ModalExemple />,
       },
     ],
   },

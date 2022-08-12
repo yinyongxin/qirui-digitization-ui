@@ -37,6 +37,11 @@ function App() {
       activeKey: 'messageExemple',
       icon: 'bars'
     },
+    {
+      title: 'Modal',
+      activeKey: 'ModalExemple',
+      icon: 'bars'
+    },
   ]
   return (
     <div className='app'>
