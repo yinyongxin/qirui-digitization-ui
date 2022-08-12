@@ -39,7 +39,12 @@ function App() {
     },
     {
       title: 'Modal',
-      activeKey: 'ModalExemple',
+      activeKey: 'modalExemple',
+      icon: 'bars'
+    },
+    {
+      title: 'Drawer',
+      activeKey: 'drawerExemple',
       icon: 'bars'
     },
   ]
