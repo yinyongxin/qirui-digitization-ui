@@ -89,63 +89,65 @@ const Select: FC<SelectPropsType> = (props) => {
 
   }
 
+  /**
+   * 当为单选是渲染
+   * @returns ReactNode
+   */
+  const valueRender = () => {
+    const selectOption = options.find((option) => option.value === value)
+    const selectValueLabelShow = typeof selectOption?.label === 'function' ? selectOption?.label(selectOption, true) : selectOption?.label
+    return (
+      <div className={`${prefixCls}-value`}>{selectValueLabelShow}</div>
+    )
+  }
 
+  /**
+  * 当为多选是渲染
+  * @returns ReactNode
+  */
+  const valuesItemRenter = () => {
+    const valuesMapKeys = [...valuesMap.keys()]
+    return (
+      <div className={`${prefixCls}-multiple-values`}>
+        {valuesMapKeys.splice(0, maxShow).map((valuesMapKey) => {
+          const valuesItem = valuesMap.get(valuesMapKey)
+          const valuesItemLabel = valuesItem?.label
+          if (isFunction(valuesItemLabel)) {
+            valuesItemLabel(valuesItem as DesignTypes['Option'], true)
+          }
+          return (
+            <div key={valuesMapKey} className={`${prefixCls}-multiple-values-item`}>
+              <>
+                {valuesItemLabel}
+                <Icon
+                  onClick={(event) => {
+                    event.preventDefault()
+                    event.stopPropagation()
+                    updataValueFn('delete', {
+                      key: valuesMapKey
+                    })
+                  }}
+                  icon="xmark"
+                  size={12}
+                />
+              </>
+            </div>
+          )
+        })}
+        {(value as [])?.length > maxShow && (
+          <span className="flex align-end" style={{ padding: '2px 0', fontSize: 18 }}>
+            {'...'}
+          </span>
+        )}
+      </div>
+    )
+  }
 
+  /**
+   * 内容渲染
+   * @returns 选项显示内容
+   */
   const contentRender = () => {
-
-    /**
-     * 当为单选是渲染
-     * @returns ReactNode
-     */
-    const valueRender = () => {
-      const selectOption = options.find((option) => option.value === value)
-      const selectValueLabelShow = typeof selectOption?.label === 'function' ? selectOption?.label(selectOption, true) : selectOption?.label
-      return (
-        <div className={`${prefixCls}-value`}>{selectValueLabelShow}</div>
-      )
-    }
-    /**
-     * 当为多选是渲染
-     * @returns ReactNode
-     */
-    const valuesItemRenter = () => {
-      const valuesMapKeys = [...valuesMap.keys()]
-      return (
-        <div className={`${prefixCls}-multiple-values`}>
-          {valuesMapKeys.splice(0, maxShow).map((valuesMapKey) => {
-            const valuesItem = valuesMap.get(valuesMapKey)
-            const valuesItemLabel = valuesItem?.label
-            if (isFunction(valuesItemLabel)) {
-              valuesItemLabel(valuesItem as DesignTypes['Option'], true)
-            }
-            return (
-              <div key={valuesMapKey} className={`${prefixCls}-multiple-values-item`}>
-                <>
-                  {valuesItemLabel}
-                  <Icon
-                    onClick={(event) => {
-                      event.preventDefault()
-                      event.stopPropagation()
-                      updataValueFn('delete', {
-                        key: valuesMapKey
-                      })
-                    }}
-                    icon="xmark"
-                    size={12}
-                  />
-                </>
-              </div>
-            )
-          })}
-          {(value as [])?.length > maxShow && (
-            <span className="flex align-end" style={{ padding: '2px 0', fontSize: 18 }}>
-              {'...'}
-            </span>
-          )}
-        </div>
-      )
-    }
-
     // 如果有值且为单选  则显示选择值
     if (!multiple && isNumber(value) || isString(value)) {
       return valueRender()
@@ -160,6 +162,10 @@ const Select: FC<SelectPropsType> = (props) => {
     }
   }
 
+  /**
+   * 右侧图标渲染
+   * @returns Icon
+   */
   const iconRender = () => {
     let iconRenderRes = <Icon icon="angle-down" />
     if (mouseHover && !multiple) {
@@ -183,7 +189,6 @@ const Select: FC<SelectPropsType> = (props) => {
       </div>
     )
   }
-
 
   const optionsRender = () => {
     const optionHandleClick = (option: DesignTypes['Option']) => {
