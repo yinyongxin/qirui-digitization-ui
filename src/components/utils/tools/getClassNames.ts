@@ -1,6 +1,6 @@
 import { isString } from "./is";
 
-type ClassNamesType = (string | Record<string, boolean>)[]
+export type ClassNamesType = (string | Record<string, boolean | undefined>)[]
 /**
  * 跟类名数组获取类名字符串
  * @param classNames 类名
@@ -9,11 +9,11 @@ type ClassNamesType = (string | Record<string, boolean>)[]
 export const getClassNames = (classNames: ClassNamesType) => {
   const classNameArr: string[] = []
   classNames.forEach(className => {
-    if(isString(className)) {
+    if (isString(className)) {
       classNameArr.push(className)
-    }else {
+    } else {
       Object.keys(className).forEach(key => {
-        if(className[key]) {
+        if (className[key]) {
           classNameArr.push(key)
         }
       })

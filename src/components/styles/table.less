@@ -2,5 +2,48 @@
 
 .@{prefix-table} {
   width: 100%;
+  border-spacing: 0;
+  .@{prefix-table}-align-left {
+    text-align: left;
+  }
+  .@{prefix-table}-align-center {
+    text-align: center;
+  }
+  .@{prefix-table}-align-right {
+    text-align: right;
+  }
+  td, th {
+    padding: 0 16px;
+  }
+  th {
+    color: var(--design-neutral-color-3);
+  }
+  td {
+    color: var(--design-neutral-color-1);
+  }
+  .@{prefix-table}-theadTr {
+    background-color: var(--design-neutral-color-7);
+    .@{prefix-table}-theadTh {
+      height: 48px;
+    }
+  }
+  .@{prefix-table}-tbodyTr {
+    background-color: var(--design-neutral-color-8);
+    .@{prefix-table}-tbodyTd {
+      height: 56px;
+    }
+  }
 }
 
+.@{prefix-table}-border-top {
+  border-top: @design-neutral-color-5 solid @design-border-sm;
+}
+.@{prefix-table}-border-bottom {
+  border-bottom: @design-neutral-color-5 solid @design-border-sm;
+}
+.@{prefix-table}-border-right {
+  border-right: @design-neutral-color-5 solid @design-border-sm;
+}
+.@{prefix-table}-border-left {
+  border-left: @design-neutral-color-5 solid @design-border-sm;
+}

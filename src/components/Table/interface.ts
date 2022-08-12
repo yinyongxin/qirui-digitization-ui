@@ -9,7 +9,7 @@ export type ColumnType<T> = {
    */
   title: ReactNode,
   /**
-   * React的 key值，如果不指定，默认取 dataIndex 的值
+   * React的 key值，如果不指定，默认取 dataKey 的值
    */
   key?: Key,
   /**
@@ -27,7 +27,7 @@ export type ColumnType<T> = {
   /**
    * 自定义单元格显示的内容
    */
-  bodyCellRender?: (col: ColumnType<T>, record: T, index: number) => ReactNode,
+  bodyCellRender?: (col: ColumnType<T>, record: T, index: Record<'columnIndex' | 'dataIndex', number>) => ReactNode,
   /**
    * 自定义头部标题单元格显示的内容
    */
@@ -49,6 +49,7 @@ export type ColumnType<T> = {
    */
   align?: DesignTypes['Align']
 }
+type TestType = { data1: string, data2: string }
 
 export interface TableBaseType<T> {
   tableStyle?: React.CSSProperties,
@@ -64,7 +65,7 @@ export interface TableBaseType<T> {
   /**
    * 	表格行 key 的取值字段
    */
-  rowKey?: React.Key | ((record: T) => React.Key),
+  rowKey?: keyof T | ((record: T) => keyof T),
   /**
    * 表格是否在加载中
    */
@@ -72,7 +73,7 @@ export interface TableBaseType<T> {
   /**
    * 表格数据
    */
-  data: T[],
+  data: Record<keyof T, any>[],
   /**
    * 当单元格内容为空时，显示占位符，优先级低于 column.placeholder。
    */
@@ -80,7 +81,9 @@ export interface TableBaseType<T> {
   /**
    * 	是否开启斑马纹
    */
-  stripe?: boolean
+  stripe?: boolean,
+
+  borders?: Partial<Record<DesignTypes['Direction'] | 'thead' | 'tbody', boolean>>
 }
 
 export type TablePropsType<T = unknown> = TableBaseType<T> & JSX.IntrinsicElements['table']
