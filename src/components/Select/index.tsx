@@ -12,15 +12,6 @@ const Select: FC<SelectPropsType> = (props) => {
     classNamePrefix
   } = useContext(GlobalContext);
 
-
-  const prefixCls = `${classNamePrefix}-select`
-
-  const [value, setValue] = useState<ValueType>([])
-  const [optionsVisible, setOptionsVisible] = useState(false)
-  const [mouseHover, setMouseHover] = useState(false)
-
-  const [selectRef, setSelectRef] = useState<HTMLDivElement>()
-
   const {
     placeholder = '请选择',
     options,
@@ -31,6 +22,14 @@ const Select: FC<SelectPropsType> = (props) => {
     onValueChange,
     ...rest
   } = props
+
+  const prefixCls = `${classNamePrefix}-select`
+
+  const [value, setValue] = useState<ValueType>([])
+  const [optionsVisible, setOptionsVisible] = useState(false)
+  const [mouseHover, setMouseHover] = useState(false)
+
+  const [selectRef, setSelectRef] = useState<HTMLDivElement>()
 
   const selectClassName = getClassNames([
     `${prefixCls}`,
