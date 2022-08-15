@@ -31,10 +31,10 @@
       "require": "./dist/theme/index.css"
     }
   },
-  "version": "1.1.6",
+  "version": "1.1.7",
   "scripts": {
     "start": "npm run dev",
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build && tsc -p tsconfig.build.json",
     "preview": "vite preview"
   },

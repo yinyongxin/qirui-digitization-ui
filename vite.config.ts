@@ -31,6 +31,6 @@ export default defineConfig({
           'react-dom': 'react-dom',
         }
       },
-    }
+    },
   }
 })
