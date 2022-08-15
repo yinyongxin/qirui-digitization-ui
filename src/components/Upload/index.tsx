@@ -37,7 +37,7 @@ const Upload: FC<UploadPropsType> = (props, ref) => {
         }
       }} />
       {value && [...value].map((item, index) => (
-        <div>
+        <div key={index}>
           <Image
             imgProps={{
               style: {
