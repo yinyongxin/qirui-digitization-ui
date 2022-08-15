@@ -1,6 +1,3 @@
-import { useContext } from "react"
-import { GlobalContext } from "../config/globalContext"
-import Button from "../Button"
 import { ModalPropsType } from "./interface"
 import Modal from "./Modal"
 const ModalItem = (props: ModalPropsType) => {

@@ -3,6 +3,7 @@
 .@{prefix-select} {
   color: var(--design-neutral-color-2);
   position: relative;
+  font-size: @design-font-size-14;
 
   .@{prefix-select}-main {
     min-width: 120px;
@@ -12,6 +13,7 @@
     .flex();
     .justify-between();
     .cursor-pointer();
+
     &:hover {
       border: @design-base-color solid @design-border-sm;
     }
@@ -49,6 +51,7 @@
     padding-left: 4px;
     padding-right: 4px;
     gap: 4px;
+
     .@{prefix-select}-multiple-values-item {
       .flex();
       .justify-between();
@@ -65,17 +68,19 @@
   .@{prefix-select}-main-border {
     border: @design-base-color solid @design-border-sm;
   }
-  
+
   .@{prefix-select}-options-centent {
     position: absolute;
     left: 0;
     right: 0;
     background-color: var(--design-neutral-color-9);
     z-index: 1000;
+
     .@{prefix-select}-options {
       border: @design-base-color solid @design-border-sm;
       border-top: none;
       .cursor-pointer();
+
       .@{prefix-select}-option {
         height: 40px;
         padding: 0 24px;
@@ -91,13 +96,15 @@
         color: @design-base-color;
         background-color: @design-base-color-10  !important;
       }
-      
+
     }
+
     .@{prefix-select}-options-overflow-5 {
       max-height: 240px;
       overflow: auto;
       .scrollbar();
     }
+
     .@{prefix-select}-option-end {
       position: sticky;
       position: -webkit-sticky;
