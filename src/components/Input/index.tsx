@@ -1,61 +1,48 @@
 import { FC, useContext } from "react"
 import { GlobalContext } from "../config/globalContext"
-import { getClassNames } from "../utils/tools";
-import { CardPropsType } from "./interface"
+import { ClassNameType, getClassNames } from "../utils/tools";
+import { InputPropsType } from "./interface"
 
-const Input: FC<CardPropsType> = (props, ref) => {
+const Input: FC<InputPropsType> = (props, ref) => {
 
   const {
     classNamePrefix
   } = useContext(GlobalContext);
 
-  const prefixCls = `${classNamePrefix}-card`
+  const prefixCls = `${classNamePrefix}-input`
 
   const {
-    status,
-    children,
-    title,
-    headerStyle = {},
-    bodyStyle = {},
-    cardStyle = {},
-    width = 377,
-    border = [
-      'top',
-      'right',
-      'bottom',
-      'left',
-    ]
+    borders,
+    type
   } = props
 
-  const cardClassName = getClassNames([
-    `${prefixCls}`,
-    ...border.map(item => `${prefixCls}-border-${item}`)
-  ])
+  const defaultBorders = {
+    top: true,
+    right: true,
+    bottom: true,
+    left: true,
+    thead: true,
+    tbody: true,
+    vertical: false,
+    ...borders
+  }
 
-  const statusClassName = getClassNames([
-    `${prefixCls}-status`,
-    `${prefixCls}-status-${status}`
-  ])
-
-  const footerRender = () => {
-    if (title || status) {
-      return (
-        <header style={headerStyle} className={`${prefixCls}-header`}>
-          <div>{title}</div>
-          {status && (
-            <div className={statusClassName}></div>
-          )}
-        </header>
-      )
-    }
+  const classNamesObj = {
+    input: (classNames?: ClassNameType[]) => getClassNames([
+      `${prefixCls}`,
+      {
+        [`${prefixCls}-border-top`]: defaultBorders.top,
+        [`${prefixCls}-border-right`]: defaultBorders.right,
+        [`${prefixCls}-border-bottom`]: defaultBorders.bottom,
+        [`${prefixCls}-border-left`]: defaultBorders.left,
+      },
+    ])
   }
 
   return (
-    <div style={{ width, minWidth: width, ...cardStyle }} className={cardClassName}>
-      {footerRender()}
-      <main style={bodyStyle} className={`${prefixCls}-body`}>
-        {children}
-      </main>
+    <div className={classNamesObj.input()}>
+      <label htmlFor="">input</label>
+      <input title="input" type={type} />
     </div>
   )
 }

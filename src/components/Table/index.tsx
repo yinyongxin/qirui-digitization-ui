@@ -1,6 +1,6 @@
 import React, { FC, Key, useContext, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
-import { ClassNamesType, getClassNames, isFunction } from "../utils/tools"
+import { ClassNameType, getClassNames, isFunction } from "../utils/tools"
 import { TablePropsType } from "./interface"
 
 const Table = <T,>(props: TablePropsType<T>) => {
@@ -53,7 +53,7 @@ const Table = <T,>(props: TablePropsType<T>) => {
     theadTr: getClassNames([
       `${prefixCls}-theadTr`,
     ]),
-    theadTh: (className: ClassNamesType) => getClassNames([
+    theadTh: (className: ClassNameType[]) => getClassNames([
       `${prefixCls}-theadTh`,
       `${prefixCls}-align-${align}`,
       ...className,
@@ -67,7 +67,7 @@ const Table = <T,>(props: TablePropsType<T>) => {
     tbodyTr: getClassNames([
       `${prefixCls}-tbodyTr`,
     ]),
-    tbodyTd: (classNames: ClassNamesType) => getClassNames([
+    tbodyTd: (classNames: ClassNameType[]) => getClassNames([
       `${prefixCls}-tbodyTd`,
       `${prefixCls}-align-${align}`,
       ...classNames,
