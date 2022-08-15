@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Icon, Input, Title } from "../../components";
+import { Icon, Input, Title, Upload } from "../../components";
 
 const IconExemple = () => {
   const [value, setValue] = useState()
@@ -30,6 +30,7 @@ const IconExemple = () => {
           <Input
             addAfter={'addAfter'}
           />
+          <Upload />
         </div>
       </Title>
     </div>

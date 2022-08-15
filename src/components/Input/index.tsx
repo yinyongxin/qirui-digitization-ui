@@ -103,6 +103,7 @@ const Input: FC<InputPropsType> = (props, ref) => {
     placeholder,
     className: classNamesObj.input(),
     onChange: (e) => {
+      console.log('e', e.target.value);
       onChange && onChange(e.target.value, e)
       setValue(e.target.value)
     }

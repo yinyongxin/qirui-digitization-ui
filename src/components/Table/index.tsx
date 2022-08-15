@@ -53,7 +53,7 @@ const Table = <T,>(props: TablePropsType<T>) => {
     theadTr: getClassNames([
       `${prefixCls}-theadTr`,
     ]),
-    theadTh: (className: ClassNameType[]) => getClassNames([
+    theadTh: (className: ClassNameType[] = []) => getClassNames([
       `${prefixCls}-theadTh`,
       `${prefixCls}-align-${align}`,
       ...className,
@@ -67,7 +67,7 @@ const Table = <T,>(props: TablePropsType<T>) => {
     tbodyTr: getClassNames([
       `${prefixCls}-tbodyTr`,
     ]),
-    tbodyTd: (classNames: ClassNameType[]) => getClassNames([
+    tbodyTd: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}-tbodyTd`,
       `${prefixCls}-align-${align}`,
       ...classNames,
