@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Icon, Input, Title } from "../../components";
 
 const IconExemple = () => {
+  const [value, setValue] = useState()
   return (
     <div>
       <Title type="tooltip" title="基本Icon status" >

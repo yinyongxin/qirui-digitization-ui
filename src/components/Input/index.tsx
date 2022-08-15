@@ -15,7 +15,7 @@ const Input: FC<InputPropsType> = (props, ref) => {
     borders,
     type = 'text',
     label,
-    value: valueProps = '',
+    value: valueProps,
     defaultValue = '',
     readOnly = false,
     height = 48,
@@ -25,11 +25,12 @@ const Input: FC<InputPropsType> = (props, ref) => {
     suffix,
     addBefore,
     addAfter,
+    onChange
   } = props
 
   const key = `input-${type}-${label}`
 
-  const [value, setValue] = useState(defaultValue)
+  const [value, setValue] = useState(valueProps || defaultValue)
 
   const defaultBorders = {
     top: true,
@@ -102,7 +103,7 @@ const Input: FC<InputPropsType> = (props, ref) => {
     placeholder,
     className: classNamesObj.input(),
     onChange: (e) => {
-      console.log('e', e.target.value);
+      onChange && onChange(e.target.value, e)
       setValue(e.target.value)
     }
   }

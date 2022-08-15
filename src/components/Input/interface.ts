@@ -64,7 +64,7 @@ export interface InputBaseType {
    */
   maxLength?: number | { length: number; errorOnly?: boolean }
   borders?: Partial<Record<DesignTypes['Direction'], boolean>> | null,
-  onChange?: (value: string, e: Event) => void,
+  onChange?: (value: string, e: React.ChangeEvent<HTMLInputElement>) => void,
   onClear?: () => void,
   onPressEnter?: (e: Event) => void
 }
