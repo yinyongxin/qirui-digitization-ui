@@ -27,6 +27,11 @@ export interface InputBaseType {
    * 	默认值
    */
   defaultValue?: string,
+  label?: string,
+  lableConfig?: {
+    align?: 'left' | 'right',
+    width?: string | number
+  }
   /**
    * 	输入框提示文字
    */
@@ -39,20 +44,20 @@ export interface InputBaseType {
   /**
    * 	输入框后添加元素
    */
-  addAfter?: ReactNode,
+  addAfter?: ReactNode | ((value: string) => ReactNode),
   /**
    * 	输入框前添加元素
    */
-  addBefore?: ReactNode,
+  addBefore?: ReactNode | ((value: string) => ReactNode),
   /**
    * 	添加前缀文字或者图标
    */
-  prefix?: ReactNode,
+  prefix?: ReactNode | ((value: string) => ReactNode),
   /**
    * 添加后缀文字或者图标
    */
-  suffix?: ReactNode,
-  height: number | string
+  suffix?: ReactNode | ((value: string) => ReactNode),
+  height?: number | string
   width?: number | string,
   /**
    * 输入框最大输入的长度；设置 errorOnly为 true 后，超过 maxLength 会展示 error 状态，并不限制用户输入。

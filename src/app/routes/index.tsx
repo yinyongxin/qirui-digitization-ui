@@ -12,6 +12,7 @@ import SelectExemple from '../exemples/SelectExemple'
 import DrawerExemple from '../exemples/DrawerExemple'
 import SideMenuExemple from '../exemples/SideMenuExemple'
 import TableExemple from '../exemples/TableExemple'
+import InputExemple from '../exemples/InputExemple'
 
 export const routes: RouteObject[] = [
   {
@@ -61,6 +62,10 @@ export const routes: RouteObject[] = [
       {
         path: 'tableExemple',
         element: <TableExemple />,
+      },
+      {
+        path: 'inputExemple',
+        element: <InputExemple />,
       },
     ],
   },

@@ -45,7 +45,7 @@ const IconExemple = () => {
               {
                 title: 'align-right',
                 dataKey: 'data3',
-                align: "right"
+                align: "center"
               },
               {
                 title: 'placeholder',

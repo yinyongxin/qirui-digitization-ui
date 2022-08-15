@@ -12,6 +12,7 @@ import Select from "./Select/index";
 import SideMenu from "./SideMenu/index";
 import Title from "./Title/index";
 import Table from "./Table/index";
+import Input from "./Input/index";
 import { GlobalContext } from './config/globalContext'
 
 export {
@@ -26,5 +27,6 @@ export {
   SideMenu,
   Title,
   GlobalContext,
-  Table
+  Table,
+  Input,
 };

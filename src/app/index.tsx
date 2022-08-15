@@ -53,13 +53,18 @@ function App() {
       icon: 'bars'
     },
     {
-      title: 'sideMenu',
+      title: 'SideMenu',
       activeKey: 'sideMenuExemple',
       icon: 'bars'
     },
     {
-      title: 'table',
+      title: 'Table',
       activeKey: 'tableExemple',
+      icon: 'bars'
+    },
+    {
+      title: 'Input',
+      activeKey: 'inputExemple',
       icon: 'bars'
     },
   ]
