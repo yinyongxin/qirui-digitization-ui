@@ -2,7 +2,7 @@ import { FC, MutableRefObject, useContext, useRef, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
 import Icon from "../Icon";
 import { DesignTypes } from "../typings";
-import { getClassNames, isFunction, isNumber, isString } from "../utils/tools";
+import { ClassNameType, getClassNames, isFunction, isNumber, isString } from "../utils/tools";
 import { SelectPropsType, ValueType } from "./interface"
 
 const valuesMap: Map<DesignTypes['Option']['value'], DesignTypes['Option']> = new Map([])
@@ -133,7 +133,7 @@ const Select: FC<SelectPropsType> = (props) => {
             </div>
           )
         })}
-        {(value as [])?.length > maxShow && (
+        {value?.length! > maxShow && (
           <span className="flex align-end" style={{ padding: '2px 0', fontSize: 18 }}>
             {'...'}
           </span>
@@ -189,6 +189,11 @@ const Select: FC<SelectPropsType> = (props) => {
     )
   }
 
+
+  /**
+   * 选项渲染
+   * @returns options Node
+   */
   const optionsRender = () => {
     const optionHandleClick = (option: DesignTypes['Option']) => {
       if (!multiple) {
@@ -222,16 +227,18 @@ const Select: FC<SelectPropsType> = (props) => {
         {options.map(option => {
           let resOption = null
 
-          const isSelected = multiple ? !!valuesMap.get(option.value) : value === option.value
+          const isSelected = multiple ? !!valuesMap.get(option.value) : value?.[0] === option.value
 
-          let optionClassNameArr: string[] = []
+          let optionClassNameArr: ClassNameType[] = []
 
           if (isFunction(option.label)) {
             resOption = option.label(option, isSelected)
           } else {
             optionClassNameArr = [
               `${prefixCls}-option`,
-              isSelected ? `${prefixCls}-option-selected` : ''
+              {
+                [`${prefixCls}-option-selected`]: isSelected
+              }
             ]
             resOption = option.label
           }
@@ -251,6 +258,7 @@ const Select: FC<SelectPropsType> = (props) => {
       </div>
     )
   }
+
   const selectHandleClick = () => {
     setOptionsVisible(!optionsVisible)
   }
