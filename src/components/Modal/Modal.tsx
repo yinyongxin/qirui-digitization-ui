@@ -88,17 +88,17 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
   ])
 
   const headerRender = () => {
-    let footerRes = null
+    let headerRes = null
     if (!header) {
       return
     } else if (header === 'default') {
-      footerRes = title
+      headerRes = title
     } else {
-      footerRes = header
+      headerRes = header
     }
     return (
       <header className={`${prefixCls}-header ${headerCenter ? 'justify-center' : 'justify-start'}`}>
-        {footerRes}
+        {headerRes}
       </header>
     )
   }
@@ -137,10 +137,12 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
           <Button
             onClick={onCancelHandle}
             level="secondary"
+            size='large'
             {...cancelButtonProps}
           >{cancelText}</Button>
           <Button
             onClick={onConfirmModal}
+            size='large'
             {...okButtonProps}
           >{okText}</Button>
         </>
@@ -175,7 +177,7 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
       return
     } else if (icon === 'default') {
       iconRes = (
-        <Icon icon={"xmark"} />
+        <Icon icon={"xmark"} size={24} />
       )
     } else {
       iconRes = icon
