@@ -15,12 +15,11 @@ const Select: FC<SelectPropsType> = (props) => {
 
   const prefixCls = `${classNamePrefix}-select`
 
-  const [value, setValue] = useState<ValueType>()
+  const [value, setValue] = useState<ValueType>([])
   const [optionsVisible, setOptionsVisible] = useState(false)
   const [mouseHover, setMouseHover] = useState(false)
 
   const [selectRef, setSelectRef] = useState<HTMLDivElement>()
-
 
   const {
     placeholder = '请选择',
@@ -79,11 +78,11 @@ const Select: FC<SelectPropsType> = (props) => {
       updateValueFn(newUpdateValue)
     } else {
       if (type === 'add') {
-        updateValueFn(updateValue as DesignTypes['Option']['value'])
+        updateValueFn([updateValue as DesignTypes['Option']['value']])
         setOptionsVisible(false)
       }
       if (type === 'delete') {
-        updateValueFn(undefined)
+        updateValueFn([])
       }
     }
 
@@ -94,7 +93,7 @@ const Select: FC<SelectPropsType> = (props) => {
    * @returns ReactNode
    */
   const valueRender = () => {
-    const selectOption = options.find((option) => option.value === value)
+    const selectOption = options.find((option) => option.value === value?.[0])
     const selectValueLabelShow = typeof selectOption?.label === 'function' ? selectOption?.label(selectOption, true) : selectOption?.label
     return (
       <div className={`${prefixCls}-value`}>{selectValueLabelShow}</div>
@@ -149,10 +148,10 @@ const Select: FC<SelectPropsType> = (props) => {
    */
   const contentRender = () => {
     // 如果有值且为单选  则显示选择值
-    if (!multiple && isNumber(value) || isString(value)) {
+    if (!multiple && value?.length !== 0) {
       return valueRender()
       // 如果有值且为多选  则显示选择值
-    } else if (multiple && Array.isArray(value) && value.length !== 0) {
+    } else if (multiple && value?.length !== 0) {
       return valuesItemRenter()
       // 如果没有值则显示 placeholder
     } else {
@@ -178,7 +177,7 @@ const Select: FC<SelectPropsType> = (props) => {
             if (optionsVisible) {
               setOptionsVisible(false)
             }
-            updateValueFn(undefined)
+            updateValueFn([])
           }}
         />
       )
@@ -257,12 +256,7 @@ const Select: FC<SelectPropsType> = (props) => {
   }
 
   const getValue = () => {
-    if (multiple && Array.isArray(value)) {
-      return value?.join(',')
-    } else if (multiple && (typeof value === "number" || typeof value === "string")) {
-      return value
-    }
-    return ''
+    return JSON.stringify(value)
   }
 
   return (
@@ -279,6 +273,7 @@ const Select: FC<SelectPropsType> = (props) => {
         title="select"
         type="text"
         value={getValue()}
+        onChange={() => { }}
         style={{ display: 'none' }}
       />
       <div
@@ -310,4 +305,5 @@ const Select: FC<SelectPropsType> = (props) => {
     </div>
   )
 }
+
 export default Select
