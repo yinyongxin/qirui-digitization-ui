@@ -19,30 +19,37 @@
   background-color: transparent;
   color: @design-base-color;
   border-color: @design-base-color;
+
   &:hover {
     background-color: @design-base-color-10;
   }
 }
+
 .@{prefix-button}-status-success {
   background-color: transparent;
   color: @design-success-color;
   border-color: @design-success-color;
+
   &:hover {
     background-color: @design-success-color-10;
   }
 }
+
 .@{prefix-button}-status-error {
   background-color: transparent;
   color: @design-error-color;
   border-color: @design-error-color;
+
   &:hover {
     background-color: @design-error-color-10;
   }
 }
+
 .@{prefix-button}-status-warning {
   background-color: transparent;
   color: @design-warning-color;
   border-color: @design-warning-color;
+
   &:hover {
     background-color: @design-warning-color-10;
   }
@@ -52,24 +59,36 @@
   padding: 0 10px;
   height: 24px;
 }
+
 .@{prefix-button}-size-default {
   padding: 0 14px;
   height: 32px;
 }
+
 .@{prefix-button}-size-large {
   padding: 0 18px;
   height: 40px;
 }
 
 
-.@{prefix-button}-level-main {
-}
+.@{prefix-button}-level-main {}
 
 .@{prefix-button}-level-secondary {
   color: @design-neutral-color-2;
   border-color: @design-neutral-color-2;
+
   &:hover {
     background-color: @design-neutral-color-3;
+    color: @design-neutral-color-1;
+  }
+}
+
+.@{prefix-button}-level-white {
+  color: @design-neutral-color;
+  border-color: @design-neutral-color;
+
+  &:hover {
+    background-color: @design-neutral-color-6;
     color: @design-neutral-color-1;
   }
 }
@@ -87,9 +106,11 @@
   padding: 0;
   border: none;
 }
+
 .@{prefix-button}-buttonShowType-text {
   cursor: pointer;
   color: @design-neutral-color-1;
+
   &:hover {
     background-color: unset;
     color: @design-base-color;
@@ -109,9 +130,11 @@
   border-bottom-width: @design-border-sm;
   border-bottom-style: solid;
 }
+
 .@{prefix-button}-line-default {
-  border-bottom-color: @design-neutral-color-1 !important;
+  border-bottom-color: @design-neutral-color-1  !important;
+
   &:hover {
-    border-bottom-color: @design-base-color !important;
+    border-bottom-color: @design-base-color  !important;
   }
 }
