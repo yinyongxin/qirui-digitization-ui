@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Title } from "../../components";
+import { Image, Title, Upload } from "../../components";
 import Luoxiaohei from '../../assets/images/luoxiaohei.jpg'
 
 const ImageExemple = () => {
@@ -7,18 +7,19 @@ const ImageExemple = () => {
     <div>
       <Title type="tooltip" title="基本Image status" >
         <div className="flex gap20">
-          <div>
-            <Image
-              imgAttributes={{
-                style: {
-                  width: 200,
-                  height: 200,
-                },
-
-                src: Luoxiaohei
-              }}
-            />
-          </div>
+          <Image
+            imgAttributes={{
+              style: {
+                width: 200,
+                height: 200,
+                objectFit: 'cover'
+              },
+              src: Luoxiaohei
+            }}
+            optionsShow="hover"
+            closeShow='always'
+            mask
+          />
         </div>
       </Title>
     </div>

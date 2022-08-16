@@ -14,6 +14,7 @@ import SideMenuExemple from '../exemples/SideMenuExemple'
 import TableExemple from '../exemples/TableExemple'
 import InputExemple from '../exemples/InputExemple'
 import ImageExemple from '../exemples/ImageExemple'
+import UploadExemple from '../exemples/UploadExemple'
 
 export const routes: RouteObject[] = [
   {
@@ -71,6 +72,10 @@ export const routes: RouteObject[] = [
       {
         path: 'imageExemple',
         element: <ImageExemple />,
+      },
+      {
+        path: 'uploadExemple',
+        element: <UploadExemple />,
       },
     ],
   },

@@ -30,7 +30,7 @@ const IconExemple = () => {
           <Input
             addAfter={'addAfter'}
           />
-          <Upload />
+
         </div>
       </Title>
     </div>

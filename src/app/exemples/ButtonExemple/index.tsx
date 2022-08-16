@@ -25,6 +25,7 @@ const ButtonExemple = () => {
       <Title type="tooltip" title="水平级别" >
         <div className="flex gap10">
           <Button level="main">main</Button>
+          <Button level="white">White</Button>
           <Button level="secondary">Secondary</Button>
         </div>
       </Title>
