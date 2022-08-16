@@ -17,10 +17,25 @@
 
   .@{prefix-image}-img {
     vertical-align: middle;
+    border: 0 none;
   }
 
   .@{prefix-image}-options {
     .absolute-fill();
+    z-index: 1001;
+  }
+
+  .@{prefix-image}-error {
+    .absolute-fill();
+    .flex-center();
+    background-color: var(--design-neutral-color-3);
+    z-index: 1001;
+  }
+
+  .@{prefix-image}-loading {
+    .absolute-fill();
+    .flex-center();
+    background-color: var(--design-neutral-color-3);
     z-index: 1001;
   }
 
