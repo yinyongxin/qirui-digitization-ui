@@ -5,6 +5,7 @@ import Icon from "../Icon"
 import { getClassNames } from "../utils/tools"
 import { ModalHandle, ModalPropsType } from "./interface"
 import { Root, createRoot } from "react-dom/client"
+import { useMemo } from "react"
 
 const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) => {
 
@@ -87,10 +88,10 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
     border ? `${prefixCls}-body-border` : ''
   ])
 
-  const headerRender = () => {
+  const HeaderRender = () => {
     let headerRes = null
     if (!header) {
-      return
+      return <></>
     } else if (header === 'default') {
       headerRes = title
     } else {
@@ -127,10 +128,10 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
     close()
   }
 
-  const footerRender = () => {
+  const FooterRender = () => {
     let footerRes = null
     if (!footer) {
-      return
+      return <></>
     } else if (footer === 'default') {
       footerRes = (
         <>
@@ -171,10 +172,10 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
     )
   }
 
-  const iconRender = () => {
+  const IconRender = () => {
     let iconRes = null
     if (!icon) {
-      return
+      return <></>
     } else if (icon === 'default') {
       iconRes = (
         <Icon icon={"xmark"} size={24} />
@@ -189,7 +190,7 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
     )
   }
 
-  const getContainer = () => {
+  const Container = () => {
     return (
       <main className={`${prefixCls}-container`} style={mianStyle}>
         {children && children}
@@ -207,19 +208,19 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
           style={bodyStyle}
           className={modalBodyClassName}
         >
-          {iconRender()}
-          {headerRender()}
-          {getContainer()}
-          {footerRender()}
+          <IconRender />
+          <HeaderRender />
+          <Container />
+          <FooterRender />
         </div >
       </main>
     </div >
   )
 
   const open = () => {
-    setVisible(true)
     modalRender(content(true))
     refFlag.current.isFristCreate = false
+    setVisible(true)
     afterOpen && afterOpen()
   }
 
