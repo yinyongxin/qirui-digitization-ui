@@ -2,6 +2,10 @@ import React, { PropsWithChildren, ReactNode } from "react"
 import { DesignTypes } from "../typings";
 
 export interface ImageBaseInterface {
+  width?: number | string,
+  height?: number | string,
+  style?: React.CSSProperties,
+  src?: string,
   imgAttributes?: JSX.IntrinsicElements['img'],
   /**
    * 	是否开启预览

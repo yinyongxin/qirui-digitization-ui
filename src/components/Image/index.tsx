@@ -1,7 +1,7 @@
 import React, { FC, MouseEventHandler, ReactNode, useContext, useState } from "react"
 import { Icon } from "../index"
 import { GlobalContext } from "../config/globalContext"
-import { ClassNameType, getClassNames } from "../utils/tools"
+import { ClassNameType, getClassNames, isBoolean, isNumber } from "../utils/tools"
 import omit from "../utils/tools/omit"
 import { ImagePropsType } from "./interface"
 
@@ -14,11 +14,18 @@ const Image: FC<ImagePropsType> = (props, ref) => {
   const prefixCls = `${classNamePrefix}-image`
 
   const [visible, setVisible] = useState(false)
+  const [loadingState, setLoadingState] = useState<'loading' | 'error' | 'success'>('loading')
 
   const {
     imgAttributes = {},
+    style = {},
+    width = "100%",
+    height = '100%',
+    src,
     closeRender,
     closeShow = 'never',
+    error,
+    loader = true,
     mask = false,
     optionsShow = 'never',
     optionsRender,
@@ -47,7 +54,15 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     mask: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}-mask`,
       ...classNames
-    ])
+    ]),
+    error: (classNames: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}-error`,
+      ...classNames
+    ]),
+    loading: (classNames: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}-loading`,
+      ...classNames
+    ]),
   }
 
   const CloseRenderConponent = () => {
@@ -117,6 +132,25 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     }
   }
 
+  const LoadStateContent = () => {
+    const iconSize = isNumber(width) ? width / 3 : 30
+    if (loadingState === 'error') {
+      return (
+        <div className={classNamesObj.error()}>
+          {error || <Icon icon="circle-exclamation" size={iconSize} />}
+        </div>
+      )
+    } else if (loadingState === 'loading' && loader) {
+      return (
+        <div className={classNamesObj.loading()}>
+          {!isBoolean(loader) ? loader : <Icon icon="image" size={iconSize} />}
+        </div>
+      )
+    } else {
+      return (<></>)
+    }
+  }
+
   return (
     <div
       className={classNamesObj.imageComponent()}
@@ -126,17 +160,42 @@ const Image: FC<ImagePropsType> = (props, ref) => {
       onMouseLeave={() => {
         setVisible(false)
       }}
+      style={{
+        width,
+        height,
+        ...style
+      }}
     >
       <img
-        style={{ ...imgAttributes?.style }}
+        onError={(e) => {
+          setLoadingState('loading')
+          imgAttributes?.onError?.(e)
+        }}
+        onLoad={(e) => {
+          setLoadingState('success')
+          imgAttributes?.onError?.(e)
+        }}
+        loading='lazy'
+        style={{
+          display: loadingState === 'error' ? 'none' : 'unset',
+          width,
+          height,
+          ...imgAttributes?.style,
+        }}
+        src={src}
         className={classNamesObj.img()}
-        {...omit(imgAttributes, ['style',])}
+        {...omit(imgAttributes, ['style', 'className', 'onError', 'onLoad'])}
       />
-      <OptionsRender />
-      <CloseRenderConponent />
-      {mask && visible && (
-        <div onClick={(e) => e.stopPropagation()} className={classNamesObj.mask()}></div>
+      <LoadStateContent />
+      {loadingState === 'success' && (
+        <>
+          <OptionsRender />
+          {mask && visible && (
+            <div onClick={(e) => e.stopPropagation()} className={classNamesObj.mask()}></div>
+          )}
+        </>
       )}
+      <CloseRenderConponent />
     </div>
   )
 }
