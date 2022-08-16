@@ -10,12 +10,12 @@ const ImageExemple = () => {
           <Image
             imgAttributes={{
               style: {
-                width: 200,
-                height: 200,
                 objectFit: 'cover'
               },
-              src: Luoxiaohei
             }}
+            src={'Luoxiaohei'}
+            width={200}
+            height={200}
             optionsShow="hover"
             closeShow='always'
             mask

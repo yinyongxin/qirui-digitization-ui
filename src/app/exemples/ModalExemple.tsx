@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Button, Icon, Modal, Title } from "../../components";
 import { ModalHandle } from "../../components/Modal/interface";
 
@@ -9,17 +9,26 @@ const ModalExemple = () => {
   const ModalRef1 = useRef<ModalHandle>()
   const ModalRef2 = useRef<ModalHandle>()
   const ModalRef3 = useRef<ModalHandle>()
+  const [title, setTitle] = useState('title')
   return (
     <div>
       <Title type="tooltip" title="默认" >
         <div className="flex gap20">
           <Modal
-            title={'title'}
+            title={title}
             ref={ModalRef1}
           >
             默认
           </Modal>
-          <Button onClick={() => ModalRef1.current?.open()}>默认</Button>
+          <Button onClick={() => {
+            setTitle('setTimeout')
+            ModalRef1.current?.open()
+            // setTimeout(() => {
+
+            //   console.log('setTimeout');
+
+            // }, 1000)
+          }}>默认</Button>
         </div>
       </Title>
       <Title type="tooltip" title="自定义头部底部" >

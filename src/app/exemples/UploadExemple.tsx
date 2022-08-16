@@ -12,14 +12,12 @@ const UploadExemple = () => {
               <Image
                 imgAttributes={{
                   style: {
-                    width: 200,
-                    height: 200,
                     objectFit: 'cover'
                   },
-                  src: Luoxiaohei
                 }}
-                mask
-                closeShow="always"
+                width={200}
+                height={200}
+                src={Luoxiaohei}
               />
             </Upload>
             <Upload>
