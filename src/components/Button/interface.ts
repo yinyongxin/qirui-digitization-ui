@@ -12,7 +12,7 @@ export interface ButtonBaseType {
    * 主要：main一般用于确认 
    * 次要：secondary一般用于取消
    */
-  level?: DesignTypes['Level'];
+  level?: DesignTypes['Level'] | 'white';
   /**
    * 状态 
    * 默认：default 成功：warnnig 失败：error 警告：warnning
