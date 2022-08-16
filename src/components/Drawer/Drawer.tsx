@@ -139,10 +139,12 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
         <>
           <Button
             onClick={onCancelHandle}
+            size='large'
             level="secondary"
             {...cancelButtonProps}
           >{cancelText}</Button>
           <Button
+            size='large'
             onClick={onConfirmDrawer}
             {...okButtonProps}
           >{okText}</Button>

@@ -2,19 +2,22 @@
 
 @keyframes drawer-body-keyframes-right {
   from {
-   transform: translateX(100%);
+    transform: translateX(100%);
   }
-  to { 
-   transform: translateX(0%);
- }
+
+  to {
+    transform: translateX(0%);
+  }
 }
+
 @keyframes drawer-body-keyframes-left {
   from {
-   transform: translateX(-100%);
+    transform: translateX(-100%);
   }
-  to { 
-   transform: translateX(0%);
- }
+
+  to {
+    transform: translateX(0%);
+  }
 }
 
 .@{prefix-drawer} {
@@ -23,6 +26,7 @@
   right: 0;
   bottom: 0;
   left: 0;
+
   .@{prefix-drawer}-mask {
     position: absolute;
     top: 0;
@@ -32,6 +36,7 @@
     background-color: @design-neutral-color-2;
     opacity: 0.5;
   }
+
   .@{prefix-drawer}-main {
     position: absolute;
     top: 0;
@@ -39,6 +44,7 @@
     bottom: 0;
     left: 0;
     display: flex;
+
     .@{prefix-drawer}-body {
       color: @design-neutral-color;
       position: relative;
@@ -47,22 +53,28 @@
       height: 100%;
       .flex();
       .flex-column();
+
       .@{prefix-drawer}-icon {
         position: absolute;
         top: 16px;
         right: 24px;
         transition: color 0.3s;
         .cursor-pointer();
+
         &:hover {
           color: @design-neutral-color-2;
         }
       }
+
       .@{prefix-drawer}-header {
-        padding: 16px 24px;
+        padding: 0 24px;
+        min-height: 72px;
         color: @design-base-color;
-        display: flex;
+        .flex();
+        .align-center();
         background-color: @design-neutral-color-5;
       }
+
       .@{prefix-drawer}-container {
         flex: 1;
         padding: 20px;
@@ -70,32 +82,40 @@
         .scrollbar-lg();
         overflow: auto;
       }
+
       .@{prefix-drawer}-footer {
         background-color: @design-neutral-color-6;
-        display: flex;
-        align-items: center;
+        .flex();
+        .align-center();
         gap: 10px;
-        padding: 16px 24px;
+        padding: 0 24px;
+        min-height: 72px;
       }
+
       .@{prefix-drawer}-footer-border {
         border-top: @design-border-sm solid @design-neutral-color-5;
       }
     }
+
     .@{prefix-drawer}-body-border {
       border: @design-border-sm solid @design-base-color;
     }
+
     .@{prefix-drawer}-body-keyframes-right {
       animation: drawer-body-keyframes-right 0.3s;
     }
+
     .@{prefix-drawer}-body-keyframes-left {
       animation: drawer-body-keyframes-left 0.3s;
     }
   }
+
   .@{prefix-drawer}-main-left {
     justify-content: flex-start;
   }
+
   .@{prefix-drawer}-main-right {
     justify-content: flex-end;
   }
- 
+
 }
