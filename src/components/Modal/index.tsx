@@ -68,10 +68,7 @@ ModalComponent.show = (config) => {
   modalsRender()
 
   return {
-    close: () => {
-      modalsMap.delete(newSymbol)
-      modalsRender()
-    },
+    close,
     update: (config) => {
       if (modalsMap.get(newSymbol)) {
         modalsMap.set(

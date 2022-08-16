@@ -61,13 +61,27 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
     if (isComponent) {
       return
     }
-    if (refFlag.current.isFristCreate) {
+
+    if (visible && refFlag.current.isFristCreate) {
       const messagesContent = document.createElement('div');
       document.body.appendChild(messagesContent);
       refFlag.current.root = createRoot(messagesContent!);
     }
-
-    refFlag.current.root?.render(content);
+    if (!visible && !refFlag.current.isFristCreate) {
+      if (unmountOnExit) {
+        refFlag.current.root?.render(content);
+      } else {
+        refFlag.current.root?.render(<></>);
+      }
+      return
+    }
+    if (!visible && refFlag.current.isFristCreate) {
+      refFlag.current.root?.render(content);
+    }
+    if (visible) {
+      refFlag.current.root?.render(content);
+      refFlag.current.isFristCreate = false
+    }
   }
 
   const [visible, setVisible] = useState<boolean>(propsVisible)
@@ -218,24 +232,16 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
   )
 
   const open = () => {
-    modalRender(content(true))
-    refFlag.current.isFristCreate = false
     setVisible(true)
     afterOpen && afterOpen()
   }
 
   const close = () => {
     setVisible(false)
-
-    if (unmountOnExit) {
-      refFlag.current.root?.render(<></>);
-    } else {
-      modalRender(content(false))
-    }
     afterClose && afterClose()
   }
 
-  const refresh = (visible = true) => {
+  const refresh = () => {
     modalRender(content(visible))
   }
 
@@ -251,12 +257,12 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
   )
 
   useEffect(() => {
-    // 如果时第一次创建且要在显示之前就渲染执行
     if (refFlag.current.isFristCreate && mountOnEnter) {
-      modalRender(content(visible))
-      refFlag.current.isFristCreate = false
+      modalRender(content(true))
+    } else {
+      refresh()
     }
-  }, [])
+  }, [visible])
 
   return (
     isComponent ? content(true) : (<></>)

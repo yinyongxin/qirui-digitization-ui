@@ -17,6 +17,7 @@ const ModalExemple = () => {
           <Modal
             title={title}
             ref={ModalRef1}
+            mountOnEnter
           >
             默认
           </Modal>
@@ -57,7 +58,7 @@ const ModalExemple = () => {
           onOK={() => {
             console.log('onOK');
             setTimeout(() => {
-              ModalRef.current?.close()
+              ModalRef2.current?.close()
             }, 1000)
           }}
         >
