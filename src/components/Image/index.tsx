@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useContext, useState } from "react"
+import React, { FC, MouseEventHandler, ReactNode, useContext, useState } from "react"
 import { Icon } from "../index"
 import { GlobalContext } from "../config/globalContext"
 import { ClassNameType, getClassNames } from "../utils/tools"
@@ -61,12 +61,17 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     ) : (
       <Icon style={{ color: 'var(--design-neutral-color-6)' }} icon={"circle-xmark"} size={22} />
     )
+    const closeClick: MouseEventHandler<HTMLDivElement> = (e) => {
+      e.stopPropagation()
+      onClose && onClose()
+    }
+
     if (closeShow === 'hover') {
       return (
         <>
           {visible && (
             <div
-              onClick={() => onClose && onClose()}
+              onClick={closeClick}
               className={classNamesObj.close()}
             >
               {closeRenderContent}
@@ -78,7 +83,7 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     else {
       return (
         <div
-          onClick={() => onClose && onClose()}
+          onClick={closeClick}
           className={classNamesObj.close()}
         >
           {closeRenderContent}
@@ -92,11 +97,11 @@ const Image: FC<ImagePropsType> = (props, ref) => {
       return <></>
     }
     const optionsRenderContent = optionsRender ? (
-      <div className="absolute-fill">
+      <div onClick={(e) => e.stopPropagation()} className="absolute-fill">
         {optionsRender()}
       </div>
     ) : (
-      <div className={classNamesObj.options()}>
+      <div onClick={(e) => e.stopPropagation()} className={classNamesObj.options()}>
         options
       </div>
     )
@@ -130,7 +135,7 @@ const Image: FC<ImagePropsType> = (props, ref) => {
       <OptionsRender />
       <CloseRenderConponent />
       {mask && visible && (
-        <div className={classNamesObj.mask()}></div>
+        <div onClick={(e) => e.stopPropagation()} className={classNamesObj.mask()}></div>
       )}
     </div>
   )

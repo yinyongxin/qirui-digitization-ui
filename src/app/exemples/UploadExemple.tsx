@@ -14,9 +14,12 @@ const UploadExemple = () => {
                   style: {
                     width: 200,
                     height: 200,
+                    objectFit: 'cover'
                   },
                   src: Luoxiaohei
                 }}
+                mask
+                closeShow="always"
               />
             </Upload>
             <Upload>
