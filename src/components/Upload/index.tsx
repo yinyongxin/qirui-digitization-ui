@@ -1,57 +1,118 @@
-import React, { FC, useContext, useState } from "react"
+import React, { FC, useContext, useRef, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
-import { ClassNameType, getClassNames } from "../utils/tools"
+import { ClassNameType, getClassNames, isString } from "../utils/tools"
 import { UploadPropsType } from "./interface"
 import {
+  Button,
   Image
 } from '../index'
 
-const Upload: FC<UploadPropsType> = (props, ref) => {
+const Upload: FC<UploadPropsType> = (props) => {
 
 
   const {
     classNamePrefix
   } = useContext(GlobalContext);
 
+  const {
+    onChange,
+    inputFileAttributes,
+    children,
+    showFileList,
+    disabled = false,
+    files,
+    defaultFileList,
+    ...rest
+  } = props
+
+  const inputRef = useRef<HTMLInputElement>()
+
   const [value, setValue] = useState<FileList>()
 
   const prefixCls = `${classNamePrefix}-upload`
 
-  const {
-    ...rest
-  } = props
+
 
   const classNamesObj = {
-    icon: (classNames: ClassNameType[] = []) => getClassNames([
+    upload: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}`,
+      ...classNames
+    ]),
+    input: (classNames: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}-input`,
       ...classNames
     ])
   }
 
-  return (
-    <div className={classNamesObj.icon()}>
-      <input title="file" multiple type="file" onChange={(e) => {
-        console.log('e', e, e.target, e.target.files);
-        if (e.target.files && e.target.files?.length !== 0) {
-          setValue(e.target.files)
-        }
-      }} />
-      {value && [...value].map((item, index) => (
-        <div key={index}>
-          <Image
-            imgProps={{
-              style: {
-                width: 200,
-                height: 200,
-                objectFit: "contain"
-              },
-              src: URL.createObjectURL(item),
-              alt: "img"
-            }}
-          />
-          {index + 1} {item.name}
+  const inputAttributes: JSX.IntrinsicElements['input'] = {
+    className: classNamesObj.input(),
+    title: "file",
+    multiple: false,
+    onChange: (e) => {
+      if (e.target.files && e.target.files?.length !== 0) {
+        onChange && onChange(e.target.files, e)
+        setValue(e.target.files)
+      }
+    },
+    ...inputFileAttributes,
+    type: "file",
+  }
+
+  const buttonHandleClick = () => {
+    inputRef.current?.click()
+  }
+
+  const fileListRender = () => {
+    return (
+      <>
+        {value && [...value].map((item, index) => (
+          <div key={index}>
+            <Image
+              imgAttributes={{
+                style: {
+                  width: 200,
+                  height: 200,
+                  objectFit: "contain"
+                },
+                src: URL.createObjectURL(item),
+                alt: "img"
+              }}
+            />
+            {index + 1} {item.name}
+          </div>
+        ))}
+      </>
+    )
+  }
+
+  const btnRender = () => {
+    if (children && isString(children)) {
+      return (
+        <Button
+          size='large'
+          level="white"
+          disabled={disabled}
+          onClick={buttonHandleClick}
+        >
+          {children && children}
+        </Button>
+      )
+    } else {
+      return (
+        <div
+          onClick={buttonHandleClick}
+        >
+          {children}
         </div>
-      ))}
+      )
+    }
+  }
+
+  return (
+    <div className={classNamesObj.upload()}>
+      <input ref={inputRef as any} {...inputAttributes} />
+      {btnRender()}
+      {showFileList && fileListRender()}
     </div>
   )
 }
