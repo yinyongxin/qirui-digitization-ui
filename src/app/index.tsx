@@ -67,6 +67,11 @@ function App() {
       activeKey: 'inputExemple',
       icon: 'bars'
     },
+    {
+      title: 'Image',
+      activeKey: 'ImageExemple',
+      icon: 'bars'
+    },
   ]
   return (
     <div className='app'>

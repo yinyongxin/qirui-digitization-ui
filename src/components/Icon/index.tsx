@@ -16,7 +16,7 @@ const Icon: FC<IconPropsType> = (props, ref) => {
     status = 'default',
     type = 'solid',
     icon = '',
-    iconStyle,
+    style,
     size = 16,
     ...rest
   } = props
@@ -36,7 +36,7 @@ const Icon: FC<IconPropsType> = (props, ref) => {
       className={classNamesObj.icon()}
       style={{
         fontSize: size,
-        ...iconStyle
+        ...style
       }}
       {...rest}
     />

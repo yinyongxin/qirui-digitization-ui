@@ -1,0 +1,38 @@
+@prefix-image: ~'@{nameSpace}-image';
+
+.@{prefix-image} {
+  position: relative;
+
+  @keyframes options-visible {
+    from {
+      opacity: 0.5;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  .@{prefix-image}-img {
+    vertical-align: middle;
+  }
+
+  .@{prefix-image}-options {
+    .absolute-fill();
+    z-index: 1001;
+  }
+
+  .@{prefix-image}-mask {
+    .absolute-fill();
+    background-color: rgba(#000, 0.3);
+    z-index: 1000;
+    animation: options-visible 0.3s;
+  }
+
+  .@{prefix-image}-close {
+    position: absolute;
+    z-index: 1002;
+    top: 10px;
+    right: 10px;
+  }
+}

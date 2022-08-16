@@ -18,8 +18,7 @@ export interface IconBaseType {
   * regular：空心
   */
   type?: 'solid' | 'regular',
-  iconStyle?: React.CSSProperties,
   icon: string,
 }
 
-export type IconPropsType = IconBaseType & React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+export type IconPropsType = IconBaseType & JSX.IntrinsicElements['i']

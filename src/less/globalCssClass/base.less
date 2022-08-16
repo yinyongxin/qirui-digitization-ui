@@ -1,4 +1,4 @@
-.not-user-select{
+.not-user-select {
   user-select: none;
   -webkit-user-select: none;
 }
@@ -6,13 +6,15 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
 .cursor-not-allowed {
   cursor: not-allowed;
 }
 
 .pointer-events-none {
-  pointer-events:none;
+  pointer-events: none;
 }
+
 .pointer-events-fill {
   pointer-events: fill;
 }
@@ -24,6 +26,7 @@
     /*高宽分别对应横竖滚动条的尺寸*/
     height: 4px;
   }
+
   &::-webkit-scrollbar-thumb {
     /*滚动条里面小方块*/
     background: @design-base-color;
@@ -41,6 +44,7 @@
     /*高宽分别对应横竖滚动条的尺寸*/
     height: 8px;
   }
+
   &::-webkit-scrollbar-thumb {
     /*滚动条里面小方块*/
     background: @design-base-color;
@@ -49,4 +53,12 @@
   // &::-webkit-scrollbar-track {
   //   /*滚动条里面轨道*/
   // }
+}
+
+.absolute-fill {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
