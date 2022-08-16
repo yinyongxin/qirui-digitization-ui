@@ -40,9 +40,29 @@ export interface ImageBaseInterface {
     content: ReactNode,
     position?: 'inner' | 'outer'
   },
+  /**
+   * 操作显示方式
+   */
+  optionsShow?: 'never' | 'hover' | 'always'
+  /**
+   * 操作自定义
+   */
+  optionsRender?: () => ReactNode
+  /**
+   * 关闭触发事件
+   */
   onClose?: () => void,
-  closeRender?: ReactNode,
-  closeShow?: boolean,
+  /**
+   * 关闭按钮定义渲染
+   */
+  closeRender?: () => ReactNode,
+  /**
+   * 是否显示关闭按钮
+   */
+  closeShow?: 'never' | 'hover' | 'always',
+  /**
+   * 是否显示遮罩
+   */
   mask?: boolean
 }
 

@@ -13,14 +13,16 @@ const Image: FC<ImagePropsType> = (props, ref) => {
 
   const prefixCls = `${classNamePrefix}-image`
 
-  const [optionsVisible, setOptionsVisible] = useState(false)
+  const [visible, setVisible] = useState(false)
 
   const {
     imgAttributes = {},
     closeRender,
-    closeShow = false,
+    closeShow = 'never',
+    mask = false,
+    optionsShow = 'never',
+    optionsRender,
     onClose,
-    mask = true,
     ...rest
   } = props
 
@@ -49,46 +51,75 @@ const Image: FC<ImagePropsType> = (props, ref) => {
   }
 
   const CloseRenderConponent = () => {
-    let resContent: ReactNode = (
+    if (closeShow === 'never') {
+      return <></>
+    }
+    const closeRenderContent = closeRender ? (
+      <>
+        {closeRender()}
+      </>
+    ) : (
       <Icon style={{ color: 'var(--design-neutral-color-6)' }} icon={"circle-xmark"} size={22} />
     )
-    if (closeRender) {
-      resContent = closeRender
+    if (closeShow === 'hover') {
+      return (
+        <>
+          {visible && (
+            <div
+              onClick={() => onClose && onClose()}
+              className={classNamesObj.close()}
+            >
+              {closeRenderContent}
+            </div>
+          )}
+        </>
+      )
     }
-    return (
-      <>
-        {(closeShow || optionsVisible) && (
-          <div
-            onClick={() => onClose && onClose()}
-            className={classNamesObj.close()}
-          >
-            {resContent}
-          </div>
-        )}
-      </>
-    )
+    else {
+      return (
+        <div
+          onClick={() => onClose && onClose()}
+          className={classNamesObj.close()}
+        >
+          {closeRenderContent}
+        </div>
+      )
+    }
   }
 
   const OptionsRender = () => {
-    return (
-      <>
-        {optionsVisible && (
-          <div className={classNamesObj.options()}>
-            
-          </div>
-        )}
-      </>
+    if (optionsShow === 'never') {
+      return <></>
+    }
+    const optionsRenderContent = optionsRender ? (
+      <div className="absolute-fill">
+        {optionsRender()}
+      </div>
+    ) : (
+      <div className={classNamesObj.options()}>
+        options
+      </div>
     )
+    if (optionsShow === 'hover') {
+      return (
+        <>
+          {visible && optionsRenderContent}
+        </>
+      )
+    }
+    else {
+      return optionsRenderContent
+    }
   }
 
   return (
     <div
       className={classNamesObj.imageComponent()}
       onMouseEnter={() => {
-        setOptionsVisible(true)
+        setVisible(true)
       }}
       onMouseLeave={() => {
-        setOptionsVisible(false)
+        setVisible(false)
       }}
     >
       <img
@@ -98,7 +129,7 @@ const Image: FC<ImagePropsType> = (props, ref) => {
       />
       <OptionsRender />
       <CloseRenderConponent />
-      {mask && optionsVisible && (
+      {mask && visible && (
         <div className={classNamesObj.mask()}></div>
       )}
     </div>
