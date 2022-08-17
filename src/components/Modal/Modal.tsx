@@ -5,7 +5,6 @@ import Icon from "../Icon"
 import { ClassNameType, getClassNames } from "../utils/tools"
 import { ModalHandle, ModalPropsType } from "./interface"
 import { Root, createRoot } from "react-dom/client"
-import { useMemo } from "react"
 
 const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) => {
 
@@ -112,28 +111,31 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
       ...classNames
     ]),
     modalBody: (classNames: ClassNameType[] = []) => getClassNames([
-      `${prefixCls}-main`,
+      `${prefixCls}-body`,
       {
         [`${prefixCls}-body-border`]: border
       },
       ...classNames
     ]),
+    modalHeader: (classNames: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}-header`,
+      {
+        'justify-center': headerCenter,
+        'justify-start': !headerCenter,
+      },
+      ...classNames
+    ]),
+    // {`${prefixCls}-footer ${footerCenter ? 'justify-center' : 'justify-end'} ${footerBorder ? prefixCls + '-footer-border' : ''}`}
+    modalFooter: (classNames: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}-footer`,
+      {
+        'justify-center': footerCenter,
+        'justify-end': !footerCenter,
+        [`${prefixCls}-footer-border`]: footerBorder
+      },
+      ...classNames
+    ]),
   }
-
-  const modalClassName = getClassNames([
-    `${prefixCls}`,
-    `${prefixCls}-border`
-  ])
-
-  const modalMainClassName = getClassNames([
-    `${prefixCls}-main`,
-    border ? `${prefixCls}-main-border` : ''
-  ])
-
-  const modalBodyClassName = getClassNames([
-    `${prefixCls}-body`,
-    border ? `${prefixCls}-body-border` : ''
-  ])
 
   const HeaderRender = () => {
     let headerRes = null
@@ -145,7 +147,7 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
       headerRes = header
     }
     return (
-      <header className={`${prefixCls}-header ${headerCenter ? 'justify-center' : 'justify-start'}`}>
+      <header className={classNamesObj.modalHeader()}>
         {headerRes}
       </header>
     )
@@ -199,7 +201,7 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
       footerRes = footer
     }
     return (
-      <footer className={`${prefixCls}-footer ${footerCenter ? 'justify-center' : 'justify-end'} ${footerBorder ? prefixCls + '-footer-border' : ''}`}>
+      <footer className={classNamesObj.modalFooter()}>
         {footerRes}
       </footer>
     )
@@ -246,14 +248,14 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
   }
 
   const content = (visible: boolean) => (
-    <div style={{ display: visible ? 'unset' : 'none' }} className={modalClassName}>
+    <div style={{ display: visible ? 'unset' : 'none' }} className={classNamesObj.modal()}>
       {mask && (
         <div className={`${prefixCls}-mask`}></div>
       )}
-      <main style={mainStyle} className={modalMainClassName}>
+      <main style={mainStyle} className={classNamesObj.modalMain()}>
         <div
           style={bodyStyle}
-          className={modalBodyClassName}
+          className={classNamesObj.modalBody()}
         >
           <IconRender />
           <HeaderRender />
