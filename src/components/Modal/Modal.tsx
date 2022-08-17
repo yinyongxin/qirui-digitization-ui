@@ -6,6 +6,7 @@ import { ClassNameType, getClassNames } from "../utils/tools"
 import { ModalHandle, ModalPropsType } from "./interface"
 import { Root, createRoot } from "react-dom/client"
 import Mask from "../Mask"
+import { useDocumentRender } from "../utils/hooks"
 
 const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) => {
 
@@ -57,41 +58,40 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
     root: null
   })
 
-  const setRoot = () => {
-    const messagesContent = document.createElement('div');
-    document.body.appendChild(messagesContent);
-    refFlag.current.root = createRoot(messagesContent!);
-  }
+  const {
+    render,
+    destroy
+  } = useDocumentRender()
 
   const modalRender = (content: ReactNode) => {
     if (isComponent) {
       return
     }
 
-    if (!refFlag.current.root && (mountOnEnter || visible)) {
-      setRoot()
+    if (mountOnEnter && !visible && refFlag.current.isFristCreate) {
+      render(content)
+      return
     }
 
     // 如果是进入前渲染且是第一次
     if (mountOnEnter && refFlag.current.isFristCreate) {
-      refFlag.current.root?.render(content);
+      render(content)
       refFlag.current.isFristCreate = false
       return
     }
 
     if (visible) {
-      refFlag.current.root?.render(content);
+      render(content)
       refFlag.current.isFristCreate = false
       return
     }
 
     if (!visible && !refFlag.current.isFristCreate) {
       if (unmountOnExit) {
-        refFlag.current.root?.render(content);
+        render(content)
       } else {
-        refFlag.current.root?.render(<></>);
+        destroy()
       }
-      return
     }
   }
 

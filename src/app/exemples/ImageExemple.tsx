@@ -16,7 +16,7 @@ const ImageExemple = () => {
             src={Luoxiaohei}
             width={200}
             height={200}
-            optionsShow="hover"
+            optionsShow="always"
             closeShow='always'
             mask
           />

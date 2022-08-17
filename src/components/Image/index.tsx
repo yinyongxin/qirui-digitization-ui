@@ -4,12 +4,18 @@ import { GlobalContext } from "../config/globalContext"
 import { ClassNameType, getClassNames, isBoolean, isNumber } from "../utils/tools"
 import omit from "../utils/tools/omit"
 import { ImagePropsType } from "./interface"
+import { useDocumentRender } from "../utils/hooks"
 
 const Image: FC<ImagePropsType> = (props, ref) => {
 
   const {
     classNamePrefix
   } = useContext(GlobalContext);
+
+  const {
+    render,
+    destroy
+  } = useDocumentRender()
 
   const prefixCls = `${classNamePrefix}-image`
 
@@ -117,7 +123,8 @@ const Image: FC<ImagePropsType> = (props, ref) => {
       </div>
     ) : (
       <div onClick={(e) => e.stopPropagation()} className={classNamesObj.options()}>
-        options
+        <Icon onClick={() => render(<div>asccasc</div>)} className="cursor-pointer" type="solid" icon="eye" size={20} />
+        <Icon onClick={() => destroy()} className="cursor-pointer" type="regular" icon="eye" size={20} />
       </div>
     )
     if (optionsShow === 'hover') {
@@ -132,6 +139,10 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     }
   }
 
+  /**
+   * 加载状态显示内容
+   * @returns ReactNode
+   */
   const LoadStateContent = () => {
     const iconSize = isNumber(width) ? width / 3 : 30
 

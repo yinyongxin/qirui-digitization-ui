@@ -18,6 +18,7 @@ const Icon: FC<IconPropsType> = (props, ref) => {
     icon = '',
     style,
     size = 16,
+    className = '',
     ...rest
   } = props
 
@@ -27,6 +28,7 @@ const Icon: FC<IconPropsType> = (props, ref) => {
       `fa-${type}`,
       `fa-${icon}`,
       `${prefixCls}-${status}`,
+      className,
       ...classNames
     ])
   }

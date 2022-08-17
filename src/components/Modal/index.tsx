@@ -9,6 +9,7 @@ const modalsMap = new Map<symbol, ModalItemProp>([])
 
 let root: Root | null = null
 
+
 const ModalComponent: ModalComponentInterFace = Modal as ModalComponentInterFace;
 
 const defaultShowConfig = {
