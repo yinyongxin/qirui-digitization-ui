@@ -1,13 +1,18 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Root, createRoot } from "react-dom/client";
 
 export const useDocumentRender = () => {
   const refFlag = useRef<{
     root: Root | null,
-    div?: Element | DocumentFragment
+    div?: Element | DocumentFragment,
+    isRender: boolean,
+    isDestroy: boolean,
   }>({
-    root: null
+    root: null,
+    isRender: false,
+    isDestroy: false,
   })
+
 
   /**
    * 设置root
@@ -27,19 +32,32 @@ export const useDocumentRender = () => {
   const render = (children: React.ReactNode) => {
     setRoot()
     refFlag.current.root?.render(children)
+    refFlag.current.isRender = true
   }
 
   /**
    * 销毁
    */
   const destroy = () => {
-    document.body?.removeChild(refFlag.current.div!)
+    try {
+      document.body?.removeChild(refFlag.current.div!)
+    } catch (error) {
+    }
+    refFlag.current.isDestroy = true
     refFlag.current.root = null
   }
 
+  useEffect(() => {
+    return () => {
+      if (!refFlag.current.isDestroy || refFlag.current.isRender) {
+        destroy()
+      }
+    }
+  }, [])
 
   return {
     render,
-    destroy
+    destroy,
+    root: refFlag.current.root
   }
 }

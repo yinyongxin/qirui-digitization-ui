@@ -5,6 +5,7 @@ import Icon from "../Icon"
 import { getClassNames } from "../utils/tools"
 import { DrawerHandle, DrawerPropsType } from "./interface"
 import { Root, createRoot } from "react-dom/client"
+import { useDocumentRender } from "../utils/hooks"
 
 const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) => {
 
@@ -57,17 +58,41 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
     root: null
   })
 
+  const {
+    render,
+    destroy
+  } = useDocumentRender()
+
   const drawerRender = (content: ReactNode) => {
     if (isComponent) {
       return
     }
-    if (refFlag.current.isFristCreate) {
-      const messagesContent = document.createElement('div');
-      document.body.appendChild(messagesContent);
-      refFlag.current.root = createRoot(messagesContent!);
+
+    if (mountOnEnter && !visible && refFlag.current.isFristCreate) {
+      render(content)
+      return
     }
 
-    refFlag.current.root?.render(content);
+    // 如果是进入前渲染且是第一次
+    if (mountOnEnter && refFlag.current.isFristCreate) {
+      render(content)
+      refFlag.current.isFristCreate = false
+      return
+    }
+
+    if (visible) {
+      render(content)
+      refFlag.current.isFristCreate = false
+      return
+    }
+
+    if (!visible && !refFlag.current.isFristCreate) {
+      if (unmountOnExit) {
+        render(content)
+      } else {
+        destroy()
+      }
+    }
   }
 
   const [visible, setVisible] = useState<boolean>(propsVisible)
@@ -221,23 +246,15 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
 
   const open = () => {
     setVisible(true)
-    drawerRender(content(true))
-    refFlag.current.isFristCreate = false
     afterOpen && afterOpen()
   }
 
   const close = () => {
     setVisible(false)
-
-    if (unmountOnExit) {
-      refFlag.current.root?.render(<></>);
-    } else {
-      drawerRender(content(false))
-    }
     afterClose && afterClose()
   }
 
-  const refresh = (visible = true) => {
+  const refresh = () => {
     drawerRender(content(visible))
   }
 
@@ -253,12 +270,8 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
   )
 
   useEffect(() => {
-    // 如果时第一次创建且要在显示之前就渲染执行
-    if (refFlag.current.isFristCreate && mountOnEnter) {
-      drawerRender(content(visible))
-      refFlag.current.isFristCreate = false
-    }
-  }, [])
+    refresh()
+  }, [visible])
 
   return (
     isComponent ? content(true) : (<></>)

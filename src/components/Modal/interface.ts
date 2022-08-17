@@ -3,7 +3,7 @@ import { ButtonPropsType } from "../Button/interface"
 
 export interface ModalBaseType {
   header?: ReactNode | 'default',
-  footer?: ReactNode | 'default' ,
+  footer?: ReactNode | 'default',
   visible?: boolean,
   icon?: ReactNode | 'default',
   /**
@@ -18,7 +18,10 @@ export interface ModalBaseType {
    * 是否显示遮罩
    */
   mask?: boolean,
-  // 是否在隐藏之后销毁DOM结构
+  /**
+   * 是否在隐藏之后销毁DOM结构
+   * 默认 false
+   */
   unmountOnExit?: boolean,
   /**
    * 	主样式
@@ -98,11 +101,11 @@ export type ModalHandle = {
 export type ModalPropsType = PropsWithChildren<ModalBaseType>
 
 
-export type ModalItemProp = Omit<ModalPropsType, 'visible' | 'mountOnEnter' | 'unmountOnExit' >
+export type ModalItemProp = Omit<ModalPropsType, 'visible' | 'mountOnEnter' | 'unmountOnExit'>
 export interface ModalComponentInterFace extends ForwardRefExoticComponent<ModalPropsType & {
   ref?: React.MutableRefObject<ModalHandle | undefined>
 }> {
-  show: (config: ModalItemProp ) => {
+  show: (config: ModalItemProp) => {
     close: () => void,
     update: (config: ModalItemProp) => void
   },

@@ -18,6 +18,7 @@ const ModalExemple = () => {
             title={title}
             ref={ModalRef1}
             mountOnEnter
+            unmountOnExit
           >
             默认
           </Modal>
