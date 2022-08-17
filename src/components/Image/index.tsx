@@ -6,6 +6,7 @@ import omit from "../utils/tools/omit"
 import { ImagePropsType } from "./interface"
 import { useDocumentRender } from "../utils/hooks"
 import ImagePreview from './ImagePreview'
+import { useEffect } from "react"
 
 const Image: FC<ImagePropsType> = (props, ref) => {
 
@@ -28,11 +29,13 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     style = {},
     width = "100%",
     height = '100%',
-    src,
+    src: srcProps,
+    objectFit = 'cover',
     closeRender,
     closeShow = 'never',
     error,
     loader = true,
+    defaultSrc,
     mask = false,
     optionsShow = 'never',
     preview,
@@ -40,6 +43,8 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     onClose,
     ...rest
   } = props
+
+  const [src, setSrc] = useState(srcProps)
 
   const classNamesObj = {
     imageComponent: (classNames: ClassNameType[] = []) => getClassNames([
@@ -158,13 +163,21 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     if (loadingState === 'error') {
       return (
         <div className={classNamesObj.error()}>
-          {error || <Icon icon="circle-exclamation" size={iconSize} />}
+          {
+            error
+            ||
+            <Icon icon="circle-exclamation" style={{ color: 'var(--design-neutral-color-3)' }} size={iconSize} />
+          }
         </div>
       )
     } else if (loadingState === 'loading' && loader) {
       return (
         <div className={classNamesObj.loading()}>
-          {!isBoolean(loader) ? loader : <Icon icon="image" size={iconSize} />}
+          {isBoolean(loader) ?
+            loader
+            :
+            <Icon icon="image" style={{ color: 'var(--design-neutral-color-3)' }} size={iconSize} />
+          }
         </div>
       )
     } else {
@@ -174,7 +187,11 @@ const Image: FC<ImagePropsType> = (props, ref) => {
 
   const imgAtts: JSX.IntrinsicElements['img'] = {
     onError: (e) => {
-      setLoadingState('error')
+      if (defaultSrc) {
+        defaultSrc && setSrc(defaultSrc)
+      } else {
+        setLoadingState('error')
+      }
       imgAttributes?.onError?.(e)
     },
     onLoad: (e) => {
@@ -186,6 +203,7 @@ const Image: FC<ImagePropsType> = (props, ref) => {
       display: loadingState === 'error' ? 'none' : 'unset',
       width,
       height,
+      objectFit,
       ...imgAttributes?.style,
     },
     src: src,
