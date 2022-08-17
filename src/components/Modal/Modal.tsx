@@ -2,7 +2,7 @@ import React, { ForwardRefRenderFunction, ReactNode, useContext, useEffect, useI
 import Button from "../Button"
 import { GlobalContext } from "../config/globalContext"
 import Icon from "../Icon"
-import { getClassNames } from "../utils/tools"
+import { ClassNameType, getClassNames } from "../utils/tools"
 import { ModalHandle, ModalPropsType } from "./interface"
 import { Root, createRoot } from "react-dom/client"
 import { useMemo } from "react"
@@ -57,16 +57,34 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
     root: null
   })
 
+  const setRoot = () => {
+    const messagesContent = document.createElement('div');
+    document.body.appendChild(messagesContent);
+    refFlag.current.root = createRoot(messagesContent!);
+  }
+
   const modalRender = (content: ReactNode) => {
     if (isComponent) {
       return
     }
 
-    if (visible && refFlag.current.isFristCreate) {
-      const messagesContent = document.createElement('div');
-      document.body.appendChild(messagesContent);
-      refFlag.current.root = createRoot(messagesContent!);
+    if (!refFlag.current.root && (mountOnEnter || visible)) {
+      setRoot()
     }
+
+    // 如果是进入前渲染且是第一次
+    if (mountOnEnter && refFlag.current.isFristCreate) {
+      refFlag.current.root?.render(content);
+      refFlag.current.isFristCreate = false
+      return
+    }
+
+    if (visible) {
+      refFlag.current.root?.render(content);
+      refFlag.current.isFristCreate = false
+      return
+    }
+
     if (!visible && !refFlag.current.isFristCreate) {
       if (unmountOnExit) {
         refFlag.current.root?.render(content);
@@ -75,17 +93,32 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
       }
       return
     }
-    if (!visible && refFlag.current.isFristCreate) {
-      refFlag.current.root?.render(content);
-    }
-    if (visible) {
-      refFlag.current.root?.render(content);
-      refFlag.current.isFristCreate = false
-    }
   }
 
   const [visible, setVisible] = useState<boolean>(propsVisible)
   const [loading, setLoading] = useState<boolean>(false)
+
+  const classNamesObj = {
+    modal: (classNames: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}`,
+      `${prefixCls}-border`,
+      ...classNames
+    ]),
+    modalMain: (classNames: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}-main`,
+      {
+        [`${prefixCls}-main-border`]: border
+      },
+      ...classNames
+    ]),
+    modalBody: (classNames: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}-main`,
+      {
+        [`${prefixCls}-body-border`]: border
+      },
+      ...classNames
+    ]),
+  }
 
   const modalClassName = getClassNames([
     `${prefixCls}`,
@@ -257,11 +290,7 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
   )
 
   useEffect(() => {
-    if (refFlag.current.isFristCreate && mountOnEnter) {
-      modalRender(content(true))
-    } else {
-      refresh()
-    }
+    refresh()
   }, [visible])
 
   return (
