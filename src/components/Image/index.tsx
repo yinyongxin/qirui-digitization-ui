@@ -1,5 +1,5 @@
 import React, { FC, MouseEventHandler, ReactNode, useContext, useState } from "react"
-import { Icon } from "../index"
+import { Icon, Mask } from "../index"
 import { GlobalContext } from "../config/globalContext"
 import { ClassNameType, getClassNames, isBoolean, isNumber } from "../utils/tools"
 import omit from "../utils/tools/omit"
@@ -134,6 +134,7 @@ const Image: FC<ImagePropsType> = (props, ref) => {
 
   const LoadStateContent = () => {
     const iconSize = isNumber(width) ? width / 3 : 30
+
     if (loadingState === 'error') {
       return (
         <div className={classNamesObj.error()}>
@@ -151,6 +152,27 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     }
   }
 
+  const imgAtts: JSX.IntrinsicElements['img'] = {
+    onError: (e) => {
+      setLoadingState('error')
+      imgAttributes?.onError?.(e)
+    },
+    onLoad: (e) => {
+      setLoadingState('success')
+      imgAttributes?.onError?.(e)
+    },
+    loading: 'lazy',
+    style: {
+      display: loadingState === 'error' ? 'none' : 'unset',
+      width,
+      height,
+      ...imgAttributes?.style,
+    },
+    src: src,
+    className: classNamesObj.img(),
+    ...omit(imgAttributes, ['style', 'className', 'onError', 'onLoad', 'src'])
+  }
+
   return (
     <div
       className={classNamesObj.imageComponent()}
@@ -166,33 +188,13 @@ const Image: FC<ImagePropsType> = (props, ref) => {
         ...style
       }}
     >
-      <img
-        onError={(e) => {
-          setLoadingState('loading')
-          imgAttributes?.onError?.(e)
-        }}
-        onLoad={(e) => {
-          setLoadingState('success')
-          imgAttributes?.onError?.(e)
-        }}
-        loading='lazy'
-        style={{
-          display: loadingState === 'error' ? 'none' : 'unset',
-          width,
-          height,
-          ...imgAttributes?.style,
-        }}
-        src={src}
-        className={classNamesObj.img()}
-        {...omit(imgAttributes, ['style', 'className', 'onError', 'onLoad'])}
-      />
+      <img {...imgAtts} />
       <LoadStateContent />
+      {/* <Mask /> */}
       {loadingState === 'success' && (
         <>
           <OptionsRender />
-          {mask && visible && (
-            <div onClick={(e) => e.stopPropagation()} className={classNamesObj.mask()}></div>
-          )}
+          <Mask visible={mask && visible} />
         </>
       )}
       <CloseRenderConponent />

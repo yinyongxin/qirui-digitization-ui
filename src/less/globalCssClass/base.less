@@ -14,7 +14,11 @@
   cursor: not-allowed;
 }
 
-// 鼠标点击穿透
+// 元素永远不会成为鼠标事件的target。但是，
+// 当其后代元素的pointer-events属性指定其他值时，
+// 鼠标事件可以指向后代元素，
+// 在这种情况下，
+// 鼠标事件将在捕获或冒泡阶段触发父元素的事件侦听器。
 .pointer-events-none {
   pointer-events: none;
 }

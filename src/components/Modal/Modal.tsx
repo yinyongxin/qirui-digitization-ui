@@ -5,6 +5,7 @@ import Icon from "../Icon"
 import { ClassNameType, getClassNames } from "../utils/tools"
 import { ModalHandle, ModalPropsType } from "./interface"
 import { Root, createRoot } from "react-dom/client"
+import Mask from "../Mask"
 
 const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) => {
 
@@ -249,9 +250,7 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
 
   const content = (visible: boolean) => (
     <div style={{ display: visible ? 'unset' : 'none' }} className={classNamesObj.modal()}>
-      {mask && (
-        <div className={`${prefixCls}-mask`}></div>
-      )}
+      <Mask clickThrough zIndex="unset" visible={mask} />
       <main style={mainStyle} className={classNamesObj.modalMain()}>
         <div
           style={bodyStyle}

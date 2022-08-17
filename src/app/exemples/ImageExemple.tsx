@@ -13,7 +13,7 @@ const ImageExemple = () => {
                 objectFit: 'cover'
               },
             }}
-            src={'Luoxiaohei'}
+            src={Luoxiaohei}
             width={200}
             height={200}
             optionsShow="hover"
