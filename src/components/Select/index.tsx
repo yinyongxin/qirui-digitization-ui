@@ -280,7 +280,6 @@ const Select: FC<SelectPropsType> = (props) => {
         title="select"
         type="text"
         value={getValue()}
-        onChange={() => { }}
         style={{ display: 'none' }}
       />
       <div
