@@ -1,47 +1,57 @@
-import React, { FC, useContext, useState } from "react"
+import React, { FC, useContext, useEffect, useRef, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
+import Input from "../Input"
 import { ClassNameType, getClassNames } from "../utils/tools"
-import { IconPropsType } from "./interface"
+import { FormPropsType } from "./interface"
 
-const Icon: FC<IconPropsType> = (props, ref) => {
+const Form: FC<FormPropsType> = (props) => {
 
 
   const {
     classNamePrefix
   } = useContext(GlobalContext);
 
-  const prefixCls = `${classNamePrefix}-icon`
+  const formRef = useRef<HTMLFormElement>(null)
+
+  const prefixCls = `${classNamePrefix}-Form`
 
   const {
-    status = 'default',
-    type = 'solid',
-    icon = '',
-    style,
-    size = 16,
     className = '',
+    children,
     ...rest
   } = props
 
+  const submit = () => {
+    console.log('formRef', formRef);
+    console.log('name', formRef.current['name'].value);
+    console.log('select', formRef.current['select'].value);
+  }
+
   const classNamesObj = {
-    icon: (classNames: ClassNameType[] = []) => getClassNames([
+    form: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}`,
-      `fa-${type}`,
-      `fa-${icon}`,
-      `${prefixCls}-${status}`,
       className,
       ...classNames
     ])
   }
 
+  // useEffect(() => {
+  //   console.log('formRef', formRef);
+
+  // }, [])
+
   return (
-    <i
-      className={classNamesObj.icon()}
-      style={{
-        fontSize: size,
-        ...style
-      }}
-      {...rest}
-    />
+    <form ref={formRef} className={classNamesObj.form()}>
+      {children && children}
+      <input
+        type="submit"
+        value="Submit"
+        onClick={(e) => {
+          e.preventDefault()
+          submit()
+        }}
+      ></input>
+    </form>
   )
 }
-export default Icon
+export default Form
