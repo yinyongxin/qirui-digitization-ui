@@ -1,10 +1,9 @@
 import React from "react";
 import { Button, Card, Title } from "../../../components";
-import styles from './styles.module.less'
 
 const ButtonExemple = () => {
   return (
-    <div className={styles.buttonExemple}>
+    <div>
       <Title type="tooltip" title="大小 size" >
         <div className="flex gap10">
           <Button size="small">Small</Button>
