@@ -221,7 +221,6 @@ const Image: FC<ImagePropsType> = (props, ref) => {
         setVisible(false)
       }}
       onClick={() => {
-        console.log('onClick');
         preview && previewFn()
       }}
       style={{
