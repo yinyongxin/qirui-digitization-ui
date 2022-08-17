@@ -17,6 +17,7 @@ import Upload from "./Upload/index";
 import Image from "./Image/index";
 import Step from "./Image/index";
 import Mask from "./Mask/index";
+import Form from "./Form/index";
 import { GlobalContext } from './config/globalContext'
 
 export {
@@ -36,5 +37,6 @@ export {
   Upload,
   Image,
   Step,
-  Mask
+  Mask,
+  Form,
 };
