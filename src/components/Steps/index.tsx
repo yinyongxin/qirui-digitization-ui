@@ -1,15 +1,11 @@
 import React, {
-  FC,
   useContext,
-  useState,
   ReactElement,
   forwardRef,
-  JSXElementConstructor,
   ForwardRefRenderFunction,
 } from "react";
 import { GlobalContext } from "../config/globalContext";
 import Step from "./Step/Step";
-import { getClassNames } from "../utils/tools";
 import { StepsPropsType } from "./interface";
 
 const Steps: ForwardRefRenderFunction<unknown, StepsPropsType> = (props) => {

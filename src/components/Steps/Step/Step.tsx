@@ -1,15 +1,12 @@
-import React, {
-  FC,
+import {
   useContext,
-  useState,
-  ReactElement,
   forwardRef,
   ForwardRefRenderFunction,
 } from "react";
 import Icon from "../../Icon";
 import { GlobalContext } from "../../config/globalContext";
 import { getClassNames } from "../../utils/tools";
-import { StepsPropsType, StepType } from "../interface";
+import { StepType } from "../interface";
 const Step: ForwardRefRenderFunction<unknown, StepType> = (props) => {
   const { title, current = 1, index = 0, length = 2, onClick } = props;
   const { MessageConfig, classNamePrefix } = useContext(GlobalContext);

@@ -15,6 +15,7 @@ import Table from "./Table/index";
 import Input from "./Input/index";
 import Upload from "./Upload/index";
 import Image from "./Image/index";
+import Step from "./Image/index";
 import { GlobalContext } from './config/globalContext'
 
 export {
@@ -33,4 +34,5 @@ export {
   Input,
   Upload,
   Image,
+  Step,
 };
