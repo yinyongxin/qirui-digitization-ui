@@ -1,3 +1,4 @@
+import { type } from "os";
 import React, { PropsWithChildren, ReactNode } from "react"
 import { DesignTypes } from "../typings";
 
@@ -51,7 +52,7 @@ export interface ImageBaseInterface {
   /**
    * 操作自定义
    */
-  optionsRender?: () => ReactNode
+  optionsRender?: (preview: () => void) => ReactNode
   /**
    * 关闭触发事件
    */
@@ -68,6 +69,11 @@ export interface ImageBaseInterface {
    * 是否显示遮罩
    */
   mask?: boolean
+}
+
+export type ImagePreviewPropsType = {
+  imgAttributes: JSX.IntrinsicElements['img'],
+  close: () => void
 }
 
 export type ImagePropsType = ImageBaseInterface

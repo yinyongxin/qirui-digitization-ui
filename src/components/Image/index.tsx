@@ -5,6 +5,7 @@ import { ClassNameType, getClassNames, isBoolean, isNumber } from "../utils/tool
 import omit from "../utils/tools/omit"
 import { ImagePropsType } from "./interface"
 import { useDocumentRender } from "../utils/hooks"
+import ImagePreview from './ImagePreview'
 
 const Image: FC<ImagePropsType> = (props, ref) => {
 
@@ -34,6 +35,7 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     loader = true,
     mask = false,
     optionsShow = 'never',
+    preview,
     optionsRender,
     onClose,
     ...rest
@@ -42,6 +44,9 @@ const Image: FC<ImagePropsType> = (props, ref) => {
   const classNamesObj = {
     imageComponent: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}`,
+      {
+        'cursor-pointer': preview
+      },
       ...classNames
     ]),
     img: (classNames: ClassNameType[] = []) => getClassNames([
@@ -82,6 +87,7 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     ) : (
       <Icon style={{ color: 'var(--design-neutral-color-6)' }} icon={"circle-xmark"} size={22} />
     )
+
     const closeClick: MouseEventHandler<HTMLDivElement> = (e) => {
       e.stopPropagation()
       onClose && onClose()
@@ -113,18 +119,21 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     }
   }
 
+  const previewFn = () => {
+    render(<ImagePreview close={destroy} imgAttributes={{ src }} />)
+  }
+
   const OptionsRender = () => {
     if (optionsShow === 'never') {
       return <></>
     }
     const optionsRenderContent = optionsRender ? (
       <div onClick={(e) => e.stopPropagation()} className="absolute-fill">
-        {optionsRender()}
+        {optionsRender(previewFn)}
       </div>
     ) : (
       <div onClick={(e) => e.stopPropagation()} className={classNamesObj.options()}>
-        <Icon onClick={() => render(<div>asccasc</div>)} className="cursor-pointer" type="solid" icon="eye" size={20} />
-        <Icon onClick={() => destroy()} className="cursor-pointer" type="regular" icon="eye" size={20} />
+        <Icon onClick={() => previewFn()} className="cursor-pointer" type="solid" icon="eye" size={20} />
       </div>
     )
     if (optionsShow === 'hover') {
@@ -192,6 +201,10 @@ const Image: FC<ImagePropsType> = (props, ref) => {
       }}
       onMouseLeave={() => {
         setVisible(false)
+      }}
+      onClick={() => {
+        console.log('onClick');
+        preview && previewFn()
       }}
       style={{
         width,

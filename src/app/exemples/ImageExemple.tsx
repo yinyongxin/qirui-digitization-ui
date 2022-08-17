@@ -16,9 +16,10 @@ const ImageExemple = () => {
             src={Luoxiaohei}
             width={200}
             height={200}
-            optionsShow="always"
+            optionsShow="never"
             closeShow='always'
-            mask
+            preview
+          // mask
           />
         </div>
       </Title>
