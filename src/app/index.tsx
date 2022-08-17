@@ -77,6 +77,11 @@ function App() {
       activeKey: 'uploadExemple',
       icon: 'bars'
     },
+    {
+      title: 'Form',
+      activeKey: 'formExemple',
+      icon: 'bars'
+    },
   ]
   return (
     <div className='app'>

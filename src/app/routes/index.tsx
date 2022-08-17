@@ -15,7 +15,7 @@ import TableExemple from '../exemples/TableExemple'
 import InputExemple from '../exemples/InputExemple'
 import ImageExemple from '../exemples/ImageExemple'
 import UploadExemple from '../exemples/UploadExemple'
-import FormExemple from '../exemples/UploadExemple'
+import FormExemple from '../exemples/FormExemple'
 
 export const routes: RouteObject[] = [
   {
