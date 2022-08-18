@@ -1,7 +1,6 @@
 import React, { ForwardRefRenderFunction, useContext, useEffect, useImperativeHandle, useMemo, useState } from "react"
-import omit from "../../utils/tools/omit"
 import { GlobalContext } from "../../config/globalContext"
-import { getClassNames } from "../../utils/tools"
+import { getClassNames, omit } from "../../utils/tools"
 import TabPane from "../TabPane"
 import { TabsComtext } from "../TabsComtext"
 import { ActiveTabChangeType, TabsHandle, TabsPropsType } from "./interface"

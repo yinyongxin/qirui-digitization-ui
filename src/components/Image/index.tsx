@@ -1,8 +1,7 @@
 import React, { FC, MouseEventHandler, ReactNode, useContext, useState } from "react"
 import { Icon, Mask } from "../index"
 import { GlobalContext } from "../config/globalContext"
-import { ClassNameType, getClassNames, isBoolean, isNumber } from "../utils/tools"
-import omit from "../utils/tools/omit"
+import { ClassNameType, getClassNames, isBoolean, isNumber, omit } from "../utils/tools"
 import { ImagePropsType } from "./interface"
 import { useDocumentRender } from "../utils/hooks"
 import ImagePreview from './ImagePreview'

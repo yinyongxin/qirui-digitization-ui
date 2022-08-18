@@ -74,9 +74,9 @@ const Upload: FC<UploadPropsType> = (props) => {
                   height: 200,
                   objectFit: "contain"
                 },
-                src: URL.createObjectURL(item),
                 alt: "img"
               }}
+              src={URL.createObjectURL(item)}
             />
             {index + 1} {item.name}
           </div>

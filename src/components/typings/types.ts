@@ -39,4 +39,6 @@ export type DesignTypes = {
 
   Direction: 'top' | 'right' | 'bottom' | 'left'
   Align: 'left' | 'center' | 'right'
+
+  KeyType: string | number | symbol;
 }

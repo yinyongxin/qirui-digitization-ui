@@ -1,8 +1,7 @@
 import React, { FC, useContext, useEffect, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
 import Icon from "../Icon"
-import { getClassNames } from "../utils/tools"
-import omit from "../utils/tools/omit"
+import { getClassNames, omit } from "../utils/tools"
 import { SideMenuItemSubPropsType, SidePropsType } from "./interface"
 import { SideMenuComtext } from "./SideMenuComtext"
 
