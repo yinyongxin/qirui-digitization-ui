@@ -1,10 +1,12 @@
 import React, { FC, useContext, useEffect, useRef, useState } from "react"
+import { Button } from "../index"
 import { GlobalContext } from "../config/globalContext"
-import Input from "../Input"
-import { ClassNameType, getClassNames } from "../utils/tools"
-import { FormPropsType } from "./interface"
+import { ClassNameType, getClassNames, getStyles, pick } from "../utils/tools"
+import { FormContext, FormContextDefult } from "./FormContext"
+import FormItem from "./FormItem"
+import { FormPropsInterface } from "./interface"
 
-const Form: FC<FormPropsType> = (props) => {
+const Form: FC<FormPropsInterface> = (props) => {
 
 
   const {
@@ -13,44 +15,80 @@ const Form: FC<FormPropsType> = (props) => {
 
   const formRef = useRef<HTMLFormElement>(null)
 
-  const prefixCls = `${classNamePrefix}-Form`
+  const prefixCls = `${classNamePrefix}-form`
+
+  const allField = {
+    ...FormContextDefult,
+    ...props
+  }
 
   const {
     className = '',
     children,
+    width = '100%',
+    style = {},
+    columns = 1,
     ...rest
-  } = props
+  } = allField
+
+  const {
+    layout
+  } = allField
+
+  // const [initialValues, setInitialValues] = useState()
 
   const submit = () => {
     console.log('formRef', formRef);
-    console.log('name', formRef.current['name'].value);
-    console.log('select', formRef.current['select'].value);
+    // console.log('name', formRef.current?.['name']['value']);
   }
 
   const classNamesObj = {
     form: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}`,
+      {
+        [`${prefixCls}-grid`]: layout !== 'inline',
+        [`${prefixCls}-flex`]: layout === 'inline',
+      },
       className,
       ...classNames
     ])
   }
+  useEffect(() => {
 
-  // useEffect(() => {
-  //   console.log('formRef', formRef);
-
-  // }, [])
+  }, [])
 
   return (
-    <form ref={formRef} className={classNamesObj.form()}>
-      {children && children}
-      <input
-        type="submit"
-        value="Submit"
-        onClick={(e) => {
-          e.preventDefault()
-          submit()
+    <form
+      ref={formRef}
+      className={classNamesObj.form()}
+      style={getStyles([
+        {
+          width
+        },
+        () => ({
+          style: {
+            gridTemplateColumns: `repeat(${columns}, 1fr)`,
+          },
+          condition: layout !== 'inline'
+        }),
+        style
+      ])}
+
+    >
+      <FormContext.Provider
+        value={{
+          ...rest
         }}
-      ></input>
+      >
+        {children && children}
+      </FormContext.Provider>
+      <div>
+        <Button onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          submit()
+        }}>submit</Button>
+      </div>
     </form>
   )
 }

@@ -1,0 +1,28 @@
+@prefix-formItem: ~'@{nameSpace}-formItem';
+
+.@{prefix-formItem} {
+  .flex();
+
+  .@{prefix-formItem}-label {
+    .flex();
+    .align-center();
+  }
+
+  .@{prefix-formItem}-children {
+    .flex();
+    flex: 1;
+    width: inherit;
+  }
+}
+
+.@{prefix-formItem}-horizontal-gap {
+  gap: 16px;
+}
+
+.@{prefix-formItem}-vertical-gap {
+  gap: 8px;
+}
+
+.@{prefix-formItem}-inline-gap {
+  gap: 16px;
+}

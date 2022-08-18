@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Icon, Input, Select, Title } from "../../components";
+import FormItem from "../../components/Form/FormItem";
 
 const FormExemple = () => {
   return (
@@ -7,27 +8,69 @@ const FormExemple = () => {
       <Title type="tooltip" title="基本Icon status" >
         <div className="flex gap20">
           <div>
-            <Form>
-              <Input label="Name" name="name" />
-              <Input label="Age" name="age" type="number" />
-              <Input label="time" name="age" type="time" />
-              <Input label="radio" name="age" type="radio" />
-              <Input label="checkbox" name="age" type='checkbox' />
-              <Input label="checkbox" name="age" type="checkbox" />
-              <Select
-                name="select"
-                options={[
-                  {
-                    label: 'Label1',
-                    value: '1',
-                  },
-                  {
-                    label: 'Label2',
-                    value: '2',
-                  },
-                ]}
-              />
+            <Form
+              width={1000}
+              initialValues={{
+                name: 'yyx',
+                age: 20
+              }}
+              layout='vertical'
+              columns={2}
+            >
+              <FormItem
+                label="Name"
+                name="name"
+                colon
+              >
+                <Input />
+              </FormItem>
+              <FormItem
+                label="Age"
+                name="age"
+                colon
+              >
+                <Input />
+              </FormItem>
+              <FormItem
+                label="Age"
+                name="age"
+                colon
+              >
+                <Input />
+              </FormItem>
+              <FormItem
+                label="Age"
+                name="age"
+                colon
+              >
+                <Input />
+              </FormItem>
+              <FormItem
+                label="Age"
+                name="age"
+                colon
+              >
+                <Select
+                  options={[
+                    {
+                      label: 'Label1',
+                      value: '1',
+                    },
+                    {
+                      label: 'Label2',
+                      value: '2',
+                    },
+                  ]}
+                  onValueChange={(newValue) => {
+                    console.log('newValue', newValue);
+                  }}
+                />
+              </FormItem>
             </Form>
+            <div>
+
+              <Input width={400} />
+            </div>
           </div>
         </div>
       </Title>

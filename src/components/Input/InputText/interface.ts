@@ -1,5 +1,6 @@
 import React, { PropsWithChildren, ReactNode } from "react"
 import { DesignTypes } from "../../typings";
+import { InputCurrencyType } from "../interface";
 
 export interface InputTextBaseType {
   /**
@@ -24,32 +25,12 @@ export interface InputTextBaseType {
    * showWordLimit
    */
   showWordLimit?: boolean,
-  /**
-   * √
-   * 	默认值
-   */
-  defaultValue?: string,
-  /**
-   * √
-   */
-  label?: string,
-  lableConfig?: {
-    align?: 'left' | 'right',
-    width?: string | number
-  }
+
   /**
    * √
    * 	输入框提示文字
    */
   placeholder?: string,
-  /**
-   * 输入框的值，受控模式
-   */
-  /**
-   * √
-   * 受控模式
-   */
-  value?: string,
   /**
    * 大小
    */
@@ -105,4 +86,4 @@ export interface InputTextBaseType {
   onPressEnter?: (e: Event) => void,
 }
 
-export type InputTextPropsType = InputTextBaseType & JSX.IntrinsicElements['input']
+export type InputTextPropsType = InputTextBaseType & JSX.IntrinsicElements['input'] & InputCurrencyType

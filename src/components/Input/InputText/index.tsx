@@ -14,18 +14,16 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
   const {
     borders,
     type = 'text',
-    label,
     value: valueProps,
     defaultValue = '',
     readOnly = false,
     height = 48,
-    width = '100%',
+    width = 'unset',
     prefix,
     suffix,
     addBefore,
     addAfter,
     onChange,
-    labelKey,
     ...rest
   } = props
 
@@ -91,7 +89,6 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
   }
 
   const inputProps: JSX.IntrinsicElements['input'] = {
-    id: labelKey,
     type: 'text',
     readOnly,
     value,
@@ -158,13 +155,17 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
   }
 
   return (
-    <div className={classNamesObj.inputTextComponent()}>
+    <div
+      style={{
+        width
+      }}
+      className={classNamesObj.inputTextComponent()}
+    >
       <div className="flex">
         {getAddBefore()}
         <main
           style={{
             height,
-            width
           }}
           className={classNamesObj.main()}>
           {getPrefix()}

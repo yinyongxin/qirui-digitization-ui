@@ -1,5 +1,6 @@
 import { FC, HTMLInputTypeAttribute, ReactNode, useContext } from "react"
 import { GlobalContext } from "../config/globalContext"
+import { FormItemContext } from "../Form/FormItemContext";
 import { ClassNameType, getClassNames } from "../utils/tools";
 import InputText from "./InputText";
 import { InputPropsType } from "./interface"
@@ -14,13 +15,13 @@ const Input: FC<InputPropsType> = (props, ref) => {
     classNamePrefix
   } = useContext(GlobalContext);
 
+  const formItemContent = useContext(FormItemContext);
+
   const {
     type = 'text',
-    label = '',
+    width = 400,
     ...rest
   } = props
-
-  const labelKey = `input-${type}-${label}`
 
   const prefixCls = `${classNamePrefix}-input`
 
@@ -29,18 +30,11 @@ const Input: FC<InputPropsType> = (props, ref) => {
       `${prefixCls}`,
       ...classNames
     ]),
-    label: (classNames: ClassNameType[] = []) => getClassNames([
-      `${prefixCls}-label`,
-      ...classNames,
-    ]),
   }
 
   return (
-    <div className={classNamesObj.inputComponent()}>
-      {label && (
-        <label className={classNamesObj.label()} htmlFor={labelKey}>{label}</label>
-      )}
-      {inputs[type]?.(rest)}
+    <div style={{ width }} className={classNamesObj.inputComponent()}>
+      {inputs[type]?.({ ...rest, ...formItemContent })}
     </div>
   )
 }
