@@ -2,7 +2,12 @@ import React, { PropsWithChildren, ReactNode } from "react"
 import { DesignTypes } from "../../typings";
 import { InputCurrencyType } from "../interface";
 
-export interface InputTextBaseType {
+export interface InputTextBaseInterFace {
+  /**
+   * √
+   * 宽度
+   */
+  width?: number | string,
   /**
    * 状态 
    * 默认：default 成功：success 失败：error 警告：warnning
@@ -61,11 +66,6 @@ export interface InputTextBaseType {
    */
   height?: number | string
   /**
-   * √
-   * 宽度
-   */
-  width?: number | string,
-  /**
    * 输入框最大输入的长度；设置 errorOnly为 true 后，超过 maxLength 会展示 error 状态，并不限制用户输入。
    */
   maxLength?: number | { length: number; errorOnly?: boolean }
@@ -86,4 +86,4 @@ export interface InputTextBaseType {
   onPressEnter?: (e: Event) => void,
 }
 
-export type InputTextPropsType = InputTextBaseType & JSX.IntrinsicElements['input'] & InputCurrencyType
+export type InputTextPropsType = InputTextBaseInterFace & JSX.IntrinsicElements['input'] & InputCurrencyType
