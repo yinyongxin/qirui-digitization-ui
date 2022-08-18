@@ -7,7 +7,7 @@ import Icon from "../../Icon";
 import { GlobalContext } from "../../config/globalContext";
 import { getClassNames } from "../../utils/tools";
 import { StepType } from "../interface";
-const Step: ForwardRefRenderFunction<unknown, StepType> = (props) => {
+const Step: ForwardRefRenderFunction<unknown, StepType> = (props, ref) => {
   const { title, current = 1, index = 0, length = 2, onClick } = props;
   const { MessageConfig, classNamePrefix } = useContext(GlobalContext);
 

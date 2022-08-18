@@ -8,7 +8,7 @@ import { GlobalContext } from "../config/globalContext";
 import Step from "./Step/Step";
 import { StepsPropsType } from "./interface";
 
-const Steps: ForwardRefRenderFunction<unknown, StepsPropsType> = (props) => {
+const Steps: ForwardRefRenderFunction<unknown, StepsPropsType> = (props, ref) => {
   const { MessageConfig, classNamePrefix } = useContext(GlobalContext);
   const prefixCls = `${classNamePrefix}-steps`;
   const { current = 1, children, onChange } = props;
