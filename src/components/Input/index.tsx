@@ -20,7 +20,7 @@ const Input: FC<InputPropsType> = (props, ref) => {
   const formContent = useContext(FormContext);
   const {
     type = 'text',
-    width,
+    width = 400,
     ...rest
   } = props
 
