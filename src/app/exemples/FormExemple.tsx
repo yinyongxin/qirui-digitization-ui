@@ -188,6 +188,7 @@ const FormExemple = () => {
             </Form>
             <div>
 
+              <Input width={200} />
               <Input />
             </div>
           </div>

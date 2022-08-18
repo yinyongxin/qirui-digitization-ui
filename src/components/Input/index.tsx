@@ -20,13 +20,12 @@ const Input: FC<InputPropsType> = (props, ref) => {
   const formContent = useContext(FormContext);
   const {
     type = 'text',
-    width = formContent.columns ? formContent.columns === 1 ? 400 : '100%' : 400,
+    width,
     ...rest
   } = props
 
-  console.log('formItemContent', formItemContent);
-  console.log('formContent', formContent);
-
+  // console.log('formItemContent', formItemContent);
+  // console.log('formContent', formContent);
 
   const prefixCls = `${classNamePrefix}-input`
 

@@ -29,7 +29,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     layout,
     className = '',
     style = {},
-    width,
+    width = '100%',
     requiredSymbol,
     ...rest
   } = allValue
