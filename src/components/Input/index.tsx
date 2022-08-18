@@ -1,5 +1,6 @@
 import { FC, HTMLInputTypeAttribute, ReactNode, useContext } from "react"
 import { GlobalContext } from "../config/globalContext"
+import { FormContext } from "../Form/FormContext";
 import { FormItemContext } from "../Form/FormItemContext";
 import { ClassNameType, getClassNames } from "../utils/tools";
 import InputText from "./InputText";
@@ -16,12 +17,16 @@ const Input: FC<InputPropsType> = (props, ref) => {
   } = useContext(GlobalContext);
 
   const formItemContent = useContext(FormItemContext);
-
+  const formContent = useContext(FormContext);
   const {
     type = 'text',
-    width = 400,
+    width = formContent.columns ? formContent.columns === 1 ? 400 : '100%' : 400,
     ...rest
   } = props
+
+  console.log('formItemContent', formItemContent);
+  console.log('formContent', formContent);
+
 
   const prefixCls = `${classNamePrefix}-input`
 

@@ -1,11 +1,12 @@
 import React from "react";
 import { isFunction, isString } from "./is";
 
-export type ClassNameType = (string | Record<string, boolean | undefined>)
+export type ClassNameType = string | Record<string, boolean | undefined> | undefined
+
 export type StyleType = React.CSSProperties | (() => {
   condition: boolean,
   style: React.CSSProperties
-})
+}) | undefined
 /**
  * 跟类名数组获取类名字符串
  * @param classNames 类名
@@ -14,7 +15,9 @@ export type StyleType = React.CSSProperties | (() => {
 export const getClassNames = (classNames: ClassNameType[]) => {
   const classNameArr: string[] = []
   classNames.forEach(className => {
-    if (isString(className)) {
+    if (!className) {
+      return
+    } else if (isString(className)) {
       classNameArr.push(className)
     } else {
       Object.keys(className).forEach(key => {
@@ -32,15 +35,19 @@ export const getClassNames = (classNames: ClassNameType[]) => {
  * @param styles CSSProperties
  * @returns 
  */
-export const getStyles = (styles: StyleType[]) => {
+export const getStyles = (styles?: StyleType[]) => {
   let styleObj: React.CSSProperties = {}
-  styles.forEach(style => {
-    if (!isFunction(style)) {
+  styles?.forEach(style => {
+    if (!style) {
+      return
+    } else if (!isFunction(style)) {
       styleObj = { ...styleObj, ...style }
     } else {
       const res = style()
       styleObj = { ...styleObj, ...(res.condition ? res.style : {}) }
     }
   });
-  return styleObj || ((styles: StyleType[]) => getStyles(styles))
-} 
+  return styleObj
+}
+
+// || ((styles?: StyleType[]) => getStyles(styles))

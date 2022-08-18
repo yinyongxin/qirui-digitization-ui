@@ -23,23 +23,21 @@ const Form: FC<FormPropsInterface> = (props) => {
   }
 
   const {
-    className = '',
+    className,
     children,
-    width = '100%',
-    style = {},
-    columns = 1,
+    width,
+    style,
     ...rest
   } = allField
 
   const {
-    layout
+    layout,
+    columns
   } = allField
 
-  // const [initialValues, setInitialValues] = useState()
 
   const submit = () => {
     console.log('formRef', formRef);
-    // console.log('name', formRef.current?.['name']['value']);
   }
 
   const classNamesObj = {
@@ -53,26 +51,27 @@ const Form: FC<FormPropsInterface> = (props) => {
       ...classNames
     ])
   }
-  useEffect(() => {
 
-  }, [])
+  const stylesObj = {
+    form: getStyles([
+      {
+        width
+      },
+      () => ({
+        style: {
+          gridTemplateColumns: `repeat(${columns}, 1fr)`,
+        },
+        condition: layout !== 'inline'
+      }),
+      style
+    ])
+  }
 
   return (
     <form
       ref={formRef}
       className={classNamesObj.form()}
-      style={getStyles([
-        {
-          width
-        },
-        () => ({
-          style: {
-            gridTemplateColumns: `repeat(${columns}, 1fr)`,
-          },
-          condition: layout !== 'inline'
-        }),
-        style
-      ])}
+      style={stylesObj.form}
 
     >
       <FormContext.Provider

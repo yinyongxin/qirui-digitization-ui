@@ -18,7 +18,7 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     defaultValue = '',
     readOnly = false,
     height = 48,
-    width = 'unset',
+    width,
     prefix,
     suffix,
     addBefore,
@@ -156,9 +156,6 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
 
   return (
     <div
-      style={{
-        width
-      }}
       className={classNamesObj.inputTextComponent()}
     >
       <div className="flex">
