@@ -1,9 +1,8 @@
-import React, { FC, useContext, useEffect, useRef, useState } from "react"
+import React, { FC, useContext, useRef } from "react"
 import { Button } from "../index"
 import { GlobalContext } from "../config/globalContext"
 import { ClassNameType, getClassNames, getStyles, pick } from "../utils/tools"
 import { FormContext, FormContextDefult } from "./FormContext"
-import FormItem from "./FormItem"
 import { FormPropsInterface } from "./interface"
 
 const Form: FC<FormPropsInterface> = (props) => {
@@ -57,12 +56,12 @@ const Form: FC<FormPropsInterface> = (props) => {
       {
         width,
       },
-      () => ({
+      {
         style: {
           gridTemplateColumns: `repeat(${columns}, 1fr)`,
         },
         condition: layout !== 'inline'
-      }),
+      },
       style
     ])
   }
@@ -72,7 +71,6 @@ const Form: FC<FormPropsInterface> = (props) => {
       ref={formRef}
       className={classNamesObj.form()}
       style={stylesObj.form}
-
     >
       <FormContext.Provider
         value={{

@@ -30,11 +30,11 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     className = '',
     style = {},
     requiredSymbol,
+    width,
     ...rest
   } = allValue
 
   const {
-    width,
     name,
     label,
   } = allValue
@@ -76,28 +76,29 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     }
     return (
       <label style={{ width: labelWidth }} className={classNamesObj.label()} htmlFor={labelKey}>
-        {isFunction(label) ? label('validating') : label}
+        <div className={`${prefixCls}-label-text`}>
+          {isFunction(label) ? label('validating') : label}
+        </div>
         {colon && (isBoolean(colon) && ':') || (!isBoolean(colon) && colon)}
       </label>
     )
   }
 
-
   return (
-    <FormItemContext.Provider
-      value={{
-        defaultValue: props.name && initialValues?.[props.name],
-        ...rest
-      }}
+    <div
+      className={classNamesObj.formItem()}
+      style={{ ...style, width }}
     >
-      <div
-        className={classNamesObj.formItem()}
-        style={{ ...style, width }}
+      <FormItemContext.Provider
+        value={{
+          defaultValue: props.name && initialValues?.[props.name],
+          ...rest
+        }}
       >
         {getLabel()}
         {children && children}
-      </div>
-    </FormItemContext.Provider>
+      </FormItemContext.Provider>
+    </div>
   )
 }
 export default FormItem
