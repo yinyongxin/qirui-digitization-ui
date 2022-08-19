@@ -14,179 +14,30 @@ const FormExemple = () => {
                 name: 'yyx',
                 age: 20
               }}
+              colon
               layout='vertical'
               columns={2}
             >
               <FormItem
-                label="Name"
+                label="NameNameNameNameNameName"
                 name="name"
-                colon
               >
                 <Input />
               </FormItem>
               <FormItem
                 label="Age"
                 name="age"
-                colon
               >
                 <Input />
-              </FormItem>
-              <FormItem
-                label="Age"
-                name="age"
-                colon
-              >
-                <Input />
-              </FormItem>
-              <FormItem
-                label="Age"
-                name="age"
-                colon
-              >
-                <Input />
-              </FormItem>
-              <FormItem
-                label="Age"
-                name="age"
-                colon
-              >
-                <Select
-                  options={[
-                    {
-                      label: 'Label1',
-                      value: '1',
-                    },
-                    {
-                      label: 'Label2',
-                      value: '2',
-                    },
-                  ]}
-                  onValueChange={(newValue) => {
-                    console.log('newValue', newValue);
-                  }}
-                />
               </FormItem>
             </Form>
-
-            <Form
-              width={1000}
-              initialValues={{
-                name: 'yyx',
-                age: 20
-              }}
-              layout='vertical'
+            <FormItem
+              label="Age"
+              name="age"
             >
-              <FormItem
-                label="Name"
-                name="name"
-                colon
-              >
-                <Input />
-              </FormItem>
-              <FormItem
-                label="Age"
-                name="age"
-                colon
-              >
-                <Input />
-              </FormItem>
-              <FormItem
-                label="Age"
-                name="age"
-                colon
-              >
-                <Input />
-              </FormItem>
-              <FormItem
-                label="Age"
-                name="age"
-                colon
-              >
-                <Input />
-              </FormItem>
-              <FormItem
-                label="Age"
-                name="age"
-                colon
-              >
-                <Select
-                  options={[
-                    {
-                      label: 'Label1',
-                      value: '1',
-                    },
-                    {
-                      label: 'Label2',
-                      value: '2',
-                    },
-                  ]}
-                  onValueChange={(newValue) => {
-                    console.log('newValue', newValue);
-                  }}
-                />
-              </FormItem>
-            </Form>
-
-            <Form
-              width={1000}
-              initialValues={{
-                name: 'yyx',
-                age: 20
-              }}
-              layout='inline'
-              colon
-            // columns={5}
-            >
-              <FormItem
-                label="Name"
-                name="name"
-              >
-                <Input width={500} />
-              </FormItem>
-              <FormItem
-                label="Age"
-                name="age"
-              >
-                <Input />
-              </FormItem>
-              <FormItem
-                label="Age"
-                name="age"
-              >
-                <Input />
-              </FormItem>
-              <FormItem
-                label="Age"
-                name="age"
-              >
-                <Input />
-              </FormItem>
-              <FormItem
-                label="Age"
-                name="age"
-              >
-                <Select
-                  options={[
-                    {
-                      label: 'Label1',
-                      value: '1',
-                    },
-                    {
-                      label: 'Label2',
-                      value: '2',
-                    },
-                  ]}
-                  onValueChange={(newValue) => {
-                    console.log('newValue', newValue);
-                  }}
-                />
-              </FormItem>
-            </Form>
-            <div>
-
-              <Input width={200} />
               <Input />
-            </div>
+            </FormItem>
+            <Input />
           </div>
         </div>
       </Title>
