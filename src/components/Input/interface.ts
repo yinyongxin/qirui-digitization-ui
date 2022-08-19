@@ -16,6 +16,7 @@ export type InputCurrencyType = {
    */
   value?: any,
   type?: HTMLInputTypeAttribute,
+  validateStatus?: 'success' | 'warning' | 'error' | 'validating'
 }
 
 export type InputPropsType = InputTextPropsType

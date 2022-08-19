@@ -2,7 +2,7 @@ import { FC, useContext, useState } from "react"
 import { FormContext } from "../../Form/FormContext";
 import { FormItemContext } from "../../Form/FormItemContext";
 import { GlobalContext } from "../../config/globalContext"
-import { ClassNameType, getClassNames, isFunction } from "../../utils/tools";
+import { ClassNameType, getClassNames, isFunction, getValueIfQualified, isUndefined, omit } from "../../utils/tools";
 import { InputTextPropsType } from "./interface"
 
 const InputText: FC<InputTextPropsType> = (props, ref) => {
@@ -30,7 +30,9 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     addBefore,
     addAfter,
     onChange,
-    ...rest
+    style,
+    className,
+    inputAttributes
   } = {
     ...formItemContent,
     ...props
@@ -52,60 +54,53 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
   const classNamesObj = {
     inputTextComponent: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}`,
+      className,
+      `${prefixCls}-border-color`,
+      {
+        [`${prefixCls}-border-top`]: defaultBorders.top,
+        [`${prefixCls}-border-right`]: defaultBorders.right,
+        [`${prefixCls}-border-bottom`]: defaultBorders.bottom,
+        [`${prefixCls}-border-left`]: defaultBorders.left,
+      },
       ...classNames,
-      // 'flex'
     ]),
     inputText: (classNames: ClassNameType[] = []) => getClassNames([
+      inputAttributes?.className,
       {
         [`${prefixCls}-margin-left`]: !!prefix,
         [`${prefixCls}-margin-right`]: !!suffix
       },
       ...classNames,
     ]),
-    main: (classNames: ClassNameType[] = []) => getClassNames([
-      `${prefixCls}-main`,
-      `${prefixCls}-border-color`,
-      {
-        [`${prefixCls}-border-top`]: defaultBorders.top,
-        [`${prefixCls}-border-right`]: defaultBorders.right && !addAfter,
-        [`${prefixCls}-border-bottom`]: defaultBorders.bottom,
-        [`${prefixCls}-border-left`]: defaultBorders.left && !addBefore,
-      },
-      ...classNames
-    ]),
-
     addBorderBefore: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}-border-color`,
-      {
-        [`${prefixCls}-border-top`]: defaultBorders.top,
-        [`${prefixCls}-border-left`]: defaultBorders.left,
-        [`${prefixCls}-border-right`]: defaultBorders.right,
-        [`${prefixCls}-border-bottom`]: defaultBorders.bottom,
-      },
+      `${prefixCls}-h100`,
+      `${prefixCls}-border-right`,
       ...classNames,
     ]),
     addBorderAfter: (classNames: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}-h100`,
       `${prefixCls}-border-color`,
-      {
-        [`${prefixCls}-border-top`]: defaultBorders.top,
-        [`${prefixCls}-border-left`]: defaultBorders.left,
-        [`${prefixCls}-border-right`]: defaultBorders.right,
-        [`${prefixCls}-border-bottom`]: defaultBorders.bottom,
-      },
+      `${prefixCls}-border-left`,
       ...classNames,
     ])
   }
 
   const inputProps: JSX.IntrinsicElements['input'] = {
     type: 'text',
-    readOnly,
-    value,
     className: classNamesObj.inputText(),
+    readOnly,
+    defaultValue,
+    ...getValueIfQualified({
+      value
+    }, !isUndefined(valueProps)),
     onChange: (e) => {
       onChange && onChange(e.target.value, e)
-      setValue(e.target.value)
+      if (!isUndefined(valueProps)) {
+        setValue(e.target.value)
+      }
     },
-    ...rest
+    ...omit(inputAttributes || {}, ['className'])
   }
 
   const getPrefix = () => {
@@ -164,19 +159,13 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
 
   return (
     <div
-      style={{ width }}
+      style={{ width, height, ...style }}
       className={classNamesObj.inputTextComponent()}
     >
       {getAddBefore()}
-      <main
-        style={{
-          height,
-        }}
-        className={classNamesObj.main()}>
-        {getPrefix()}
-        <input {...inputProps} />
-        {getSuffix()}
-      </main>
+      {getPrefix()}
+      <input {...inputProps} />
+      {getSuffix()}
       {getAddAfter()}
     </div>
   )

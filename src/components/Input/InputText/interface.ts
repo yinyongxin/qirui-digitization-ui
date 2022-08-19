@@ -4,11 +4,6 @@ import { InputCurrencyType } from "../interface";
 
 export interface InputTextBaseInterFace {
   /**
-   * √
-   * 宽度
-   */
-  width?: number | string,
-  /**
    * 状态 
    * 默认：default 成功：success 失败：error 警告：warnning
    */
@@ -21,21 +16,12 @@ export interface InputTextBaseInterFace {
    * 是否禁用
    */
   disabled?: boolean,
-  /**
-   * √
-   * 是否只读
-   */
-  readOnly?: boolean,
+
   /**
    * showWordLimit
    */
   showWordLimit?: boolean,
 
-  /**
-   * √
-   * 	输入框提示文字
-   */
-  placeholder?: string,
   /**
    * 大小
    */
@@ -66,24 +52,40 @@ export interface InputTextBaseInterFace {
    */
   height?: number | string
   /**
-   * 输入框最大输入的长度；设置 errorOnly为 true 后，超过 maxLength 会展示 error 状态，并不限制用户输入。
-   */
-  maxLength?: number | { length: number; errorOnly?: boolean }
-  /**
    * √
    * 边框
    */
   borders?: Partial<Record<DesignTypes['Direction'], boolean>> | null,
   /**
-   * √
-   * 监听数值变化
-   */
-  onChange?: (value: string, e: React.ChangeEvent<HTMLInputElement>) => void,
-  /**
    * 监听清除操作
    */
   onClear?: () => void,
   onPressEnter?: (e: Event) => void,
+  /**
+   * √
+   * 宽度
+   */
+  width?: number | string,
+  /**
+   * √
+   * 	输入框提示文字
+   */
+  placeholder?: string,
+  /**
+   * 输入框最大输入的长度；设置 errorOnly为 true 后，超过 maxLength 会展示 error 状态，并不限制用户输入。
+   */
+  maxLength?: number | { length: number; errorOnly?: boolean }
+  /**
+ * √
+ * 监听数值变化
+ */
+  onChange?: (value: string, e: React.ChangeEvent<HTMLInputElement>) => void,
+  /**
+ * √
+ * 是否只读
+ */
+  readOnly?: boolean,
+  inputAttributes?: JSX.IntrinsicElements['input']
 }
 
-export type InputTextPropsType = InputTextBaseInterFace & JSX.IntrinsicElements['input'] & InputCurrencyType
+export type InputTextPropsType = InputTextBaseInterFace & InputCurrencyType & Pick<JSX.IntrinsicElements['div'], 'style' | 'className'>
