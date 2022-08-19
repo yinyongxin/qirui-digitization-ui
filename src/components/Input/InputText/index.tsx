@@ -55,12 +55,13 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     inputTextComponent: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}`,
       className,
-      `${prefixCls}-border-color`,
+      `${classNamePrefix}-border-color-default`,
+      `${classNamePrefix}-border-sm`,
       {
-        [`${prefixCls}-border-top`]: defaultBorders.top,
-        [`${prefixCls}-border-right`]: defaultBorders.right,
-        [`${prefixCls}-border-bottom`]: defaultBorders.bottom,
-        [`${prefixCls}-border-left`]: defaultBorders.left,
+        [`${classNamePrefix}-border-top`]: defaultBorders.top,
+        [`${classNamePrefix}-border-right`]: defaultBorders.right,
+        [`${classNamePrefix}-border-bottom`]: defaultBorders.bottom,
+        [`${classNamePrefix}-border-left`]: defaultBorders.left,
       },
       ...classNames,
     ]),
@@ -73,15 +74,17 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
       ...classNames,
     ]),
     addBorderBefore: (classNames: ClassNameType[] = []) => getClassNames([
-      `${prefixCls}-border-color`,
       `${prefixCls}-h100`,
-      `${prefixCls}-border-right`,
+      `${classNamePrefix}-border-sm`,
+      `${classNamePrefix}-border-color-default`,
+      `${classNamePrefix}-border-right`,
       ...classNames,
     ]),
     addBorderAfter: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}-h100`,
-      `${prefixCls}-border-color`,
-      `${prefixCls}-border-left`,
+      `${classNamePrefix}-border-sm`,
+      `${classNamePrefix}-border-color-default`,
+      `${classNamePrefix}-border-left`,
       ...classNames,
     ])
   }
