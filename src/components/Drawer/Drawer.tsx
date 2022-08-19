@@ -271,7 +271,7 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
 
   useEffect(() => {
     refresh()
-  }, [visible])
+  }, [visible, props])
 
   return (
     isComponent ? content(true) : (<></>)

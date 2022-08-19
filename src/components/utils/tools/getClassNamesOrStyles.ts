@@ -1,12 +1,12 @@
 import React from "react";
-import { isFunction, isString } from "./is";
+import { isFunction, isString, isUndefined, getValueIfQualified } from "./index";
 
 export type ClassNameType = string | Record<string, boolean | undefined> | undefined
 
-export type StyleType = React.CSSProperties | (() => {
-  condition: boolean,
-  style: React.CSSProperties
-}) | undefined
+export type StyleType = React.CSSProperties & {
+  style?: React.CSSProperties,
+  condition?: boolean | boolean[]
+} | undefined
 /**
  * 跟类名数组获取类名字符串
  * @param classNames 类名
@@ -40,14 +40,11 @@ export const getStyles = (styles?: StyleType[]) => {
   styles?.forEach(style => {
     if (!style) {
       return
-    } else if (!isFunction(style)) {
+    } else if (isUndefined(style.condition)) {
       styleObj = { ...styleObj, ...style }
     } else {
-      const res = style()
-      styleObj = { ...styleObj, ...(res.condition ? res.style : {}) }
+      styleObj = { ...styleObj, ...getValueIfQualified(style.style, style.condition) }
     }
   });
   return styleObj
 }
-
-// || ((styles?: StyleType[]) => getStyles(styles))
