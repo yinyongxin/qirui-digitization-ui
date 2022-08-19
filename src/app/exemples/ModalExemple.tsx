@@ -9,7 +9,7 @@ const ModalExemple = () => {
   const ModalRef1 = useRef<ModalHandle>()
   const ModalRef2 = useRef<ModalHandle>()
   const ModalRef3 = useRef<ModalHandle>()
-  const [title, setTitle] = useState('title')
+  const [title, setTitle] = useState('默认')
   return (
     <div>
       <Title type="tooltip" title="默认" >
@@ -20,7 +20,10 @@ const ModalExemple = () => {
             mountOnEnter
             unmountOnExit
           >
-            默认
+            {title}
+            <Button onClick={() => {
+              setTitle('acascascsc')
+            }}>SetTitle</Button>
           </Modal>
           <Button onClick={() => {
             setTitle('setTimeout')

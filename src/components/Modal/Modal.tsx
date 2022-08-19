@@ -241,7 +241,6 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
   }
 
   const Container = () => {
-    modalRender
     return (
       <main className={`${prefixCls}-container`} style={mianStyle}>
         {children && children}
@@ -293,7 +292,7 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
 
   useEffect(() => {
     refresh()
-  }, [visible])
+  }, [visible, props])
 
   return (
     isComponent ? content(true) : (<></>)

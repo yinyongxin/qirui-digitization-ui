@@ -1,4 +1,6 @@
 import { FC, useContext, useState } from "react"
+import { FormContext } from "../../Form/FormContext";
+import { FormItemContext } from "../../Form/FormItemContext";
 import { GlobalContext } from "../../config/globalContext"
 import { ClassNameType, getClassNames, isFunction } from "../../utils/tools";
 import { InputTextPropsType } from "./interface"
@@ -9,13 +11,17 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     classNamePrefix
   } = useContext(GlobalContext);
 
+  const formItemContent = useContext(FormItemContext);
+  const formContent = useContext(FormContext);
+  console.log('formItemContent', formItemContent);
+
   const prefixCls = `${classNamePrefix}-inputText`
 
   const {
     borders,
     type = 'text',
     value: valueProps,
-    defaultValue = '',
+    defaultValue,
     readOnly = false,
     height = 48,
     width,
@@ -25,7 +31,10 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     addAfter,
     onChange,
     ...rest
-  } = props
+  } = {
+    ...formItemContent,
+    ...props
+  }
 
   const [value, setValue] = useState(valueProps || defaultValue)
 
@@ -43,7 +52,6 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
   const classNamesObj = {
     inputTextComponent: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}`,
-      `${prefixCls}-margin-right`,
       ...classNames,
       // 'flex'
     ]),
@@ -156,21 +164,20 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
 
   return (
     <div
+      style={{ width }}
       className={classNamesObj.inputTextComponent()}
     >
-      <div className="flex">
-        {getAddBefore()}
-        <main
-          style={{
-            height,
-          }}
-          className={classNamesObj.main()}>
-          {getPrefix()}
-          <input {...inputProps} />
-          {getSuffix()}
-        </main>
-        {getAddAfter()}
-      </div>
+      {getAddBefore()}
+      <main
+        style={{
+          height,
+        }}
+        className={classNamesObj.main()}>
+        {getPrefix()}
+        <input {...inputProps} />
+        {getSuffix()}
+      </main>
+      {getAddAfter()}
     </div>
   )
 }

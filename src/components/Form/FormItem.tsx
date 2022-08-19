@@ -29,12 +29,12 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     layout,
     className = '',
     style = {},
-    width = formContextRest.layout !== 'inline' && '100%',
     requiredSymbol,
     ...rest
   } = allValue
 
   const {
+    width,
     name,
     label,
   } = allValue
@@ -69,6 +69,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     ]),
   }
 
+
   const getLabel = () => {
     if (!label) {
       return
@@ -94,9 +95,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
         style={{ ...style, width }}
       >
         {getLabel()}
-        <div className={classNamesObj.children()}>
-          {children && children}
-        </div>
+        {children && children}
       </div>
     </FormItemContext.Provider>
   )

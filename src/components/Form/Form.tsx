@@ -55,7 +55,7 @@ const Form: FC<FormPropsInterface> = (props) => {
   const stylesObj = {
     form: getStyles([
       {
-        width
+        width,
       },
       () => ({
         style: {

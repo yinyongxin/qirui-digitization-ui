@@ -16,11 +16,8 @@ const Input: FC<InputPropsType> = (props, ref) => {
     classNamePrefix
   } = useContext(GlobalContext);
 
-  const formItemContent = useContext(FormItemContext);
-  const formContent = useContext(FormContext);
   const {
     type = 'text',
-    width = 400,
     ...rest
   } = props
 
@@ -37,9 +34,11 @@ const Input: FC<InputPropsType> = (props, ref) => {
   }
 
   return (
-    <div style={{ width }} className={classNamesObj.inputComponent()}>
-      {inputs[type]?.({ ...rest, ...formItemContent })}
-    </div>
+    // <div className={classNamesObj.inputComponent()}>
+    <>
+      {inputs[type]?.(rest)}
+    </>
+    // </div>
   )
 }
 export default Input

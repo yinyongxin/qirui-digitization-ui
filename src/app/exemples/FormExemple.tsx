@@ -134,40 +134,36 @@ const FormExemple = () => {
                 age: 20
               }}
               layout='inline'
+              colon
             // columns={5}
             >
               <FormItem
                 label="Name"
                 name="name"
-                colon
+              >
+                <Input width={500} />
+              </FormItem>
+              <FormItem
+                label="Age"
+                name="age"
               >
                 <Input />
               </FormItem>
               <FormItem
                 label="Age"
                 name="age"
-                colon
               >
                 <Input />
               </FormItem>
               <FormItem
                 label="Age"
                 name="age"
-                colon
               >
                 <Input />
               </FormItem>
               <FormItem
                 label="Age"
                 name="age"
-                colon
-              >
-                <Input />
-              </FormItem>
-              <FormItem
-                label="Age"
-                name="age"
-                colon
               >
                 <Select
                   options={[
