@@ -11,16 +11,28 @@ const FormExemple = () => {
             <Form
               width={1000}
               initialValues={{
-                name: 'yyx',
-                age: 20
+                username: 'yyx',
+                age: 'age',
+                other: {
+                  username: 'otheryyx',
+                  age: 'otherage'
+                },
+                arr: [{
+                  username: 'arryyx',
+                  age: 'arrage',
+                  other: {
+                    username: 'arrotheryyx',
+                    age: 'arrotherage'
+                  },
+                }]
               }}
               colon
-              layout='vertical'
+              // layout='vertical'
               columns={2}
             >
               <FormItem
-                label="NameNameNameNameNameName"
-                name="name"
+                label="Username"
+                name="username"
               >
                 <Input />
               </FormItem>
@@ -30,14 +42,43 @@ const FormExemple = () => {
               >
                 <Input />
               </FormItem>
+              <FormItem
+                label="OtherUsername"
+                name="other.username"
+              >
+                <Input />
+              </FormItem>
+              <FormItem
+                label="OtherAge"
+                name="other.age"
+              >
+                <Input />
+              </FormItem>
+              <FormItem
+                label="OtherUsername"
+                name="arr.0.username"
+              >
+                <Input />
+              </FormItem>
+              <FormItem
+                label="OtherAge"
+                name="arr.0.age"
+              >
+                <Input />
+              </FormItem>
+              <FormItem
+                label="OtherUsername"
+                name="arr.0.other.username"
+              >
+                <Input />
+              </FormItem>
+              <FormItem
+                label="OtherAge"
+                name="arr.0.other.age"
+              >
+                <Input />
+              </FormItem>
             </Form>
-            <FormItem
-              label="Age"
-              name="age"
-            >
-              <Input />
-            </FormItem>
-            <Input />
           </div>
         </div>
       </Title>

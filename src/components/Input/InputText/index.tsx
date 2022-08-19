@@ -10,16 +10,14 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
   const {
     classNamePrefix
   } = useContext(GlobalContext);
+  const prefixCls = `${classNamePrefix}-inputText`
 
   const formItemContent = useContext(FormItemContext);
   const formContent = useContext(FormContext);
-  console.log('formItemContent', formItemContent);
-
-  const prefixCls = `${classNamePrefix}-inputText`
+  // console.log('formItemContent', formItemContent);
 
   const {
     borders,
-    type = 'text',
     value: valueProps,
     defaultValue,
     readOnly = false,
@@ -32,7 +30,8 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     onChange,
     style,
     className,
-    inputAttributes
+    inputAttributes,
+    name,
   } = {
     ...formItemContent,
     ...props
@@ -45,9 +44,6 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     right: true,
     bottom: true,
     left: true,
-    thead: true,
-    tbody: true,
-    vertical: false,
     ...borders
   }
 
@@ -68,8 +64,8 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     inputText: (classNames: ClassNameType[] = []) => getClassNames([
       inputAttributes?.className,
       {
-        [`${prefixCls}-margin-left`]: !!prefix,
-        [`${prefixCls}-margin-right`]: !!suffix
+        [`${prefixCls}-margin-left`]: !!prefix || !!addBefore,
+        [`${prefixCls}-margin-right`]: !!suffix || !!addAfter
       },
       ...classNames,
     ]),
@@ -91,11 +87,12 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
 
   const inputProps: JSX.IntrinsicElements['input'] = {
     type: 'text',
+    name,
     className: classNamesObj.inputText(),
     readOnly,
     defaultValue,
     ...getValueIfQualified({
-      value
+      value,
     }, !isUndefined(valueProps)),
     onChange: (e) => {
       onChange && onChange(e.target.value, e)
@@ -106,58 +103,71 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     ...omit(inputAttributes || {}, ['className'])
   }
 
-  const getPrefix = () => {
-    if (!prefix) {
-      return
-    }
-    if (isFunction(prefix)) {
-      return prefix(value)
-    } else {
-      return prefix
+  /**
+   * 输入框前
+   */
+  const before = {
+    //前缀
+    prefix: () => {
+      if (!prefix) {
+        return
+      }
+      if (isFunction(prefix)) {
+        return prefix(value)
+      } else {
+        return prefix
+      }
+    },
+    // 输入框前
+    addBefore: () => {
+      if (!addBefore) {
+        return
+      }
+      let getAddBeforeRes = null
+      if (isFunction(addBefore)) {
+        getAddBeforeRes = addBefore(value)
+      } else {
+        getAddBeforeRes = addBefore
+      }
+      return (
+        <div className={classNamesObj.addBorderBefore()}>
+          {getAddBeforeRes}
+        </div>
+      )
     }
   }
-  const getSuffix = () => {
-    if (!suffix) {
-      return
+  /**
+   * 输入框后
+   */
+  const after = {
+    //后缀
+    suffix: () => {
+      if (!suffix) {
+        return
+      }
+      if (isFunction(suffix)) {
+        return suffix(value)
+      } else {
+        return suffix
+      }
+    },
+    // 输入框后
+    addAfter: () => {
+      if (!addAfter) {
+        return
+      }
+      let getAddAfterRes = null
+      if (isFunction(addAfter)) {
+        getAddAfterRes = addAfter(value)
+      } else {
+        getAddAfterRes = addAfter
+      }
+      return (
+        <div className={classNamesObj.addBorderAfter()}>
+          {getAddAfterRes}
+        </div>
+      )
     }
-    if (isFunction(suffix)) {
-      return suffix(value)
-    } else {
-      return suffix
-    }
-  }
-
-  const getAddAfter = () => {
-    if (!addAfter) {
-      return
-    }
-    let getAddAfterRes = null
-    if (isFunction(addAfter)) {
-      getAddAfterRes = addAfter(value)
-    } else {
-      getAddAfterRes = addAfter
-    }
-    return (
-      <div className={classNamesObj.addBorderAfter()}>
-        {getAddAfterRes}
-      </div>
-    )
-  }
-  const getAddBefore = () => {
-    if (!addBefore) {
-      return
-    }
-    let getAddBeforeRes = null
-    if (isFunction(addBefore)) {
-      getAddBeforeRes = addBefore(value)
-    } else {
-      getAddBeforeRes = addBefore
-    }
-    return (
-      <div className={classNamesObj.addBorderBefore()}>
-        {getAddBeforeRes}
-      </div>
-    )
   }
 
   return (
@@ -165,11 +175,11 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
       style={{ width, height, ...style }}
       className={classNamesObj.inputTextComponent()}
     >
-      {getAddBefore()}
-      {getPrefix()}
+      {before.addBefore()}
+      {before.prefix()}
       <input {...inputProps} />
-      {getSuffix()}
-      {getAddAfter()}
+      {after.suffix()}
+      {after.addAfter()}
     </div>
   )
 }

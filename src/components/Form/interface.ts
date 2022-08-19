@@ -78,8 +78,10 @@ export type FormItemBaseType<FormData = any, FieldValue = any> = {
   /**
    * 将控件的 value 进行一定的转换再保存到form中。
    */
+  name: string,
+
   normalize?: (value: FieldValue, prevValue: FieldValue, allValues: Partial<FormData>) => any
-} & Pick<JSX.IntrinsicElements['input'], 'name' | 'style' | 'className'>
+} & Pick<JSX.IntrinsicElements['input'], 'style' | 'className'>
 
 export type FormItemPropsType = PropsWithChildren<FormItemBaseType>
 
@@ -93,7 +95,7 @@ export type FormInstanceType<
   }
 
 
-export interface FormBaseType<FormData = any> extends
+export interface FormBaseType<FormData> extends
   Pick<FormItemBaseType, 'labelAlign' | 'colon' | 'requiredSymbol' | 'disabled' | 'layout'> {
   width?: string | number
   initialValues?: Partial<FormData>
@@ -109,8 +111,8 @@ export interface FormBaseType<FormData = any> extends
   onValuesChange?: (value: Partial<FormData>, values: Partial<FormData>) => void
 }
 
-export interface FormPropsInterface extends FormBaseType, Omit<FormHTMLAttributes<any>, 'onChange' | 'onSubmit' | 'value'> {
+export interface FormPropsInterface<FormData> extends FormBaseType<FormData>, Omit<FormHTMLAttributes<any>, 'onChange' | 'onSubmit' | 'value'> {
 }
 
 
-export type FormContextPropsType<FormData = any> = FormBaseType<FormData>
+export type FormContextPropsType<FormData> = FormBaseType<FormData>

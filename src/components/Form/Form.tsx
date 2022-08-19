@@ -5,14 +5,11 @@ import { ClassNameType, getClassNames, getStyles, pick } from "../utils/tools"
 import { FormContext, FormContextDefult } from "./FormContext"
 import { FormPropsInterface } from "./interface"
 
-const Form: FC<FormPropsInterface> = (props) => {
-
+const Form = <FormData,>(props: FormPropsInterface<FormData>) => {
 
   const {
     classNamePrefix
   } = useContext(GlobalContext);
-
-  const formRef = useRef<HTMLFormElement>(null)
 
   const prefixCls = `${classNamePrefix}-form`
 
@@ -31,12 +28,18 @@ const Form: FC<FormPropsInterface> = (props) => {
 
   const {
     layout,
-    columns
+    columns,
+    initialValues
   } = allField
+
+  const formRef = useRef<HTMLFormElement>()
 
 
   const submit = () => {
+    console.log('formRef', Object.keys(initialValues));
     console.log('formRef', formRef);
+    console.log('formRef', formRef.current?.age.value);
+    console.log('formRef', formRef.current?.username.value);
   }
 
   const classNamesObj = {

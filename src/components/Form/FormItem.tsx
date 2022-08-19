@@ -1,6 +1,6 @@
 import React, { FC, useContext, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
-import { ClassNameType, getClassNames, isBoolean, isFunction } from "../utils/tools"
+import { ClassNameType, getClassNames, getValueFromObjectByString, isArray, isBoolean, isFunction, isNumber, isObject, isString } from "../utils/tools"
 import { omit } from "../utils/tools"
 import { FormContext } from "./FormContext"
 import { FormItemContext } from "./FormItemContext"
@@ -23,7 +23,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
 
   const {
     children,
-    labelWidth = 60,
+    labelWidth = 100,
     labelAlign = 'right',
     colon,
     layout,
@@ -70,12 +70,14 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
   }
 
 
+
+
   const getLabel = () => {
     if (!label) {
       return
     }
     return (
-      <label style={{ width: labelWidth }} className={classNamesObj.label()} htmlFor={labelKey}>
+      <label style={{ width: labelWidth, minWidth: labelWidth }} className={classNamesObj.label()} htmlFor={labelKey}>
         <div className={`${prefixCls}-label-text`}>
           {isFunction(label) ? label('validating') : label}
         </div>
@@ -91,7 +93,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     >
       <FormItemContext.Provider
         value={{
-          defaultValue: props.name && initialValues?.[props.name],
+          defaultValue: getValueFromObjectByString(initialValues, props.name),
           ...rest
         }}
       >
