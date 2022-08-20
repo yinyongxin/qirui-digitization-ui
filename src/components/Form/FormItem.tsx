@@ -1,6 +1,6 @@
 import React, { FC, useContext, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
-import { ClassNameType, getClassNames, getValueFromObjectByString, isArray, isBoolean, isFunction, isNumber, isObject, isString } from "../utils/tools"
+import { ClassNameType, getClassNames, getValueFormObjectByString, getValueFormObjectByStringDeep, isArray, isBoolean, isFunction, isNumber, isObject, isString } from "../utils/tools"
 import { omit } from "../utils/tools"
 import { FormContext } from "./FormContext"
 import { FormItemContext } from "./FormItemContext"
@@ -69,9 +69,6 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     ]),
   }
 
-
-
-
   const getLabel = () => {
     if (!label) {
       return
@@ -93,7 +90,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     >
       <FormItemContext.Provider
         value={{
-          defaultValue: getValueFromObjectByString(initialValues, props.name),
+          defaultValue: getValueFormObjectByString(initialValues, props.name),
           ...rest
         }}
       >

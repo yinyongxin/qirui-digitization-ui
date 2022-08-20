@@ -17,6 +17,6 @@ export type InputCurrencyType = {
   value?: any,
   type?: HTMLInputTypeAttribute,
   validateStatus?: 'success' | 'warning' | 'error' | 'validating'
-}
+} & Pick<JSX.IntrinsicElements['input'], 'name'>
 
 export type InputPropsType = InputTextPropsType

@@ -1,7 +1,7 @@
 import React, { FC, useContext, useRef } from "react"
 import { Button } from "../index"
 import { GlobalContext } from "../config/globalContext"
-import { ClassNameType, getClassNames, getStyles, pick } from "../utils/tools"
+import { ClassNameType, getClassNames, getStyles, getValueFormObjectByString, getValueFormObjectByStringDeep, pick, setObjectValueByString } from "../utils/tools"
 import { FormContext, FormContextDefult } from "./FormContext"
 import { FormPropsInterface } from "./interface"
 
@@ -36,10 +36,21 @@ const Form = <FormData,>(props: FormPropsInterface<FormData>) => {
 
 
   const submit = () => {
-    console.log('formRef', Object.keys(initialValues));
-    console.log('formRef', formRef);
-    console.log('formRef', formRef.current?.age.value);
-    console.log('formRef', formRef.current?.username.value);
+    console.time()
+    const valueDeep = getValueFormObjectByStringDeep(initialValues, 'arr.0.other.username')
+    console.log('valueDeep', valueDeep);
+    console.timeEnd()
+    console.time()
+    const value = getValueFormObjectByString(initialValues, 'arr.0.other.username')
+    console.log('value', value);
+    console.timeEnd()
+    // setObjectValueByString(initialValues, 'other.username', 'newUsername')
+    // console.log('initialValues', initialValues);
+
+    // console.log('formRef', Object.keys(initialValues));
+    // console.log('formRef', formRef);
+    // console.log('formRef', formRef.current?.age.value);
+    // console.log('formRef', formRef.current?.username.value);
   }
 
   const classNamesObj = {
