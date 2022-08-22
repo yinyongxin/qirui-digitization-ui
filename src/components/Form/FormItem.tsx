@@ -90,7 +90,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     >
       <FormItemContext.Provider
         value={{
-          defaultValue: getValueFormObjectByString(initialValues, props.name),
+          defaultValue: getValueFormObjectByString(initialValues!, props.name),
           ...rest
         }}
       >

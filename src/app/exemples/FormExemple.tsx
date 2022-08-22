@@ -26,9 +26,9 @@ const FormExemple = () => {
                   },
                 }]
               }}
-              onValuesChange={(value, allValue, oldValue) => {
-                console.log(value, allValue, oldValue);
-              }}
+              // onValuesChange={(value, allValue, oldValue) => {
+              //   // console.log(value, allValue, oldValue);
+              // }}
               colon
               // layout='vertical'
               columns={2}

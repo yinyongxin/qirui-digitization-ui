@@ -35,7 +35,7 @@ export interface RulesProps<FieldValue = any> {
   message?: ReactNode;
 }
 
-export type FormItemBaseType<FormData = any, FieldValue = any> = {
+export type FormItemBaseType<FieldValue = any> = {
   /**
    * 是否显示标签后的一个冒号
    */
@@ -95,10 +95,9 @@ export type FormInstanceType<
   }
 
 
-export interface FormBaseType<FormData> extends
-  Pick<FormItemBaseType, 'labelAlign' | 'colon' | 'requiredSymbol' | 'disabled' | 'layout'> {
+export interface FormBaseType extends Pick<FormItemBaseType, 'labelAlign' | 'colon' | 'requiredSymbol' | 'disabled' | 'layout'> {
   width?: string | number
-  initialValues?: Partial<FormData>
+  initialValues?: Record<string, any>
   form?: FormInstanceType<FormData>
   columns?: number,
   /**
@@ -111,8 +110,10 @@ export interface FormBaseType<FormData> extends
   onValuesChange?: (value: Partial<FormData>, values: Partial<FormData>, oldValue: Partial<FormData>) => void
 }
 
-export interface FormPropsInterface<FormData> extends FormBaseType<FormData>, Omit<FormHTMLAttributes<any>, 'onChange' | 'onSubmit' | 'value'> {
+export interface FormPropsInterface extends FormBaseType, Omit<FormHTMLAttributes<any>, 'onChange' | 'onSubmit' | 'value'> {
 }
 
 
-export type FormContextPropsType<FormData> = FormBaseType<FormData>
+export type FormContextPropsType = FormBaseType & {
+  allValue?: object
+}

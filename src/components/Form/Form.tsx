@@ -5,7 +5,7 @@ import { ClassNameType, getClassNames, getStyles, getValueFormObjectByString, ge
 import { FormContext, FormContextDefult } from "./FormContext"
 import { FormPropsInterface } from "./interface"
 
-const Form = <FormData,>(props: FormPropsInterface<FormData>) => {
+const Form = (props: FormPropsInterface) => {
 
   const {
     classNamePrefix
@@ -35,26 +35,33 @@ const Form = <FormData,>(props: FormPropsInterface<FormData>) => {
   const formRef = useRef<HTMLFormElement>()
   const [initialValuesState, setInitialValuesState] = useState(initialValues)
 
+  const allValue = {}
+  const formData = new FormData(formRef.current)
 
   const submit = () => {
-    console.time()
-    const valueDeep = getValueFormObjectByStringDeep(initialValues, 'arr.0.other.username')
-    console.log('valueDeep ', valueDeep);
-    console.timeEnd()
-    console.time()
-    const value = getValueFormObjectByString(initialValues, 'arr.0.other.username')
-    console.log('value', value);
-    console.timeEnd()
+    // console.log('formData', formData.getAll('other.username'))
+    // console.log('formData', formData.getAll('arr.0.username'))
+    // console.log('allValue', allValue);
 
-    console.time()
-    const {
-      allValue
-    } = setObjectValueByString(initialValues, 'other.username', 'newUsername', {
-      returnAllValue: true
-    })
-    console.log(allValue);
-    setInitialValuesState(allValue)
-    console.timeEnd()
+    // console.time()
+    // const valueDeep = getValueFormObjectByStringDeep(initialValues, 'arr.0.other.username')
+    // console.log('valueDeep ', valueDeep);
+    // console.timeEnd()
+
+    // console.time()
+    // const value = getValueFormObjectByString(initialValues, 'arr.0.other.username')
+    // console.log('value', value);
+    // console.timeEnd()
+
+    // console.time()
+    // const {
+    //   allValue
+    // } = setObjectValueByString(initialValues, 'other.username', 'newUsername', {
+    //   returnAllValue: true
+    // })
+    // console.log(allValue);
+    // setInitialValuesState(allValue)
+    // console.timeEnd()
     // console.log('initialValues', initialValues);
 
     // console.log('formRef', Object.keys(initialValues));
@@ -98,7 +105,8 @@ const Form = <FormData,>(props: FormPropsInterface<FormData>) => {
     >
       <FormContext.Provider
         value={{
-          ...rest
+          ...rest,
+          allValue
         }}
       >
         {children && children}
