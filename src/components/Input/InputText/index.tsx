@@ -96,20 +96,23 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     }, !isUndefined(valueProps)),
     onChange: (e) => {
       onChange && onChange(e.target.value, e)
+
       const {
         allValue: allValue1,
       } = setObjectValueByString(formContent.allValue!, name, e.target.value, {
         returnAllValue: true,
       })
+      console.log('allValue1', allValue1);
 
-      // const {
-      //   allValue,
-      //   oldValue
-      // } = setObjectValueByString(formContent.initialValues!, name, e.target.value, {
-      //   returnAllValue: true,
-      //   returnOldValue: true,
-      // })
-      // formContent?.onValuesChange?.(e.target.value! as any, allValue as any, oldValue)
+
+      const {
+        allValue,
+        oldValue
+      } = setObjectValueByString(formContent.initialValues!, name, e.target.value, {
+        returnAllValue: true,
+        returnOldValue: true,
+      })
+      formContent?.onValuesChange?.(e.target.value! as any, allValue as any, oldValue)
       if (!isUndefined(valueProps)) {
         setValue(e.target.value)
       }

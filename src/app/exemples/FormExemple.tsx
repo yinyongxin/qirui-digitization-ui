@@ -20,10 +20,6 @@ const FormExemple = () => {
                 arr: [{
                   username: 'arryyx',
                   age: 'arrage',
-                  other: {
-                    username: 'arrotheryyx',
-                    age: 'arrotherage'
-                  },
                 }]
               }}
               // onValuesChange={(value, allValue, oldValue) => {
@@ -66,18 +62,6 @@ const FormExemple = () => {
               <FormItem
                 label="OtherAge"
                 name="arr.0.age"
-              >
-                <Input />
-              </FormItem>
-              <FormItem
-                label="OtherUsername"
-                name="arr.0.other.username"
-              >
-                <Input />
-              </FormItem>
-              <FormItem
-                label="OtherAge"
-                name="arr.0.other.age"
               >
                 <Input />
               </FormItem>

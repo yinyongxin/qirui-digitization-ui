@@ -1,4 +1,4 @@
-import { isArray, isBoolean, isUndefined } from "./is"
+import { isArray, isBoolean, isNumber, isString, isUndefined } from "./is"
 
 /**
  * 根据条件获取值
@@ -74,7 +74,7 @@ export const setObjectValueByString = (
   }
   const fieldNameArr = fieldsString?.split('.') || []
   const fieldNameLength = fieldNameArr.length
-  let value = initialValues
+  let value = completionObject(initialValues, fieldsString)
   for (let index = 0; index < fieldNameLength - 1; index++) {
     const fieldName = isNaN(Number(fieldNameArr[index])) ? fieldNameArr[index] : Number(fieldNameArr[index])
     value = value[fieldName]
@@ -91,4 +91,33 @@ export const setObjectValueByString = (
       oldValue
     }, returnOldValue)
   }
+}
+
+/**
+ * 还原对象属性
+ * @param initialValues 初始值
+ * @param fieldNames 字段
+ * @returns 
+ */
+export const completionObject = (
+  initialValues: Record<string, any>,
+  fieldNames: string | (string | number)[],
+): any => {
+  const fieldNameArr = isArray(fieldNames) ? fieldNames : fieldNames?.split('.')
+  const fieldNameArrFrist = fieldNameArr.shift()
+  const fieldName = isNaN(Number(fieldNameArrFrist)) ? fieldNameArrFrist : Number(fieldNameArrFrist)
+  const afterFieldName = isNaN(Number(fieldNameArr[0])) ? fieldNameArr[0] : Number(fieldNameArr[0])
+  if (fieldNameArr.length === 0) {
+    initialValues[fieldName!] = null
+    initialValues
+  } else {
+    if (isNumber(afterFieldName)) {
+      initialValues[fieldName!] = isUndefined(initialValues[fieldName!]) ? [] : [...initialValues[fieldName!]]
+    }
+    if (isString(afterFieldName)) {
+      initialValues[fieldName!] = isUndefined(initialValues[fieldName!]) ? {} : { ...initialValues[fieldName!] }
+    }
+    completionObject(initialValues[fieldName!], fieldNameArr.join('.'))
+  }
+  return initialValues
 }
