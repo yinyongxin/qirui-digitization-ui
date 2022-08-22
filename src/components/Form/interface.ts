@@ -104,11 +104,11 @@ export interface FormBaseType<FormData> extends
   /**
    * 	表单项值改变时候触发。和 onValuesChange 不同的是只会在用户操作表单项时触发
    */
-  onChange?: (value: Partial<FormData>, values: Partial<FormData>) => void
+  onChange?: (value: Partial<FormData>, values: Partial<FormData>, oldValue: Partial<FormData>) => void
   /**
    * 任意表单项值改变时候触发。第一个参数是被改变表单项的值，第二个参数是所有的表单项值
    */
-  onValuesChange?: (value: Partial<FormData>, values: Partial<FormData>) => void
+  onValuesChange?: (value: Partial<FormData>, values: Partial<FormData>, oldValue: Partial<FormData>) => void
 }
 
 export interface FormPropsInterface<FormData> extends FormBaseType<FormData>, Omit<FormHTMLAttributes<any>, 'onChange' | 'onSubmit' | 'value'> {

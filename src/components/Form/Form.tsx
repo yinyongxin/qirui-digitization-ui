@@ -1,4 +1,4 @@
-import React, { FC, useContext, useRef } from "react"
+import React, { FC, useContext, useRef, useState } from "react"
 import { Button } from "../index"
 import { GlobalContext } from "../config/globalContext"
 import { ClassNameType, getClassNames, getStyles, getValueFormObjectByString, getValueFormObjectByStringDeep, pick, setObjectValueByString } from "../utils/tools"
@@ -33,18 +33,28 @@ const Form = <FormData,>(props: FormPropsInterface<FormData>) => {
   } = allField
 
   const formRef = useRef<HTMLFormElement>()
+  const [initialValuesState, setInitialValuesState] = useState(initialValues)
 
 
   const submit = () => {
     console.time()
     const valueDeep = getValueFormObjectByStringDeep(initialValues, 'arr.0.other.username')
-    console.log('valueDeep', valueDeep);
+    console.log('valueDeep ', valueDeep);
     console.timeEnd()
     console.time()
     const value = getValueFormObjectByString(initialValues, 'arr.0.other.username')
     console.log('value', value);
     console.timeEnd()
-    // setObjectValueByString(initialValues, 'other.username', 'newUsername')
+
+    console.time()
+    const {
+      allValue
+    } = setObjectValueByString(initialValues, 'other.username', 'newUsername', {
+      returnAllValue: true
+    })
+    console.log(allValue);
+    setInitialValuesState(allValue)
+    console.timeEnd()
     // console.log('initialValues', initialValues);
 
     // console.log('formRef', Object.keys(initialValues));

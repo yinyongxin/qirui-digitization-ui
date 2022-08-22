@@ -60,8 +60,8 @@ export const setObjectValueByString = (
   fieldsString: string,
   newValue: any,
   options?: {
-    returnOldValue: boolean
-    returnAllValue: boolean
+    returnOldValue?: boolean
+    returnAllValue?: boolean
   }
 ) => {
   const {
