@@ -6,7 +6,9 @@ import { ClassNameType, getClassNames } from "../utils/tools"
 import { ModalHandle, ModalPropsType } from "./interface"
 import { Root, createRoot } from "react-dom/client"
 import Mask from "../Mask"
-import { useDocumentRender } from "../utils/hooks"
+import { useDocumentRender, usePortals } from "../utils/hooks"
+import { createPortal } from "react-dom"
+import { Portal } from ".."
 
 const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) => {
 
@@ -51,49 +53,10 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
   }
 
   const refFlag = useRef<{
-    isFristCreate: boolean,
-    root: Root | null
+    isFristVisible: boolean
   }>({
-    isFristCreate: true,
-    root: null
+    isFristVisible: true,
   })
-
-  const {
-    render,
-    destroy
-  } = useDocumentRender()
-
-  const modalRender = (content: ReactNode) => {
-    if (isComponent) {
-      return
-    }
-
-    if (mountOnEnter && !visible && refFlag.current.isFristCreate) {
-      render(content)
-      return
-    }
-
-    // 如果是进入前渲染且是第一次
-    if (mountOnEnter && refFlag.current.isFristCreate) {
-      render(content)
-      refFlag.current.isFristCreate = false
-      return
-    }
-
-    if (visible) {
-      render(content)
-      refFlag.current.isFristCreate = false
-      return
-    }
-
-    if (!visible && !refFlag.current.isFristCreate) {
-      if (unmountOnExit) {
-        render(content)
-      } else {
-        destroy()
-      }
-    }
-  }
 
   const [visible, setVisible] = useState<boolean>(propsVisible)
   const [loading, setLoading] = useState<boolean>(false)
@@ -107,7 +70,8 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
     modalMain: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}-main`,
       {
-        [`${prefixCls}-main-border`]: border
+        [`${prefixCls}-main-border`]: border,
+        [`${prefixCls}-main-animation`]: true,
       },
       ...classNames
     ]),
@@ -138,22 +102,6 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
     ]),
   }
 
-  const HeaderRender = () => {
-    let headerRes = null
-    if (!header) {
-      return <></>
-    } else if (header === 'default') {
-      headerRes = title
-    } else {
-      headerRes = header
-    }
-    return (
-      <header className={classNamesObj.modalHeader()}>
-        {headerRes}
-      </header>
-    )
-  }
-
   const onConfirmModal: React.MouseEventHandler<HTMLElement> = (e: any) => {
     let ret;
     if (onOK) {
@@ -178,34 +126,75 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
     close()
   }
 
-  const FooterRender = () => {
-    let footerRes = null
-    if (!footer) {
-      return <></>
-    } else if (footer === 'default') {
-      footerRes = (
-        <>
-          <Button
-            onClick={onCancelHandle}
-            level="secondary"
-            size='large'
-            {...cancelButtonProps}
-          >{cancelText}</Button>
-          <Button
-            onClick={onConfirmModal}
-            size='large'
-            {...okButtonProps}
-          >{okText}</Button>
-        </>
+  const mainContent = {
+    iconRender: () => {
+      let iconRes = null
+      if (!icon) {
+        return <></>
+      } else if (icon === 'default') {
+        iconRes = (
+          <Icon icon={"xmark"} size={24} />
+        )
+      } else {
+        iconRes = icon
+      }
+      return (
+        <div onClick={onCancelHandle} className={`${prefixCls}-icon`}>
+          {iconRes}
+        </div>
       )
-    } else {
-      footerRes = footer
+    },
+    headerRender: () => {
+      let headerRes = null
+      if (!header) {
+        return <></>
+      } else if (header === 'default') {
+        headerRes = title
+      } else {
+        headerRes = header
+      }
+      return (
+        <header className={classNamesObj.modalHeader()}>
+          {headerRes}
+        </header>
+      )
+    },
+    containerRender: () => (
+      <>
+        <main className={`${prefixCls}-container`} style={mianStyle}>
+          {children && children}
+        </main>
+      </>
+    ),
+    footerRender: () => {
+      let footerRes = null
+      if (!footer) {
+        return <></>
+      } else if (footer === 'default') {
+        footerRes = (
+          <>
+            <Button
+              onClick={onCancelHandle}
+              level="secondary"
+              size='large'
+              {...cancelButtonProps}
+            >{cancelText}</Button>
+            <Button
+              onClick={onConfirmModal}
+              size='large'
+              {...okButtonProps}
+            >{okText}</Button>
+          </>
+        )
+      } else {
+        footerRes = footer
+      }
+      return (
+        <footer className={classNamesObj.modalFooter()}>
+          {footerRes}
+        </footer>
+      )
     }
-    return (
-      <footer className={classNamesObj.modalFooter()}>
-        {footerRes}
-      </footer>
-    )
   }
 
   const mainStyle: React.CSSProperties = alignCenter ? {
@@ -222,33 +211,7 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
     )
   }
 
-  const IconRender = () => {
-    let iconRes = null
-    if (!icon) {
-      return <></>
-    } else if (icon === 'default') {
-      iconRes = (
-        <Icon icon={"xmark"} size={24} />
-      )
-    } else {
-      iconRes = icon
-    }
-    return (
-      <div onClick={onCancelHandle} className={`${prefixCls}-icon`}>
-        {iconRes}
-      </div>
-    )
-  }
-
-  const Container = () => {
-    return (
-      <main className={`${prefixCls}-container`} style={mianStyle}>
-        {children && children}
-      </main>
-    )
-  }
-
-  const content = (visible: boolean) => (
+  const content = (
     <div style={{ display: visible ? 'unset' : 'none' }} className={classNamesObj.modal()}>
       <Mask clickThrough zIndex="unset" visible={mask} />
       <main style={mainStyle} className={classNamesObj.modalMain()}>
@@ -256,10 +219,10 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
           style={bodyStyle}
           className={classNamesObj.modalBody()}
         >
-          <IconRender />
-          <HeaderRender />
-          <Container />
-          <FooterRender />
+          {mainContent.iconRender()}
+          {mainContent.headerRender()}
+          {mainContent.containerRender()}
+          {mainContent.footerRender()}
         </div >
       </main>
     </div >
@@ -267,6 +230,7 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
 
   const open = () => {
     setVisible(true)
+    refFlag.current.isFristVisible = false
     afterOpen && afterOpen()
   }
 
@@ -275,27 +239,20 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
     afterClose && afterClose()
   }
 
-  const refresh = () => {
-    modalRender(content(visible))
-  }
-
   useImperativeHandle<unknown, ModalHandle>(
     ref,
     () => ({
       open,
       close,
-      visible,
-      refresh
+      visible
     }),
     [visible]
   )
 
-  useEffect(() => {
-    refresh()
-  }, [visible, props])
-
   return (
-    isComponent ? content(true) : (<></>)
+    isComponent ? content : (<Portal forceRender={mountOnEnter || (!refFlag.current.isFristVisible && unmountOnExit)} visible={visible} container={getPopupContainer?.()}>
+      {content}
+    </Portal>)
   )
 }
 export default React.forwardRef(Modal)

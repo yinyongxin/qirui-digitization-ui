@@ -94,8 +94,7 @@ export interface ModalBaseType {
 export type ModalHandle = {
   open: () => void,
   close: () => void,
-  visible: boolean,
-  refresh: (visible: boolean) => void
+  visible: boolean
 }
 
 export type ModalPropsType = PropsWithChildren<ModalBaseType>
