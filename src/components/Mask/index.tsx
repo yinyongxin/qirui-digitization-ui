@@ -19,6 +19,7 @@ const Mask: FC<MaskPropsType> = (props, ref) => {
     visible = true,
     clickThrough = false,
     style = {},
+    animation = true,
     ...rest
   } = props
 
@@ -27,7 +28,8 @@ const Mask: FC<MaskPropsType> = (props, ref) => {
       `${prefixCls}`,
       className,
       {
-        'pointer-events-none': clickThrough
+        'pointer-events-none': clickThrough,
+        [`${prefixCls}-animation`]: animation,
       },
       ...classNames
     ])

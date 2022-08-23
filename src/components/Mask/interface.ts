@@ -18,7 +18,7 @@ export interface MaskBaseType {
    * 默认为 false
    */
   clickThrough?: boolean
-
+  animation?: boolean
 }
 
 export type MaskPropsType = MaskBaseType & JSX.IntrinsicElements['div']
