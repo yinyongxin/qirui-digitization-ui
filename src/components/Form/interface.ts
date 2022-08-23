@@ -91,6 +91,10 @@ export interface FormBaseType extends Pick<FormItemBaseType, 'labelAlign' | 'col
   width?: string | number
   initialValues?: Record<string, any>
   form?: any
+  /**
+   * 表单为几列 
+   * 默认为 1
+   */
   columns?: number,
   /**
    * 	表单项值改变时候触发。和 onValuesChange 不同的是只会在用户操作表单项时触发
@@ -105,9 +109,24 @@ export interface FormBaseType extends Pick<FormItemBaseType, 'labelAlign' | 'col
 export interface FormPropsInterface extends FormBaseType, Omit<FormHTMLAttributes<any>, 'onChange' | 'onSubmit' | 'value'> {
 }
 
-export type FormContextPropsType = FormBaseType & {
+export type FormContextType = FormBaseType & {
   // initialValuesState?: any
-  inForm: boolean
+  /**
+   * 组件是否再From组件下
+   */
+  inForm: boolean,
+  /**
+   * 表单数据
+   */
+  formData?: any,
+  /**
+   * 设置表单数据
+   */
+  setFormData?: any,
+  /**
+   * 是否为受控组件
+   */
+  controlled: boolean
 }
 
 export type FormItemContextType = FormItemBaseType & InputCurrencyType & {

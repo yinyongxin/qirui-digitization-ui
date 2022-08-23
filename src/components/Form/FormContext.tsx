@@ -1,14 +1,15 @@
 import { createContext } from "react";
-import { FormContextPropsType } from "./interface";
+import { FormContextType } from "./interface";
 
-export const FormContextDefult: FormContextPropsType = {
+export const FormContextDefult: FormContextType = {
   layout: 'horizontal',
   labelAlign: 'right',
   requiredSymbol: true,
   columns: 1,
-  inForm: false
+  inForm: false,
+  controlled: false,
 }
 
-export const FormContext = createContext<FormContextPropsType>(FormContextDefult);
+export const FormContext = createContext<FormContextType>(FormContextDefult);
 
 FormContext.displayName = 'FormContext'

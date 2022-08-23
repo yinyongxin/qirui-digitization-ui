@@ -67,6 +67,14 @@ const FormExemple = () => {
               >
                 <Input />
               </FormItem>
+              <FormItem
+                label="username"
+                name="ascascsac"
+              >
+                {(formData) => {
+                  return formData.username
+                }}
+              </FormItem>
             </Form>
             <Input />
             <Button onClick={() => {

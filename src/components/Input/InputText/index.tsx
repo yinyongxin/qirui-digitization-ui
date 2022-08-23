@@ -91,6 +91,25 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     ])
   }
 
+  const inFormObj = {
+    valueChange: (value: string) => {
+      const {
+        allValue,
+        oldValue
+      } = setObjectValueByString(formContent.initialValues || {}, name, value, {
+        returnAllValue: true,
+        returnOldValue: true,
+      })
+
+      formContent.setFormData(() => ({ ...allValue }))
+      if (dataRef.current.focusState === 'focus') {
+        formContent?.onChange?.<string>({ [name]: value }, allValue, { [name]: oldValue })
+      }
+
+      formContent?.onValuesChange?.<string>({ [name]: value }, allValue, { [name]: oldValue })
+    }
+  }
+
   const inputProps: JSX.IntrinsicElements['input'] = {
     type: 'text',
     name,
@@ -113,19 +132,7 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
       }
 
       if (formContent.inForm) {
-        const {
-          allValue,
-          oldValue
-        } = setObjectValueByString(formContent.initialValues || {}, name, e.target.value, {
-          returnAllValue: true,
-          returnOldValue: true,
-        })
-
-        if (dataRef.current.focusState === 'focus') {
-          formContent?.onChange?.<string>({ [name]: e.target.value }, allValue, { [name]: oldValue })
-        }
-
-        formContent?.onValuesChange?.<string>({ [name]: e.target.value }, allValue, { [name]: oldValue })
+        inFormObj.valueChange(e.target.value)
       }
     },
     ...omit(inputAttributes || {}, ['className'])

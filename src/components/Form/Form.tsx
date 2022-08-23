@@ -38,7 +38,7 @@ const Form = (props: FormPropsInterface) => {
   })
 
   const formRef = useRef<HTMLFormElement>(null)
-  const [initialValuesState, setInitialValuesState] = useState(initialValues)
+  const [formData, setFormData] = useState(initialValues)
 
   const submit = () => {
     // const {
@@ -80,11 +80,20 @@ const Form = (props: FormPropsInterface) => {
     ])
   }
 
+  // useEffect(() => {
+  //   console.log('formData', formData);
+
+  //   console.log(999);
+
+  // }, [formData])
+
   return (
     <FormContext.Provider
       value={{
         ...rest,
-        inForm: true
+        inForm: true,
+        formData,
+        setFormData
       }}
     >
       <form

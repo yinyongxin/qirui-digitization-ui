@@ -37,6 +37,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
 
   const {
     name,
+    formData
   } = allField
 
   const prefixCls = `${classNamePrefix}-formItem`
@@ -96,7 +97,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
         style={{ ...style, width }}
       >
         {getLabel()}
-        {children && isFunction(children) ? children?.(initialValues) : children}
+        {children && isFunction(children) ? children?.(formData) : children}
       </div>
     </FormItemContext.Provider>
   )
