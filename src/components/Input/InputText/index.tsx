@@ -6,6 +6,7 @@ import { ClassNameType, getClassNames, isFunction, getValueIfQualified, isUndefi
 import { InputTextPropsType } from "./interface"
 import { useRef } from "react";
 import { InputDataRef } from "../interface";
+import { useEffect } from "react";
 
 const InputText: FC<InputTextPropsType> = (props, ref) => {
 
@@ -96,11 +97,10 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
       const {
         allValue,
         oldValue
-      } = setObjectValueByString(formContent.initialValues || {}, name, value, {
+      } = setObjectValueByString(formContent.formData || {}, name, value, {
         returnAllValue: true,
         returnOldValue: true,
       })
-
       formContent.setFormData(() => ({ ...allValue }))
       if (dataRef.current.focusState === 'focus') {
         formContent?.onChange?.<string>({ [name]: value }, allValue, { [name]: oldValue })

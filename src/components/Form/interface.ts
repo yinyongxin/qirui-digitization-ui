@@ -82,7 +82,7 @@ export type FormItemBaseType<FieldValue = any> = {
   name: string,
 
   normalize?: (value: FieldValue, prevValue: FieldValue, allValues: Partial<FormData>) => any,
-  children?: ReactNode | ((allValue?: any) => ReactNode) | undefined;
+  children?: ReactNode | ((formData?: any) => ReactNode) | undefined;
 } & Pick<JSX.IntrinsicElements['input'], 'style' | 'className'>
 
 export type FormItemPropsType = FormItemBaseType
@@ -106,7 +106,8 @@ export interface FormBaseType extends Pick<FormItemBaseType, 'labelAlign' | 'col
   onValuesChange?: <V = unknown, AV = unknown>(value: Record<string, V>, values: AV, oldValue: Record<string, V>) => void
 }
 
-export interface FormPropsInterface extends FormBaseType, Omit<FormHTMLAttributes<any>, 'onChange' | 'onSubmit' | 'value'> {
+export interface FormPropsInterface extends FormBaseType, Omit<FormHTMLAttributes<any>, 'onChange' | 'onSubmit' | 'value' | 'children'> {
+  children?: ReactNode | ((formData?: any) => ReactNode) | undefined;
 }
 
 export type FormContextType = FormBaseType & {

@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from "react"
 import { Button } from "../index"
 import { GlobalContext } from "../config/globalContext"
-import { ClassNameType, getClassNames, getStyles, setObjectValueByString } from "../utils/tools"
+import { ClassNameType, getClassNames, getStyles, isFunction, setObjectValueByString } from "../utils/tools"
 import { FormContext, FormContextDefult } from "./FormContext"
 import { FormDataRef, FormPropsInterface } from "./interface"
 import { useEffect } from "react"
@@ -37,20 +37,24 @@ const Form = (props: FormPropsInterface) => {
     allValue: initialValues
   })
 
-  const formRef = useRef<HTMLFormElement>(null)
+  const formRef = useRef<HTMLFormElement & {
+    [key in string]: HTMLInputElement
+  }>(null)
   const [formData, setFormData] = useState(initialValues)
 
   const submit = () => {
-    // const {
-    //   allValue,
-    //   oldValue
-    // } = setObjectValueByString(initialValues || {}, 'username', 'username', {
-    //   returnAllValue: true,
-    //   returnOldValue: true,
-    // })
-    // formRef.current['username'].value = 'username'
-    // console.log('allValue', dataRef.current.allValue);
-    // console.log('initialValuesState', initialValuesState);
+    const {
+      allValue,
+      oldValue
+    } = setObjectValueByString(formData || {}, 'username', 'username', {
+      returnAllValue: true,
+      returnOldValue: true,
+    })
+    setFormData(() => ({ ...allValue }))
+    console.log('formData', formData);
+
+    formRef.current && (formRef.current['username'].value = 'username')
+
   }
 
   const classNamesObj = {
@@ -80,13 +84,6 @@ const Form = (props: FormPropsInterface) => {
     ])
   }
 
-  // useEffect(() => {
-  //   console.log('formData', formData);
-
-  //   console.log(999);
-
-  // }, [formData])
-
   return (
     <FormContext.Provider
       value={{
@@ -101,7 +98,7 @@ const Form = (props: FormPropsInterface) => {
         className={classNamesObj.form()}
         style={stylesObj.form}
       >
-        {children && children}
+        {children && isFunction(children) ? children?.(formData) : children}
         <div>
           <Button onClick={(e) => {
             e.preventDefault()
