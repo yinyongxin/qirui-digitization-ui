@@ -1,8 +1,20 @@
-import React from "react";
-import { Form, Icon, Input, Select, Title } from "../../components";
+import React, { useState } from "react";
+import { Button, Form, Icon, Input, Select, Title } from "../../components";
 import FormItem from "../../components/Form/FormItem";
 
 const FormExemple = () => {
+  const initialValues = {
+    username: 'yyx',
+    age: 'age',
+    other: {
+      // username: 'otheryyx',
+      // age: 'otherage'
+    },
+    arr: [{
+      username: 'arryyx',
+      age: 'arrage',
+    }]
+  }
   return (
     <div>
       <Title type="tooltip" title="基本Icon status" >
@@ -10,18 +22,7 @@ const FormExemple = () => {
           <div>
             <Form
               width={1000}
-              initialValues={{
-                username: 'yyx',
-                age: 'age',
-                other: {
-                  // username: 'otheryyx',
-                  // age: 'otherage'
-                },
-                arr: [{
-                  username: 'arryyx',
-                  age: 'arrage',
-                }]
-              }}
+              initialValues={initialValues}
               onValuesChange={(value, allValue, oldValue) => {
                 // console.log(value, allValue, oldValue);
               }}
@@ -68,6 +69,10 @@ const FormExemple = () => {
               </FormItem>
             </Form>
           </div>
+          <Button onClick={() => {
+            console.log('initialValues', initialValues);
+
+          }}>LOG</Button>
         </div>
       </Title>
     </div>

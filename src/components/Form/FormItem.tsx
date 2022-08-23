@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from "react"
+import React, { FC, useContext, useEffect, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
 import { ClassNameType, getClassNames, getValueFormObjectByString, getValueFormObjectByStringDeep, isArray, isBoolean, isFunction, isNumber, isObject, isString } from "../utils/tools"
 import { omit } from "../utils/tools"
@@ -16,7 +16,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     ...formContextRest
   } = useContext(FormContext);
 
-  const allValue = {
+  const allField = {
     ...formContextRest,
     ...props,
   }
@@ -32,12 +32,12 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     requiredSymbol,
     width,
     ...rest
-  } = allValue
+  } = allField
 
   const {
     name,
     label,
-  } = allValue
+  } = allField
 
   const prefixCls = `${classNamePrefix}-formItem`
   const labelKey = `${name}`
@@ -95,7 +95,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
         style={{ ...style, width }}
       >
         {getLabel()}
-        {children && children}
+        {children && isFunction(children) ? children?.(initialValues) : children}
       </div>
     </FormItemContext.Provider>
   )

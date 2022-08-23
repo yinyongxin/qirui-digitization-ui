@@ -80,10 +80,11 @@ export type FormItemBaseType<FieldValue = any> = {
    */
   name: string,
 
-  normalize?: (value: FieldValue, prevValue: FieldValue, allValues: Partial<FormData>) => any
+  normalize?: (value: FieldValue, prevValue: FieldValue, allValues: Partial<FormData>) => any,
+  children?: ReactNode | ((allValue?: any) => ReactNode) | undefined;
 } & Pick<JSX.IntrinsicElements['input'], 'style' | 'className'>
 
-export type FormItemPropsType = PropsWithChildren<FormItemBaseType>
+export type FormItemPropsType = FormItemBaseType
 
 export interface FormBaseType extends Pick<FormItemBaseType, 'labelAlign' | 'colon' | 'requiredSymbol' | 'disabled' | 'layout'> {
   width?: string | number
@@ -104,6 +105,7 @@ export interface FormPropsInterface extends FormBaseType, Omit<FormHTMLAttribute
 }
 
 export type FormContextPropsType = FormBaseType & {
+  // initialValuesState?: any
 }
 
 export type FormDataRef<AV = unknown> = {

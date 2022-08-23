@@ -1,9 +1,10 @@
 import { useContext, useRef, useState } from "react"
 import { Button } from "../index"
 import { GlobalContext } from "../config/globalContext"
-import { ClassNameType, getClassNames, getStyles } from "../utils/tools"
+import { ClassNameType, getClassNames, getStyles, setObjectValueByString } from "../utils/tools"
 import { FormContext, FormContextDefult } from "./FormContext"
 import { FormDataRef, FormPropsInterface } from "./interface"
+import { useEffect } from "react"
 
 const Form = (props: FormPropsInterface) => {
 
@@ -37,10 +38,19 @@ const Form = (props: FormPropsInterface) => {
   })
 
   const formRef = useRef<HTMLFormElement>(null)
-  // const [initialValuesState, setInitialValuesState] = useState(initialValues)
+  const [initialValuesState, setInitialValuesState] = useState(initialValues)
 
   const submit = () => {
-    console.log('allValue', dataRef.current.allValue);
+    const {
+      allValue,
+      oldValue
+    } = setObjectValueByString(initialValues || {}, 'username', 'username', {
+      returnAllValue: true,
+      returnOldValue: true,
+    })
+    formRef.current['username'].value = 'username'
+    // console.log('allValue', dataRef.current.allValue);
+    // console.log('initialValuesState', initialValuesState);
   }
 
   const classNamesObj = {
@@ -73,7 +83,7 @@ const Form = (props: FormPropsInterface) => {
   return (
     <FormContext.Provider
       value={{
-        ...rest,
+        ...rest
       }}
     >
       <form
