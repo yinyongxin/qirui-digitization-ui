@@ -108,23 +108,24 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     },
     onChange: (e) => {
       onChange && onChange(e.target.value, e)
-
-      const {
-        allValue,
-        oldValue
-      } = setObjectValueByString(formContent.initialValues || {}, name, e.target.value, {
-        returnAllValue: true,
-        returnOldValue: true,
-      })
-
-      if (dataRef.current.focusState === 'focus') {
-        formContent?.onChange?.<string>({ [name]: e.target.value }, allValue, { [name]: oldValue })
-      }
-
-      formContent?.onValuesChange?.<string>({ [name]: e.target.value }, allValue, { [name]: oldValue })
-
       if (!isUndefined(valueProps)) {
         setValue(e.target.value)
+      }
+
+      if (formContent.inForm) {
+        const {
+          allValue,
+          oldValue
+        } = setObjectValueByString(formContent.initialValues || {}, name, e.target.value, {
+          returnAllValue: true,
+          returnOldValue: true,
+        })
+
+        if (dataRef.current.focusState === 'focus') {
+          formContent?.onChange?.<string>({ [name]: e.target.value }, allValue, { [name]: oldValue })
+        }
+
+        formContent?.onValuesChange?.<string>({ [name]: e.target.value }, allValue, { [name]: oldValue })
       }
     },
     ...omit(inputAttributes || {}, ['className'])

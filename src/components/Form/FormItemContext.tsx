@@ -1,8 +1,8 @@
 import { createContext } from "react";
-import { InputCurrencyType } from "../Input/interface";
-import { FormItemBaseType } from "./interface";
+import { FormItemContextType } from "./interface";
 
-export const FormItemContext = createContext<FormItemBaseType & InputCurrencyType>({
-  name: ''
+export const FormItemContext = createContext<FormItemContextType>({
+  name: '',
+  inFormItem: false
 });
 FormItemContext.displayName = 'FormItemContext'

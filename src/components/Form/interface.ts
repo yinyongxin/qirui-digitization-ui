@@ -1,5 +1,6 @@
 import { type } from "os";
 import React, { FormHTMLAttributes, PropsWithChildren, ReactNode } from "react"
+import { InputCurrencyType } from "../Input/interface";
 import { DesignTypes } from "../typings";
 
 export interface RulesProps<FieldValue = any> {
@@ -106,6 +107,12 @@ export interface FormPropsInterface extends FormBaseType, Omit<FormHTMLAttribute
 
 export type FormContextPropsType = FormBaseType & {
   // initialValuesState?: any
+  inForm: boolean
+}
+
+export type FormItemContextType = FormItemBaseType & InputCurrencyType & {
+  // initialValuesState?: any
+  inFormItem: boolean
 }
 
 export type FormDataRef<AV = unknown> = {

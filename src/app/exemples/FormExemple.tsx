@@ -68,11 +68,13 @@ const FormExemple = () => {
                 <Input />
               </FormItem>
             </Form>
-          </div>
-          <Button onClick={() => {
-            console.log('initialValues', initialValues);
+            <Input />
+            <Button onClick={() => {
+              console.log('initialValues', initialValues);
 
-          }}>LOG</Button>
+            }}>LOG</Button>
+          </div>
+
         </div>
       </Title>
     </div>

@@ -31,12 +31,12 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     style = {},
     requiredSymbol,
     width,
+    label,
     ...rest
   } = allField
 
   const {
     name,
-    label,
   } = allField
 
   const prefixCls = `${classNamePrefix}-formItem`
@@ -87,7 +87,8 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     <FormItemContext.Provider
       value={{
         defaultValue: getValueFormObjectByString(initialValues!, props.name),
-        ...rest
+        ...rest,
+        inFormItem: true
       }}
     >
       <div

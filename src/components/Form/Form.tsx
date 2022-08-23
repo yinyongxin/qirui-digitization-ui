@@ -41,14 +41,14 @@ const Form = (props: FormPropsInterface) => {
   const [initialValuesState, setInitialValuesState] = useState(initialValues)
 
   const submit = () => {
-    const {
-      allValue,
-      oldValue
-    } = setObjectValueByString(initialValues || {}, 'username', 'username', {
-      returnAllValue: true,
-      returnOldValue: true,
-    })
-    formRef.current['username'].value = 'username'
+    // const {
+    //   allValue,
+    //   oldValue
+    // } = setObjectValueByString(initialValues || {}, 'username', 'username', {
+    //   returnAllValue: true,
+    //   returnOldValue: true,
+    // })
+    // formRef.current['username'].value = 'username'
     // console.log('allValue', dataRef.current.allValue);
     // console.log('initialValuesState', initialValuesState);
   }
@@ -83,7 +83,8 @@ const Form = (props: FormPropsInterface) => {
   return (
     <FormContext.Provider
       value={{
-        ...rest
+        ...rest,
+        inForm: true
       }}
     >
       <form
