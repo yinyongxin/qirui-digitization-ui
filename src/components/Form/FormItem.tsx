@@ -84,20 +84,20 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
   }
 
   return (
-    <div
-      className={classNamesObj.formItem()}
-      style={{ ...style, width }}
+    <FormItemContext.Provider
+      value={{
+        defaultValue: getValueFormObjectByString(initialValues!, props.name),
+        ...rest
+      }}
     >
-      <FormItemContext.Provider
-        value={{
-          defaultValue: getValueFormObjectByString(initialValues!, props.name),
-          ...rest
-        }}
+      <div
+        className={classNamesObj.formItem()}
+        style={{ ...style, width }}
       >
         {getLabel()}
         {children && children}
-      </FormItemContext.Provider>
-    </div>
+      </div>
+    </FormItemContext.Provider>
   )
 }
 export default FormItem

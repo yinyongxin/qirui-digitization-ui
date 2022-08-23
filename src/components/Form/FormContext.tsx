@@ -9,3 +9,5 @@ export const FormContextDefult: FormContextPropsType = {
 }
 
 export const FormContext = createContext<FormContextPropsType>(FormContextDefult);
+
+FormContext.displayName = 'FormContext'

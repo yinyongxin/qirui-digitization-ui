@@ -6,3 +6,5 @@ export const SideMenuComtext = createContext<SideMenuComtextType>({
   activeMenu: [],
   activeMenuSub: [],
 });
+
+SideMenuComtext.displayName = 'SideMenuComtext'

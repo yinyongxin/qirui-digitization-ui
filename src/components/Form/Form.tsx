@@ -71,26 +71,26 @@ const Form = (props: FormPropsInterface) => {
   }
 
   return (
-    <form
-      ref={formRef}
-      className={classNamesObj.form()}
-      style={stylesObj.form}
+    <FormContext.Provider
+      value={{
+        ...rest,
+      }}
     >
-      <FormContext.Provider
-        value={{
-          ...rest,
-        }}
+      <form
+        ref={formRef}
+        className={classNamesObj.form()}
+        style={stylesObj.form}
       >
         {children && children}
-      </FormContext.Provider>
-      <div>
-        <Button onClick={(e) => {
-          e.preventDefault()
-          e.stopPropagation()
-          submit()
-        }}>submit</Button>
-      </div>
-    </form>
+        <div>
+          <Button onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            submit()
+          }}>submit</Button>
+        </div>
+      </form>
+    </FormContext.Provider>
   )
 }
 export default Form
