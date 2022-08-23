@@ -20,3 +20,7 @@ export type InputCurrencyType = {
 } & Pick<JSX.IntrinsicElements['input'], 'name'>
 
 export type InputPropsType = InputTextPropsType
+
+export type InputDataRef = {
+  focusState: 'blur' | 'focus'
+} 

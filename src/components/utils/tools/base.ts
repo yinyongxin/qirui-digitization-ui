@@ -102,6 +102,7 @@ export const setObjectValueByString = (
 export const completionObject = (
   initialValues: Record<string, any>,
   fieldNames: string | (string | number)[],
+  newValue?: any
 ): any => {
   const fieldNameArr = isArray(fieldNames) ? fieldNames : fieldNames?.split('.')
   const fieldNameArrFrist = fieldNameArr.shift()
@@ -109,13 +110,12 @@ export const completionObject = (
   const afterFieldName = isNaN(Number(fieldNameArr[0])) ? fieldNameArr[0] : Number(fieldNameArr[0])
   if (fieldNameArr.length === 0) {
     initialValues[fieldName!] = null
-    initialValues
   } else {
-    if (isNumber(afterFieldName)) {
-      initialValues[fieldName!] = isUndefined(initialValues[fieldName!]) ? [] : [...initialValues[fieldName!]]
+    if (isNumber(afterFieldName) && isUndefined(initialValues[fieldName!])) {
+      initialValues[fieldName!] = []
     }
-    if (isString(afterFieldName)) {
-      initialValues[fieldName!] = isUndefined(initialValues[fieldName!]) ? {} : { ...initialValues[fieldName!] }
+    if (isString(afterFieldName) && isUndefined(initialValues[fieldName!])) {
+      initialValues[fieldName!] = {}
     }
     completionObject(initialValues[fieldName!], fieldNameArr.join('.'))
   }

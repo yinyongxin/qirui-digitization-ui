@@ -4,6 +4,8 @@ import { FormItemContext } from "../../Form/FormItemContext";
 import { GlobalContext } from "../../config/globalContext"
 import { ClassNameType, getClassNames, isFunction, getValueIfQualified, isUndefined, omit, setObjectValueByString } from "../../utils/tools";
 import { InputTextPropsType } from "./interface"
+import { useRef } from "react";
+import { InputDataRef } from "../interface";
 
 const InputText: FC<InputTextPropsType> = (props, ref) => {
 
@@ -15,6 +17,10 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
   const formItemContent = useContext(FormItemContext);
   const formContent = useContext(FormContext);
   // console.log('formItemContent', formItemContent);
+
+  const dataRef = useRef<InputDataRef>({
+    focusState: 'blur'
+  })
 
   const {
     borders,
@@ -94,25 +100,29 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     ...getValueIfQualified({
       value,
     }, !isUndefined(valueProps)),
+    onFocus: () => {
+      dataRef.current.focusState = 'focus'
+    },
+    onBlur: () => {
+      dataRef.current.focusState = 'blur'
+    },
     onChange: (e) => {
       onChange && onChange(e.target.value, e)
 
       const {
-        allValue: allValue1,
-      } = setObjectValueByString(formContent.allValue!, name, e.target.value, {
-        returnAllValue: true,
-      })
-      console.log('allValue1', allValue1);
-
-
-      const {
         allValue,
         oldValue
-      } = setObjectValueByString(formContent.initialValues!, name, e.target.value, {
+      } = setObjectValueByString(formContent.initialValues || {}, name, e.target.value, {
         returnAllValue: true,
         returnOldValue: true,
       })
-      formContent?.onValuesChange?.(e.target.value! as any, allValue as any, oldValue)
+
+      if (dataRef.current.focusState === 'focus') {
+        formContent?.onChange?.<string>({ [name]: e.target.value }, allValue, { [name]: oldValue })
+      }
+
+      formContent?.onValuesChange?.<string>({ [name]: e.target.value }, allValue, { [name]: oldValue })
+
       if (!isUndefined(valueProps)) {
         setValue(e.target.value)
       }

@@ -14,19 +14,20 @@ const FormExemple = () => {
                 username: 'yyx',
                 age: 'age',
                 other: {
-                  username: 'otheryyx',
-                  age: 'otherage'
+                  // username: 'otheryyx',
+                  // age: 'otherage'
                 },
                 arr: [{
                   username: 'arryyx',
                   age: 'arrage',
                 }]
               }}
-              // onValuesChange={(value, allValue, oldValue) => {
-              //   // console.log(value, allValue, oldValue);
-              // }}
+              onValuesChange={(value, allValue, oldValue) => {
+                // console.log(value, allValue, oldValue);
+              }}
               colon
               // layout='vertical'
+              // layout='inline'
               columns={2}
             >
               <FormItem
