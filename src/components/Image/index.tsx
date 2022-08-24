@@ -38,7 +38,7 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     mask = false,
     optionsShow = 'never',
     preview,
-    optionsRender,
+    optionsRender: optionsRenderProps,
     onClose,
     ...rest
   } = props
@@ -127,13 +127,13 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     render(<ImagePreview close={destroy} imgAttributes={{ src }} />)
   }
 
-  const OptionsRender = () => {
+  const optionsRender = () => {
     if (optionsShow === 'never') {
       return <></>
     }
-    const optionsRenderContent = optionsRender ? (
+    const optionsRenderContent = optionsRenderProps ? (
       <div onClick={(e) => e.stopPropagation()} className="absolute-fill">
-        {optionsRender(previewFn)}
+        {optionsRenderProps(previewFn)}
       </div>
     ) : (
       <div onClick={(e) => e.stopPropagation()} className={classNamesObj.options()}>
@@ -156,7 +156,7 @@ const Image: FC<ImagePropsType> = (props, ref) => {
    * 加载状态显示内容
    * @returns ReactNode
    */
-  const LoadStateContent = () => {
+  const loadStateRender = () => {
     const iconSize = isNumber(width) ? width / 3 : 30
 
     if (loadingState === 'error') {
@@ -173,33 +173,30 @@ const Image: FC<ImagePropsType> = (props, ref) => {
       return (
         <div className={classNamesObj.loading()}>
           {isBoolean(loader) ?
-            loader
-            :
             <Icon icon="image" style={{ color: 'var(--design-neutral-color-3)' }} size={iconSize} />
+            :
+            loader
           }
         </div>
       )
-    } else {
-      return (<></>)
     }
   }
 
   const imgAtts: JSX.IntrinsicElements['img'] = {
     onError: (e) => {
-      if (defaultSrc) {
-        defaultSrc && setSrc(defaultSrc)
-      } else {
-        setLoadingState('error')
-      }
+      defaultSrc && setSrc(defaultSrc)
+      setLoadingState('error')
       imgAttributes?.onError?.(e)
     },
     onLoad: (e) => {
       setLoadingState('success')
-      imgAttributes?.onError?.(e)
+      if (defaultSrc) {
+        return
+      }
+      imgAttributes?.onLoad?.(e)
     },
     loading: 'lazy',
     style: {
-      display: loadingState === 'error' ? 'none' : 'unset',
       width,
       height,
       objectFit,
@@ -209,6 +206,14 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     className: classNamesObj.img(),
     ...omit(imgAttributes, ['style', 'className', 'onError', 'onLoad', 'src'])
   }
+
+  useEffect(() => {
+    if (!srcProps) {
+      setSrc(defaultSrc)
+    } else {
+      setSrc(srcProps)
+    }
+  }, [srcProps])
 
   return (
     <div
@@ -229,11 +234,10 @@ const Image: FC<ImagePropsType> = (props, ref) => {
       }}
     >
       <img {...imgAtts} />
-      <LoadStateContent />
-      {/* <Mask /> */}
+      {loadStateRender()}
       {loadingState === 'success' && (
         <>
-          <OptionsRender />
+          {optionsRender()}
           <Mask visible={mask && visible} />
         </>
       )}
