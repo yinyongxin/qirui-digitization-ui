@@ -3,7 +3,7 @@ import { DesignTypes } from "../typings";
 
 export type CallbackProps = Partial<Pick<React.DOMAttributes<any>, 'onClick' | 'onMouseEnter' | 'onMouseLeave'>>
 
-export type ColumnType<T> = {
+export type ColumnType<T = unknown> = {
   /**
    * √
    * 列标题
@@ -32,12 +32,12 @@ export type ColumnType<T> = {
    * √
    * 自定义单元格显示的内容
    */
-  bodyCellRender?: (col: ColumnType<T>, record: T, index: Record<'columnIndex' | 'dataIndex', number>) => ReactNode,
+  bodyCellRender?: (column: ColumnType<T>, record: T, index: Record<'columnIndex' | 'dataIndex', number>) => ReactNode,
   /**
    * √
    * 自定义头部标题单元格显示的内容
    */
-  headerCellRender?: (col: ColumnType<T>, index: number) => ReactNode,
+  headerCellRender?: (column: ColumnType<T>, index: number) => ReactNode,
   /**
    * √
    * 设置头部单元格的各项事件回调
@@ -60,7 +60,7 @@ export type ColumnType<T> = {
   align?: DesignTypes['Align']
 }
 
-export interface TableBaseType<T> {
+export interface TableBaseType<T = unknown> {
   /**
    * 表格尾部
    */

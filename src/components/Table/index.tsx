@@ -1,3 +1,4 @@
+import { join } from "path"
 import React, { FC, Key, useContext, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
 import { ClassNameType, getClassNames, isFunction } from "../utils/tools"
@@ -146,6 +147,9 @@ const Table = <T,>(props: TablePropsType<T>) => {
       </tbody>
     )
   }
+
+
+
 
   return (
     <table
