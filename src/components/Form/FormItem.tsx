@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from "react"
+import React, { FC, ReactNode, useContext, useEffect, useState } from "react"
 import { useCallback } from "react"
 import { useMemo } from "react"
 import { GlobalContext } from "../config/globalContext"
@@ -14,6 +14,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     classNamePrefix
   } = useContext(GlobalContext);
   const formContext = useContext(FormContext);
+  const prefixCls = `${classNamePrefix}-formItem`
 
   const allField = {
     ...formContext,
@@ -31,9 +32,10 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     requiredSymbol,
     width,
     label,
-    message,
+    message: messageProps,
     initialValues,
     formData,
+    validateStatus: validateStatusProps,
     ...rest
   } = allField
 
@@ -41,8 +43,11 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     name,
   } = allField
 
-  const prefixCls = `${classNamePrefix}-formItem`
-  const labelKey = `${name}`
+
+
+  const [message, setMessage] = useState(messageProps)
+  const [validateStatus, setValidateStatus] = useState(validateStatusProps)
+
 
   const classNamesObj = {
     formItem: (classNames: ClassNameType[] = []) => getClassNames([
@@ -61,8 +66,10 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     ]),
     message: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}-message`,
+
       {
-        [`${prefixCls}-message-row-column`]: layout !== 'vertical'
+        [`${prefixCls}-message-row-column`]: layout !== 'vertical',
+        [`${prefixCls}-message-${validateStatus}`]: validateStatus !== 'validating',
       },
       ...classNames,
     ]),
@@ -73,7 +80,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
       return
     }
     return (
-      <label className={classNamesObj.label()} htmlFor={labelKey}>
+      <label className={classNamesObj.label()} htmlFor={name}>
         <div className={`${prefixCls}-label-text`}>
           {isFunction(label) ? label('validating') : label}
         </div>
@@ -83,13 +90,13 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
   }
 
   const getMessage = () => {
-    let res
-    if (message) {
-      res = message
+    let res: ReactNode = message
+    if (messageProps) {
+      res = messageProps
     }
     return (
       <div className={classNamesObj.message()}>
-        message
+        {res}
       </div>
     )
   }
@@ -99,7 +106,8 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
       value={{
         ...rest,
         defaultValue: getValueFormObjectByString(formData!, props.name),
-        inFormItem: true
+        inFormItem: true,
+        validateStatus
       }}
     >
       <div

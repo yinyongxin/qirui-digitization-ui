@@ -19,7 +19,7 @@ const UploadExemple = () => {
                   width={200}
                   height={200}
                   src={files?.[0] ? URL.createObjectURL(files?.[0]) : ''}
-                  defaultSrc={Luoxiaohei}
+                // defaultSrc={Luoxiaohei}
                 />
               )}
 

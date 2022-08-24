@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Button, Form, Icon, Input, Select, Title } from "../../components";
+import { Button, Form, Image, Input, Select, Title, Upload } from "../../components";
 import FormItem from "../../components/Form/FormItem";
 
 const FormExemple = () => {
   const initialValues = {
     username: 'yyx',
     age: 'age',
+    address: 'address',
     other: {
       // username: 'otheryyx',
       // age: 'otherage'
@@ -15,6 +16,7 @@ const FormExemple = () => {
       age: 'arrage',
     }]
   }
+  const [message, setMessage] = useState('')
   return (
     <div>
       <Title type="tooltip" title="基本Icon status" >
@@ -27,9 +29,9 @@ const FormExemple = () => {
                 // console.log(value, allValue, oldValue);
               }}
               colon
-              // layout='vertical'
-              // layout='inline'
-              columns={2}
+            // layout='vertical'
+            // layout='inline'
+            // columns={2}
             >
               <FormItem
                 label="Username"
@@ -44,45 +46,18 @@ const FormExemple = () => {
                 <Input />
               </FormItem>
               <FormItem
-                label="OtherUsername"
-                name="other.username"
+                label="address"
+                name="address"
               >
                 <Input />
-              </FormItem>
-              <FormItem
-                label="OtherAge"
-                name="other.age"
-              >
-                <Input />
-              </FormItem>
-              <FormItem
-                label="OtherUsername"
-                name="arr.0.username"
-              >
-                <Input />
-              </FormItem>
-              <FormItem
-                label="OtherAge"
-                name="arr.0.age"
-              >
-                <Input />
-              </FormItem>
-              <FormItem
-                label="username"
-                name="ascascsac"
-              >
-                {(formData) => {
-                  return formData.username
-                }}
               </FormItem>
             </Form>
-            <Input />
-            <Button onClick={() => {
-              console.log('initialValues', initialValues);
-
-            }}>LOG</Button>
           </div>
-
+          {/* <Button
+            onClick={() => {
+              setMessage(Math.random().toString())
+            }}
+          >setMessage</Button> */}
         </div>
       </Title>
     </div>
