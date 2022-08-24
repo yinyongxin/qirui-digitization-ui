@@ -1,5 +1,6 @@
 import { FC } from "react"
 import { createRoot, Root } from 'react-dom/client';
+import Portal from "../Portal";
 import { AddMessageInterface, MessagesBaseType, MessagePropsType, MessageType, MessagesConfigType } from "./interface"
 import MessageItem from "./MessageItem";
 import { MessageItemPropsType } from "./MessageItem/interface";
@@ -27,7 +28,15 @@ const messageRender = () => {
   if (!root) {
     root = createRoot(designMessages!);
   }
-  root.render(<Messages messages={[...messagesMap.values()]} />);
+  root.render(
+    <Portal visible={true} container={designMessages!}>
+      {[...messagesMap.values()]?.map((message, index) => {
+        return (
+          <MessageItem key={index} {...message} close={deleteMessage} />
+        )
+      })}
+    </Portal>
+  );
 }
 
 const addMessage: AddMessageInterface = (config) => {
@@ -48,18 +57,6 @@ const deleteMessage = (id: symbol) => {
   messageRender()
 }
 
-const Messages: FC<MessagePropsType> = (props, ref) => {
-
-  return (
-    <>
-      {[...messagesMap.values()]?.map((message, index) => {
-        return (
-          <MessageItem key={index} {...message} close={deleteMessage} />
-        )
-      })}
-    </>
-  )
-}
 /**
  * 获取新的config
  * @param config MessageItem配置 或者 字符串
