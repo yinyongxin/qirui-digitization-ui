@@ -1,7 +1,7 @@
 import './index.less'
 import React, { } from 'react'
 import { SideMenu } from '../components'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate, useLocation, useResolvedPath } from 'react-router-dom'
 import { MenuTreeItemType, SidePropsType } from '../components/SideMenu/interface';
 
 function App() {
@@ -83,6 +83,8 @@ function App() {
       icon: 'bars'
     },
   ]
+  const location = useLocation()
+
   return (
     <div className='app'>
       <SideMenu
@@ -90,7 +92,7 @@ function App() {
           console.log('menuItems', menuItems);
           navigate(`/${menuItems?.[0]}`);
         }}
-        defaultActiveKeys={['1']}
+        defaultActiveKeys={[location.pathname.split('/')[1]]}
         menuTree={menuTree}
         borders={['right']}
       />
