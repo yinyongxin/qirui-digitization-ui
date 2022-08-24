@@ -1,10 +1,11 @@
 @prefix-formItem: ~'@{nameSpace}-formItem';
 
 .@{prefix-formItem} {
-  .flex();
+  display: grid;
 
   .@{prefix-formItem}-label {
     width: 100%;
+    padding-right: 16px;
     .flex();
     .align-center();
   }
@@ -14,21 +15,13 @@
     text-overflow: ellipsis;
   }
 
-  .@{prefix-formItem}-children {
-    .flex();
-    flex: 1;
-    width: inherit;
+  .@{prefix-formItem}-message {
+    // grid-column: 2 / 3;
+    // grid-row: 2 / 3;
   }
-}
 
-.@{prefix-formItem}-horizontal-gap {
-  gap: 16px;
-}
-
-.@{prefix-formItem}-vertical-gap {
-  gap: 8px;
-}
-
-.@{prefix-formItem}-inline-gap {
-  gap: 16px;
+  .@{prefix-formItem}-message-row-column {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+  }
 }

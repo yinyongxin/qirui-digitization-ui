@@ -2,7 +2,7 @@ import React, { FC, useContext, useEffect, useState } from "react"
 import { useCallback } from "react"
 import { useMemo } from "react"
 import { GlobalContext } from "../config/globalContext"
-import { ClassNameType, getClassNames, getValueFormObjectByString, getValueFormObjectByStringDeep, isArray, isBoolean, isFunction, isNumber, isObject, isString } from "../utils/tools"
+import { ClassNameType, getClassNames, getStyles, getValueFormObjectByString, getValueFormObjectByStringDeep, isArray, isBoolean, isFunction, isNumber, isObject, isString } from "../utils/tools"
 import { omit } from "../utils/tools"
 import { FormContext } from "./FormContext"
 import { FormItemContext } from "./FormItemContext"
@@ -22,7 +22,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
 
   const {
     children,
-    labelWidth = 100,
+    labelWidth = '15%',
     labelAlign = 'right',
     colon,
     layout,
@@ -31,6 +31,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     requiredSymbol,
     width,
     label,
+    message,
     initialValues,
     formData,
     ...rest
@@ -47,25 +48,22 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     formItem: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}`,
       className,
-      {
-        'flex-column': layout === 'vertical',
-        [`${prefixCls}-horizontal-gap`]: layout === 'horizontal',
-        [`${prefixCls}-vertical-gap`]: layout === 'vertical',
-        [`${prefixCls}-inline-gap`]: layout === 'inline',
-      },
       ...classNames
     ]),
     label: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}-label`,
       {
         'justify-start': layout !== 'horizontal' && labelAlign === 'left',
-        'justify-end': layout === 'horizontal' && labelAlign === 'right'
-
+        'justify-end': layout === 'horizontal' && labelAlign === 'right',
+        [`${classNamePrefix}-padding-bottom-sm`]: layout === 'vertical'
       },
       ...classNames,
     ]),
-    children: (classNames: ClassNameType[] = []) => getClassNames([
-      `${prefixCls}-children`,
+    message: (classNames: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}-message`,
+      {
+        [`${prefixCls}-message-row-column`]: layout !== 'vertical'
+      },
       ...classNames,
     ]),
   }
@@ -75,12 +73,24 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
       return
     }
     return (
-      <label style={{ width: labelWidth, minWidth: labelWidth }} className={classNamesObj.label()} htmlFor={labelKey}>
+      <label className={classNamesObj.label()} htmlFor={labelKey}>
         <div className={`${prefixCls}-label-text`}>
           {isFunction(label) ? label('validating') : label}
         </div>
         {colon && (isBoolean(colon) && ':') || (!isBoolean(colon) && colon)}
       </label>
+    )
+  }
+
+  const getMessage = () => {
+    let res
+    if (message) {
+      res = message
+    }
+    return (
+      <div className={classNamesObj.message()}>
+        message
+      </div>
     )
   }
 
@@ -94,11 +104,31 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     >
       <div
         className={classNamesObj.formItem()}
-        style={{ ...style, width }}
+        style={getStyles([
+          style,
+          {
+            width,
+          },
+          {
+            style: {
+              gridTemplateColumns: `${labelWidth} auto`
+            },
+            condition: layout === 'horizontal'
+          },
+          {
+            style: {
+              gridTemplateColumns: 'auto auto'
+            },
+            condition: layout === 'inline'
+          }
+        ])}
       >
         {getLabel()}
         {children && isFunction(children) ? children?.(formData) : children}
+        {/* <div></div> */}
+        {getMessage()}
       </div>
+
     </FormItemContext.Provider>
   )
 }

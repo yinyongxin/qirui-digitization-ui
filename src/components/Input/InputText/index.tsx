@@ -29,7 +29,7 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     defaultValue,
     readOnly = false,
     height = 48,
-    width = '100%',
+    width,
     prefix,
     suffix,
     addBefore,

@@ -73,6 +73,7 @@ const Form = (props: FormPropsInterface) => {
     form: getStyles([
       {
         width,
+
       },
       {
         style: {

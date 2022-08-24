@@ -80,7 +80,7 @@ export type FormItemBaseType<FieldValue = any> = {
    * 将控件的 value 进行一定的转换再保存到form中。
    */
   name: string,
-
+  message?: ReactNode,
   normalize?: (value: FieldValue, prevValue: FieldValue, allValues: Partial<FormData>) => any,
   children?: ReactNode | ((formData?: any) => ReactNode) | undefined;
 } & Pick<JSX.IntrinsicElements['input'], 'style' | 'className'>
