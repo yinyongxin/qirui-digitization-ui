@@ -2,6 +2,7 @@ import Drawer from "./Drawer";
 import { DrawerComponentInterFace, DrawerItemProp } from "./interface";
 import { Root, createRoot } from "react-dom/client";
 import DrawerItem from "./DrawerItem";
+import { getElement } from "../utils/tools";
 
 let DrawersContentClassName = 'drawers-show-content'
 
@@ -20,13 +21,8 @@ const defaultShowConfig = {
 
 
 const drawersRender = () => {
-  let designMessages = document.querySelector(`.${DrawersContentClassName}`)
-  if (!designMessages) {
-    const drawersContent = document.createElement('div');
-    drawersContent.setAttribute('class', DrawersContentClassName);
-    document.body.appendChild(drawersContent);
-    designMessages = document.querySelector(`.${DrawersContentClassName}`);
-  }
+
+  const [designDrawers] = getElement(DrawersContentClassName)
 
   const close = (key: symbol) => {
     drawersMao.delete(key)
@@ -52,7 +48,7 @@ const drawersRender = () => {
   }))
 
   if (!root) {
-    root = createRoot(designMessages!);
+    root = createRoot(designDrawers!);
   }
 
   root?.render(drawersComponent);

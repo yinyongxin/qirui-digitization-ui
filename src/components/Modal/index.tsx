@@ -2,6 +2,8 @@ import Modal from "./Modal";
 import { ModalComponentInterFace, ModalItemProp } from "./interface";
 import { Root, createRoot } from "react-dom/client";
 import ModalItem from "./ModalItem";
+import { Portal } from "../index";
+import { getElement } from "../utils/tools";
 
 let ModalsContentClassName = 'modals-show-content'
 
@@ -19,20 +21,14 @@ const defaultShowConfig = {
   footerBorder: false,
 }
 
+const close = (key: symbol) => {
+  modalsMap.delete(key)
+  modalsRender()
+}
 
 const modalsRender = () => {
-  let designMessages = document.querySelector(`.${ModalsContentClassName}`)
-  if (!designMessages) {
-    const modalsContent = document.createElement('div');
-    modalsContent.setAttribute('class', ModalsContentClassName);
-    document.body.appendChild(modalsContent);
-    designMessages = document.querySelector(`.${ModalsContentClassName}`);
-  }
 
-  const close = (key: symbol) => {
-    modalsMap.delete(key)
-    modalsRender()
-  }
+  const [designModals] = getElement(ModalsContentClassName)
 
   const modalsComponent = ([...modalsMap.keys()].map((modalKey, index) => {
     const modalValue = modalsMap.get(modalKey)
@@ -53,14 +49,19 @@ const modalsRender = () => {
   }))
 
   if (!root) {
-    root = createRoot(designMessages!);
+    root = createRoot(designModals!);
   }
 
-  root?.render(modalsComponent);
+  root?.render(
+    <Portal visible={true} container={designModals!}>
+      {modalsComponent}
+    </Portal>
+  );
 }
 
 ModalComponent.show = (config) => {
   const newSymbol = Symbol()
+
   modalsMap.set(newSymbol, {
     ...defaultShowConfig,
     ...config
@@ -69,7 +70,9 @@ ModalComponent.show = (config) => {
   modalsRender()
 
   return {
-    close,
+    close: () => {
+      close(newSymbol)
+    },
     update: (config) => {
       if (modalsMap.get(newSymbol)) {
         modalsMap.set(

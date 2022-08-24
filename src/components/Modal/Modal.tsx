@@ -250,9 +250,11 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
   )
 
   return (
-    isComponent ? content : (<Portal forceRender={mountOnEnter || (!refFlag.current.isFristVisible && unmountOnExit)} visible={visible} container={getPopupContainer?.()}>
-      {content}
-    </Portal>)
+    isComponent ? content : (
+      <Portal forceRender={mountOnEnter || (!refFlag.current.isFristVisible && unmountOnExit)} visible={visible} container={getPopupContainer?.()}>
+        {content}
+      </Portal>
+    )
   )
 }
 export default React.forwardRef(Modal)

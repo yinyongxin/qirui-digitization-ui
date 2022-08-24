@@ -1,6 +1,7 @@
 import { FC } from "react"
 import { createRoot, Root } from 'react-dom/client';
 import Portal from "../Portal";
+import { getElement } from "../utils/tools";
 import { AddMessageInterface, MessagesBaseType, MessagePropsType, MessageType, MessagesConfigType } from "./interface"
 import MessageItem from "./MessageItem";
 import { MessageItemPropsType } from "./MessageItem/interface";
@@ -17,14 +18,15 @@ let messagesMap: Map<symbol, Omit<MessageItemPropsType, 'key' | 'close'>> = new 
 let root: Root | null = null
 
 const messageRender = () => {
-  let designMessages = document.querySelector(`.${MessagesContentClassName}`)
-  if (!designMessages) {
-    const messagesContent = document.createElement('div');
-    messagesContent.setAttribute('class', MessagesContentClassName)
-    messagesContent.setAttribute('style', `top: ${messagesConfig.top}px`)
-    document.body.appendChild(messagesContent);
-    designMessages = document.querySelector(`.${MessagesContentClassName}`)
-  }
+  const [designMessages] = getElement(MessagesContentClassName, {
+    attributes: [
+      {
+        qualifiedName: 'style',
+        value: `top: ${messagesConfig.top}px`
+      }
+    ]
+  })
+
   if (!root) {
     root = createRoot(designMessages!);
   }

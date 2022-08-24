@@ -96,6 +96,7 @@ const ModalExemple = () => {
               modal.update({
                 children: '12311312',
               })
+              // modal.close()
             }, 2000)
           }}>自动更新</Button>
         </div>
