@@ -24,7 +24,8 @@ const SideMenu: ForwardRefRenderFunction<unknown, SideMenuPropsType> = (props, r
     onMenuSubClick,
     allOpen = false,
     width = 220,
-    borders = []
+    borders = [],
+    children
   } = props
 
 
@@ -96,6 +97,7 @@ const SideMenu: ForwardRefRenderFunction<unknown, SideMenuPropsType> = (props, r
     >
       <aside style={{ width }} className={sideMenuClassName}>
         {getMenus(menuTree)}
+        {children && children}
       </aside>
     </SideMenuComtext.Provider>
 

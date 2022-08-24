@@ -22,8 +22,6 @@ const Tabs: ForwardRefRenderFunction<unknown, TabsPropsType> = (props, ref) => {
   const [activeTab, setActiveTab] = useState<TabPaneBaseType['current']>()
 
   const activeTabChange: ActiveTabChangeType = (activeTabKey, tabPaneProps) => {
-    console.log('activeTabKey, tabPaneProps', activeTabKey, tabPaneProps);
-
     setActiveTab(activeTabKey)
     propsactiveTabChange && propsactiveTabChange(activeTabKey, tabPaneProps)
   }

@@ -24,14 +24,17 @@ const SideMenuItem: FC<SideMenuItemPropsType> = (props) => {
     icon,
     activeKey,
     render,
-    index
+    index,
+    onClick,
+    ...rest
   } = props
 
 
   /**
    * menuItem被点击
    */
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    onClick && onClick(e)
     setActiveMenu && setActiveMenu([activeKey])
     activeMenuItemChange && activeMenuItemChange([activeKey], props)
     onMenuItemClick && onMenuItemClick(props)
@@ -50,7 +53,7 @@ const SideMenuItem: FC<SideMenuItemPropsType> = (props) => {
   ])
 
   return (
-    <div onClick={handleClick}>
+    <div onClick={handleClick} {...rest}>
       {render ? (
         render(props, isActive, { index })
       ) : (

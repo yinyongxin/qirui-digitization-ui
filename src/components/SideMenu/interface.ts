@@ -56,7 +56,7 @@ export type SidePropsType = {
   /**
    * list key
    */
-  key: ActiveKeyType,
+  key?: ActiveKeyType,
   /**
    * 用于onMenuItemClick onMenuSubClick 事件统一处理参数
    */
@@ -75,7 +75,7 @@ export type SideMenuHandleType = {
   setActiveMenuSub: React.Dispatch<React.SetStateAction<React.Key[]>>
 }
 
-export type SideMenuItemPropsType = SidePropsType
+export type SideMenuItemPropsType = SidePropsType & Omit<JSX.IntrinsicElements['div'], 'key' | 'title' | 'children'>
 
 export type SideMenuItemSubPropsType = PropsWithChildren<SidePropsType>
 
@@ -92,4 +92,4 @@ export type SideMenuComtextType = {
   setActiveMenuSub?: React.Dispatch<React.SetStateAction<React.Key[]>>
 } & Omit<SideMenuBaseType, 'menuTree' | 'activeChange' | 'borders'>
 
-export type SideMenuPropsType = SideMenuBaseType
+export type SideMenuPropsType = PropsWithChildren<SideMenuBaseType> 

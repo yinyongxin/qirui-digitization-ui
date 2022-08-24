@@ -35,16 +35,15 @@ const SideMenuItemSub: FC<SideMenuItemSubPropsType> = (props, ref) => {
     let newProps = omit(props, ['children'])
     if (isIn) {
       actives = [...new Set(activeMenuSub.filter(item => item !== activeKey))]
-      setOpen(false)
+      setOpen(!open)
     } else {
       actives = [...new Set([...activeMenuSub, activeKey])]
-      setOpen(true)
+      setOpen(!open)
     }
     setActiveMenuSub && setActiveMenuSub(actives)
     onMenuSubClick && onMenuSubClick(newProps)
     activeMenuSubChange && activeMenuSubChange(actives, newProps)
   }
-
 
   const [open, setOpen] = useState(isIn)
 

@@ -10,6 +10,8 @@ import Drawer from "./Drawer/index";
 import Card from "./Card/index";
 import Select from "./Select/index";
 import SideMenu from "./SideMenu/index";
+import SideMenuItem from "./SideMenu/SideMenuItem";
+import SideMenuItemSub from "./SideMenu/SideMenuItemSub";
 import Title from "./Title/index";
 import Table from "./Table/index";
 import Input from "./Input/index";
@@ -31,6 +33,8 @@ export {
   Card,
   Select,
   SideMenu,
+  SideMenuItem,
+  SideMenuItemSub,
   Title,
   GlobalContext,
   Table,
