@@ -10,6 +10,7 @@ const ModalExemple = () => {
   const ModalRef2 = useRef<ModalHandle>()
   const ModalRef3 = useRef<ModalHandle>()
   const [title, setTitle] = useState('默认')
+  const [num, setNum] = useState(0)
   return (
     <div>
       <Title type="tooltip" title="默认" >
@@ -18,11 +19,10 @@ const ModalExemple = () => {
             title={title}
             ref={ModalRef1}
             mountOnEnter
-            unmountOnExit
           >
-            {title}
+            {num}
             <Button onClick={() => {
-              setTitle('acascascsc')
+              setNum(Math.random())
             }}>SetTitle</Button>
           </Modal>
           <Button onClick={() => {
@@ -65,6 +65,7 @@ const ModalExemple = () => {
               ModalRef2.current?.close()
             }, 1000)
           }}
+          unmountOnExit
         >
           自动关闭
         </Modal>
