@@ -5,24 +5,14 @@
 .app {
   color: #fff;
   box-sizing: border-box;
-  background: #000;
+
   min-height: 100vh;
-  display: flex;
-
-  // gap: 20px;
-  .exemple {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .tabsExemple {
-    width: 600px;
-  }
+  display: grid;
+  grid-template-columns: 220px minmax(1200px, auto);
 
   .appContent {
+    background: #000;
     padding: 10px;
-    flex: 1;
-    height: 100vh;
     overflow: auto;
   }
 }
