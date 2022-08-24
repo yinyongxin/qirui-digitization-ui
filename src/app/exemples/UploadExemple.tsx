@@ -9,17 +9,22 @@ const UploadExemple = () => {
         <div className="flex gap20">
           <div>
             <Upload>
-              <Image
-                imgAttributes={{
-                  style: {
-                    objectFit: 'cover'
-                  },
-                }}
-                width={200}
-                height={200}
-                src={Luoxiaohei}
-              />
+              {(files) => (
+                <Image
+                  imgAttributes={{
+                    style: {
+                      objectFit: 'cover'
+                    },
+                  }}
+                  width={200}
+                  height={200}
+                  src={files?.[0] ? URL.createObjectURL(files?.[0]) : ''}
+                  defaultSrc={Luoxiaohei}
+                />
+              )}
+
             </Upload>
+
             <Upload>
               选择图片
             </Upload>

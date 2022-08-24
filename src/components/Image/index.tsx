@@ -184,15 +184,16 @@ const Image: FC<ImagePropsType> = (props, ref) => {
 
   const imgAtts: JSX.IntrinsicElements['img'] = {
     onError: (e) => {
-      defaultSrc && setSrc(defaultSrc)
+      setTimeout(() => {
+        defaultSrc && setSrc(defaultSrc)
+      })
       setLoadingState('error')
       imgAttributes?.onError?.(e)
     },
     onLoad: (e) => {
       setLoadingState('success')
-      if (defaultSrc) {
-        return
-      }
+      console.log('success');
+
       imgAttributes?.onLoad?.(e)
     },
     loading: 'lazy',
@@ -208,11 +209,7 @@ const Image: FC<ImagePropsType> = (props, ref) => {
   }
 
   useEffect(() => {
-    if (!srcProps) {
-      setSrc(defaultSrc)
-    } else {
-      setSrc(srcProps)
-    }
+    setSrc(srcProps)
   }, [srcProps])
 
   return (

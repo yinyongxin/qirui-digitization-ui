@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Title, Upload } from "../../components";
+import { Icon, Image, Title, Upload } from "../../components";
 import Luoxiaohei from '../../assets/images/luoxiaohei.jpg'
 
 const ImageExemple = () => {
@@ -69,6 +69,7 @@ const ImageExemple = () => {
           />
           <Image
             src={'Luoxiaohei'}
+            error="error"
             width={200}
             height={200}
             optionsShow="always"
