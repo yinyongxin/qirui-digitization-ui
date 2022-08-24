@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react"
+import React, { PropsWithChildren, ReactNode } from "react"
 import { DesignTypes } from "../typings";
 
 export interface UploadBaseInterface {
@@ -18,6 +18,7 @@ export interface UploadBaseInterface {
   disabled?: boolean
   files?: FileList,
   defaultFileList?: { name: string, url: string }[],
+  children?: ReactNode | ((files?: FileList) => ReactNode)
 }
 
-export type UploadPropsType = PropsWithChildren<UploadBaseInterface>
+export type UploadPropsType = UploadBaseInterface

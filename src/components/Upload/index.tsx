@@ -1,6 +1,6 @@
 import React, { FC, useContext, useRef, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
-import { ClassNameType, getClassNames, isString } from "../utils/tools"
+import { ClassNameType, getClassNames, isFunction, isString } from "../utils/tools"
 import { UploadPropsType } from "./interface"
 import {
   Button,
@@ -94,7 +94,7 @@ const Upload: FC<UploadPropsType> = (props) => {
           disabled={disabled}
           onClick={buttonHandleClick}
         >
-          {children && children}
+          {children && isFunction(children) ? children(value) : children}
         </Button>
       )
     } else {
@@ -102,7 +102,7 @@ const Upload: FC<UploadPropsType> = (props) => {
         <div
           onClick={buttonHandleClick}
         >
-          {children}
+          {children && isFunction(children) ? children(value) : children}
         </div>
       )
     }
