@@ -14,6 +14,7 @@ const DrawerExemple = () => {
           <Drawer
             title={'title'}
             ref={DrawerRef1}
+            mountOnEnter
           >
             默认
           </Drawer>

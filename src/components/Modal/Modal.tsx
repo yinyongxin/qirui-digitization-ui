@@ -6,7 +6,7 @@ import { ClassNameType, getClassNames } from "../utils/tools"
 import { ModalHandle, ModalPropsType } from "./interface"
 import { Root, createRoot } from "react-dom/client"
 import Mask from "../Mask"
-import { useDocumentRender, usePortals } from "../utils/hooks"
+import { useDocumentRender } from "../utils/hooks"
 import { createPortal } from "react-dom"
 import { Portal } from ".."
 

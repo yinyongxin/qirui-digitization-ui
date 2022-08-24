@@ -3,7 +3,7 @@ import { ButtonPropsType } from "../Button/interface"
 
 export interface DrawerBaseType {
   header?: ReactNode | 'default',
-  footer?: ReactNode | 'default' ,
+  footer?: ReactNode | 'default',
   visible?: boolean,
   icon?: ReactNode | 'default',
   /**
@@ -95,18 +95,17 @@ export interface DrawerBaseType {
 export type DrawerHandle = {
   open: () => void,
   close: () => void,
-  visible: boolean,
-  refresh: (visible: boolean) => void
+  visible: boolean
 }
 
 export type DrawerPropsType = PropsWithChildren<DrawerBaseType>
 
 
-export type DrawerItemProp = Omit<DrawerPropsType, 'visible' | 'mountOnEnter' | 'unmountOnExit' >
+export type DrawerItemProp = Omit<DrawerPropsType, 'visible' | 'mountOnEnter' | 'unmountOnExit'>
 export interface DrawerComponentInterFace extends ForwardRefExoticComponent<DrawerPropsType & {
   ref?: React.MutableRefObject<DrawerHandle | undefined>
 }> {
-  show: (config: DrawerItemProp ) => {
+  show: (config: DrawerItemProp) => {
     close: () => void,
     update: (config: DrawerItemProp) => void
   },

@@ -6,6 +6,7 @@ import { getClassNames } from "../utils/tools"
 import { DrawerHandle, DrawerPropsType } from "./interface"
 import { Root, createRoot } from "react-dom/client"
 import { useDocumentRender } from "../utils/hooks"
+import Portal from "../Portal"
 
 const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) => {
 
@@ -51,49 +52,12 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
   }
 
   const refFlag = useRef<{
-    isFristCreate: boolean,
+    isFristVisible: boolean,
     root: Root | null
   }>({
-    isFristCreate: true,
+    isFristVisible: true,
     root: null
   })
-
-  const {
-    render,
-    destroy
-  } = useDocumentRender()
-
-  const drawerRender = (content: ReactNode) => {
-    if (isComponent) {
-      return
-    }
-
-    if (mountOnEnter && !visible && refFlag.current.isFristCreate) {
-      render(content)
-      return
-    }
-
-    // 如果是进入前渲染且是第一次
-    if (mountOnEnter && refFlag.current.isFristCreate) {
-      render(content)
-      refFlag.current.isFristCreate = false
-      return
-    }
-
-    if (visible) {
-      render(content)
-      refFlag.current.isFristCreate = false
-      return
-    }
-
-    if (!visible && !refFlag.current.isFristCreate) {
-      if (unmountOnExit) {
-        render(content)
-      } else {
-        destroy()
-      }
-    }
-  }
 
   const [visible, setVisible] = useState<boolean>(propsVisible)
   const [loading, setLoading] = useState<boolean>(false)
@@ -114,22 +78,6 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
     border ? `${prefixCls}-body-border` : '',
     `${prefixCls}-body-keyframes-${placement}`
   ])
-
-  const headerRender = () => {
-    let footerRes = null
-    if (!header) {
-      return
-    } else if (header === 'default') {
-      footerRes = title
-    } else {
-      footerRes = header
-    }
-    return (
-      <header className={`${prefixCls}-header ${headerCenter ? 'justify-center' : 'justify-start'}`}>
-        {footerRes}
-      </header>
-    )
-  }
 
   const onConfirmDrawer: React.MouseEventHandler<HTMLElement> = (e: any) => {
     let ret;
@@ -155,36 +103,6 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
     close()
   }
 
-  const footerRender = () => {
-    let footerRes = null
-    if (!footer) {
-      return
-    } else if (footer === 'default') {
-      footerRes = (
-        <>
-          <Button
-            onClick={onCancelHandle}
-            size='large'
-            level="secondary"
-            {...cancelButtonProps}
-          >{cancelText}</Button>
-          <Button
-            size='large'
-            onClick={onConfirmDrawer}
-            {...okButtonProps}
-          >{okText}</Button>
-        </>
-      )
-    } else {
-      footerRes = footer
-    }
-    return (
-      <footer className={`${prefixCls}-footer ${footerCenter ? 'justify-center' : 'justify-end'} ${footerBorder ? prefixCls + '-footer-border' : ''}`}>
-        {footerRes}
-      </footer>
-    )
-  }
-
   const mainStyle: React.CSSProperties = alignCenter ? {
     alignItems: 'center'
   } : {
@@ -199,33 +117,78 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
     )
   }
 
-  const iconRender = () => {
-    let iconRes = null
-    if (!icon) {
-      return
-    } else if (icon === 'default') {
-      iconRes = (
-        <Icon icon={"xmark"} />
+  const mainContent = {
+    iconRender: () => {
+      let iconRes = null
+      if (!icon) {
+        return
+      } else if (icon === 'default') {
+        iconRes = (
+          <Icon icon={"xmark"} />
+        )
+      } else {
+        iconRes = icon
+      }
+      return (
+        <div onClick={onCancelHandle} className={`${prefixCls}-icon`}>
+          {iconRes}
+        </div>
       )
-    } else {
-      iconRes = icon
-    }
-    return (
-      <div onClick={onCancelHandle} className={`${prefixCls}-icon`}>
-        {iconRes}
-      </div>
-    )
+    },
+    headerRender: () => {
+      let footerRes = null
+      if (!header) {
+        return
+      } else if (header === 'default') {
+        footerRes = title
+      } else {
+        footerRes = header
+      }
+      return (
+        <header className={`${prefixCls}-header ${headerCenter ? 'justify-center' : 'justify-start'}`}>
+          {footerRes}
+        </header>
+      )
+    },
+    containerRender: () => {
+      return (
+        <main className={`${prefixCls}-container`} style={mianStyle}>
+          {children && children}
+        </main>
+      )
+    },
+    footerRender: () => {
+      let footerRes = null
+      if (!footer) {
+        return
+      } else if (footer === 'default') {
+        footerRes = (
+          <>
+            <Button
+              onClick={onCancelHandle}
+              size='large'
+              level="secondary"
+              {...cancelButtonProps}
+            >{cancelText}</Button>
+            <Button
+              size='large'
+              onClick={onConfirmDrawer}
+              {...okButtonProps}
+            >{okText}</Button>
+          </>
+        )
+      } else {
+        footerRes = footer
+      }
+      return (
+        <footer className={`${prefixCls}-footer ${footerCenter ? 'justify-center' : 'justify-end'} ${footerBorder ? prefixCls + '-footer-border' : ''}`}>
+          {footerRes}
+        </footer>
+      )
+    },
   }
 
-  const getContainer = () => {
-    return (
-      <main className={`${prefixCls}-container`} style={mianStyle}>
-        {children && children}
-      </main>
-    )
-  }
-
-  const content = (visible: boolean) => (
+  const content = (
     <div style={{ display: visible ? 'unset' : 'none' }} className={drawerClassName}>
       {mask && (
         <div className={`${prefixCls}-mask`}></div>
@@ -235,10 +198,10 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
           style={bodyStyle}
           className={drawerBodyClassName}
         >
-          {iconRender()}
-          {headerRender()}
-          {getContainer()}
-          {footerRender()}
+          {mainContent.iconRender()}
+          {mainContent.headerRender()}
+          {mainContent.containerRender()}
+          {mainContent.footerRender()}
         </div >
       </main>
     </div >
@@ -254,9 +217,6 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
     afterClose && afterClose()
   }
 
-  const refresh = () => {
-    drawerRender(content(visible))
-  }
 
   useImperativeHandle<unknown, DrawerHandle>(
     ref,
@@ -264,17 +224,16 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
       open,
       close,
       visible,
-      refresh
     }),
     [visible]
   )
 
-  useEffect(() => {
-    refresh()
-  }, [visible, props])
-
   return (
-    isComponent ? content(true) : (<></>)
+    isComponent ? content : (
+      <Portal forceRender={mountOnEnter || (!refFlag.current.isFristVisible && unmountOnExit)} visible={visible} container={getPopupContainer?.()}>
+        {content}
+      </Portal>
+    )
   )
 }
 export default React.forwardRef(Drawer)
