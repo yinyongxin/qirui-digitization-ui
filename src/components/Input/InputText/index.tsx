@@ -1,6 +1,6 @@
 import { FC, useContext, useState } from "react"
-import { FormContext } from "../../Form/FormContext";
-import { FormItemContext } from "../../Form/FormItemContext";
+import { FormContext } from "../../Form/Context";
+import { FormItemContext } from "../../Form/Context";
 import { GlobalContext } from "../../config/globalContext"
 import { ClassNameType, getClassNames, isFunction, getValueIfQualified, isUndefined, omit, setObjectValueByString } from "../../utils/tools";
 import { InputTextPropsType } from "./interface"
@@ -93,20 +93,13 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
   }
 
   const inFormObj = {
-    valueChange: (value: string) => {
-      const {
-        allValue,
-        oldValue
-      } = setObjectValueByString(formContent.formData || {}, name, value, {
-        returnAllValue: true,
-        returnOldValue: true,
-      })
-      formContent.setFormData(() => ({ ...allValue }))
+    valueChange: (newAalue: string) => {
+      formContent.store?.setFieldValue(name, newAalue)
+      const allValue = formContent.store?.getFields()
       if (dataRef.current.focusState === 'focus') {
-        formContent?.onChange?.<string>({ [name]: value }, allValue, { [name]: oldValue })
+        formContent?.onChange?.({ [name]: value }, allValue, { [name]: value })
       }
-
-      formContent?.onValuesChange?.<string>({ [name]: value }, allValue, { [name]: oldValue })
+      formContent?.onValuesChange?.({ [name]: value }, allValue, { [name]: value })
     }
   }
 
@@ -128,12 +121,11 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     },
     onChange: (e) => {
       onChange && onChange(e.target.value, e)
-      if (!isUndefined(valueProps)) {
-        setValue(e.target.value)
-      }
-
       if (formContent.inForm) {
         inFormObj.valueChange(e.target.value)
+      }
+      if (!isUndefined(valueProps)) {
+        setValue(e.target.value)
       }
     },
     ...omit(inputAttributes || {}, ['className'])

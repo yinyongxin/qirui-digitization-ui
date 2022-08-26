@@ -1,8 +1,4 @@
-import { FC, HTMLInputTypeAttribute, ReactNode, useContext } from "react"
-import { GlobalContext } from "../config/globalContext"
-import { FormContext } from "../Form/FormContext";
-import { FormItemContext } from "../Form/FormItemContext";
-import { ClassNameType, getClassNames } from "../utils/tools";
+import { FC, HTMLInputTypeAttribute, ReactNode } from "react"
 import InputText from "./InputText";
 import { InputPropsType } from "./interface"
 

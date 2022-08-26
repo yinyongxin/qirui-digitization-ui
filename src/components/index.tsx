@@ -19,8 +19,10 @@ import Upload from "./Upload/index";
 import Image from "./Image/index";
 import Steps from "./Steps/index";
 import Mask from "./Mask/index";
-import Form from "./Form/index";
 import Portal from "./Portal";
+import Form from "./Form/index";
+import FormItem from "./Form/FormItem";
+
 import { GlobalContext } from './config/globalContext'
 
 export {
@@ -43,6 +45,8 @@ export {
   Image,
   Steps,
   Mask,
-  Form,
   Portal,
+
+  Form,
+  FormItem
 };

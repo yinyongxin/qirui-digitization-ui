@@ -4,8 +4,8 @@ import { useMemo } from "react"
 import { GlobalContext } from "../config/globalContext"
 import { ClassNameType, getClassNames, getStyles, getValueFormObjectByString, getValueFormObjectByStringDeep, isArray, isBoolean, isFunction, isNumber, isObject, isString } from "../utils/tools"
 import { omit } from "../utils/tools"
-import { FormContext } from "./FormContext"
-import { FormItemContext } from "./FormItemContext"
+import { FormContext } from "./Context"
+import { FormItemContext } from "./Context"
 import { FormItemPropsType } from "./interface"
 
 const FormItem: FC<FormItemPropsType> = (props, ref) => {
@@ -34,16 +34,14 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     label,
     message: messageProps,
     initialValues,
-    formData,
     validateStatus: validateStatusProps,
     ...rest
   } = allField
 
   const {
     name,
+    store
   } = allField
-
-
 
   const [message, setMessage] = useState(messageProps)
   const [validateStatus, setValidateStatus] = useState(validateStatusProps)
@@ -80,7 +78,10 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
       return
     }
     return (
-      <label className={classNamesObj.label()} htmlFor={name}>
+      <label className={classNamesObj.label()} htmlFor={name} onClick={() => {
+        console.log('label', store?.getFields());
+
+      }}>
         <div className={`${prefixCls}-label-text`}>
           {isFunction(label) ? label('validating') : label}
         </div>
@@ -105,7 +106,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     <FormItemContext.Provider
       value={{
         ...rest,
-        defaultValue: getValueFormObjectByString(formData!, props.name),
+        value: store?.getFieldValue(name),
         inFormItem: true,
         validateStatus
       }}
@@ -132,7 +133,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
         ])}
       >
         {getLabel()}
-        {children && isFunction(children) ? children?.(formData) : children}
+        {children && isFunction(children) ? children?.(initialValues) : children}
         {/* <div></div> */}
         {getMessage()}
       </div>

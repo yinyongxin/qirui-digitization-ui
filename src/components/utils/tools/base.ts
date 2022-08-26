@@ -1,4 +1,4 @@
-import { isArray, isBoolean, isNumber, isString, isUndefined } from "./is"
+import { isArray, isBoolean, isNumber, isObject, isString, isUndefined } from "./is"
 
 /**
  * 根据条件获取值
@@ -59,19 +59,7 @@ export const setObjectValueByString = (
   initialValues: Record<string, any>,
   fieldsString: string,
   newValue: any,
-  options?: {
-    returnOldValue?: boolean
-    returnAllValue?: boolean
-  }
 ) => {
-  const {
-    returnOldValue,
-    returnAllValue
-  } = {
-    returnOldValue: false,
-    returnAllValue: false,
-    ...options
-  }
   const fieldNameArr = fieldsString?.split('.') || []
   const fieldNameLength = fieldNameArr.length
   let value = completionObject(initialValues, fieldsString)
@@ -79,18 +67,8 @@ export const setObjectValueByString = (
     const fieldName = isNaN(Number(fieldNameArr[index])) ? fieldNameArr[index] : Number(fieldNameArr[index])
     value = value[fieldName]
   }
-  const oldValue = value[fieldNameArr[fieldNameLength - 1]]
 
   value[fieldNameArr[fieldNameLength - 1]] = newValue
-
-  return {
-    ...getValueIfQualified({
-      allValue: initialValues
-    }, returnAllValue),
-    ...getValueIfQualified({
-      oldValue
-    }, returnOldValue)
-  }
 }
 
 /**
@@ -120,4 +98,19 @@ export const completionObject = (
     completionObject(initialValues[fieldName!], fieldNameArr.join('.'))
   }
   return initialValues
+}
+
+
+export const cloneDeep = (value: any) => {
+  let cloneObj: any = {}
+  for (const key in value) {
+    if (isObject(value[key])) {
+      cloneObj[key] = cloneDeep(value[key])
+    } else if (isArray(value[key])) {
+      cloneObj[key] = value[key].map((item: any) => cloneDeep(item))
+    } else {
+      cloneObj[key] = value[key]
+    }
+  }
+  return cloneObj
 }

@@ -1,13 +1,22 @@
-import { useContext, useRef, useState } from "react"
+import { forwardRef, Ref, useContext, useImperativeHandle, useRef, useState } from "react"
 import { Button } from "../index"
 import { GlobalContext } from "../config/globalContext"
-import { ClassNameType, getClassNames, getStyles, isFunction, setObjectValueByString } from "../utils/tools"
-import { FormContext, FormContextDefult } from "./FormContext"
-import { FormDataRef, FormPropsInterface } from "./interface"
-import { useEffect } from "react"
+import { ClassNameType, getClassNames, getStyles, isFunction } from "../utils/tools"
+import { FormContext, FormContextDefult } from "./Context"
+import { FormInstance, FormPropsInterface, InnerMethodsReturnType } from "./interface"
+import { DesignTypes } from "../typings"
+import { useForm } from "./useForm"
+import FormItem from "./FormItem"
+import { useData, useIsFirst, useNotFirst } from "../utils/hooks"
 
-const Form = (props: FormPropsInterface) => {
-
+const Form = <
+  FormData extends unknown = any,
+  FieldValue = FormData[keyof FormData],
+  FieldKey extends DesignTypes['KeyType'] = keyof FormData
+>(
+  props: FormPropsInterface<FormData>,
+  ref: Ref<unknown> | undefined
+) => {
   const {
     classNamePrefix
   } = useContext(GlobalContext);
@@ -24,6 +33,7 @@ const Form = (props: FormPropsInterface) => {
     children,
     width,
     style,
+    form,
     ...rest
   } = allField
 
@@ -33,29 +43,23 @@ const Form = (props: FormPropsInterface) => {
     initialValues,
   } = allField
 
-  const dataRef = useRef<FormDataRef>({
-    allValue: initialValues
+  const data = useData<{
+    innerMethods?: InnerMethodsReturnType<FormData>
+  }>({})
+  const [test, settest] = useState('');
+
+  const [formInstance] = useForm<FormData>(form)
+  data.innerMethods = formInstance?.getInnerMethods(true)
+
+  useIsFirst(() => {
+    data?.innerMethods?.setStore(initialValues!)
+    data?.innerMethods?.setInitialValues(initialValues!)
+  })
+  useNotFirst(() => {
+    console.log('useNotFirst');
   })
 
-  const formRef = useRef<HTMLFormElement & {
-    [key in string]: HTMLInputElement
-  }>(null)
-  const [formData, setFormData] = useState(initialValues)
-
-  const submit = () => {
-    const {
-      allValue,
-      oldValue
-    } = setObjectValueByString(formData || {}, 'username', 'username', {
-      returnAllValue: true,
-      returnOldValue: true,
-    })
-    setFormData(() => ({ ...allValue }))
-    console.log('formData', formData);
-
-    formRef.current && (formRef.current['username'].value = 'username')
-
-  }
+  const formRef = useRef<HTMLFormElement>(null)
 
   const classNamesObj = {
     form: (classNames: ClassNameType[] = []) => getClassNames([
@@ -85,30 +89,43 @@ const Form = (props: FormPropsInterface) => {
     ])
   }
 
+  useImperativeHandle(ref, () => {
+    return formInstance;
+  });
+
   return (
     <FormContext.Provider
       value={{
         ...rest,
         inForm: true,
-        formData,
-        setFormData
+        store: formInstance as any
       }}
     >
       <form
+        onClick={() => {
+          settest(Math.random().toString())
+        }}
         ref={formRef}
         className={classNamesObj.form()}
         style={stylesObj.form}
       >
-        {children && isFunction(children) ? children?.(formData) : children}
-        <div>
-          <Button onClick={(e) => {
-            e.preventDefault()
-            e.stopPropagation()
-            submit()
-          }}>submit</Button>
-        </div>
+        {test}
+        {children && isFunction(children) ? children?.() : children}
       </form>
     </FormContext.Provider>
   )
 }
-export default Form
+
+const FormComponent = forwardRef(Form);
+
+FormComponent.displayName = 'Form';
+
+export default FormComponent as <
+  FormData = any,
+  FieldValue = FormData[keyof FormData],
+  FieldKey extends DesignTypes['KeyType'] = keyof FormData
+  >(
+  props: React.PropsWithChildren<FormPropsInterface<FormData>> & {
+    ref?: React.Ref<FormInstance<FormData, FieldValue, FieldKey>>;
+  }
+) => React.ReactElement;

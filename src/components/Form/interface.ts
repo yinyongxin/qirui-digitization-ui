@@ -2,6 +2,7 @@ import { type } from "os";
 import React, { FormHTMLAttributes, PropsWithChildren, ReactNode } from "react"
 import { InputCurrencyType } from "../Input/interface";
 import { DesignTypes } from "../typings";
+import { Store } from "./StoreClass";
 
 export interface RulesProps<FieldValue = any> {
   validateTrigger?: string | string[];
@@ -87,10 +88,14 @@ export type FormItemBaseType<FieldValue = any> = {
 
 export type FormItemPropsType = FormItemBaseType
 
-export interface FormBaseType extends Pick<FormItemBaseType, 'labelAlign' | 'colon' | 'requiredSymbol' | 'disabled' | 'layout'> {
+export interface FormBaseType<
+  FormData = any,
+  FieldValue = FormData[keyof FormData],
+  FieldKey extends DesignTypes['KeyType'] = keyof FormData
+  > extends Pick<FormItemBaseType, 'labelAlign' | 'colon' | 'requiredSymbol' | 'disabled' | 'layout'> {
   width?: string | number
-  initialValues?: Record<string, any>
-  form?: any
+  initialValues?: Partial<FormData>
+  form?: FormInstance<FormData, FieldValue, FieldKey>
   /**
    * 表单为几列 
    * 默认为 1
@@ -99,42 +104,50 @@ export interface FormBaseType extends Pick<FormItemBaseType, 'labelAlign' | 'col
   /**
    * 	表单项值改变时候触发。和 onValuesChange 不同的是只会在用户操作表单项时触发
    */
-  onChange?: <V = unknown, AV = unknown>(value: Record<string, V>, values: AV, oldValue: Record<string, V>) => void
+  onChange?: (value: FormData, values: FormData, oldValue: FormData) => void
   /**
    * 任意表单项值改变时候触发。第一个参数是被改变表单项的值，第二个参数是所有的表单项值
    */
-  onValuesChange?: <V = unknown, AV = unknown>(value: Record<string, V>, values: AV, oldValue: Record<string, V>) => void
+  onValuesChange?: (value: FormData, values: FormData, oldValue: FormData) => void
 }
 
-export interface FormPropsInterface extends FormBaseType, Omit<FormHTMLAttributes<any>, 'onChange' | 'onSubmit' | 'value' | 'children'> {
-  children?: ReactNode | ((formData?: any) => ReactNode) | undefined;
+export interface FormPropsInterface<FormData> extends FormBaseType<FormData>, Omit<FormHTMLAttributes<any>, 'onChange' | 'onSubmit' | 'value' | 'children'> {
+  children?: ReactNode
 }
 
-export type FormContextType = FormBaseType & {
-  // initialValuesState?: any
+export type FormContextType<FormData = any> = FormBaseType & {
   /**
    * 组件是否再From组件下
    */
   inForm: boolean,
-  /**
-   * 表单数据
-   */
-  formData?: any,
-  /**
-   * 设置表单数据
-   */
-  setFormData?: any,
-  /**
-   * 是否为受控组件
-   */
-  controlled: boolean
+  store?: FormInstance<FormData>
 }
 
 export type FormItemContextType = FormItemBaseType & InputCurrencyType & {
-  // initialValuesState?: any
   inFormItem: boolean
 }
 
-export type FormDataRef<AV = unknown> = {
-  allValue: AV
-}
+export type FormInstance<
+  FormData = any,
+  FieldValue = FormData[keyof FormData],
+  FieldKey extends DesignTypes['KeyType'] = keyof FormData
+  > = Pick<
+    Store<FormData, FieldValue, FieldKey>,
+    | 'getFields'
+    | 'getFieldsValue'
+    | 'getFieldValue'
+    | 'setFieldValue'
+    | 'setFieldsValue'
+  > & {
+    getInnerMethods: (inner?: boolean) => InnerMethodsReturnType<FormData>;
+  };
+
+export type InnerMethodsReturnType<
+  FormData = any,
+  FieldValue = FormData[keyof FormData],
+  FieldKey extends DesignTypes['KeyType'] = keyof FormData
+  > = Pick<
+    Store<FormData, FieldValue, FieldKey>,
+    'setStore' |
+    'setInitialValues'
+  >;
