@@ -5,7 +5,7 @@ import { FormInstance, InnerMethodsReturnType } from "./interface";
 import { Store } from "./StoreClass";
 
 export function getFormInstance<
-  FormData = any,
+  FormData extends unknown = any,
   FieldValue = FormData[keyof FormData],
   FieldKey extends DesignTypes['KeyType'] = keyof FormData
 >(): FormInstance<FormData, FieldValue, FieldKey> {
@@ -17,38 +17,25 @@ export function getFormInstance<
     getFields: store.getFields,
     setFieldValue: store.setFieldValue,
     setFieldsValue: store.setFieldsValue,
-    getInnerMethods: (inner): InnerMethodsReturnType<FormData, FieldValue, FieldKey> => {
-      const methods = {} as InnerMethodsReturnType<FormData, FieldValue, FieldKey>;
-      const fns: [
-        'setStore',
-        'setInitialValues',
-      ] = [
-          'setStore',
-          'setInitialValues',
-          // 'registerField',
-          // 'registerWatcher',
-          // 'innerSetInitialValues',
-          // 'innerSetInitialValue',
-          // 'innerSetCallbacks',
-          // 'innerSetFieldValue',
-          // 'innerGetStore',
-        ]
-      if (inner) {
-        fns.map((key) => {
-          methods[key] = store[key];
-        });
-      }
-      return methods;
+    getInnerMethods: (): InnerMethodsReturnType<FormData, FieldValue, FieldKey> => {
+      return {
+        setStore: store.setStore,
+        setInitialValues: store.setInitialValues,
+        innerSetFieldValue: store.innerSetFieldValue,
+        setUpdateCallBack: store.setUpdateCallBack,
+        // updateCallBack: store.updateCallBack,
+        // updateFieldsName: store.updateFieldsName,
+      };
     },
   };
 }
 
 export function useForm<
-  FormData = any,
+  FormData extends unknown = any,
   FieldValue = FormData[keyof FormData],
   FieldKey extends DesignTypes['KeyType'] = keyof FormData
 >(
-  form?: FormInstance<FormData, FieldValue, FieldKey>,
+  form?: FormInstance<FormData, FieldValue, FieldKey>
 ): [FormInstance<FormData, FieldValue, FieldKey>] {
   const formRef = useRef<FormInstance<FormData, FieldValue, FieldKey>>();
   if (!formRef.current) {

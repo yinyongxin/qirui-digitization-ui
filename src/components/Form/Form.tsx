@@ -14,8 +14,8 @@ const Form = <
   FieldValue = FormData[keyof FormData],
   FieldKey extends DesignTypes['KeyType'] = keyof FormData
 >(
-  props: FormPropsInterface<FormData>,
-  ref: Ref<unknown> | undefined
+  props: FormPropsInterface<FormData, FieldValue, FieldKey>,
+  ref: Ref<FormInstance<FormData, FieldValue, FieldKey>>
 ) => {
   const {
     classNamePrefix
@@ -44,17 +44,23 @@ const Form = <
   } = allField
 
   const data = useData<{
-    innerMethods?: InnerMethodsReturnType<FormData>
+    innerMethods?: InnerMethodsReturnType<FormData, FieldValue, FieldKey>
   }>({})
-  const [test, settest] = useState('');
 
-  const [formInstance] = useForm<FormData>(form)
-  data.innerMethods = formInstance?.getInnerMethods(true)
+  const [updataFieldsName, setUpdataFieldsName] = useState<FieldKey[]>()
+
+  const [formInstance] = useForm<FormData, FieldValue, FieldKey>(form)
+  data.innerMethods = formInstance?.getInnerMethods()
 
   useIsFirst(() => {
     data?.innerMethods?.setStore(initialValues!)
     data?.innerMethods?.setInitialValues(initialValues!)
+    // data?.innerMethods?.setUpdateCallBack(() => {
+    //   console.log('setUpdateCallBack', data?.innerMethods?.updateFieldsName);
+    //   setUpdataFieldsName(data?.innerMethods?.updateFieldsName)
+    // })
   })
+
   useNotFirst(() => {
     console.log('useNotFirst');
   })
@@ -102,14 +108,10 @@ const Form = <
       }}
     >
       <form
-        onClick={() => {
-          settest(Math.random().toString())
-        }}
         ref={formRef}
         className={classNamesObj.form()}
         style={stylesObj.form}
       >
-        {test}
         {children && isFunction(children) ? children?.() : children}
       </form>
     </FormContext.Provider>
@@ -125,7 +127,7 @@ export default FormComponent as <
   FieldValue = FormData[keyof FormData],
   FieldKey extends DesignTypes['KeyType'] = keyof FormData
   >(
-  props: React.PropsWithChildren<FormPropsInterface<FormData>> & {
+  props: React.PropsWithChildren<FormPropsInterface<FormData, FieldValue, FieldKey>> & {
     ref?: React.Ref<FormInstance<FormData, FieldValue, FieldKey>>;
   }
 ) => React.ReactElement;

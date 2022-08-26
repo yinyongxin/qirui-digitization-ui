@@ -91,10 +91,15 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
       ...classNames,
     ])
   }
+  useEffect(() => {
+    console.log('valueProps', valueProps);
+    setValue(valueProps)
+  }, [valueProps])
 
   const inFormObj = {
     valueChange: (newAalue: string) => {
-      formContent.store?.setFieldValue(name, newAalue)
+      const innerMethods = formContent.store?.getInnerMethods()
+      innerMethods?.innerSetFieldValue(name, newAalue)
       const allValue = formContent.store?.getFields()
       if (dataRef.current.focusState === 'focus') {
         formContent?.onChange?.({ [name]: value }, allValue, { [name]: value })

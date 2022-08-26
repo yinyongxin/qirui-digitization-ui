@@ -12,11 +12,11 @@ export class Store<
   FieldKey extends DesignTypes['KeyType'] = keyof FormData
   >
 {
-  constructor() {
-  }
+  constructor() { }
   private store: Partial<FormData> = {};
   private initialValues: Partial<FormData> = {};
-
+  public updateFieldsName: FieldKey[] = []
+  public updateCallBack = () => { }
   public getFields = () => {
     return this.store
   }
@@ -32,12 +32,25 @@ export class Store<
   }
 
   public setFieldValue = (field: FieldKey, newValue: FieldValue) => {
-    return setObjectValueByString(this.store, field as string, newValue)
+    setObjectValueByString(this.store, field as string, newValue)
+    this.updateFieldsName = [field]
+    this.updateCallBack?.()
   }
+
+  public innerSetFieldValue = (field: FieldKey, newValue: FieldValue) => {
+    setObjectValueByString(this.store, field as string, newValue)
+  }
+
   public setFieldsValue = (values: DeepPartial<FormData>) => {
     for (const key in values) {
       setObjectValueByString(this.store, key as string, values[key])
     }
+    this.updateFieldsName = Object.keys(values) as FieldKey[]
+    this.updateCallBack?.()
+  }
+
+  public setUpdateCallBack = (updateCallBack: () => void) => {
+    this.updateCallBack = updateCallBack
   }
 
   public setStore = (store: Partial<FormData>) => {

@@ -5,7 +5,7 @@ export const FormContextDefult: FormContextType = {
   labelAlign: 'right',
   requiredSymbol: true,
   columns: 1,
-  inForm: false
+  inForm: false,
 }
 
 export const FormContext = createContext<FormContextType>(FormContextDefult)

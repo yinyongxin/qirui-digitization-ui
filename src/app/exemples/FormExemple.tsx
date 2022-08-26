@@ -26,11 +26,7 @@ const FormExemple = () => {
       <Title type="tooltip" title="基本Icon status" >
         <div className="flex gap20">
           <div>
-            <Form<
-              {
-                username: string
-              }
-            >
+            <Form
               width={1000}
               initialValues={initialValues}
               onValuesChange={(value, allValue, oldValue) => {
@@ -64,13 +60,13 @@ const FormExemple = () => {
           </div>
           <Button
             onClick={() => {
-              console.log('getFields', form.getFields());
               form.setFieldsValue({
-                username: 'asfsdf'
+                username: Math.random().toString()
               })
-              form.setFieldValue('age', '25')
-              console.log('getFieldValue', form.getFieldValue('username'));
-              console.log('getFieldValue', form.getFieldsValue(['username', 'age', 'arr.username']));
+              console.log('setMessage');
+
+              // console.log('getFieldValue', form.getFieldValue('username'));
+              // console.log('getFields', form.getFields());
             }}
           >setMessage</Button>
         </div>

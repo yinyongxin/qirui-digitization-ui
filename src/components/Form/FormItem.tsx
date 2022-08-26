@@ -2,6 +2,7 @@ import React, { FC, ReactNode, useContext, useEffect, useState } from "react"
 import { useCallback } from "react"
 import { useMemo } from "react"
 import { GlobalContext } from "../config/globalContext"
+import { useIsFirst } from "../utils/hooks"
 import { ClassNameType, getClassNames, getStyles, getValueFormObjectByString, getValueFormObjectByStringDeep, isArray, isBoolean, isFunction, isNumber, isObject, isString } from "../utils/tools"
 import { omit } from "../utils/tools"
 import { FormContext } from "./Context"
@@ -44,8 +45,8 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
   } = allField
 
   const [message, setMessage] = useState(messageProps)
+  const [value, setValue] = useState(store?.getFieldValue(name))
   const [validateStatus, setValidateStatus] = useState(validateStatusProps)
-
 
   const classNamesObj = {
     formItem: (classNames: ClassNameType[] = []) => getClassNames([
@@ -78,10 +79,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
       return
     }
     return (
-      <label className={classNamesObj.label()} htmlFor={name} onClick={() => {
-        console.log('label', store?.getFields());
-
-      }}>
+      <label className={classNamesObj.label()} htmlFor={name}>
         <div className={`${prefixCls}-label-text`}>
           {isFunction(label) ? label('validating') : label}
         </div>
@@ -106,7 +104,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     <FormItemContext.Provider
       value={{
         ...rest,
-        value: store?.getFieldValue(name),
+        value,
         inFormItem: true,
         validateStatus
       }}
