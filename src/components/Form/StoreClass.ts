@@ -15,7 +15,7 @@ export class Store<
   constructor() { }
   private store: Partial<FormData> = {};
   private initialValues: Partial<FormData> = {};
-  public updateFieldsName: FieldKey[] = []
+  public updateFieldsName: FieldKey[] | any = []
   public updateCallBack = () => { }
   public getFields = () => {
     return this.store
@@ -51,6 +51,10 @@ export class Store<
 
   public setUpdateCallBack = (updateCallBack: () => void) => {
     this.updateCallBack = updateCallBack
+  }
+
+  public getUpdateFieldsName = () => {
+    return this.updateFieldsName
   }
 
   public setStore = (store: Partial<FormData>) => {

@@ -44,7 +44,7 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     ...props
   }
 
-  const [value, setValue] = useState(valueProps || defaultValue)
+  const [value, setValue] = useState(valueProps)
 
   const defaultBorders = {
     top: true,
@@ -91,10 +91,6 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
       ...classNames,
     ])
   }
-  useEffect(() => {
-    console.log('valueProps', valueProps);
-    setValue(valueProps)
-  }, [valueProps])
 
   const inFormObj = {
     valueChange: (newAalue: string) => {

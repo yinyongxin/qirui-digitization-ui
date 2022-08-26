@@ -55,10 +55,10 @@ const Form = <
   useIsFirst(() => {
     data?.innerMethods?.setStore(initialValues!)
     data?.innerMethods?.setInitialValues(initialValues!)
-    // data?.innerMethods?.setUpdateCallBack(() => {
-    //   console.log('setUpdateCallBack', data?.innerMethods?.updateFieldsName);
-    //   setUpdataFieldsName(data?.innerMethods?.updateFieldsName)
-    // })
+    data?.innerMethods?.setUpdateCallBack(() => {
+      console.log('setUpdateCallBack', data?.innerMethods?.getUpdateFieldsName());
+      setUpdataFieldsName(data?.innerMethods?.getUpdateFieldsName())
+    })
   })
 
   useNotFirst(() => {

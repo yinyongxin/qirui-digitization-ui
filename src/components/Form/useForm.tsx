@@ -17,14 +17,15 @@ export function getFormInstance<
     getFields: store.getFields,
     setFieldValue: store.setFieldValue,
     setFieldsValue: store.setFieldsValue,
+    getUpdateFieldsName: store.getUpdateFieldsName,
     getInnerMethods: (): InnerMethodsReturnType<FormData, FieldValue, FieldKey> => {
       return {
         setStore: store.setStore,
         setInitialValues: store.setInitialValues,
         innerSetFieldValue: store.innerSetFieldValue,
         setUpdateCallBack: store.setUpdateCallBack,
-        // updateCallBack: store.updateCallBack,
-        // updateFieldsName: store.updateFieldsName,
+        updateCallBack: store.updateCallBack,
+        getUpdateFieldsName: store.getUpdateFieldsName,
       };
     },
   };

@@ -97,7 +97,7 @@ export type FormItemBaseType<
 export type FormItemPropsType = FormItemBaseType
 
 export interface FormBaseType<
-  FormData = any,
+  FormData extends unknown = any,
   FieldValue = FormData[keyof FormData],
   FieldKey extends DesignTypes['KeyType'] = keyof FormData
   > extends Pick<FormItemBaseType, 'labelAlign' | 'colon' | 'requiredSymbol' | 'disabled' | 'layout'> {
@@ -154,6 +154,7 @@ export type FormInstance<
     | 'getFieldValue'
     | 'setFieldValue'
     | 'setFieldsValue'
+    | 'getUpdateFieldsName'
   > & {
     getInnerMethods: () => InnerMethodsReturnType<FormData, FieldValue, FieldKey>;
   };
@@ -167,7 +168,7 @@ export type InnerMethodsReturnType<
     'setStore' |
     'setInitialValues' |
     'innerSetFieldValue' |
-    'setUpdateCallBack'
-  // 'updateCallBack' |
-  // 'updateFieldsName'
+    'updateCallBack' |
+    'setUpdateCallBack' |
+    'getUpdateFieldsName'
   >;
