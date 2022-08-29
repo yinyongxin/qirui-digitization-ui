@@ -128,7 +128,7 @@ export interface FormPropsInterface<
 }
 
 export type FormContextType<
-  FormData = any,
+  FormData extends unknown = any,
   FieldValue = FormData[keyof FormData],
   FieldKey extends DesignTypes['KeyType'] = keyof FormData
   > = FormBaseType<FormData, FieldValue, FieldKey> & {
@@ -137,6 +137,7 @@ export type FormContextType<
      */
     inForm: boolean,
     store?: FormInstance<FormData, FieldValue, FieldKey>
+    updataFieldsName: FieldKey[]
   }
 
 export type FormItemContextType = FormItemBaseType & InputCurrencyType & {

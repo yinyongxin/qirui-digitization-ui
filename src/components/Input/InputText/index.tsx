@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from "react"
+import { FC, useContext, useMemo, useState } from "react"
 import { FormContext } from "../../Form/Context";
 import { FormItemContext } from "../../Form/Context";
 import { GlobalContext } from "../../config/globalContext"
@@ -6,7 +6,7 @@ import { ClassNameType, getClassNames, isFunction, getValueIfQualified, isUndefi
 import { InputTextPropsType } from "./interface"
 import { useRef } from "react";
 import { InputDataRef } from "../interface";
-import { useEffect } from "react";
+import { useNotFirst } from "../../utils/hooks";
 
 const InputText: FC<InputTextPropsType> = (props, ref) => {
 
@@ -44,7 +44,11 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     ...props
   }
 
-  const [value, setValue] = useState(valueProps)
+  const [value, setValue] = useState('')
+
+  useMemo(() => {
+    setValue(valueProps || defaultValue || '')
+  }, [valueProps])
 
   const defaultBorders = {
     top: true,

@@ -6,6 +6,7 @@ export const FormContextDefult: FormContextType = {
   requiredSymbol: true,
   columns: 1,
   inForm: false,
+  updataFieldsName: []
 }
 
 export const FormContext = createContext<FormContextType>(FormContextDefult)

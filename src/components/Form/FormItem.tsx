@@ -2,7 +2,7 @@ import React, { FC, ReactNode, useContext, useEffect, useState } from "react"
 import { useCallback } from "react"
 import { useMemo } from "react"
 import { GlobalContext } from "../config/globalContext"
-import { useIsFirst } from "../utils/hooks"
+import { useIsFirst, useNotFirst } from "../utils/hooks"
 import { ClassNameType, getClassNames, getStyles, getValueFormObjectByString, getValueFormObjectByStringDeep, isArray, isBoolean, isFunction, isNumber, isObject, isString } from "../utils/tools"
 import { omit } from "../utils/tools"
 import { FormContext } from "./Context"
@@ -41,7 +41,8 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
 
   const {
     name,
-    store
+    store,
+    updataFieldsName
   } = allField
 
   const [message, setMessage] = useState(messageProps)
@@ -99,6 +100,11 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
       </div>
     )
   }
+  useMemo(() => {
+    if (updataFieldsName.findIndex(updateFieldName => updateFieldName === name) !== -1) {
+      setValue(store?.getFieldValue(name))
+    }
+  }, [updataFieldsName])
 
   return (
     <FormItemContext.Provider
@@ -132,6 +138,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
       >
         {getLabel()}
         {children && isFunction(children) ? children?.(initialValues) : children}
+        {/* {childrenMemo} */}
         {/* <div></div> */}
         {getMessage()}
       </div>

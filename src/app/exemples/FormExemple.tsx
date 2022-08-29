@@ -61,7 +61,9 @@ const FormExemple = () => {
           <Button
             onClick={() => {
               form.setFieldsValue({
-                username: Math.random().toString()
+                username: Math.random().toString(),
+                // age: 'acascas',
+                // address: 'addrescascascs'
               })
               console.log('setMessage');
 

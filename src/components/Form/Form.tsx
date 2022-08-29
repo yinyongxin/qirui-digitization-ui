@@ -1,4 +1,4 @@
-import { forwardRef, Ref, useContext, useImperativeHandle, useRef, useState } from "react"
+import { forwardRef, Ref, useCallback, useContext, useImperativeHandle, useRef, useState } from "react"
 import { Button } from "../index"
 import { GlobalContext } from "../config/globalContext"
 import { ClassNameType, getClassNames, getStyles, isFunction } from "../utils/tools"
@@ -6,8 +6,7 @@ import { FormContext, FormContextDefult } from "./Context"
 import { FormInstance, FormPropsInterface, InnerMethodsReturnType } from "./interface"
 import { DesignTypes } from "../typings"
 import { useForm } from "./useForm"
-import FormItem from "./FormItem"
-import { useData, useIsFirst, useNotFirst } from "../utils/hooks"
+import { useData, useIsFirst } from "../utils/hooks"
 
 const Form = <
   FormData extends unknown = any,
@@ -47,7 +46,9 @@ const Form = <
     innerMethods?: InnerMethodsReturnType<FormData, FieldValue, FieldKey>
   }>({})
 
-  const [updataFieldsName, setUpdataFieldsName] = useState<FieldKey[]>()
+  const formRef = useRef<HTMLFormElement>(null)
+
+  const [updataFieldsName, setUpdataFieldsName] = useState<FieldKey[]>([])
 
   const [formInstance] = useForm<FormData, FieldValue, FieldKey>(form)
   data.innerMethods = formInstance?.getInnerMethods()
@@ -56,16 +57,11 @@ const Form = <
     data?.innerMethods?.setStore(initialValues!)
     data?.innerMethods?.setInitialValues(initialValues!)
     data?.innerMethods?.setUpdateCallBack(() => {
-      console.log('setUpdateCallBack', data?.innerMethods?.getUpdateFieldsName());
       setUpdataFieldsName(data?.innerMethods?.getUpdateFieldsName())
     })
   })
 
-  useNotFirst(() => {
-    console.log('useNotFirst');
-  })
 
-  const formRef = useRef<HTMLFormElement>(null)
 
   const classNamesObj = {
     form: (classNames: ClassNameType[] = []) => getClassNames([
@@ -104,7 +100,8 @@ const Form = <
       value={{
         ...rest,
         inForm: true,
-        store: formInstance as any
+        store: formInstance as any,
+        updataFieldsName
       }}
     >
       <form
