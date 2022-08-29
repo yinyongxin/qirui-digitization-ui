@@ -151,6 +151,7 @@ export type FormInstance<
   > = Pick<
     Store<FormData, FieldValue, FieldKey>,
     | 'getFields'
+    | 'getOldFields'
     | 'getFieldsValue'
     | 'getFieldValue'
     | 'getOldFieldsValue'

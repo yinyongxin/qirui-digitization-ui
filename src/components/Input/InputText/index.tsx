@@ -35,6 +35,7 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     addBefore,
     addAfter,
     onChange,
+    placeholder,
     style,
     className,
     inputAttributes,
@@ -101,9 +102,10 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     ])
   }
 
+  const innerMethods = formContent.store?.getInnerMethods()
+
   const inFormObj = {
     valueChange: (newAalue: string) => {
-      const innerMethods = formContent.store?.getInnerMethods()
       innerMethods?.innerSetFieldValue(name, newAalue)
       formContent?.onChange?.({ [name]: value }, formContent.store?.getFields(), { [name]: value })
     }
@@ -122,6 +124,7 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     onFocus: () => {
       dataRef.current.focusState = 'focus'
     },
+    placeholder,
     onBlur: () => {
       dataRef.current.focusState = 'blur'
     },
