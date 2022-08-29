@@ -107,7 +107,7 @@ const Form = <
         className={classNamesObj.form()}
         style={stylesObj.form}
       >
-        {children && isFunction(children) ? children?.() : children}
+        {children && isFunction(children) ? children?.(formInstance.getFieldsValue(updataFieldsName)) : children}
       </form>
     </FormContext.Provider>
   )

@@ -10,17 +10,20 @@
   color: @design-neutral-color-2;
   gap: 15px;
   transition: all var(--animation-time-base);
+
   .@{prefix-sideMenuItem}-title {
     flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   &:hover {
     background-color: @design-base-color-10;
     color: @design-base-color-5;
   }
 }
+
 .@{prefix-sideMenuItem}-active {
   background-color: @design-base-color-10;
   color: @design-base-color-5;

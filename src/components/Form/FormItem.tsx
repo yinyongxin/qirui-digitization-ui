@@ -140,7 +140,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
       >
         {labelRender()}
         <main>
-          {children && isFunction(children) ? children?.(initialValues) : children}
+          {children && isFunction(children) ? children?.(store?.getFieldsValue(updataFieldsName)) : children}
         </main>
         {getMessage()}
       </div>
