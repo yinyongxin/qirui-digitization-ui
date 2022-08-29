@@ -51,17 +51,17 @@ const Form = <
   const [updataFieldsName, setUpdataFieldsName] = useState<FieldKey[]>([])
 
   const [formInstance] = useForm<FormData, FieldValue, FieldKey>(form)
-  data.innerMethods = formInstance?.getInnerMethods()
+
+  const updateCallBack = () => {
+    setUpdataFieldsName(data?.innerMethods?.getUpdateFieldsName())
+  }
 
   useIsFirst(() => {
+    data.innerMethods = formInstance?.getInnerMethods()
     data?.innerMethods?.setStore(initialValues!)
     data?.innerMethods?.setInitialValues(initialValues!)
-    data?.innerMethods?.setUpdateCallBack(() => {
-      setUpdataFieldsName(data?.innerMethods?.getUpdateFieldsName())
-    })
+    data?.innerMethods?.setUpdateCallBack(updateCallBack)
   })
-
-
 
   const classNamesObj = {
     form: (classNames: ClassNameType[] = []) => getClassNames([

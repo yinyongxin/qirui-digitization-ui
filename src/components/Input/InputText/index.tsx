@@ -44,10 +44,15 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     ...props
   }
 
-  const [value, setValue] = useState('')
+  // 是否为受控组件
+  const isControll = formContent.inForm || valueProps
+
+  const [value, setValue] = useState(valueProps)
 
   useMemo(() => {
-    setValue(valueProps || defaultValue || '')
+    if (formContent.inForm) {
+      setValue(valueProps || '')
+    }
   }, [valueProps])
 
   const defaultBorders = {
@@ -100,11 +105,7 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     valueChange: (newAalue: string) => {
       const innerMethods = formContent.store?.getInnerMethods()
       innerMethods?.innerSetFieldValue(name, newAalue)
-      const allValue = formContent.store?.getFields()
-      if (dataRef.current.focusState === 'focus') {
-        formContent?.onChange?.({ [name]: value }, allValue, { [name]: value })
-      }
-      formContent?.onValuesChange?.({ [name]: value }, allValue, { [name]: value })
+      formContent?.onChange?.({ [name]: value }, formContent.store?.getFields(), { [name]: value })
     }
   }
 
@@ -117,7 +118,7 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
     defaultValue,
     ...getValueIfQualified({
       value,
-    }, !isUndefined(valueProps)),
+    }, isControll),
     onFocus: () => {
       dataRef.current.focusState = 'focus'
     },
@@ -129,7 +130,7 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
       if (formContent.inForm) {
         inFormObj.valueChange(e.target.value)
       }
-      if (!isUndefined(valueProps)) {
+      if (isControll) {
         setValue(e.target.value)
       }
     },

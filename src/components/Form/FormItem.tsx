@@ -35,14 +35,15 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     label,
     message: messageProps,
     initialValues,
-    validateStatus: validateStatusProps,
+    validateStatus: validateStatusProps = 'error',
     ...rest
   } = allField
 
   const {
     name,
     store,
-    updataFieldsName
+    updataFieldsName,
+    onValuesChange
   } = allField
 
   const [message, setMessage] = useState(messageProps)
@@ -75,7 +76,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     ]),
   }
 
-  const getLabel = () => {
+  const labelRender = () => {
     if (!label) {
       return
     }
@@ -89,6 +90,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
     )
   }
 
+  // 提示信息渲染
   const getMessage = () => {
     let res: ReactNode = message
     if (messageProps) {
@@ -100,9 +102,12 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
       </div>
     )
   }
+
+  // 监听数据更新 并做出相应
   useMemo(() => {
     if (updataFieldsName.findIndex(updateFieldName => updateFieldName === name) !== -1) {
       setValue(store?.getFieldValue(name))
+      onValuesChange?.(store?.getFieldsValue(updataFieldsName), store?.getFields(), store?.getOldFieldsValue(updataFieldsName))
     }
   }, [updataFieldsName])
 
@@ -136,10 +141,8 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
           }
         ])}
       >
-        {getLabel()}
+        {labelRender()}
         {children && isFunction(children) ? children?.(initialValues) : children}
-        {/* {childrenMemo} */}
-        {/* <div></div> */}
         {getMessage()}
       </div>
 

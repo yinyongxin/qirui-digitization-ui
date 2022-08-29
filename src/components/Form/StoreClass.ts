@@ -14,6 +14,7 @@ export class Store<
 {
   constructor() { }
   private store: Partial<FormData> = {};
+  private oldStore: Partial<FormData> = {};
   private initialValues: Partial<FormData> = {};
   public updateFieldsName: FieldKey[] | any = []
   public updateCallBack = () => { }
@@ -31,17 +32,30 @@ export class Store<
     return fieldsValue
   }
 
+  public getOldFieldValue = (field: FieldKey): FieldValue => {
+    return getValueFormObjectByStringDeep(this.oldStore, field as string)
+  }
+  public getOldFieldsValue = (fields: FieldKey[]): Partial<FormData> => {
+    const fieldsValue: any = {}
+    fields.forEach(field => {
+      fieldsValue[field as string] = getValueFormObjectByStringDeep(this.oldStore, field as string)
+    })
+    return fieldsValue
+  }
+
+  public updateOldStore = () => {
+    this.oldStore = cloneDeep(this.store)
+  }
+
   public setFieldValue = (field: FieldKey, newValue: FieldValue) => {
+    this.updateOldStore()
     setObjectValueByString(this.store, field as string, newValue)
     this.updateFieldsName = [field]
     this.updateCallBack?.()
   }
 
-  public innerSetFieldValue = (field: FieldKey, newValue: FieldValue) => {
-    setObjectValueByString(this.store, field as string, newValue)
-  }
-
   public setFieldsValue = (values: DeepPartial<FormData>) => {
+    this.updateOldStore()
     for (const key in values) {
       setObjectValueByString(this.store, key as string, values[key])
     }
@@ -49,6 +63,9 @@ export class Store<
     this.updateCallBack?.()
   }
 
+  public innerSetFieldValue = (field: FieldKey, newValue: FieldValue) => {
+    setObjectValueByString(this.store, field as string, newValue)
+  }
   public setUpdateCallBack = (updateCallBack: () => void) => {
     this.updateCallBack = updateCallBack
   }
@@ -60,7 +77,17 @@ export class Store<
   public setStore = (store: Partial<FormData>) => {
     this.store = cloneDeep(store)
   }
+  public getStore = (store: Partial<FormData>) => {
+    return this.store
+  }
+  public getOldStore = (store: Partial<FormData>) => {
+    return this.oldStore
+  }
+
   public setInitialValues = (initialValues: Partial<FormData>) => {
     this.initialValues = cloneDeep(initialValues)
+  }
+  public getInitialValues = () => {
+    return this.initialValues
   }
 }

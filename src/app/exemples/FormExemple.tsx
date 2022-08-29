@@ -16,7 +16,7 @@ const FormExemple = () => {
     //   age: 'arrage',
     // }]
   }
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState('error')
 
   const [form] = Form.useForm()
 
@@ -29,11 +29,13 @@ const FormExemple = () => {
             <Form
               width={1000}
               initialValues={initialValues}
-              onValuesChange={(value, allValue, oldValue) => {
-                // console.log(value, allValue, oldValue);
-              }}
+              // onValuesChange={(value, allValue, oldValue) => {
+              //   console.log('onValuesChange', value, allValue, oldValue);
+              // }}
+              // onChange={() => {
+              //   console.log('onChange');
+              // }}
               form={form}
-              colon
             // layout='vertical'
             // layout='inline'
             // columns={2}
@@ -41,12 +43,14 @@ const FormExemple = () => {
               <FormItem
                 label="Username"
                 name="username"
+                message="message"
               >
                 <Input />
               </FormItem>
               <FormItem
                 label="Age"
                 name="age"
+                message={message}
               >
                 <Input />
               </FormItem>
@@ -62,13 +66,9 @@ const FormExemple = () => {
             onClick={() => {
               form.setFieldsValue({
                 username: Math.random().toString(),
-                // age: 'acascas',
-                // address: 'addrescascascs'
+                age: 'acascas',
+                address: 'addrescascascs'
               })
-              console.log('setMessage');
-
-              // console.log('getFieldValue', form.getFieldValue('username'));
-              // console.log('getFields', form.getFields());
             }}
           >setMessage</Button>
         </div>

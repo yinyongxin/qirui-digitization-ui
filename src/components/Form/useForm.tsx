@@ -14,10 +14,13 @@ export function getFormInstance<
   return {
     getFieldsValue: store.getFieldsValue,
     getFieldValue: store.getFieldValue,
+    getOldFieldsValue: store.getOldFieldsValue,
+    getOldFieldValue: store.getOldFieldValue,
     getFields: store.getFields,
     setFieldValue: store.setFieldValue,
     setFieldsValue: store.setFieldsValue,
     getUpdateFieldsName: store.getUpdateFieldsName,
+    getOldStore: store.getOldStore,
     getInnerMethods: (): InnerMethodsReturnType<FormData, FieldValue, FieldKey> => {
       return {
         setStore: store.setStore,

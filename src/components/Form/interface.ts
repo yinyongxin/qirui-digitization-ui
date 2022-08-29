@@ -153,8 +153,11 @@ export type FormInstance<
     | 'getFields'
     | 'getFieldsValue'
     | 'getFieldValue'
+    | 'getOldFieldsValue'
+    | 'getOldFieldValue'
     | 'setFieldValue'
     | 'setFieldsValue'
+    | 'getOldStore'
     | 'getUpdateFieldsName'
   > & {
     getInnerMethods: () => InnerMethodsReturnType<FormData, FieldValue, FieldKey>;
