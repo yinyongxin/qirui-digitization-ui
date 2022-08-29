@@ -29,7 +29,8 @@ const Select: FC<SelectPropsType> = (props) => {
   const [optionsVisible, setOptionsVisible] = useState(false)
   const [mouseHover, setMouseHover] = useState(false)
 
-  const [selectRef, setSelectRef] = useState<HTMLDivElement>()
+  const selectRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const selectClassName = getClassNames([
     `${prefixCls}`,
@@ -260,6 +261,7 @@ const Select: FC<SelectPropsType> = (props) => {
 
   const selectHandleClick = () => {
     setOptionsVisible(!optionsVisible)
+    inputRef.current?.focus()
   }
 
   const getValue = () => {
@@ -272,7 +274,7 @@ const Select: FC<SelectPropsType> = (props) => {
       style={{
         width
       }}
-      ref={ref => setSelectRef(ref as React.SetStateAction<HTMLDivElement | undefined>)}
+      ref={selectRef}
     >
       <input
         name={name}
@@ -281,6 +283,7 @@ const Select: FC<SelectPropsType> = (props) => {
         type="text"
         value={getValue()}
         style={{ display: 'none' }}
+        ref={inputRef}
       />
       <div
         onClick={() => selectHandleClick()}
