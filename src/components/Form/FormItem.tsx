@@ -139,9 +139,9 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
         ])}
       >
         {labelRender()}
-        <div>
+        <main>
           {children && isFunction(children) ? children?.(initialValues) : children}
-        </div>
+        </main>
         {getMessage()}
       </div>
 

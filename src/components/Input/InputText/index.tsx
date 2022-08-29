@@ -75,14 +75,16 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
         [`${classNamePrefix}-border-right`]: defaultBorders.right,
         [`${classNamePrefix}-border-bottom`]: defaultBorders.bottom,
         [`${classNamePrefix}-border-left`]: defaultBorders.left,
+        [`${prefixCls}-padding-left`]: !addBefore,
+        [`${prefixCls}-padding-right`]: !addAfter
       },
       ...classNames,
     ]),
     inputText: (classNames: ClassNameType[] = []) => getClassNames([
       inputAttributes?.className,
       {
-        [`${prefixCls}-margin-left`]: !!prefix || !!addBefore,
-        [`${prefixCls}-margin-right`]: !!suffix || !!addAfter
+        [`${prefixCls}-padding-left`]: !!prefix || !!addBefore,
+        [`${prefixCls}-padding-right`]: !!suffix || !!addAfter
       },
       ...classNames,
     ]),
