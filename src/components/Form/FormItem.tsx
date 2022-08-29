@@ -66,7 +66,7 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
       `${prefixCls}-message`,
 
       {
-        [`${prefixCls}-message-row-column`]: layout !== 'vertical',
+        [`${prefixCls}-message-row-column`]: layout !== 'vertical' && !!label,
         [`${prefixCls}-message-${validateStatus}`]: validateStatus !== 'validating',
       },
       ...classNames,
@@ -126,20 +126,22 @@ const FormItem: FC<FormItemPropsType> = (props, ref) => {
           },
           {
             style: {
-              gridTemplateColumns: `${labelWidth} auto`
+              gridTemplateColumns: `${label ? labelWidth : ''} auto`
             },
             condition: layout === 'horizontal'
           },
           {
             style: {
-              gridTemplateColumns: 'auto auto'
+              gridTemplateColumns: label ? 'auto auto' : 'auto'
             },
             condition: layout === 'inline'
           }
         ])}
       >
         {labelRender()}
-        {children && isFunction(children) ? children?.(initialValues) : children}
+        <div>
+          {children && isFunction(children) ? children?.(initialValues) : children}
+        </div>
         {getMessage()}
       </div>
 

@@ -36,9 +36,9 @@ const FormExemple = () => {
               //   console.log('onChange');
               // }}
               form={form}
-            // layout='vertical'
-            // layout='inline'
-            // columns={2}
+              layout='vertical'
+              layout='inline'
+              columns={2}
             >
               <FormItem
                 label="Username"

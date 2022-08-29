@@ -78,7 +78,6 @@ const Form = <
     form: getStyles([
       {
         width,
-
       },
       {
         style: {
