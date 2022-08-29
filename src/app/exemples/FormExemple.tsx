@@ -60,15 +60,19 @@ const FormExemple = () => {
               >
                 <Input style={{ flex: 1 }} />
               </FormItem>
+              <input title="number" type="number" defaultValue={21351542345324523523524352345234534235} />
             </Form>
           </div>
           <Button
             onClick={() => {
-              form.setFieldsValue({
-                username: Math.random().toString(),
-                age: 'acascas',
-                address: 'addrescascascs'
-              })
+              // form.setFieldsValue({
+              //   username: Math.random().toString(),
+              //   age: 21351542345324523523524352345234534235,
+              //   address: 'addrescascascs'
+              // })
+              console.log(form.getFields());
+
+
             }}
           >setMessage</Button>
         </div>

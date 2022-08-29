@@ -1,0 +1,18 @@
+@prefix-pagination: ~'@{nameSpace}-pagination';
+
+.@{prefix-pagination} {
+  font-style: normal;
+  width: 100%;
+  display: grid;
+  justify-content: end;
+  gap: 10px;
+
+  li {
+    list-style: none;
+  }
+
+  .@{prefix-pagination}-page {
+    .flex();
+    gap: 10px;
+  }
+}

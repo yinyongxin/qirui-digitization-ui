@@ -16,6 +16,7 @@ import InputExemple from '../exemples/InputExemple'
 import ImageExemple from '../exemples/ImageExemple'
 import UploadExemple from '../exemples/UploadExemple'
 import FormExemple from '../exemples/FormExemple'
+import PaginationExemple from '../exemples/PaginationExemple'
 
 export const routes: RouteObject[] = [
   {
@@ -81,6 +82,10 @@ export const routes: RouteObject[] = [
       {
         path: 'formExemple',
         element: <FormExemple />,
+      },
+      {
+        path: 'paginationExemple',
+        element: <PaginationExemple />,
       },
     ],
   },

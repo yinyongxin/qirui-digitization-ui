@@ -82,6 +82,11 @@ function App() {
       activeKey: 'formExemple',
       icon: 'bars'
     },
+    {
+      title: 'Pagination',
+      activeKey: 'paginationExemple',
+      icon: 'bars'
+    },
   ]
   const location = useLocation()
 

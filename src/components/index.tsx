@@ -22,6 +22,7 @@ import Mask from "./Mask/index";
 import Portal from "./Portal";
 import Form from "./Form/index";
 import FormItem from "./Form/FormItem";
+import Pagination from "./Pagination/index";
 
 import { GlobalContext } from './config/globalContext'
 
@@ -47,5 +48,6 @@ export {
   Mask,
   Portal,
   Form,
-  FormItem
+  FormItem,
+  Pagination,
 };
