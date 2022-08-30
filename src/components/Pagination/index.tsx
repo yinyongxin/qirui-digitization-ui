@@ -41,7 +41,7 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
 
 
   useEffect(() => {
-    onChange?.(current, pageSize)
+    onChange?.(current, pageSize, pageCurrent)
   }, [current, pageSize])
 
   useEffect(() => {
@@ -52,7 +52,6 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
       arr[index] = (pageCurrent - 1) * pageSize + index + 1
     }
     setPageList(arr)
-    onChange?.(arr[0], pageSize)
     setCurrent(arr[0])
   }, [pageCurrent])
 
@@ -92,22 +91,30 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
   const turnButton = {
     prev: () => {
       const disabled = pageCurrent === 1
-      return partsRender?.turnButton ? (
+      return partsRender?.turnButton?.prev ? (
         <div onClick={() => turnButtonFn.prev()}>
-          {partsRender.turnButton.prev?.(pageCurrent === 1)}
+          {partsRender.turnButton.prev(pageCurrent === 1)}
         </div>
       ) : (
-        <Button disabled={disabled} size='small' onClick={() => turnButtonFn.prev()}>Prev</Button>
+        <Button
+          disabled={disabled}
+          size='small'
+          onClick={() => turnButtonFn.prev()}
+        >Prev</Button>
       )
     },
     next: () => {
       const disabled = pageCurrent > total / pageSize
-      return partsRender?.turnButton ? (
+      return partsRender?.turnButton?.next ? (
         <div onClick={() => turnButtonFn.next()}>
-          {partsRender.turnButton.next?.(disabled)}
+          {partsRender.turnButton.next(disabled)}
         </div>
       ) : (
-        <Button size='small' disabled={disabled} onClick={() => turnButtonFn.next()}>Next</Button>
+        <Button
+          size='small'
+          disabled={disabled}
+          onClick={() => turnButtonFn.next()}
+        >Next</Button>
       )
     }
   }
@@ -117,15 +124,23 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
       return (
         <div className={classNamesObj.page}>
           {turnButton.prev()}
-          {pageList.map(item => (
-            partsRender?.turnButton ? (
-              <div onClick={() => setCurrent(item)}>{partsRender.pageItem?.()}</div>
-            ) : (
-              <Button level={item === current ? 'white' : 'main'} onClick={() => setCurrent(item)} key={item} size='small'>
-                {item}
-              </Button>
+          {pageList.map(item => {
+            const checked = item === current
+            return (
+              partsRender?.pageItem ? (
+                <div onClick={() => setCurrent(item)}>{partsRender.pageItem(checked)}</div>
+              ) : (
+                <Button
+                  level={checked ? 'white' : 'main'}
+                  onClick={() => setCurrent(item)}
+                  key={item}
+                  size='small'
+                >
+                  {item}
+                </Button>
+              )
             )
-          ))}
+          })}
           {turnButton.next()}
         </div>
       )

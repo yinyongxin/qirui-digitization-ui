@@ -45,7 +45,7 @@ export interface PaginationBaseType {
     current?: () => ReactNode,
     total?: () => ReactNode,
     jumper?: () => ReactNode,
-    pageItem?: () => ReactNode,
+    pageItem?: (checked: boolean) => ReactNode,
     turnButton?: {
       prev?: (isFirst: boolean) => ReactNode
       next?: (isLast: boolean) => ReactNode
@@ -83,7 +83,7 @@ export interface PaginationBaseType {
    * @zh 变化时的回调
    * @en Callback when page changes
    */
-  onChange?: (current: number, pageSize: number) => void;
+  onChange?: (current: number, pageSize: number, pageCurrent: number) => void;
   /**
    * @zh pageSize 变化时的回调
    * @en Callback when pageSize changes
@@ -111,4 +111,4 @@ export interface PaginationBaseType {
   mini?: boolean; // 1.0
 }
 
-export type PaginationPropsType = PaginationBaseType & JSX.IntrinsicElements['ul']
+export type PaginationPropsType = PaginationBaseType & Omit<JSX.IntrinsicElements['ul'], 'onChange'>
