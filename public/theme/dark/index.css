@@ -3,8 +3,3 @@
 @import './warning.css';
 @import './neutral.css';
 @import './base.css';
-
-:root {
-  --design-color-white: #FFFFFF;
-  --design-color-black: #000000;
-}
