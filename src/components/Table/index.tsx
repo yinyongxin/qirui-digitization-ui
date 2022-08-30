@@ -49,8 +49,7 @@ const Table = <
   const dataAsync = useData({
     pagination: {
       current: 1,
-      pageSize: 10,
-      pageCurrent: 1
+      pageSize: 10
     },
     search: {}
   })
@@ -208,11 +207,10 @@ const Table = <
       {pagination && (isBoolean(pagination) ? (
         <Pagination />
       ) : (
-        <Pagination total={total} {...pagination} onChange={(current, pageSize, pageCurrent) => {
+        <Pagination total={total} {...pagination} onChange={(current, pageSize) => {
           dataAsync.pagination = {
             current,
-            pageSize,
-            pageCurrent
+            pageSize
           }
           getTableData()
         }} />

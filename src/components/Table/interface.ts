@@ -84,8 +84,7 @@ export interface TableBaseType<
   data: T[] | ((
     pagination: {
       current: number,
-      pageSize: number,
-      pageCurrent: number
+      pageSize: number
     },
     search: any
   ) => Promise<{

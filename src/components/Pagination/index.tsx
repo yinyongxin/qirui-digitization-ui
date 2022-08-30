@@ -59,7 +59,7 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
       setPageListFn()
     }
 
-    onChange?.(current, pageSize, current)
+    onChange?.(current, pageSize)
   }, [current, pageSize])
 
   useEffect(() => {
