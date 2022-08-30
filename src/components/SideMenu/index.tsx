@@ -1,6 +1,6 @@
 import { forwardRef, ForwardRefRenderFunction, Key, useContext, useEffect, useImperativeHandle, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
-import { getClassNames } from "../utils/tools"
+import { getClassNames, getStyles } from "../utils/tools"
 import { MenuTreeItemType, SideMenuHandleType, SideMenuPropsType } from "./interface"
 import { SideMenuComtext } from "./SideMenuComtext"
 import SideMenuItem from "./SideMenuItem"
@@ -23,6 +23,8 @@ const SideMenu: ForwardRefRenderFunction<unknown, SideMenuPropsType> = (props, r
     onMenuItemClick,
     onMenuSubClick,
     allOpen = false,
+    className,
+    style,
     width = 220,
     borders = [],
     children
@@ -68,10 +70,23 @@ const SideMenu: ForwardRefRenderFunction<unknown, SideMenuPropsType> = (props, r
     })
   }
 
-  const sideMenuClassName = getClassNames([
-    `${prefixCls}`,
-    ...borders.map(border => `${prefixCls}-border-${border}`)
-  ])
+
+  const classNamesObj = {
+    sideMenu: getClassNames([
+      `${prefixCls}`,
+      className,
+      ...borders.map(border => `${prefixCls}-border-${border}`)
+    ])
+  }
+
+  const stylesObj = {
+    sideMenu: getStyles([
+      {
+        width,
+      },
+      style
+    ])
+  }
 
   useImperativeHandle<unknown, SideMenuHandleType>(
     ref,
@@ -95,7 +110,7 @@ const SideMenu: ForwardRefRenderFunction<unknown, SideMenuPropsType> = (props, r
         onMenuSubClick
       }}
     >
-      <aside style={{ width }} className={sideMenuClassName}>
+      <aside style={stylesObj.sideMenu} className={classNamesObj.sideMenu}>
         {getMenus(menuTree)}
         {children && children}
       </aside>

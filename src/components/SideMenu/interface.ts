@@ -1,4 +1,4 @@
-import { Key, PropsWithChildren, ReactNode } from "react"
+import React, { Key, PropsWithChildren, ReactNode } from "react"
 import { DesignTypes } from "../typings"
 
 export type ActiveKeyType = Key
@@ -36,7 +36,8 @@ export interface SideMenuBaseType {
  */
   allOpen?: boolean,
   width?: number,
-
+  style?: React.CSSProperties,
+  className?: string
   borders?: DesignTypes['Direction'][]
 }
 
