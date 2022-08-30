@@ -1,8 +1,8 @@
-import React, { FC, ReactNode, useContext, useEffect, useState } from "react"
+import React, { FC, ReactNode, useContext, useEffect, useMemo, useState } from "react"
 import Button from "../Button"
 import { GlobalContext } from "../config/globalContext"
-import { useNotFirst } from "../utils/hooks"
-import { ClassNameType, getClassNames, getStyles } from "../utils/tools"
+import { useData, useNotFirst } from "../utils/hooks"
+import { ClassNameType, getClassNames, getStyles, isNumber } from "../utils/tools"
 import { PaginationBaseType, PaginationPropsType, PartType } from "./interface"
 
 // 分页组件
@@ -15,9 +15,7 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
 
   const {
     style,
-    current: currentProps,
-    pageSize: pageSizeProps,
-    total: totalProps = 0,
+    total = 0,
     defaultConfig,
     onChange,
     sort = ['total', 'current', 'page', 'pageSize', 'jumper'],
@@ -33,27 +31,40 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
     ...rest
   } = props
 
-  const [current, setCurrent] = useState(currentProps || defaultConfig?.current || 1)
-  const [pageCurrent, setPageCurrent] = useState(1)
-  const [pageSize, setPageSize] = useState(sizeOptions[0])
-  const [total, setTotal] = useState(totalProps)
+  const [current, setCurrent] = useState(defaultConfig?.current || 1)
+  const [pageSize, setPageSize] = useState(defaultConfig?.pageSize || sizeOptions[0])
   const [pageList, setPageList] = useState<number[]>([])
 
 
-  useEffect(() => {
-    onChange?.(current, pageSize, pageCurrent)
+  const data = useData({
+    pageCurrent: 0,
+  })
+
+  const pageNum = Math.ceil(total / pageSize)
+
+  const setPageListFn = () => {
+    const sub = pageNum - pageSize * data.pageCurrent
+    const forValue = sub < 10 ? sub : pageSize
+    const arr = []
+    for (let index = 0; index < forValue; index++) {
+      arr[index] = data.pageCurrent * pageSize + index + 1
+    }
+    setPageList(arr)
+  }
+
+  useMemo(() => {
+    const floor = Math.floor((current - 1) / pageSize)
+    if (data.pageCurrent !== floor) {
+      data.pageCurrent = floor
+      setPageListFn()
+    }
+
+    onChange?.(current, pageSize, current)
   }, [current, pageSize])
 
   useEffect(() => {
-    const surplus = total - pageSize * pageCurrent
-    const forValue = surplus > 0 ? pageSize : pageSize + surplus
-    const arr = []
-    for (let index = 0; index < forValue; index++) {
-      arr[index] = (pageCurrent - 1) * pageSize + index + 1
-    }
-    setPageList(arr)
-    setCurrent(arr[0])
-  }, [pageCurrent])
+    setPageListFn()
+  }, [total])
 
   const classNamesObj = {
     pagination: (classNames: ClassNameType[] = []) => getClassNames([
@@ -77,23 +88,23 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
 
   const turnButtonFn = {
     prev: () => {
-      if (pageCurrent > 1) {
-        setPageCurrent(pageCurrent - 1)
+      if (current > 1) {
+        setCurrent(current - 1)
       }
     },
     next: () => {
-      if (pageCurrent < total / pageSize) {
-        setPageCurrent(pageCurrent + 1)
+      if (current < pageNum) {
+        setCurrent(current + 1)
       }
     }
   }
 
   const turnButton = {
     prev: () => {
-      const disabled = pageCurrent === 1
+      const disabled = current === 1
       return partsRender?.turnButton?.prev ? (
         <div onClick={() => turnButtonFn.prev()}>
-          {partsRender.turnButton.prev(pageCurrent === 1)}
+          {partsRender.turnButton.prev(current === 1)}
         </div>
       ) : (
         <Button
@@ -104,7 +115,7 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
       )
     },
     next: () => {
-      const disabled = pageCurrent > total / pageSize
+      const disabled = current >= pageNum
       return partsRender?.turnButton?.next ? (
         <div onClick={() => turnButtonFn.next()}>
           {partsRender.turnButton.next(disabled)}
@@ -122,7 +133,7 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
   const parts: Record<PartType, () => ReactNode> = {
     page: () => {
       return (
-        <div className={classNamesObj.page}>
+        <>
           {turnButton.prev()}
           {pageList.map(item => {
             const checked = item === current
@@ -142,28 +153,28 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
             )
           })}
           {turnButton.next()}
-        </div>
+        </>
       )
     },
     current: () => {
       return (
-        <div>
+        <>
           {current}
-        </div>
+        </>
       )
     },
     pageSize: () => {
       return (
-        <div>
+        <>
           {pageSize}
-        </div>
+        </>
       )
     },
     total: () => {
       return (
-        <div>
+        <>
           {total}
-        </div>
+        </>
       )
     },
     jumper: () => {
@@ -174,13 +185,13 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
   }
 
   return (
-    <ul style={sytlesObj.pagination} className={classNamesObj.pagination()}>
+    <div style={sytlesObj.pagination} className={classNamesObj.pagination()}>
       {sort.map(item => (
-        <li key={item} className={`${prefixCls}-${item}`}>
+        <div key={item} className={`${prefixCls}-${item}`}>
           {parts[item]()}
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   )
 }
 export default Pagination

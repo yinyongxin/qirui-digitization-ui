@@ -1,10 +1,17 @@
-import { join } from "path"
-import React, { FC, Key, useContext, useState } from "react"
+import React, { FC, Key, useContext, useEffect, useState } from "react"
+import { isPromise } from "util/types"
+import { Pagination } from ".."
 import { GlobalContext } from "../config/globalContext"
-import { ClassNameType, getClassNames, isFunction } from "../utils/tools"
+import { DesignTypes } from "../typings"
+import { useData } from "../utils/hooks"
+import { ClassNameType, getClassNames, isBoolean, isFunction } from "../utils/tools"
 import { TablePropsType } from "./interface"
 
-const Table = <T,>(props: TablePropsType<T>) => {
+const Table = <
+  T extends unknown = any,
+  TValue = T[keyof T],
+  TKey extends DesignTypes['KeyType'] = keyof T
+>(props: TablePropsType<T, TValue, TKey>) => {
 
   const {
     classNamePrefix
@@ -23,6 +30,7 @@ const Table = <T,>(props: TablePropsType<T>) => {
     placeholder,
     borderWidth = 1,
     style,
+    pagination,
     ...rest
   } = props
 
@@ -36,6 +44,35 @@ const Table = <T,>(props: TablePropsType<T>) => {
     vertical: false,
     ...borders
   }
+
+  const [tableData, setTableData] = useState<(T | any)[]>([])
+  const dataAsync = useData({
+    pagination: {
+      current: 1,
+      pageSize: 10,
+      pageCurrent: 1
+    },
+    search: {}
+  })
+
+  const [total, setTotal] = useState(0)
+
+  const getTableData = async () => {
+    if (isFunction(data)) {
+      try {
+        let res = await data(dataAsync.pagination, dataAsync.search)
+        setTableData(res?.list)
+        setTotal(res?.total)
+      } catch (error) {
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (!isFunction(data)) {
+      setTableData(data)
+    }
+  }, [data])
 
   const tableClassName = {
     table: getClassNames([
@@ -113,7 +150,7 @@ const Table = <T,>(props: TablePropsType<T>) => {
   const tbodyRender = () => {
     return (
       <tbody className={tableClassName.tbody}>
-        {data.map((dataItem, dataIndex) => {
+        {tableData.map((dataItem, dataIndex) => {
           return (
             <tr
               key={isFunction(rowKey) ? rowKey?.(dataItem) : (rowKey && dataItem[rowKey]) || dataIndex}
@@ -127,7 +164,7 @@ const Table = <T,>(props: TablePropsType<T>) => {
                   className={tableClassName.tbodyTd([
                     `${prefixCls}-align-${column.align}`,
                     {
-                      [`${prefixCls}-border-bottom`]: tableBorders.tbody && (dataIndex + 1) !== data.length,
+                      [`${prefixCls}-border-bottom`]: tableBorders.tbody && (dataIndex + 1) !== tableData.length,
                       [`${prefixCls}-border-left`]: tableBorders.vertical && columnIndex !== 0,
                     }
                   ])}
@@ -148,18 +185,39 @@ const Table = <T,>(props: TablePropsType<T>) => {
     )
   }
 
+  const tfootRender = () => {
+    return (
+      <tfoot>
 
+      </tfoot>
+    )
+  }
 
 
   return (
-    <table
-      style={{ borderWidth, ...style }}
-      className={tableClassName.table}
-      {...rest}
-    >
-      {theadRender()}
-      {tbodyRender()}
-    </table>
+    <div>
+      <table
+        style={{ borderWidth, ...style }}
+        className={tableClassName.table}
+        {...rest}
+      >
+        {theadRender()}
+        {tbodyRender()}
+        {tfootRender()}
+      </table>
+      {pagination && (isBoolean(pagination) ? (
+        <Pagination />
+      ) : (
+        <Pagination total={total} {...pagination} onChange={(current, pageSize, pageCurrent) => {
+          dataAsync.pagination = {
+            current,
+            pageSize,
+            pageCurrent
+          }
+          getTableData()
+        }} />
+      ))}
+    </div>
   )
 }
 export default Table

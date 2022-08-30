@@ -13,18 +13,6 @@ export interface PaginationBaseType {
   className?: string | string[];
   /**
    * √
-   * @zh 当前页
-   * @en Current page
-   */
-  current?: number;
-  /**
-   * √
-   * @zh 每页数据条数
-   * @en Number of data items per page
-   */
-  pageSize?: number;
-  /**
-   * √
    * @zh 数据总数
    * @en Total number of data
    */
@@ -34,8 +22,8 @@ export interface PaginationBaseType {
    * 默认配置
    */
   defaultConfig?: {
-    pageSize?: PaginationBaseType['pageSize'],
-    current?: PaginationBaseType['current'],
+    pageSize?: number,
+    current?: number,
   }
   /**
    * @zh 是否禁用

@@ -1,5 +1,5 @@
-import React from "react";
-import { Pagination, Title } from "../../components";
+import React, { useState } from "react";
+import { Button, Pagination, Title } from "../../components";
 
 const PaginationExemple = () => {
   return (
