@@ -46,8 +46,8 @@ const SideMenuExemple = () => {
           borders={["right", 'top', 'bottom']}
         />
         <SideMenuItemSub title={'SideMenuItemSub'} activeKey={'SideMenuItemSub'} index={0}>
-          <SideMenuItem title={'SideMenuItem'} activeKey="SideMenuItem" key={"activeKey"} index={1} />
-          <SideMenuItem title={'SideMenuItem'} activeKey="SideMenuItem" key={"activeKey"} index={1} />
+          <SideMenuItem title={'SideMenuItem'} activeKey="SideMenuItem" key={"activeKey1"} index={1} />
+          <SideMenuItem title={'SideMenuItem'} activeKey="SideMenuItem" key={"activeKey2"} index={1} />
         </SideMenuItemSub>
       </Title>
     </div>

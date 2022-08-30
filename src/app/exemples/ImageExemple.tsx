@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon, Image, Title, Upload } from "../../components";
-import Luoxiaohei from '../../assets/images/luoxiaohei.jpg'
+import Luoxiaohei from '@/assets/images/luoxiaohei.jpg'
 
 const ImageExemple = () => {
   return (

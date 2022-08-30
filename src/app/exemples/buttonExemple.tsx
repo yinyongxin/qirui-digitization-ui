@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, Title } from "../../../components";
+import { Button, Title } from "@/components";
 
 const ButtonExemple = () => {
   return (

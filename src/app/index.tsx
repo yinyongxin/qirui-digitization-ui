@@ -3,91 +3,20 @@ import React, { } from 'react'
 import { SideMenu } from '../components'
 import { Outlet, useNavigate, useLocation, useResolvedPath } from 'react-router-dom'
 import { MenuTreeItemType, SidePropsType } from '../components/SideMenu/interface';
+import { exemplesNameList } from './routes';
 
 function App() {
   let navigate = useNavigate();
-  const menuTree: MenuTreeItemType<SidePropsType>[] = [
-    {
-      title: 'Button',
-      activeKey: 'buttonExemple',
+
+  const menuTree: MenuTreeItemType<SidePropsType>[] = exemplesNameList.map((exemplesName) => {
+    const title = exemplesName?.replace(/Exemple/, '')
+    return {
+      title: title,
+      activeKey: exemplesName,
       icon: 'bars',
-    },
-    {
-      title: 'Icon',
-      activeKey: 'iconExemple',
-      icon: 'bars',
-    },
-    {
-      title: 'Title',
-      activeKey: 'titleExemple',
-      icon: 'bars',
-    },
-    {
-      title: 'Card',
-      activeKey: 'cardExemple',
-      icon: 'bars',
-    },
-    {
-      title: 'Tabs',
-      activeKey: 'tabsExemple',
-      icon: 'bars'
-    },
-    {
-      title: 'Message',
-      activeKey: 'messageExemple',
-      icon: 'bars'
-    },
-    {
-      title: 'Modal',
-      activeKey: 'modalExemple',
-      icon: 'bars'
-    },
-    {
-      title: 'Drawer',
-      activeKey: 'drawerExemple',
-      icon: 'bars'
-    },
-    {
-      title: 'Select',
-      activeKey: 'selectExemple',
-      icon: 'bars'
-    },
-    {
-      title: 'SideMenu',
-      activeKey: 'sideMenuExemple',
-      icon: 'bars'
-    },
-    {
-      title: 'Table',
-      activeKey: 'tableExemple',
-      icon: 'bars'
-    },
-    {
-      title: 'Input',
-      activeKey: 'inputExemple',
-      icon: 'bars'
-    },
-    {
-      title: 'Image',
-      activeKey: 'ImageExemple',
-      icon: 'bars'
-    },
-    {
-      title: 'Upload',
-      activeKey: 'uploadExemple',
-      icon: 'bars'
-    },
-    {
-      title: 'Form',
-      activeKey: 'formExemple',
-      icon: 'bars'
-    },
-    {
-      title: 'Pagination',
-      activeKey: 'paginationExemple',
-      icon: 'bars'
-    },
-  ]
+    }
+  })
+
   const location = useLocation()
 
   return (

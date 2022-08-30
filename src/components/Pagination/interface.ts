@@ -3,23 +3,36 @@ import { CSSProperties, ReactNode } from "react"
 export type PartType = 'pageSize' | 'total' | 'current' | 'page' | 'jumper'
 
 export interface PaginationBaseType {
+  /**
+   * √
+   */
   style?: CSSProperties;
+  /**
+  * √
+  */
   className?: string | string[];
   /**
+   * √
    * @zh 当前页
    * @en Current page
    */
   current?: number;
   /**
+   * √
    * @zh 每页数据条数
    * @en Number of data items per page
    */
   pageSize?: number;
   /**
+   * √
    * @zh 数据总数
    * @en Total number of data
    */
   total?: number;
+  /**
+   * √
+   * 默认配置
+   */
   defaultConfig?: {
     pageSize?: PaginationBaseType['pageSize'],
     current?: PaginationBaseType['current'],
@@ -37,8 +50,8 @@ export interface PaginationBaseType {
   hideOnSinglePage?: boolean;
   sort?: PartType[]
   /**
-   * @zh 定制分页按钮的结构
-   * @en Customized pagination button structure
+   * @zh 定制结构
+   * @en Customized structure
    */
   partsRender?: {
     pageSize?: () => ReactNode,
@@ -56,11 +69,6 @@ export interface PaginationBaseType {
    * @en pager size
    */
   size?: 'mini' | 'small' | 'default' | 'large';
-  /**
-   * @zh 是否显示数据总数
-   * @en Whether to display the total number of data
-   */
-  showTotal?: boolean | ((total: number, range: number[]) => ReactNode);
   /**
    * @zh 是否可以改变每页条数
    * @en Is it possible to change page size
@@ -85,8 +93,9 @@ export interface PaginationBaseType {
    */
   onChange?: (current: number, pageSize: number, pageCurrent: number) => void;
   /**
-   * @zh pageSize 变化时的回调
-   * @en Callback when pageSize changes
+   * @zh `pageSize` 改变的时候重置当前页码为 `1`
+   * @en When pageSize changes, resets the current page number to `1`
+   * @defaultValue true
    */
   pageSizeChangeResetCurrent?: boolean;
   /**

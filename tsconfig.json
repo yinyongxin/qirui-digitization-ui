@@ -17,6 +17,9 @@
     "declaration": true,
     "jsx": "react-jsx",
     "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": ["src/components"],
   "exclude": ["node_modules"]
