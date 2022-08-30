@@ -1,15 +1,10 @@
 import { CSSProperties, ReactNode } from "react"
 
-export type PartType = 'pageSize' | 'total' | 'current' | 'page' | 'jump'
+export type PartType = 'pageSize' | 'total' | 'current' | 'page' | 'jumper'
 
 export interface PaginationBaseType {
   style?: CSSProperties;
   className?: string | string[];
-  /**
-   * @zh 分页按钮样式
-   * @en Pagination button style
-   */
-  pageItemStyle?: (checked: boolean) => CSSProperties;
   /**
    * @zh 当前页
    * @en Current page
@@ -49,11 +44,11 @@ export interface PaginationBaseType {
     pageSize?: () => ReactNode,
     current?: () => ReactNode,
     total?: () => ReactNode,
-    jump?: () => ReactNode,
+    jumper?: () => ReactNode,
     pageItem?: () => ReactNode,
     turnButton?: {
-      prev?: () => ReactNode
-      next?: () => ReactNode
+      prev?: (isFirst: boolean) => ReactNode
+      next?: (isLast: boolean) => ReactNode
     }
   };
   /**
@@ -116,4 +111,4 @@ export interface PaginationBaseType {
   mini?: boolean; // 1.0
 }
 
-export type PaginationPropsType = PaginationBaseType & JSX.IntrinsicElements['i']
+export type PaginationPropsType = PaginationBaseType & JSX.IntrinsicElements['ul']

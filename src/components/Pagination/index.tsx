@@ -3,7 +3,7 @@ import Button from "../Button"
 import { GlobalContext } from "../config/globalContext"
 import { useNotFirst } from "../utils/hooks"
 import { ClassNameType, getClassNames, getStyles } from "../utils/tools"
-import { PaginationPropsType, PartType } from "./interface"
+import { PaginationBaseType, PaginationPropsType, PartType } from "./interface"
 
 // 分页组件
 const Pagination: FC<PaginationPropsType> = (props, ref) => {
@@ -20,7 +20,7 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
     total: totalProps = 0,
     defaultConfig,
     onChange,
-    sort = ['total', 'current', 'page', 'pageSize', 'jump'],
+    sort = ['total', 'current', 'page', 'pageSize', 'jumper'],
     sizeOptions = [
       10,
       20,
@@ -91,17 +91,23 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
 
   const turnButton = {
     prev: () => {
+      const disabled = pageCurrent === 1
       return partsRender?.turnButton ? (
-        <div onClick={() => turnButtonFn.prev()}>{partsRender.turnButton.prev?.()}</div>
+        <div onClick={() => turnButtonFn.prev()}>
+          {partsRender.turnButton.prev?.(pageCurrent === 1)}
+        </div>
       ) : (
-        <Button size='small' onClick={() => turnButtonFn.prev()}>Prev</Button>
+        <Button disabled={disabled} size='small' onClick={() => turnButtonFn.prev()}>Prev</Button>
       )
     },
     next: () => {
+      const disabled = pageCurrent > total / pageSize
       return partsRender?.turnButton ? (
-        <div onClick={() => turnButtonFn.next()}>{partsRender.turnButton.next?.()}</div>
+        <div onClick={() => turnButtonFn.next()}>
+          {partsRender.turnButton.next?.(disabled)}
+        </div>
       ) : (
-        <Button size='small' onClick={() => turnButtonFn.next()}>Next</Button>
+        <Button size='small' disabled={disabled} onClick={() => turnButtonFn.next()}>Next</Button>
       )
     }
   }
@@ -145,9 +151,9 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
         </div>
       )
     },
-    jump: () => {
+    jumper: () => {
       return (
-        'jump'
+        'jumper'
       )
     }
   }
