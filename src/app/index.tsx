@@ -97,6 +97,10 @@ function App() {
           console.log('menuItems', menuItems);
           navigate(`/${menuItems?.[0]}`);
         }}
+        style={{
+          overflow: 'auto',
+          height: '100vh'
+        }}
         defaultActiveKeys={[location.pathname.split('/')[1]]}
         menuTree={menuTree}
         borders={['right']}

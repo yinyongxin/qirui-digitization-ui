@@ -1,7 +1,9 @@
 @prefix-message-item: ~'@{nameSpace}-message-item';
+
 .@{prefix-message-item} {
   pointer-events: all;
   font-size: @design-font-size-14;
+
   .@{prefix-message-item}-base {
     padding: 0 18px;
     display: flex;
@@ -13,46 +15,51 @@
     border-style: solid;
     border-width: @design-border-sm;
     border-color: @design-base-color;
-    color: @design-neutral-color-1;
+    color: @design-neutral-color;
     background: @design-base-color-10;
+
     .@{prefix-message-item}-icon {
       .flex-center()
     }
+
     .@{prefix-message-item}-content {
       height: 100%;
       flex: 1;
       display: flex;
       justify-content: space-between;
       align-items: center;
+
       .@{prefix-message-item}-content {
         flex: 1;
       }
     }
+
     .@{prefix-message-item}-opration {
       cursor: pointer;
+
       &:hover {
         color: @design-neutral-color-2;
       }
     }
   }
+
   .@{prefix-message-item}-default {
     border-color: @design-base-color;
-    color: @design-neutral-color-1;
     background: @design-base-color-10;
   }
+
   .@{prefix-message-item}-success {
     border-color: @design-success-color;
-    color: @design-neutral-color-1;
     background: @design-success-color-10;
   }
+
   .@{prefix-message-item}-error {
     border-color: @design-error-color;
-    color: @design-neutral-color-1;
     background: @design-error-color-10;
   }
+
   .@{prefix-message-item}-warning {
     border-color: @design-warning-color;
-    color: @design-neutral-color-1;
     background: @design-warning-color-10;
   }
 }

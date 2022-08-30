@@ -9,7 +9,12 @@ const IconExemple = () => {
         <div className="flex gap20">
           <Input />
           <Input defaultValue={'defaultValue'} />
-          <Input placeholder="placeholder" />
+          <Input width={520} borders={{
+            top: false,
+            bottom: false,
+            left: false,
+            right: false
+          }} placeholder="点击搜索工单" />
         </div>
       </Title>
       <Title type="tooltip" title="前缀(prefix) 后缀(suffix)" >
