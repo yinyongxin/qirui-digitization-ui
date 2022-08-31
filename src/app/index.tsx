@@ -1,20 +1,45 @@
 import './index.less'
-import React, { } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SideMenu } from '../components'
 import { Outlet, useNavigate, useLocation, useResolvedPath } from 'react-router-dom'
 import { MenuTreeItemType, SidePropsType } from '../components/SideMenu/interface';
 import { exemplesNameList } from './routes';
+import { useData } from '../components/utils/hooks';
+// const menuTree = exemplesNameList.map((exemplesName) => {
+//   const title = exemplesName?.replace(/Exemple/, '').split('').map((item, index) => {
+//     if (index === 0) {
+//       return item.toUpperCase()
+//     } else {
+//       return item
+//     }
+//   }).join('')
 
+//   return {
+//     title: title,
+//     activeKey: exemplesName,
+//     icon: 'bars',
+//   }
+// })
 function App() {
-  let navigate = useNavigate();
+  console.log('app');
 
-  const menuTree: MenuTreeItemType<SidePropsType>[] = exemplesNameList.map((exemplesName) => {
-    const title = exemplesName?.replace(/Exemple/, '')
-    return {
-      title: title,
-      activeKey: exemplesName,
-      icon: 'bars',
-    }
+  let navigate = useNavigate();
+  const data = useData({
+    menuTree: exemplesNameList.map((exemplesName) => {
+      const title = exemplesName?.replace(/Exemple/, '').split('').map((item, index) => {
+        if (index === 0) {
+          return item.toUpperCase()
+        } else {
+          return item
+        }
+      }).join('')
+
+      return {
+        title: title,
+        activeKey: exemplesName,
+        icon: 'bars',
+      }
+    })
   })
 
   const location = useLocation()
@@ -23,7 +48,6 @@ function App() {
     <div className='app'>
       <SideMenu
         activeMenuItemChange={(menuItems) => {
-          console.log('menuItems', menuItems);
           navigate(`/${menuItems?.[0]}`);
         }}
         style={{
@@ -31,7 +55,7 @@ function App() {
           height: '100vh'
         }}
         defaultActiveKeys={[location.pathname.split('/')[1]]}
-        menuTree={menuTree}
+        menuTree={data.menuTree}
         borders={['right']}
       />
       <div className='appContent'>
