@@ -1,10 +1,27 @@
 import React, { useState } from "react";
-import { Icon, Input, Title, Upload } from "../../components";
+import { Page, Input, Title, Upload } from "../../components";
 
 const IconExemple = () => {
   const [value, setValue] = useState()
   return (
-    <div>
+    <Page
+      pageHeader={{
+        title: '输入框 Input',
+        descriptions: '基本表单组件，并在原生控件基础上进行了功能扩展，可以组合使用。',
+        breadcrumb: {
+          list: [
+            {
+              title: 'Home',
+              // path: '/home'
+            },
+            {
+              title: 'InputExemple',
+              path: '/inputExemple'
+            }
+          ]
+        }
+      }}
+    >
       <Title type="tooltip" title="基本Icon status" >
         <div className="flex gap20">
           <Input />
@@ -38,7 +55,7 @@ const IconExemple = () => {
 
         </div>
       </Title>
-    </div>
+    </Page>
   )
 }
 export default IconExemple

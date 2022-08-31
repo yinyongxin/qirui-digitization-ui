@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Button, Icon, Modal, Title } from "../../components";
+import { Button, Page, Modal, Title } from "../../components";
 import { ModalHandle } from "../../components/Modal/interface";
 
 let modal
@@ -12,7 +12,24 @@ const ModalExemple = () => {
   const [title, setTitle] = useState('默认')
   const [num, setNum] = useState(0)
   return (
-    <div>
+    <Page
+      pageHeader={{
+        title: '对话框 Modal',
+        descriptions: '在当前页面打开一个浮层，承载相关操作。',
+        breadcrumb: {
+          list: [
+            {
+              title: 'Home',
+              // path: '/home'
+            },
+            {
+              title: 'ModalExemple',
+              path: '/modalExemple'
+            }
+          ]
+        }
+      }}
+    >
       <Title type="tooltip" title="默认" >
         <div className="flex gap20">
           <Modal
@@ -101,7 +118,7 @@ const ModalExemple = () => {
           }}>自动更新</Button>
         </div>
       </Title>
-    </div>
+    </Page>
   )
 }
 export default ModalExemple

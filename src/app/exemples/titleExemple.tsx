@@ -1,12 +1,29 @@
 import React from "react";
-import { Button, Card, Title } from "../../components";
+import { Page, Title } from "../../components";
 
 const TitleExemple = () => {
   return (
-    <div>
+    <Page
+      pageHeader={{
+        title: '标题 Title',
+        descriptions: '用于作为内容和标题详情',
+        breadcrumb: {
+          list: [
+            {
+              title: 'Home',
+              // path: '/home'
+            },
+            {
+              title: 'TableExemple',
+              path: '/tableExemple'
+            }
+          ]
+        }
+      }}
+    >
       <Title title="基础 text"></Title>
       <Title type="tooltip" title="带有下边框 tooltip"></Title>
-    </div>
+    </Page>
   )
 }
 export default TitleExemple

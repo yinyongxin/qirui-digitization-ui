@@ -1,9 +1,26 @@
 import React from "react";
-import { Select, Title } from "../../components";
+import { Select, Title, Page } from "../../components";
 
 const SelectExemple = () => {
   return (
-    <div>
+    <Page
+      pageHeader={{
+        title: '选择器 Select',
+        descriptions: '当用户需要从一组同类数据中选择一个或多个时，可以使用下拉选择器，点击后选择对应项。',
+        breadcrumb: {
+          list: [
+            {
+              title: 'Home',
+              // path: '/home'
+            },
+            {
+              title: 'SelectExemple',
+              path: '/selectExemple'
+            }
+          ]
+        }
+      }}
+    >
       <Title type="tooltip" title="单选" >
         <Select
           options={[
@@ -65,7 +82,7 @@ const SelectExemple = () => {
         />
       </Title>
 
-    </div>
+    </Page>
   )
 }
 export default SelectExemple

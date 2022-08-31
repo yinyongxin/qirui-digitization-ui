@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon, Table, Title } from "../../components";
+import { Page, Table, Title } from "../../components";
 import { ColumnType } from "../../components/Table/interface";
 type TableDataType = {
   col1: string,
@@ -29,7 +29,24 @@ const IconExemple = () => {
     },
   ]
   return (
-    <div>
+    <Page
+      pageHeader={{
+        title: '表格 Table',
+        descriptions: '用于数据收集展示、分析整理、操作处理。',
+        breadcrumb: {
+          list: [
+            {
+              title: 'Home',
+              // path: '/home'
+            },
+            {
+              title: 'TableExemple',
+              path: '/tableExemple'
+            }
+          ]
+        }
+      }}
+    >
       <Title type="tooltip" title="基本Table" >
         <div>
           <Table<{
@@ -162,7 +179,7 @@ const IconExemple = () => {
           />
         </div>
       </Title>
-    </div>
+    </Page>
   )
 }
 export default IconExemple

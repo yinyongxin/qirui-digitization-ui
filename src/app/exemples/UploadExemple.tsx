@@ -1,10 +1,27 @@
 import React from "react";
-import { Image, Title, Upload } from "../../components";
+import { Image, Title, Upload, Page } from "../../components";
 import Luoxiaohei from '../../assets/images/luoxiaohei.jpg'
 
 const UploadExemple = () => {
   return (
-    <div>
+    <Page
+      pageHeader={{
+        title: '上传 Upload',
+        descriptions: '用户可传输文件或提交相应的内容。',
+        breadcrumb: {
+          list: [
+            {
+              title: 'Home',
+              // path: '/home'
+            },
+            {
+              title: 'UploadExemple',
+              path: '/uploadExemple'
+            }
+          ]
+        }
+      }}
+    >
       <Title type="tooltip" title="基本Image status" >
         <div className="flex gap20">
           <div>
@@ -31,7 +48,7 @@ const UploadExemple = () => {
           </div>
         </div>
       </Title>
-    </div>
+    </Page>
   )
 }
 export default UploadExemple

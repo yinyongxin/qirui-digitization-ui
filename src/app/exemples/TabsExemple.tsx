@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Button, Tabs, Title } from "../../components";
+import { Button, Tabs, Title, Page } from "../../components";
 import { TabsHandle } from "../../components/Tabs/Tabs/interface";
 
 const TabsExemple = () => {
@@ -41,7 +41,24 @@ const TabsExemple = () => {
     })
   }
   return (
-    <div>
+    <Page
+      pageHeader={{
+        title: '标签页 Tabs',
+        descriptions: '将内容组织同一视图中，一次可查看一个视图内容。查看其他内容可切换选项卡查看。',
+        breadcrumb: {
+          list: [
+            {
+              title: 'Home',
+              // path: '/home'
+            },
+            {
+              title: 'TableExemple',
+              path: '/tableExemple'
+            }
+          ]
+        }
+      }}
+    >
       <Title type="tooltip" title="type 为 line" >
 
         <Tabs
@@ -121,7 +138,7 @@ const TabsExemple = () => {
           type="card"
         />
       </Title>
-    </div>
+    </Page>
   )
 }
 export default TabsExemple

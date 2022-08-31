@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon, SideMenu, SideMenuItem, Title, SideMenuItemSub } from "../../components";
+import { Page, SideMenu, SideMenuItem, Title, SideMenuItemSub } from "../../components";
 
 const SideMenuExemple = () => {
   const menuTree = [
@@ -34,7 +34,24 @@ const SideMenuExemple = () => {
     },
   ]
   return (
-    <div>
+    <Page
+      pageHeader={{
+        title: '侧边菜单 SideMenu',
+        descriptions: '收纳、排列并展示一系列选项的列表。',
+        breadcrumb: {
+          list: [
+            {
+              title: 'Home',
+              // path: '/home'
+            },
+            {
+              title: 'SideMenuExemple',
+              path: '/sideMenuExemple'
+            }
+          ]
+        }
+      }}
+    >
       <Title type="tooltip" title="borders" >
         <SideMenu
           menuTree={menuTree}
@@ -50,7 +67,7 @@ const SideMenuExemple = () => {
           <SideMenuItem title={'SideMenuItem'} activeKey="SideMenuItem" key={"activeKey2"} index={1} />
         </SideMenuItemSub>
       </Title>
-    </div>
+    </Page>
   )
 }
 export default SideMenuExemple

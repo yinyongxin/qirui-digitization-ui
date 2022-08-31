@@ -1,10 +1,27 @@
 import React from "react";
-import { Icon, Image, Title, Upload } from "../../components";
+import { Page, Image, Title, Upload } from "../../components";
 import Luoxiaohei from '@/assets/images/luoxiaohei.jpg'
 
 const ImageExemple = () => {
   return (
-    <div>
+    <Page
+      pageHeader={{
+        title: '图标 Icon',
+        descriptions: '展示和预览图片。',
+        breadcrumb: {
+          list: [
+            {
+              title: 'Home',
+              // path: '/home'
+            },
+            {
+              title: 'ImageExemple',
+              path: '/imageExemple'
+            }
+          ]
+        }
+      }}
+    >
       <Title type="tooltip" title="基本Image" >
         <div className="flex gap20">
           <Image
@@ -87,7 +104,7 @@ const ImageExemple = () => {
           />
         </div>
       </Title>
-    </div>
+    </Page>
   )
 }
 export default ImageExemple

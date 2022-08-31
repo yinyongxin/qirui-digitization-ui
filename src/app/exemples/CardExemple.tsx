@@ -5,8 +5,8 @@ const CardExemple = () => {
   return (
     <Page
       pageHeader={{
-        title: '按钮 Button',
-        descriptions: '按钮是一种命令组件，可发起一个即时操作。',
+        title: '卡片 Card',
+        descriptions: '将信息分类后分标题、详情等区域聚合展现，一般作为简洁介绍或者信息的大盘和入口。',
         breadcrumb: {
           list: [
             {
@@ -77,8 +77,7 @@ const CardExemple = () => {
           {`border={['right']}`}
         </Card>
       </Title>
-
-    </div>
+    </Page>
   )
 }
 export default CardExemple 

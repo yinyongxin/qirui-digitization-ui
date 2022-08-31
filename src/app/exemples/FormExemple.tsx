@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Image, Input, Select, Title, Upload } from "../../components";
+import { Button, Form, Image, Input, Page, Select, Title, Upload } from "../../components";
 import FormItem from "../../components/Form/FormItem";
 
 const FormExemple = () => {
@@ -22,7 +22,24 @@ const FormExemple = () => {
 
 
   return (
-    <div>
+    <Page
+      pageHeader={{
+        title: '表单 Form',
+        descriptions: '具有数据收集、校验和提交功能的表单，包含复选框、单选框、输入框、下拉选择框等元素。',
+        breadcrumb: {
+          list: [
+            {
+              title: 'Home',
+              // path: '/home'
+            },
+            {
+              title: 'FormExemple',
+              path: '/formExemple'
+            }
+          ]
+        }
+      }}
+    >
       <Title type="tooltip" title="基本Icon status" >
         <div className="flex gap20">
           <div>
@@ -77,7 +94,7 @@ const FormExemple = () => {
           >setMessage</Button>
         </div>
       </Title>
-    </div>
+    </Page>
   )
 }
 export default FormExemple

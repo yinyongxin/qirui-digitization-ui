@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Button, Icon, Drawer, Title } from "../../components";
+import { Button, Page, Drawer, Title } from "../../components";
 import { DrawerHandle } from "../../components/Drawer/interface";
 let drawer
 const DrawerExemple = () => {
@@ -8,7 +8,24 @@ const DrawerExemple = () => {
   const DrawerRef2 = useRef<DrawerHandle>()
   const DrawerRef3 = useRef<DrawerHandle>()
   return (
-    <div>
+    <Page
+      pageHeader={{
+        title: '抽屉 Drawer',
+        descriptions: '触发命令后，从屏幕一侧滑出的抽屉式的面板。',
+        breadcrumb: {
+          list: [
+            {
+              title: 'Home',
+              // path: '/home'
+            },
+            {
+              title: 'BreadcrumbExemple',
+              path: '/breadcrumbExemple'
+            }
+          ]
+        }
+      }}
+    >
       <Title type="tooltip" title="默认" >
         <div className="flex gap20">
           <Drawer
@@ -84,7 +101,7 @@ const DrawerExemple = () => {
           }}>自动更新</Button>
         </div>
       </Title>
-    </div>
+    </Page>
   )
 }
 export default DrawerExemple

@@ -1,9 +1,26 @@
 import React from "react";
-import { Icon, Title } from "../../components";
+import { Icon, Page, Title } from "../../components";
 
 const IconExemple = () => {
   return (
-    <div>
+    <Page
+      pageHeader={{
+        title: '图标 Icon',
+        descriptions: '这里有 fontawesome 内置的免费图标。',
+        breadcrumb: {
+          list: [
+            {
+              title: 'Home',
+              // path: '/home'
+            },
+            {
+              title: 'Iconxemple',
+              path: '/iconExemple'
+            }
+          ]
+        }
+      }}
+    >
       <Title type="tooltip" title="基本Icon status" >
         <div className="flex gap20">
           <div>
@@ -28,7 +45,7 @@ const IconExemple = () => {
           </div>
         </div>
       </Title>
-    </div>
+    </Page>
   )
 }
 export default IconExemple

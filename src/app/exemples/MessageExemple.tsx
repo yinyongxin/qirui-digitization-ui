@@ -1,9 +1,26 @@
 import React from "react";
-import { Button, Message, Title } from "../../components";
+import { Button, Message, Title, Page } from "../../components";
 
 const MessageExemple = () => {
   return (
-    <div>
+    <Page
+      pageHeader={{
+        title: '全局提示 Message',
+        descriptions: '由用户的操作触发的轻量级全局反馈。',
+        breadcrumb: {
+          list: [
+            {
+              title: 'Home',
+              // path: '/home'
+            },
+            {
+              title: 'MessageExemple',
+              path: '/messageExemple'
+            }
+          ]
+        }
+      }}
+    >
       <Title type="tooltip" title="四种基本类型" >
         <div className="flex gap20">
           <Button
@@ -46,7 +63,7 @@ const MessageExemple = () => {
           >ErrorMessage</Button>
         </div>
       </Title>
-    </div>
+    </Page>
   )
 }
 export default MessageExemple
