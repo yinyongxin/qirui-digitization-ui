@@ -13,7 +13,8 @@ const Page = (props: PagePropsType) => {
 
 
   const {
-    classNamePrefix
+    classNamePrefix,
+    PageConfig
   } = useContext(GlobalContext);
   const prefixCls = `${classNamePrefix}-page`
 
@@ -22,8 +23,12 @@ const Page = (props: PagePropsType) => {
     className,
     children,
     pageHeader,
+    sticky,
     ...rest
-  } = props
+  } = {
+    ...PageConfig,
+    ...props
+  }
 
   const classNamesObj = {
     page: getClassNames([
@@ -32,6 +37,9 @@ const Page = (props: PagePropsType) => {
     ]),
     header: getClassNames([
       `${prefixCls}-header`,
+      {
+        [`${prefixCls}-header-sticky`]: sticky
+      }
     ]),
     toBack: getClassNames([
       `${prefixCls}-toBack`,

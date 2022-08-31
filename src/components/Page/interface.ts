@@ -36,6 +36,11 @@ export interface PageBaseType {
      */
     style?: React.CSSProperties
   }
+  /**
+   * √
+   * 吸顶
+   */
+  sticky?: boolean
 }
 
 export type PagePropsType = PageBaseType & JSX.IntrinsicElements['div']

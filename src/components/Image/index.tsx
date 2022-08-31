@@ -192,8 +192,6 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     },
     onLoad: (e) => {
       setLoadingState('success')
-      console.log('success');
-
       imgAttributes?.onLoad?.(e)
     },
     loading: 'lazy',

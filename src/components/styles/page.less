@@ -6,6 +6,7 @@
   font-size: @design-font-size-14;
   font-weight: 400;
   height: 100%;
+  overflow: auto;
   width: 100%;
 
   .@{prefix-page}-header {
@@ -14,6 +15,14 @@
     .flex();
     .flex-column();
     gap: 16px;
+
+  }
+
+  .@{prefix-page}-header-sticky {
+    position: sticky;
+    position: -webkit-sticky;
+    z-index: 500;
+    top: 0;
   }
 
   .@{prefix-page}-toBack {

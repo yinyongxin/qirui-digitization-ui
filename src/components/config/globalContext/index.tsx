@@ -6,6 +6,7 @@ import { ButtonConfig, ButtonConfigType } from "./button";
 import { MessageConfig, MessageConfigType } from "./message";
 import { ModalConfig, ModalConfigType } from "./modal";
 import { DrawerConfig, DrawerConfigType } from "./drawer";
+import { PageConfig, PageConfigType } from "./page";
 
 export type GlobalConfigType = {
   theme?: DesignTypes['Theme'],
@@ -15,6 +16,7 @@ export type GlobalConfigType = {
   MessageConfig?: MessageConfigType,
   ModalConfig?: ModalConfigType,
   DrawerConfig?: DrawerConfigType,
+  PageConfig?: PageConfigType,
 }
 
 export const GlobalContextValue: GlobalConfigType = {
@@ -24,6 +26,7 @@ export const GlobalContextValue: GlobalConfigType = {
   MessageConfig,
   ModalConfig,
   DrawerConfig,
+  PageConfig,
   classNamePrefix: 'design'
 }
 
