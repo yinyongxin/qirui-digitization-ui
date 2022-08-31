@@ -32,6 +32,23 @@ export type ColumnType<
     * 排序函数，如果想要服务端排序或者添加更多自定义操作，
     */
     sorter?: ((a: any, b: any) => any) | boolean,
+
+    /**
+     * √
+     * 自定义头部标题单元格显示的内容
+     */
+    headerCellRender?: (column: ColumnType<T, TValue, TKey>, index: number) => ReactNode,
+
+    /**
+     * √
+     * 设置头部单元格的各项事件回调
+     */
+    onTheadTdCell?: (column: ColumnType<T, TValue, TKey>, index: number) => CallbackProps,
+
+    footerCellRender?: (column: ColumnType<T, TValue, TKey>, colData: TValue[], index: number) => ReactNode,
+    onTfootTdCell?: (column: ColumnType<T, TValue, TKey>, colData: TValue[], index: number) => CallbackProps,
+
+
     /**
      * √
      * 自定义单元格显示的内容
@@ -39,19 +56,9 @@ export type ColumnType<
     bodyCellRender?: (column: ColumnType<T, TValue, TKey>, record: T, index: Record<'columnIndex' | 'dataIndex', number>) => ReactNode,
     /**
      * √
-     * 自定义头部标题单元格显示的内容
-     */
-    headerCellRender?: (column: ColumnType<T, TValue, TKey>, index: number) => ReactNode,
-    /**
-     * √
-     * 设置头部单元格的各项事件回调
-     */
-    onTheadTdCell?: (column: ColumnType<T, TValue, TKey>, index: number) => CallbackProps,
-    /**
-     * √
      * 设置单元格的各项事件回调
      */
-    onTbodyTdCell?: (record: T, index: number) => CallbackProps,
+    onTbodyTdCell?: (column: ColumnType<T, TValue, TKey>, record: T, index: number) => CallbackProps,
     /**
      * √
      * 	当单元格内容为空时，显示占位符，优先级低于 render。

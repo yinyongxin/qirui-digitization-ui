@@ -84,20 +84,24 @@ const Table = <
       },
       className || ''
     ]),
+
+
     thead: getClassNames([
       `${prefixCls}-thead`,
     ]),
     theadTr: getClassNames([
       `${prefixCls}-theadTr`,
     ]),
+
     theadTh: (className: ClassNameType[] = []) => getClassNames([
       `${prefixCls}-theadTh`,
-      `${prefixCls}-align-${align}`,
-      ...className,
       {
         [`${prefixCls}-border-bottom`]: tableBorders.thead,
-      }
+      },
+      ...className,
     ]),
+
+
     tbody: getClassNames([
       `${prefixCls}-tbody`,
     ]),
@@ -106,9 +110,24 @@ const Table = <
     ]),
     tbodyTd: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}-tbodyTd`,
-      `${prefixCls}-align-${align}`,
       ...classNames,
     ]),
+
+
+    tfoot: getClassNames([
+      `${prefixCls}-tfoot`,
+    ]),
+    tfootTr: getClassNames([
+      `${prefixCls}-tfootTr`,
+    ]),
+    tfootTd: (className: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}-tfootTd`,
+      `${prefixCls}-border-top`,
+      ...className,
+    ]),
+
+
+
   }
 
   const theadRender = () => {
@@ -125,7 +144,7 @@ const Table = <
                 style={thStyle}
                 key={column.key || column.dataKey as Key}
                 className={tableClassName.theadTh([
-                  `${prefixCls}-align-${column.align}`,
+                  `${prefixCls}-align-${column.align || align}`,
                   {
                     [`${prefixCls}-border-left`]: tableBorders.vertical && columnIndex !== 0,
                   }
@@ -161,13 +180,13 @@ const Table = <
                   style={{ borderWidth }}
                   key={column.key || columnIndex}
                   className={tableClassName.tbodyTd([
-                    `${prefixCls}-align-${column.align}`,
+                    `${prefixCls}-align-${column.align || align}`,
                     {
                       [`${prefixCls}-border-bottom`]: tableBorders.tbody && (dataIndex + 1) !== tableData.length,
                       [`${prefixCls}-border-left`]: tableBorders.vertical && columnIndex !== 0,
                     }
                   ])}
-                  {...column?.onTbodyTdCell?.(dataItem, dataIndex)}
+                  {...column?.onTbodyTdCell?.(column, dataItem, dataIndex)}
                 >
                   {
                     column.bodyCellRender?.(column, dataItem, { columnIndex, dataIndex }) ||
@@ -186,8 +205,37 @@ const Table = <
 
   const tfootRender = () => {
     return (
-      <tfoot>
+      <tfoot className={tableClassName.tfoot}>
+        <tr className={tableClassName.tfootTr}>
+          {columns.map((column, columnIndex) => {
+            const colData = []
+            for (let index = 0; index < tableData.length; index++) {
+              const element = tableData[index][column.dataKey];
+              colData[index] = element
+            }
 
+            return (
+              <td
+                style={{ borderWidth }}
+                key={column.key || column.dataKey as Key}
+                className={tableClassName.tfootTd([
+                  `${prefixCls}-align-${column.align || align}`,
+                  {
+                    [`${prefixCls}-border-left`]: tableBorders.vertical && columnIndex !== 0,
+                  }
+                ])}
+                {...column?.onTfootTdCell?.(column, colData, columnIndex)}
+              >
+                {
+                  column.footerCellRender?.(column, colData, columnIndex) ||
+                  column.title ||
+                  placeholder ||
+                  column.placeholder
+                }
+              </td>
+            )
+          })}
+        </tr>
       </tfoot>
     )
   }

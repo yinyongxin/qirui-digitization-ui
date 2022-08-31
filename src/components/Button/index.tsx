@@ -38,21 +38,29 @@ const Button: FC<ButtonPropsType> = (props) => {
     default: getClassNames([
       `${prefixCls}`,
       `${prefixCls}-size-${size}`,
-      !disabled ? `${prefixCls}-status-${status}` : `${prefixCls}-disabled`,
       `${prefixCls}-level-${level}`,
       `${prefixCls}-buttonShowType-${buttonShowType}`,
+      {
+        [`${prefixCls}-status-${status}`]: !disabled,
+        [`${prefixCls}-disabled`]: disabled
+      },
     ]),
     // 文字按钮样式
     text: getClassNames([
       `${prefixCls}`,
       `${prefixCls}-buttonShowType-text-base`,
-      !disabled ? `${prefixCls}-buttonShowType-text` : `${prefixCls}-buttonShowType-text-disabled`,
+      {
+        [`${prefixCls}-buttonShowType-text`]: !disabled,
+        [`${prefixCls}-buttonShowType-text-disabled`]: disabled
+      },
     ]),
   }
 
   const bottomLine = buttonShowType === 'text' ? getClassNames([
-    textBottomLine ? `${prefixCls}-line-base` : '',
-    !disabled ? `` : `${prefixCls}-line-base-disabled`,
+    {
+      [`${prefixCls}-line-base`]: textBottomLine,
+      [`${prefixCls}-line-base-disabled`]: disabled
+    },
   ]) : ''
 
   /**
