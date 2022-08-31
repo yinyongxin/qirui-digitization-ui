@@ -25,6 +25,7 @@ import FormItem from "./Form/FormItem";
 import Pagination from "./Pagination/index";
 import Breadcrumb from "./Breadcrumb";
 import Page from "./Page";
+import Text from "./Text";
 
 import { GlobalContext } from './config/globalContext'
 
@@ -54,4 +55,5 @@ export {
   Pagination,
   Breadcrumb,
   Page,
+  Text,
 };

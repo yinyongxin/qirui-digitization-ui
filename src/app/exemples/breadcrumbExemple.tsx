@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumb, Page, Title } from "../../components";
+import { Breadcrumb, Page, Title, Text } from "../../components";
 
 const BreadcrumbExemple = () => {
   return (

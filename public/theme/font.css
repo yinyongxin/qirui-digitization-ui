@@ -1,7 +1,5 @@
 :root {
-  --design-base-zh: 'Noto Sans SC';
-  --design-base-en: 'Noto Sans SC';
+  --design-base: 'Noto Sans SC';
   --design-special-number: 'Orbitron';
   --design-special-en: 'Teko';
-  font-size: 14px;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon, Page, Title } from "../../components";
+import { Icon, Page, Title, Text } from "../../components";
 
 const IconExemple = () => {
   return (
@@ -43,6 +43,7 @@ const IconExemple = () => {
             <Icon status="warning" icon="circle-check" />
             <div>warning</div>
           </div>
+          <Text type='error'>Text</Text>
         </div>
       </Title>
     </Page>
