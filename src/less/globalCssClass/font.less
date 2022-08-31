@@ -1,12 +1,37 @@
-.base-zh {
-  font-family: var(--design-base-zh);
+@prefix-font: ~'@{nameSpace}-font';
+
+.@{prefix-font}-base {
+  font-family: var(--design-base);
 }
-.base-en {
-  font-family: var(--design-base-en);
-}
-.special-number {
+
+.@{prefix-font}-special-number {
   font-family: var(--design-special-number);
 }
-.special-en {
+
+.@{prefix-font}-special-en {
   font-family: var(--design-special-en);
+}
+
+.@{prefix-font}-default {
+  color: @design-neutral-color-1;
+}
+
+.@{prefix-font}-secondary {
+  color: @design-neutral-color-2;
+}
+
+.@{prefix-font}-base {
+  color: @design-base-color;
+}
+
+.@{prefix-font}-success {
+  color: @design-success-color;
+}
+
+.@{prefix-font}-warning {
+  color: @design-warning-color;
+}
+
+.@{prefix-font}-error {
+  color: @design-error-color;
 }
