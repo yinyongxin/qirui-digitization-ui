@@ -213,7 +213,6 @@ const Table = <
               const element = tableData[index][column.dataKey];
               colData[index] = element
             }
-
             return (
               <td
                 style={{ borderWidth }}
