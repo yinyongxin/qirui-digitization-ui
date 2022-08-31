@@ -192,9 +192,23 @@ const Table = <
     )
   }
 
+  const paginationRender = () => {
+    return pagination && (isBoolean(pagination) ? (
+      <Pagination />
+    ) : (
+      <Pagination total={total} {...pagination} onChange={(current, pageSize) => {
+        dataAsync.pagination = {
+          current,
+          pageSize
+        }
+        getTableData()
+      }} />
+    ))
+  }
+
 
   return (
-    <div>
+    <>
       <table
         style={{ borderWidth, ...style }}
         className={tableClassName.table}
@@ -204,18 +218,8 @@ const Table = <
         {tbodyRender()}
         {tfootRender()}
       </table>
-      {pagination && (isBoolean(pagination) ? (
-        <Pagination />
-      ) : (
-        <Pagination total={total} {...pagination} onChange={(current, pageSize) => {
-          dataAsync.pagination = {
-            current,
-            pageSize
-          }
-          getTableData()
-        }} />
-      ))}
-    </div>
+      {paginationRender()}
+    </>
   )
 }
 export default Table

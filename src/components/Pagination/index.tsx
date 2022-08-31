@@ -28,6 +28,8 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
     ],
     partsRender,
     className = '',
+    hideOnSinglePage,
+    disabled: disabledProps,
     ...rest
   } = props
 
@@ -78,11 +80,10 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
   }
   const sytlesObj = {
     pagination: getStyles([
-      style,
       {
-        // gridTemplateColumns: `repeat(${sort.length}, 1fr)`,
-        gridAutoFlow: 'column dense'
+        gridAutoFlow: 'column dense',
       },
+      style,
     ])
   }
 
@@ -108,7 +109,7 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
         </div>
       ) : (
         <Button
-          disabled={disabled}
+          disabled={disabledProps || disabled}
           size='small'
           onClick={() => turnButtonFn.prev()}
         >Prev</Button>
@@ -123,7 +124,7 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
       ) : (
         <Button
           size='small'
-          disabled={disabled}
+          disabled={disabledProps || disabled}
           onClick={() => turnButtonFn.next()}
         >Next</Button>
       )
@@ -144,6 +145,7 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
                 <Button
                   level={checked ? 'white' : 'main'}
                   onClick={() => setCurrent(item)}
+                  disabled={disabledProps}
                   key={item}
                   size='small'
                 >
@@ -157,34 +159,33 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
       )
     },
     current: () => {
-      return (
+      return partsRender?.current ? partsRender?.current() : (
         <>
           {current}
         </>
       )
     },
     pageSize: () => {
-      return (
+      return partsRender?.pageSize ? partsRender?.pageSize() : (
         <>
           {pageSize}
         </>
       )
     },
     total: () => {
-      return (
+      return partsRender?.total ? partsRender?.total() : (
         <>
           {total}
         </>
       )
     },
     jumper: () => {
-      return (
+      return partsRender?.jumper ? partsRender?.jumper() : (
         'jumper'
       )
     }
   }
-
-  return (
+  const content = (
     <div style={sytlesObj.pagination} className={classNamesObj.pagination()}>
       {sort.map(item => (
         <div key={item} className={`${prefixCls}-${item}`}>
@@ -193,5 +194,8 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
       ))}
     </div>
   )
+
+  return (hideOnSinglePage ? (total <= pageSize ? <></> : content) : content)
+
 }
 export default Pagination

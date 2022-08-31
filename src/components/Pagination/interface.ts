@@ -31,11 +31,16 @@ export interface PaginationBaseType {
    */
   disabled?: boolean;
   /**
+   * √
    * @zh 是否在只有一页的情况下隐藏
    * @en Whether to hide when there is only one page
    * @version 2.6.0
    */
   hideOnSinglePage?: boolean;
+  /**
+   * √
+   * 排序和控制显示隐藏
+   */
   sort?: PartType[]
   /**
    * @zh 定制结构
@@ -58,12 +63,7 @@ export interface PaginationBaseType {
    */
   size?: 'mini' | 'small' | 'default' | 'large';
   /**
-   * @zh 是否可以改变每页条数
-   * @en Is it possible to change page size
-   * @defaultValue true
-   */
-  sizeCanChange?: boolean;
-  /**
+   * √
    * @zh 每页可以显示数据条数
    * @en The number of data items that can be displayed per page
    */
@@ -76,6 +76,7 @@ export interface PaginationBaseType {
    */
   bufferSize?: number;
   /**
+   * √
    * @zh 变化时的回调
    * @en Callback when page changes
    */
@@ -92,20 +93,10 @@ export interface PaginationBaseType {
    */
   simple?: boolean;
   /**
-   * @zh 是否显示快速跳转到某页，在 `simple` 模式下默认为 true
-   * @en Whether to display quick jump. Defaults to true in `simple` mode
-   */
-  showJumper?: boolean;
-  /**
    * @zh 是否显示更多页码提示（当尚无法计算数据总数时可以使用）
    * @en Whether to show more page number tips (can be used when the total number of data cannot be calculated yet)
    */
   showMore?: boolean;
-  /**
-   * @zh 设置分页器的图标
-   * @en Set icon of the pager
-   */
-  mini?: boolean; // 1.0
 }
 
 export type PaginationPropsType = PaginationBaseType & Omit<JSX.IntrinsicElements['ul'], 'onChange'>

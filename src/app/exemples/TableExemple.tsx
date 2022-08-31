@@ -129,9 +129,10 @@ const IconExemple = () => {
           <Table<TableDataType>
             columns={columns}
             data={data}
-          // pagination={{
-          //   sort: ['total', 'page'],
-          // }}
+            pagination={{
+              sort: ['total', 'page'],
+              total: 200
+            }}
           />
         </div>
       </Title>
@@ -150,11 +151,13 @@ const IconExemple = () => {
               }
               return {
                 list,
-                total: 15,
+                total: 20,
               }
             }}
             pagination={{
               sort: ['total', 'page'],
+              hideOnSinglePage: true,
+              disabled: true
             }}
           />
         </div>
