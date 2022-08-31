@@ -1,9 +1,27 @@
 import React from "react";
 import { Button, Title } from "@/components";
+import { Page } from "../../components";
 
 const ButtonExemple = () => {
   return (
-    <div>
+    <Page
+      pageHeader={{
+        title: '按钮 Button',
+        descriptions: '按钮是一种命令组件，可发起一个即时操作。',
+        breadcrumb: {
+          list: [
+            {
+              title: 'Home',
+              // path: '/home'
+            },
+            {
+              title: 'BreadcrumbExemple',
+              path: '/breadcrumbExemple'
+            }
+          ]
+        }
+      }}
+    >
       <Title type="tooltip" title="大小 size" >
         <div className="flex gap10">
           <Button size="small">Small</Button>
@@ -56,7 +74,7 @@ const ButtonExemple = () => {
           <Button buttonShowType='text' disabled>disabled</Button>
         </div>
       </Title>
-    </div>
+    </Page>
   )
 }
 export default ButtonExemple

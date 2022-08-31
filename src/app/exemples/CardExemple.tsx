@@ -1,9 +1,26 @@
 import React from "react";
-import { Card, Title } from "../../components";
+import { Card, Page, Title } from "../../components";
 
 const CardExemple = () => {
   return (
-    <div>
+    <Page
+      pageHeader={{
+        title: '按钮 Button',
+        descriptions: '按钮是一种命令组件，可发起一个即时操作。',
+        breadcrumb: {
+          list: [
+            {
+              title: 'Home',
+              // path: '/home'
+            },
+            {
+              title: 'BreadcrumbExemple',
+              path: '/breadcrumbExemple'
+            }
+          ]
+        }
+      }}
+    >
       <Title type="tooltip" title="基本" >
         <Card>
           CardContent
