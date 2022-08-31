@@ -1,0 +1,38 @@
+@prefix-page: ~'@{nameSpace}-page';
+
+.@{prefix-page} {
+  color: @design-neutral-color;
+  background-color: @design-neutral-color-9;
+  font-size: @design-font-size-14;
+  font-weight: 400;
+  height: 100%;
+  width: 100%;
+
+  .@{prefix-page}-header {
+    background-color: @design-neutral-color-8;
+    padding: 24px;
+    .flex();
+    .flex-column();
+    gap: 16px;
+  }
+
+  .@{prefix-page}-toBack {
+    .flex();
+    .align-center();
+    // .cursor-pointer();
+    gap: 6px;
+  }
+
+  .@{prefix-page}-title {
+    color: @design-base-color;
+    font-size: @design-font-size-18;
+  }
+
+  .@{prefix-page}-descriptions {
+    color: @design-neutral-color-2;
+  }
+
+  .@{prefix-page}-main {
+    padding: 24px;
+  }
+}

@@ -1,0 +1,21 @@
+@prefix-breadcrumb: ~'@{nameSpace}-breadcrumb';
+
+.@{prefix-breadcrumb} {
+  font-size: @design-font-size-14;
+  color: @design-neutral-color-2;
+  font-weight: 400;
+  .flex();
+  gap: 10px;
+
+  .@{prefix-breadcrumb}-separator {
+    margin-right: 10px;
+  }
+
+  .@{prefix-breadcrumb}-breadcrumbItem {
+    .cursor-pointer();
+  }
+
+  .@{prefix-breadcrumb}-isThis {
+    color: @design-neutral-color;
+  }
+}

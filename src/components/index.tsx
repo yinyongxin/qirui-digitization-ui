@@ -23,6 +23,8 @@ import Portal from "./Portal";
 import Form from "./Form/index";
 import FormItem from "./Form/FormItem";
 import Pagination from "./Pagination/index";
+import Breadcrumb from "./Breadcrumb";
+import Page from "./Page";
 
 import { GlobalContext } from './config/globalContext'
 
@@ -50,4 +52,6 @@ export {
   Form,
   FormItem,
   Pagination,
+  Breadcrumb,
+  Page,
 };

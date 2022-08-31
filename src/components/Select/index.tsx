@@ -298,6 +298,7 @@ const Select: FC<SelectPropsType> = (props) => {
         {contentRender()}
         {iconRender()}
       </div>
+
       <div className={`${prefixCls}-options-centent`}>
         {optionsVisible && optionsRender()}
         {multiple && optionsVisible && (
