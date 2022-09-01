@@ -16,7 +16,7 @@
     .cursor-pointer();
 
     &:hover {
-      border: @design-base-color solid @design-border-sm;
+      border: var(--design-base-color) solid @design-border-sm;
     }
 
     .@{prefix-select}-placeholder {
@@ -58,7 +58,7 @@
       .justify-between();
       .align-center();
       gap: 12px;
-      color: @design-base-color;
+      color: var(--design-base-color);
       background-color: var(--design-base-color-10);
       padding: 0 6px;
       flex-wrap: nowrap;
@@ -67,7 +67,7 @@
   }
 
   .@{prefix-select}-main-border {
-    border: @design-base-color solid @design-border-sm;
+    border: var(--design-base-color) solid @design-border-sm;
   }
 
   .@{prefix-select}-options-centent {
@@ -78,7 +78,7 @@
     z-index: 1000;
 
     .@{prefix-select}-options {
-      border: @design-base-color solid @design-border-sm;
+      border: var(--design-base-color) solid @design-border-sm;
       border-top: none;
       .cursor-pointer();
 
@@ -94,7 +94,7 @@
       }
 
       .@{prefix-select}-option-selected {
-        color: @design-base-color;
+        color: var(--design-base-color);
         background-color: var(--design-base-color-10) !important;
       }
 
@@ -113,7 +113,7 @@
       .flex();
       .flex-center();
       background-color: var(--design-base-color-9);
-      border: @design-base-color solid @design-border-sm;
+      border: var(--design-base-color) solid @design-border-sm;
       bottom: 0;
       cursor: pointer;
     }

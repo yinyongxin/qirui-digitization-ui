@@ -4,11 +4,13 @@
   font-size: @design-font-size-14;
   .flex();
   flex-direction: column;
+
   .@{prefix-card}-header {
     background-color: @design-neutral-color-7;
     border-bottom: @design-neutral-color-5 solid @design-border-sm;
     padding: 16px;
   }
+
   .@{prefix-card}-header-default {
     min-height: 40px;
     padding: 0 16px;
@@ -18,30 +20,37 @@
     .justify-between();
     .align-center();
   }
+
   .@{prefix-card}-footer {
     background-color: @design-neutral-color-7;
     border-top: @design-neutral-color-5 solid @design-border-sm;
     padding: 16px;
   }
+
   .@{prefix-card}-body {
     background-color: @design-neutral-color-8;
     padding: 16px;
     flex: 1;
   }
+
   .@{prefix-card}-status {
     width: 12px;
     height: 12px;
     border-radius: 50%;
   }
+
   .@{prefix-card}-status-default {
-    background-color: @design-base-color;
+    background-color: var(--design-base-color);
   }
+
   .@{prefix-card}-status-success {
     background-color: @design-success-color;
   }
+
   .@{prefix-card}-status-error {
     background-color: @design-error-color;
   }
+
   .@{prefix-card}-status-warning {
     background-color: @design-warning-color;
   }
@@ -50,12 +59,15 @@
 .@{prefix-card}-border-top {
   border-top: @design-neutral-color-5 solid @design-border-sm;
 }
+
 .@{prefix-card}-border-bottom {
   border-bottom: @design-neutral-color-5 solid @design-border-sm;
 }
+
 .@{prefix-card}-border-right {
   border-right: @design-neutral-color-5 solid @design-border-sm;
 }
+
 .@{prefix-card}-border-left {
   border-left: @design-neutral-color-5 solid @design-border-sm;
 }
