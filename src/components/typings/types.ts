@@ -43,4 +43,6 @@ export type DesignTypes = {
   KeyType: string | number | symbol;
   Padding: Record<DesignTypes['Direction'], boolean>
   Margin: Record<DesignTypes['Direction'], boolean>
+  Shadow: 'sm' | 'base' | 'md' | 'lg' | 'xl'
+  Show: 'always' | 'never' | 'hover' | 'active' | 'focus'
 }

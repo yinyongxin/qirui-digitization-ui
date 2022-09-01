@@ -77,6 +77,16 @@ const CardExemple = () => {
           {`border={['right']}`}
         </Card>
       </Title>
+      <Title type="tooltip" title="阴影 shadow" >
+        <Card width={200} shadow="base" shadowShow='always'>
+          {`border={['right']}`}
+        </Card>
+
+        <div style={{ height: 30 }}></div>
+        <Card width={200} shadow="base" shadowShow="hover">
+          {`border={['right']}`}
+        </Card>
+      </Title>
     </Page>
   )
 }
