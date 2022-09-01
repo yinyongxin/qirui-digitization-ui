@@ -1,7 +1,7 @@
 @prefix-tabPane: ~'@{nameSpace}-tabPane';
 
 .@{prefix-tabPane} {
-  color: @design-neutral-color;
+  color: var(--design-neutral-color);
   font-size: @design-font-size-14;
   position: relative;
   .cursor-pointer();
@@ -10,8 +10,8 @@
 
 .@{prefix-tabPane}-line-base {
   transition: all 0.3s;
-  border-bottom: @design-border-sm solid @design-neutral-color;
-  color: @design-neutral-color-2;
+  border-bottom: @design-border-sm solid var(--design-neutral-color);
+  color: var(--design-neutral-color-2);
   padding: 0 0 10px 0;
   display: flex;
   gap: 8px;
@@ -19,7 +19,7 @@
   .@{prefix-tabPane}-line-base-num {
     font-family: var(--design-special-number);
     padding: 0px 4px;
-    background-color: @design-neutral-color-6;
+    background-color: var(--design-neutral-color-6);
   }
 }
 
@@ -35,12 +35,12 @@
 
 .@{prefix-tabPane}-line-disabled {
   .cursor-not-allowed();
-  border-bottom-color: @design-neutral-color-3;
-  color: @design-neutral-color-3;
+  border-bottom-color: var(--design-neutral-color-3);
+  color: var(--design-neutral-color-3);
 
   .@{prefix-tabPane}-line-disabled-num {
-    border-bottom-color: @design-neutral-color-3;
-    color: @design-neutral-color-3;
+    border-bottom-color: var(--design-neutral-color-3);
+    color: var(--design-neutral-color-3);
   }
 }
 
@@ -59,7 +59,7 @@
 
 .@{prefix-tabPane}-card-disabled {
   .cursor-not-allowed();
-  color: @design-neutral-color-3;
+  color: var(--design-neutral-color-3);
 }
 
 .@{prefix-tabPane}-miniCard-base {
@@ -67,8 +67,8 @@
   transition: all 0.3s;
   box-sizing: border-box;
   padding: 10px 20px;
-  color: @design-neutral-color-2;
-  background-color: @design-neutral-color-6;
+  color: var(--design-neutral-color-2);
+  background-color: var(--design-neutral-color-6);
 }
 
 .@{prefix-tabPane}-miniCard-checked {
@@ -78,7 +78,7 @@
 
 .@{prefix-tabPane}-miniCard-disabled {
   .cursor-not-allowed();
-  color: @design-neutral-color-3;
+  color: var(--design-neutral-color-3);
 }
 
 .@{prefix-tabPane}-miniCard-check-border {
@@ -135,7 +135,7 @@
 .@{prefix-tabPane}-text-base {
   transition: all 0.3s;
   position: relative;
-  color: @design-neutral-color-2;
+  color: var(--design-neutral-color-2);
   padding: 0 12px;
 }
 
@@ -145,7 +145,7 @@
 
 .@{prefix-tabPane}-text-disabled {
   .cursor-not-allowed();
-  color: @design-neutral-color-3;
+  color: var(--design-neutral-color-3);
 }
 
 .@{prefix-tabPane}-text-check-left-border {

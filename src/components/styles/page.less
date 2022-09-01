@@ -1,15 +1,15 @@
 @prefix-page: ~'@{nameSpace}-page';
 
 .@{prefix-page} {
-  color: @design-neutral-color;
-  background-color: @design-neutral-color-9;
+  color: var(--design-neutral-color);
+  background-color: var(--design-neutral-color-9);
   font-size: @design-font-size-14;
   font-weight: 400;
   min-height: 100%;
   min-width: 100%;
 
   .@{prefix-page}-header {
-    background-color: @design-neutral-color-8;
+    background-color: var(--design-neutral-color-8);
     .flex();
     .flex-column();
     gap: 16px;
@@ -36,7 +36,7 @@
   }
 
   .@{prefix-page}-descriptions {
-    color: @design-neutral-color-2;
+    color: var(--design-neutral-color-2);
   }
 
   .@{prefix-page}-main {

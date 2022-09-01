@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
-  color: @design-neutral-color ;
+  color: var(--design-neutral-color) ;
   cursor: pointer;
   transition: all 0.2s;
   border: none;
@@ -75,27 +75,27 @@
 .@{prefix-button}-level-main {}
 
 .@{prefix-button}-level-secondary {
-  color: @design-neutral-color-2;
-  border-color: @design-neutral-color-2;
+  color: var(--design-neutral-color-2);
+  border-color: var(--design-neutral-color-2);
 
   &:hover {
-    background-color: @design-neutral-color-5;
+    background-color: var(--design-neutral-color-5);
   }
 }
 
 .@{prefix-button}-level-white {
-  color: @design-neutral-color;
-  border-color: @design-neutral-color;
+  color: var(--design-neutral-color);
+  border-color: var(--design-neutral-color);
 
   &:hover {
-    background-color: @design-neutral-color-5;
+    background-color: var(--design-neutral-color-5);
   }
 }
 
 .@{prefix-button}-disabled {
-  background-color: @design-neutral-color-6  !important;
-  color: @design-neutral-color-3;
-  border-color: @design-neutral-color-3;
+  background-color: var(--design-neutral-color-6) !important;
+  color: var(--design-neutral-color-3);
+  border-color: var(--design-neutral-color-3);
   cursor: not-allowed;
 }
 
@@ -108,7 +108,7 @@
 
 .@{prefix-button}-buttonShowType-text {
   cursor: pointer;
-  color: @design-neutral-color-1;
+  color: var(--design-neutral-color-1);
 
   &:hover {
     background-color: unset;
@@ -122,7 +122,7 @@
   height: unset;
   padding: 0;
   border: none;
-  color: @design-neutral-color-2;
+  color: var(--design-neutral-color-2);
 }
 
 .@{prefix-button}-line-base {
@@ -131,7 +131,7 @@
 }
 
 .@{prefix-button}-line-default {
-  border-bottom-color: @design-neutral-color-1  !important;
+  border-bottom-color: var(--design-neutral-color-1) !important;
 
   &:hover {
     border-bottom-color: var(--design-base-color) !important;
