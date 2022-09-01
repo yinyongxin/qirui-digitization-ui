@@ -28,16 +28,6 @@
   left: 0;
   z-index: 1000;
 
-  .@{prefix-drawer}-mask {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: var(--design-neutral-color-2);
-    opacity: 0.5;
-  }
-
   .@{prefix-drawer}-main {
     position: absolute;
     top: 0;
@@ -74,19 +64,19 @@
         color: var(--design-base-color);
         .flex();
         .align-center();
-        background-color: var(--design-neutral-color-8);
+        background-color: var(--design-bg-color-3);
       }
 
       .@{prefix-drawer}-container {
         flex: 1;
         padding: 20px;
-        background-color: var(--design-neutral-color-9);
+        background-color: var(--design-bg-color-4);
         .scrollbar-lg();
         overflow: auto;
       }
 
       .@{prefix-drawer}-footer {
-        background-color: var(--design-neutral-color-8);
+        background-color: var(--design-bg-color-3);
         .flex();
         .align-center();
         gap: 10px;
