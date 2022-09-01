@@ -35,10 +35,10 @@ export interface PageBaseType {
      * 头部内联样式
      */
     style?: React.CSSProperties,
-    padding: DesignTypes['Padding']
+    padding?: DesignTypes['Padding']
   },
   pageBody?: {
-    padding: DesignTypes['Padding']
+    padding?: DesignTypes['Padding']
   }
   /**
    * √

@@ -43,7 +43,6 @@ const IconExemple = () => {
             <Icon status="warning" icon="circle-check" />
             <div>warning</div>
           </div>
-          <Text type='error'>Text</Text>
         </div>
       </Title>
     </Page>
