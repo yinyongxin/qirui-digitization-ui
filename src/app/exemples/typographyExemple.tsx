@@ -34,7 +34,7 @@ const IconExemple = () => {
           <Text copyable disabled>disabled</Text>
         </div>
       </Title>
-      <Title margin={{ top: false }} type="tooltip" title="文本 Text" >
+      <Title type="tooltip" title="文本 Text" >
         <div className="flex gap20">
           <Text type='default'>default</Text>
           <Text type='secondary'>secondary</Text>

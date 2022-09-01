@@ -52,7 +52,7 @@ function App() {
         }}
         style={{
           overflow: 'auto',
-          height: '100vh'
+          maxHeight: '100vh'
         }}
         defaultActiveKeys={[location.pathname.split('/')[1]]}
         menuTree={data.menuTree}

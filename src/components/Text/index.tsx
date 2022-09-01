@@ -60,10 +60,9 @@ const Text = (props: TextPropsType) => {
         setIsCopyable(true)
       })
       data.resetIsCopyableId = setTimeout(() => {
-        console.log('data.resetIsCopyableId', data.resetIsCopyableId);
         setIsCopyable(false)
         clearTimeout(data.resetIsCopyableId!)
-      }, 1000)
+      }, 2000)
     }
   }
 

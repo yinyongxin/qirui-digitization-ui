@@ -5,8 +5,8 @@
 .app {
   color: #fff;
   box-sizing: border-box;
-
-  min-height: 100vh;
+  height: 100%;
+  width: 100%;
   display: grid;
   grid-template-columns: 220px minmax(1200px, auto);
 
@@ -14,5 +14,6 @@
     background: var(--design-neutral-color-7);
     overflow: auto;
     height: 100vh;
+    .scrollbar-lg();
   }
 }

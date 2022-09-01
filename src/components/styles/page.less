@@ -5,9 +5,8 @@
   background-color: @design-neutral-color-9;
   font-size: @design-font-size-14;
   font-weight: 400;
-  height: 100%;
-  overflow: auto;
-  width: 100%;
+  min-height: 100%;
+  min-width: 100%;
 
   .@{prefix-page}-header {
     background-color: @design-neutral-color-8;
@@ -21,7 +20,7 @@
   .@{prefix-page}-header-sticky {
     position: sticky;
     position: -webkit-sticky;
-    z-index: 500;
+    z-index: 1;
     top: 0;
   }
 

@@ -55,10 +55,11 @@
 }
 
 .scrollbar-lg {
+
+  /*滚动条整体样式*/
   &::-webkit-scrollbar {
-    /*滚动条整体样式*/
-    width: 8px;
     /*高宽分别对应横竖滚动条的尺寸*/
+    width: 8px;
     height: 8px;
   }
 
@@ -67,9 +68,10 @@
     background: @design-base-color;
   }
 
-  // &::-webkit-scrollbar-track {
-  //   /*滚动条里面轨道*/
-  // }
+  &::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    background: @design-neutral-color-4;
+  }
 }
 
 // 占据整个元素
