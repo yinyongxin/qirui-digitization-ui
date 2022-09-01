@@ -42,8 +42,21 @@ const Button: FC<ButtonPropsType> = (props) => {
       `${prefixCls}-level-${level}`,
       `${prefixCls}-buttonShowType-${buttonShowType}`,
       {
-        [`${prefixCls}-status-${status}`]: !disabled,
-        [`${prefixCls}-disabled`]: disabled
+        [`${prefixCls}-font-status-${status}`]: !disabled,
+        [`${prefixCls}-font-status-${status}-hover`]: !disabled,
+
+        [`${prefixCls}-bg-status-${status}`]: !disabled,
+        [`${prefixCls}-bg-status-${status}-hover`]: !disabled,
+
+        [`${prefixCls}-border-status-${status}`]: !disabled,
+        [`${prefixCls}-border-status-${status}-hover`]: !disabled,
+
+        [`${prefixCls}-font-disabled`]: disabled,
+        [`${prefixCls}-bg-disabled`]: disabled,
+        [`${prefixCls}-border-disabled`]: disabled,
+        [`${prefixCls}-font-disabled-hover`]: disabled,
+        [`${prefixCls}-bg-disabled-hover`]: disabled,
+        [`${prefixCls}-border-disabled-hover`]: disabled,
       },
       className
     ]),
