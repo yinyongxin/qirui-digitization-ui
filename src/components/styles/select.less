@@ -9,14 +9,14 @@
   .@{prefix-select}-main {
     min-width: 120px;
     height: 40px;
-    border: var(--design-neutral-color-5) solid @design-border-sm;
+    border: var(--design-neutral-color-5) solid var(--design-border-sm);
     gap: 10px;
     .flex();
     .justify-between();
     .cursor-pointer();
 
     &:hover {
-      border: var(--design-base-color) solid @design-border-sm;
+      border: var(--design-base-color) solid var(--design-border-sm);
     }
 
     .@{prefix-select}-placeholder {
@@ -67,7 +67,7 @@
   }
 
   .@{prefix-select}-main-border {
-    border: var(--design-base-color) solid @design-border-sm;
+    border: var(--design-base-color) solid var(--design-border-sm);
   }
 
   .@{prefix-select}-options-centent {
@@ -78,7 +78,7 @@
     z-index: 1000;
 
     .@{prefix-select}-options {
-      border: var(--design-base-color) solid @design-border-sm;
+      border: var(--design-base-color) solid var(--design-border-sm);
       border-top: none;
       .cursor-pointer();
 
@@ -113,7 +113,7 @@
       .flex();
       .flex-center();
       background-color: var(--design-base-color-9);
-      border: var(--design-base-color) solid @design-border-sm;
+      border: var(--design-base-color) solid var(--design-border-sm);
       bottom: 0;
       cursor: pointer;
     }

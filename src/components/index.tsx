@@ -26,7 +26,7 @@ import Pagination from "./Pagination/index";
 import Breadcrumb from "./Breadcrumb";
 import Page from "./Page";
 import Text from "./Text";
-import Typography from "./Typography";
+import Typography from "./Exemple copy";
 
 import { GlobalContext } from './config/globalContext'
 

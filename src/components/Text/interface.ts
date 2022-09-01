@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react"
 import { DesignTypes } from "../typings";
-import { OperationsProps } from "../Typography/interface";
+import { OperationsProps } from "../Exemple copy/interface";
 
 export interface TextBaseType {
   /**
