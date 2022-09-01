@@ -1,6 +1,6 @@
 import React, { FC, useContext, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
-import { getClassNames, getStyles } from "../utils/tools"
+import { getClassNames, getStyles, isBoolean, isString } from "../utils/tools"
 import { TextPropsType } from "./interface"
 
 const Text = (props: TextPropsType) => {
@@ -18,17 +18,22 @@ const Text = (props: TextPropsType) => {
     delete: deleteProps,
     type = 'default',
     level = 3,
+    mark,
+    disabled,
     ...rest
   } = props
 
   const classNamesObj = {
     text: getClassNames([
       `${prefixCls}`,
-      `${classNamePrefix}-font-${type}`,
       `${prefixCls}-level-${level}`,
       {
+        [`${classNamePrefix}-font-${type}`]: !disabled,
         [`${prefixCls}-underline`]: underline,
         [`${prefixCls}-delete`]: deleteProps,
+        [`${prefixCls}-mark`]: mark && isString(mark),
+        [`${classNamePrefix}-bg-${mark}`]: mark && isString(mark),
+        [`${classNamePrefix}-base-disabled`]: disabled,
       },
       className,
     ])
@@ -40,7 +45,13 @@ const Text = (props: TextPropsType) => {
 
   const stylesObj = {
     text: getStyles([
-      style
+      style,
+      {
+        style: {
+          backgroundColor: !isString(mark) && mark?.color || ''
+        },
+        condition: !isString(mark) && !!mark?.color
+      }
     ])
   }
 

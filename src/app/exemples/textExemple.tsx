@@ -30,6 +30,8 @@ const IconExemple = () => {
           <Text type='warning'>warning</Text>
           <Text underline>underline</Text>
           <Text delete>underline</Text>
+          <Text mark='warning'>mark</Text>
+          <Text disabled>disabled</Text>
         </div>
       </Title>
     </Page>

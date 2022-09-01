@@ -34,6 +34,11 @@ export interface TextBaseType {
    * 字体
    */
   font?: 'sc' | 'teko' | 'orbitron'
+  /**
+   * @zh 标记样式
+   * @en Mark style
+   */
+  mark?: (DesignTypes['Status'] | 'base') | { color: string };
 }
 
 export type TextPropsType = TextBaseType & JSX.IntrinsicElements['span']
