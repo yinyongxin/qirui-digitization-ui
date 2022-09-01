@@ -7,7 +7,7 @@ export const getValueIfQualified = <O = unknown>(value: O, condition: boolean | 
   if (isBoolean(condition) && condition) {
     return value
   } else if (isArray(condition)) {
-    const isHas = !isUndefined(condition.find(item => item === false))
+    const isHas = !(condition.findIndex(item => item === false) !== -1)
     if (isHas) {
       return value
     }

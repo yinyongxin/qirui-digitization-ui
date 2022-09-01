@@ -8,16 +8,10 @@ export interface ButtonBaseType {
    */
   size?: DesignTypes['Size'];
   /**
-   * 两种级别的按钮 
-   * 主要：main一般用于确认 
-   * 次要：secondary一般用于取消
-   */
-  level?: DesignTypes['Level'] | 'white';
-  /**
    * 状态 
    * 默认：default 成功：warnnig 失败：error 警告：warnning
    */
-  status?: DesignTypes['Status'];
+  status?: DesignTypes['Status'] | 'secondary';
   /**
    * 按钮类型 默认： default  文字：text
    */

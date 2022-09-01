@@ -32,17 +32,11 @@ const ButtonExemple = () => {
       <Title type="tooltip" title="状态 status" >
         <div className="flex gap10">
           <Button >default</Button>
+          <Button status='secondary' >secondary</Button>
+          <Button status='primary' >primary</Button>
           <Button status="success">Success</Button>
           <Button status="error">Error</Button>
           <Button status="warning">Warning</Button>
-        </div>
-      </Title>
-
-      <Title type="tooltip" title="水平级别" >
-        <div className="flex gap10">
-          <Button level="main">main</Button>
-          <Button level="white">White</Button>
-          <Button level="secondary">Secondary</Button>
         </div>
       </Title>
 

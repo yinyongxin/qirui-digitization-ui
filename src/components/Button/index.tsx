@@ -1,7 +1,7 @@
 import React, { FC, useContext } from "react"
 import { GlobalContext } from "../config/globalContext"
 import { DesignTypes } from "../typings"
-import { getClassNames } from "../utils/tools"
+import { getClassNames, getValueIfQualified } from "../utils/tools"
 import { ButtonPropsType } from "./interface"
 
 const Button: FC<ButtonPropsType> = (props) => {
@@ -13,12 +13,12 @@ const Button: FC<ButtonPropsType> = (props) => {
 
   const prefixCls = `${classNamePrefix}-button`
 
+
   const {
-    children,
     status = 'default',
-    size,
     buttonShowType = 'default',
-    level = 'main',
+    children,
+    size,
     disabled = false,
     prefix,
     suffix,
@@ -31,45 +31,53 @@ const Button: FC<ButtonPropsType> = (props) => {
     ...props
   }
 
-  /**
-   * button不同模式下的className
-   */
-  const buttonShowTypes: Record<DesignTypes['ButtonShowType'], string> = {
-    // 默认按钮样式
-    default: getClassNames([
-      `${prefixCls}`,
+  const defaultBtn = getValueIfQualified(
+    [
       `${prefixCls}-size-${size}`,
-      `${prefixCls}-level-${level}`,
-      `${prefixCls}-buttonShowType-${buttonShowType}`,
-      {
-        [`${prefixCls}-font-status-${status}`]: !disabled,
-        [`${prefixCls}-font-status-${status}-hover`]: !disabled,
+      ...(getValueIfQualified(
+        [
+          `${prefixCls}-font-${status}`,
+          `${prefixCls}-font-${status}-hover`,
 
-        [`${prefixCls}-bg-status-${status}`]: !disabled,
-        [`${prefixCls}-bg-status-${status}-hover`]: !disabled,
+          `${prefixCls}-bg-${status}`,
+          `${prefixCls}-bg-${status}-hover`,
 
-        [`${prefixCls}-border-status-${status}`]: !disabled,
-        [`${prefixCls}-border-status-${status}-hover`]: !disabled,
+          `${prefixCls}-border-${status}`,
+          `${prefixCls}-border-${status}-hover`,
+        ],
+        [!disabled]
+      ) || []),
+    ],
+    [buttonShowType === 'default']
+  ) || []
 
-        [`${prefixCls}-font-disabled`]: disabled,
-        [`${prefixCls}-bg-disabled`]: disabled,
-        [`${prefixCls}-border-disabled`]: disabled,
-        [`${prefixCls}-font-disabled-hover`]: disabled,
-        [`${prefixCls}-bg-disabled-hover`]: disabled,
-        [`${prefixCls}-border-disabled-hover`]: disabled,
-      },
-      className
-    ]),
-    // 文字按钮样式
-    text: getClassNames([
+  const textBtn = getValueIfQualified([
+    `${prefixCls}-border-text`,
+    `${prefixCls}-bg-text`,
+    ...(getValueIfQualified([
+      `${prefixCls}-border-text`,
+      `${prefixCls}-bg-text`,
+      `${prefixCls}-font-${status}`,
+      `${prefixCls}-font-${status}-hover`,
+    ], [!disabled]) || []),
+  ], buttonShowType === 'text') || []
+
+  const classNamesObj = {
+    comp: getClassNames([
       `${prefixCls}`,
-      `${prefixCls}-buttonShowType-text-base`,
-      {
-        [`${prefixCls}-buttonShowType-text`]: !disabled,
-        [`${prefixCls}-buttonShowType-text-disabled`]: disabled
-      },
+      ...defaultBtn,
+      ...textBtn,
+      ...(getValueIfQualified(
+        [
+          `${prefixCls}-disabled`,
+          `${prefixCls}-font-disabled`,
+          `${prefixCls}-bg-disabled`,
+          `${prefixCls}-border-disabled`,
+        ],
+        [disabled]
+      ) || []),
       className
-    ]),
+    ])
   }
 
   const bottomLine = buttonShowType === 'text' ? getClassNames([
@@ -89,7 +97,7 @@ const Button: FC<ButtonPropsType> = (props) => {
 
   return (
     <button
-      className={buttonShowTypes[buttonShowType]}
+      className={classNamesObj.comp}
       onClick={handleClick}
       {...rest}
     >

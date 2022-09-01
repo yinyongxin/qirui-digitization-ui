@@ -175,7 +175,7 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
           <>
             <Button
               onClick={onCancelHandle}
-              level="secondary"
+              status="secondary"
               size='large'
               {...cancelButtonProps}
             >{cancelText}</Button>

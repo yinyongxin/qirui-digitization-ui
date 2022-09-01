@@ -8,7 +8,7 @@ export type DesignTypes = {
    * 默认有四种状态 
    * default: 默认    success：成功    warnnig：警告     error；错误 
    */
-  Status: 'default' | 'success' | 'warning' | 'error';
+  Status: 'default' | 'primary' | 'success' | 'warning' | 'error';
   /**
   * 默认有四种状态 
   * default: 默认    success：成功    warnnig：警告     error；错误 

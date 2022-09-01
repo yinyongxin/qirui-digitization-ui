@@ -90,7 +90,6 @@ const Upload: FC<UploadPropsType> = (props) => {
       return (
         <Button
           size='large'
-          level="white"
           disabled={disabled}
           onClick={buttonHandleClick}
         >
