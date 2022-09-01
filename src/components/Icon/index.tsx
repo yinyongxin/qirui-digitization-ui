@@ -1,6 +1,6 @@
 import React, { FC, useContext, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
-import { ClassNameType, getClassNames } from "../utils/tools"
+import { ClassNameType, getClassNames, getStyles } from "../utils/tools"
 import { IconPropsType } from "./interface"
 
 const Icon: FC<IconPropsType> = (props, ref) => {
@@ -17,7 +17,7 @@ const Icon: FC<IconPropsType> = (props, ref) => {
     type = 'solid',
     icon = '',
     style,
-    size = 16,
+    size,
     className = '',
     ...rest
   } = props
@@ -36,10 +36,15 @@ const Icon: FC<IconPropsType> = (props, ref) => {
   return (
     <i
       className={classNamesObj.icon()}
-      style={{
-        fontSize: size,
-        ...style
-      }}
+      style={getStyles([
+        style,
+        {
+          style: {
+            fontSize: size,
+          },
+          condition: !!size
+        }
+      ])}
       {...rest}
     />
   )

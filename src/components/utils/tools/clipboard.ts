@@ -1,6 +1,6 @@
 // https://github.com/feross/clipboard-copy/blob/master/index.js
 
-export default async function clipboard(text: string) {
+export async function clipboard(text: string) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     try {
       await navigator.clipboard.writeText(text);

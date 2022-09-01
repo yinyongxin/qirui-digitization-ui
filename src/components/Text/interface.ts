@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from "react"
 import { DesignTypes } from "../typings";
+import { OperationsProps } from "../Typography/interface";
 
 export interface TextBaseType {
   /**
@@ -41,4 +42,4 @@ export interface TextBaseType {
   mark?: (DesignTypes['Status'] | 'base') | { color: string };
 }
 
-export type TextPropsType = TextBaseType & JSX.IntrinsicElements['span']
+export type TextPropsType = TextBaseType & JSX.IntrinsicElements['span'] & OperationsProps

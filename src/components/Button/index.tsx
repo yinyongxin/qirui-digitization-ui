@@ -22,6 +22,7 @@ const Button: FC<ButtonPropsType> = (props) => {
     disabled = false,
     prefix,
     suffix,
+    className,
     textBottomLine = false,
     onClick,
     ...rest
@@ -44,6 +45,7 @@ const Button: FC<ButtonPropsType> = (props) => {
         [`${prefixCls}-status-${status}`]: !disabled,
         [`${prefixCls}-disabled`]: disabled
       },
+      className
     ]),
     // 文字按钮样式
     text: getClassNames([
@@ -53,6 +55,7 @@ const Button: FC<ButtonPropsType> = (props) => {
         [`${prefixCls}-buttonShowType-text`]: !disabled,
         [`${prefixCls}-buttonShowType-text-disabled`]: disabled
       },
+      className
     ]),
   }
 

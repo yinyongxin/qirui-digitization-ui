@@ -22,6 +22,7 @@ const Title: FC<TitlePropsType> = (props, ref) => {
     divider = true,
     heading = 1,
     margin: marginProps,
+    bodyProps,
     ...rest
   } = props
 
@@ -30,16 +31,23 @@ const Title: FC<TitlePropsType> = (props, ref) => {
     ...marginProps
   }
 
-  const titleClassName = getClassNames([
-    `${prefixCls}`,
-    {
-      [`${prefixCls}-margin-top`]: isBoolean(margin?.top) && margin.top,
-      [`${prefixCls}-margin-right`]: isBoolean(margin?.right) && margin.right,
-      [`${prefixCls}-margin-bottom`]: isBoolean(margin?.bottom) && margin.bottom,
-      [`${prefixCls}-margin-left`]: isBoolean(margin?.left) && margin.left,
-    },
-    className
-  ])
+  const classNamesObj = {
+    title: getClassNames([
+      `${prefixCls}`,
+      {
+        [`${prefixCls}-margin-top`]: isBoolean(margin?.top) && margin.top,
+        [`${prefixCls}-margin-right`]: isBoolean(margin?.right) && margin.right,
+        [`${prefixCls}-margin-bottom`]: isBoolean(margin?.bottom) && margin.bottom,
+        [`${prefixCls}-margin-left`]: isBoolean(margin?.left) && margin.left,
+      },
+      className
+    ]),
+    body: getClassNames([
+      `${prefixCls}-body`,
+      bodyProps?.className
+    ])
+  }
+
 
   const tooltipsvg = (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -54,14 +62,13 @@ const Title: FC<TitlePropsType> = (props, ref) => {
     </svg>
   )
 
-  const childrenRender = () => {
+  const bodynRender = () => {
     return children && (
-      <div className={`${prefixCls}-children`}>
+      <div {...bodyProps} className={`${prefixCls}-body`}>
         {children}
       </div>
     )
   }
-  console.log(getValueIfQualified(margin.top, !isBoolean(margin?.top)));
 
   const stylesObj = {
     title: getStyles([
@@ -86,7 +93,7 @@ const Title: FC<TitlePropsType> = (props, ref) => {
   }
 
   return (
-    <div {...rest} style={stylesObj.title} className={titleClassName}>
+    <div {...rest} style={stylesObj.title} className={classNamesObj.title}>
       <div className={`${prefixCls}-main`}>
         <Text level={heading} type='base' {...textProps}>{title}</Text>
         {tooltip === 'tooltip' && (
@@ -96,7 +103,7 @@ const Title: FC<TitlePropsType> = (props, ref) => {
         )}
       </div>
       {dividerRender()}
-      {childrenRender()}
+      {bodynRender()}
     </div>
   )
 }

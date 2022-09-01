@@ -6,7 +6,8 @@ export interface TitleBaseType {
   tooltip?: string
   heading?: TextBaseType['level']
   divider?: boolean
-  textProps?: TextBaseType
+  textProps?: TextBaseType,
+  bodyProps?: JSX.IntrinsicElements['div'],
   margin?: {
     top?: boolean | number | string,
     right?: boolean | number | string,

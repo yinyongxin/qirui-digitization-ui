@@ -1,6 +1,9 @@
-import React, { FC, useContext, useState } from "react"
+import React, { FC, useContext, useEffect, useState } from "react"
+import Button from "../Button"
 import { GlobalContext } from "../config/globalContext"
-import { getClassNames, getStyles, isBoolean, isString } from "../utils/tools"
+import Icon from "../Icon"
+import { useData } from "../utils/hooks"
+import { getClassNames, getStyles, clipboard, isString } from "../utils/tools"
 import { TextPropsType } from "./interface"
 
 const Text = (props: TextPropsType) => {
@@ -9,6 +12,14 @@ const Text = (props: TextPropsType) => {
   } = useContext(GlobalContext);
 
   const prefixCls = `${classNamePrefix}-text`
+
+  const [isCopyable, setIsCopyable] = useState(false)
+
+  const data = useData<{
+    resetIsCopyableId: NodeJS.Timeout | null
+  }>({
+    resetIsCopyableId: null
+  })
 
   const {
     style,
@@ -20,6 +31,7 @@ const Text = (props: TextPropsType) => {
     level = 5,
     mark,
     disabled,
+    copyable,
     ...rest
   } = props
 
@@ -36,11 +48,34 @@ const Text = (props: TextPropsType) => {
         [`${classNamePrefix}-base-disabled`]: disabled,
       },
       className,
+    ]),
+    copyable: getClassNames([
+      `${prefixCls}-copyable`,
     ])
   }
 
-  const getChildren = () => {
+  const copyableHandle = async () => {
+    if (!isCopyable) {
+      clipboard(children as string).then(() => {
+        setIsCopyable(true)
+      })
+      data.resetIsCopyableId = setTimeout(() => {
+        console.log('data.resetIsCopyableId', data.resetIsCopyableId);
+        setIsCopyable(false)
+        clearTimeout(data.resetIsCopyableId!)
+      }, 1000)
+    }
+  }
 
+  const copyableRender = () => {
+    return (
+      <span
+        className={classNamesObj.copyable}
+        onClick={copyableHandle}
+      >
+        <Icon status={isCopyable ? 'success' : 'default'} icon={isCopyable ? 'circle-check' : 'copy'} />
+      </span>
+    )
   }
 
   const stylesObj = {
@@ -55,6 +90,12 @@ const Text = (props: TextPropsType) => {
     ])
   }
 
+  useEffect(() => {
+    return () => {
+      clearTimeout(data.resetIsCopyableId!)
+    }
+  }, [])
+
   return (
     <span
       className={classNamesObj.text}
@@ -62,6 +103,7 @@ const Text = (props: TextPropsType) => {
       {...rest}
     >
       {children}
+      {copyable && copyableRender()}
     </span>
   )
 }

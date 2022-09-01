@@ -4,6 +4,18 @@
   // text-decoration: line-through;
 }
 
+.@{prefix-text}-copyable {
+  // text-decoration: line-through;
+  margin-left: 4px;
+  .cursor-pointer();
+  padding: 0 4px;
+
+  &:hover {
+    border-radius: 2px;
+    background-color: var(--design-neutral-color-4);
+  }
+}
+
 .@{prefix-text}-underline {
   text-decoration: underline;
 }
