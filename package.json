@@ -31,7 +31,7 @@
       "require": "./dist/theme/index.css"
     }
   },
-  "version": "1.2.8",
+  "version": "1.2.9",
   "scripts": {
     "start": "npm run dev",
     "dev": "vite --host",
