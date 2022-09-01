@@ -5,22 +5,22 @@ const IconExemple = () => {
   return (
     <Page
       pageHeader={{
-        title: '文字 Text',
-        descriptions: '这里有 fontawesome 内置的免费图标。',
+        title: '排版 Typography',
+        descriptions: '用于展示标题、段落、文本内容。',
         breadcrumb: {
           list: [
             {
               title: 'Home',
             },
             {
-              title: 'TextExemple',
-              path: '/textExemple'
+              title: 'TypographyExemple',
+              path: '/typographyExemple'
             }
           ]
         }
       }}
     >
-      <Title type="tooltip" title="基本Icon status" >
+      <Title margin={{ top: false }} type="tooltip" title="文本" >
         <div className="flex gap20">
           <Text type='default'>default</Text>
           <Text type='secondary'>secondary</Text>
@@ -34,7 +34,7 @@ const IconExemple = () => {
           <Text disabled>disabled</Text>
         </div>
       </Title>
-    </Page>
+    </Page >
   )
 }
 export default IconExemple

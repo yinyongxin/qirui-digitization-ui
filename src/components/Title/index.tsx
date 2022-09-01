@@ -1,8 +1,8 @@
 import React, { FC, useContext, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
-import { getClassNames } from "../utils/tools"
+import { getClassNames, getStyles, getValueIfQualified, isBoolean } from "../utils/tools"
 import { TitlePropsType } from "./interface"
-import Tooltipsvg from './Tooltipsvg.svg'
+import Text from '../Text'
 
 const Title: FC<TitlePropsType> = (props, ref) => {
   const {
@@ -17,11 +17,28 @@ const Title: FC<TitlePropsType> = (props, ref) => {
     tooltip,
     children,
     className,
+    style,
+    textProps,
+    divider = true,
+    heading = 1,
+    margin: marginProps,
     ...rest
   } = props
 
+  const margin = {
+    top: true,
+    ...marginProps
+  }
+
   const titleClassName = getClassNames([
     `${prefixCls}`,
+    {
+      [`${prefixCls}-margin-top`]: isBoolean(margin?.top) && margin.top,
+      [`${prefixCls}-margin-right`]: isBoolean(margin?.right) && margin.right,
+      [`${prefixCls}-margin-bottom`]: isBoolean(margin?.bottom) && margin.bottom,
+      [`${prefixCls}-margin-left`]: isBoolean(margin?.left) && margin.left,
+    },
+    className
   ])
 
   const tooltipsvg = (
@@ -44,9 +61,22 @@ const Title: FC<TitlePropsType> = (props, ref) => {
       </div>
     )
   }
+  console.log(getValueIfQualified(margin.top, !isBoolean(margin?.top)));
 
-  const tooltipBorderRender = () => {
-    return type === 'tooltip' && (
+  const stylesObj = {
+    title: getStyles([
+      style,
+      {
+        marginTop: getValueIfQualified(margin.top, !isBoolean(margin?.top)) as any,
+        marginBottom: getValueIfQualified(margin.right, !isBoolean(margin?.right)) as any,
+        marginRight: getValueIfQualified(margin.bottom, !isBoolean(margin?.bottom)) as any,
+        marginLeft: getValueIfQualified(margin.left, !isBoolean(margin?.left)) as any,
+      }
+    ])
+  }
+
+  const dividerRender = () => {
+    return divider && (
       <div className={`${prefixCls}-bottom-border`}>
         <div className={`${prefixCls}-bottom-border-left`}></div>
         <div className={`${prefixCls}-bottom-border-center`}></div>
@@ -56,18 +86,18 @@ const Title: FC<TitlePropsType> = (props, ref) => {
   }
 
   return (
-    <h3 {...rest} className={`${titleClassName} ${className}`}>
+    <div {...rest} style={stylesObj.title} className={titleClassName}>
       <div className={`${prefixCls}-main`}>
-        <div className={`${prefixCls}-title`}>{title}</div>
-        {type === 'tooltip' && (
+        <Text level={heading} type='base' {...textProps}>{title}</Text>
+        {tooltip === 'tooltip' && (
           <div className={`${prefixCls}-tooltip`}>
             {tooltipsvg}
           </div>
         )}
       </div>
-      {tooltipBorderRender()}
+      {dividerRender()}
       {childrenRender()}
-    </h3>
+    </div>
   )
 }
 export default Title

@@ -17,7 +17,7 @@ const Text = (props: TextPropsType) => {
     underline,
     delete: deleteProps,
     type = 'default',
-    level = 3,
+    level = 5,
     mark,
     disabled,
     ...rest
@@ -26,7 +26,7 @@ const Text = (props: TextPropsType) => {
   const classNamesObj = {
     text: getClassNames([
       `${prefixCls}`,
-      `${prefixCls}-level-${level}`,
+      `${classNamePrefix}-font-level-${level}`,
       {
         [`${classNamePrefix}-font-${type}`]: !disabled,
         [`${prefixCls}-underline`]: underline,
