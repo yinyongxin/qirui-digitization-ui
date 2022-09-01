@@ -22,6 +22,8 @@ const Card: FC<CardPropsType> = (props, ref) => {
     width,
     header,
     footer,
+    shadow = 'base',
+    shadowShow = 'never',
     borders = [
       'top',
       'right',
@@ -30,15 +32,21 @@ const Card: FC<CardPropsType> = (props, ref) => {
     ]
   } = props
 
-  const cardClassName = getClassNames([
-    `${prefixCls}`,
-    ...borders.map(item => `${prefixCls}-border-${item}`)
-  ])
-
-  const statusClassName = getClassNames([
-    `${prefixCls}-status`,
-    `${prefixCls}-status-${status}`
-  ])
+  const classnameObj = {
+    comp: getClassNames([
+      `${prefixCls}`,
+      `${classNamePrefix}-shadow-time-base`,
+      {
+        [`${classNamePrefix}-shadow-${shadow}`]: shadowShow === 'always',
+        [`${classNamePrefix}-shadow-${shadow}-hover`]: shadowShow === 'hover',
+      },
+      ...borders.map(item => `${prefixCls}-border-${item}`)
+    ]),
+    status: getClassNames([
+      `${prefixCls}-status`,
+      `${prefixCls}-status-${status}`
+    ])
+  }
 
   const headerRender = () => {
     if (header) {
@@ -53,12 +61,13 @@ const Card: FC<CardPropsType> = (props, ref) => {
         <header style={headerStyle} className={`${prefixCls}-header-default`}>
           <div>{title}</div>
           {status && (
-            <div className={statusClassName}></div>
+            <div className={classnameObj.status}></div>
           )}
         </header>
       )
     }
   }
+
   const footerRender = () => {
     if (footer) {
       return (
@@ -70,7 +79,7 @@ const Card: FC<CardPropsType> = (props, ref) => {
   }
 
   return (
-    <div style={{ ...(width ? { width } : {}), ...cardStyle }} className={cardClassName}>
+    <div style={{ ...(width ? { width } : {}), ...cardStyle }} className={classnameObj.comp}>
       {headerRender()}
       <main style={bodyStyle} className={`${prefixCls}-body`}>
         {children}

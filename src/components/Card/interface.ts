@@ -15,7 +15,17 @@ export interface CardBaseType {
   bodyStyle?: React.CSSProperties,
   cardStyle?: React.CSSProperties,
   width?: number,
-  borders?: DesignTypes['Direction'][]
+  borders?: DesignTypes['Direction'][],
+  /**
+   * 阴影类型
+   * @default base
+   */
+  shadow?: DesignTypes['Shadow'],
+  /**
+   * 阴影显示条件
+   * @default never
+   */
+  shadowShow?: 'always' | 'never' | 'hover'
 }
 
 export type CardPropsType = PropsWithChildren<CardBaseType>
