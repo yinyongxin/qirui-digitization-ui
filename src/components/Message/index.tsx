@@ -89,6 +89,12 @@ const Message: MessageType = {
       ...getConfig(config)
     })
   },
+  primary: (config) => {
+    addMessage({
+      status: 'primary',
+      ...getConfig(config)
+    })
+  },
   success: (config) => {
     addMessage({
       status: 'success',

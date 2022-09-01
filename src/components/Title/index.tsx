@@ -95,7 +95,7 @@ const Title: FC<TitlePropsType> = (props, ref) => {
   return (
     <div {...rest} style={stylesObj.title} className={classNamesObj.title}>
       <div className={`${prefixCls}-main`}>
-        <Text level={heading} type='base' {...textProps}>{title}</Text>
+        <Text level={heading} type='primary' {...textProps}>{title}</Text>
         {tooltip === 'tooltip' && (
           <div className={`${prefixCls}-tooltip`}>
             {tooltipsvg}

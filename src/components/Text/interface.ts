@@ -22,7 +22,7 @@ export interface TextBaseType {
   /**
    * 文本类型
    */
-  type?: DesignTypes['Status'] | 'base' | 'secondary',
+  type?: DesignTypes['Status'] | 'secondary',
   /**
    * 级别
    */

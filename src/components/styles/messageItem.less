@@ -16,7 +16,6 @@
     border-width: var(--design-border-sm);
     border-color: var(--design-base-color);
     color: var(--design-neutral-color);
-    background: var(--design-base-color-10);
 
     .@{prefix-message-item}-icon {
       .flex-center()
@@ -44,13 +43,18 @@
   }
 
   .@{prefix-message-item}-default {
+    border-color: var(--design-neutral-color-2);
+    background: var(--design-neutral-color-5);
+  }
+
+  .@{prefix-message-item}-primary {
     border-color: var(--design-base-color);
     background: var(--design-base-color-10);
   }
 
   .@{prefix-message-item}-success {
     border-color: var(--design-success-color);
-    background: var(--design-error-color-10);
+    background: var(--design-success-color-10);
   }
 
   .@{prefix-message-item}-error {
@@ -60,6 +64,6 @@
 
   .@{prefix-message-item}-warning {
     border-color: var(--design-warning-color);
-    background: var(--design-warning-color);
+    background: var(--design-warning-color-10);
   }
 }

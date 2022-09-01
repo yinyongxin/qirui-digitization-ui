@@ -25,10 +25,15 @@ const MessageExemple = () => {
         <div className="flex gap20">
           <Button
             onClick={() => {
-              console.log('notDisabledBtn');
               Message.default('DefaultMessage')
             }}
           >DefaultMessage</Button>
+          <Button
+            status="primary"
+            onClick={() => {
+              Message.primary('PrimaryMessage')
+            }}
+          >PrimaryMessage</Button>
           <Button
             status="success"
             onClick={() => {

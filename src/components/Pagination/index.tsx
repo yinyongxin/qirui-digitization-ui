@@ -109,6 +109,7 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
         </div>
       ) : (
         <Button
+          status="primary"
           disabled={disabledProps || disabled}
           size='small'
           onClick={() => turnButtonFn.prev()}
@@ -123,6 +124,7 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
         </div>
       ) : (
         <Button
+          status="primary"
           size='small'
           disabled={disabledProps || disabled}
           onClick={() => turnButtonFn.next()}
@@ -143,7 +145,7 @@ const Pagination: FC<PaginationPropsType> = (props, ref) => {
                 <div onClick={() => setCurrent(item)}>{partsRender.pageItem(checked)}</div>
               ) : (
                 <Button
-                  level={checked ? 'white' : 'main'}
+                  status={checked ? 'default' : 'primary'}
                   onClick={() => setCurrent(item)}
                   disabled={disabledProps}
                   key={item}

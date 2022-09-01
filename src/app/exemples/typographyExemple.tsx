@@ -24,7 +24,7 @@ const IconExemple = () => {
         <div className="flex gap20">
           <Text copyable type='default'>default</Text>
           <Text copyable type='secondary'>secondary</Text>
-          <Text copyable type='base'>base</Text>
+          <Text copyable type='primary'>base</Text>
           <Text copyable type='error'>error</Text>
           <Text copyable type='success'>success</Text>
           <Text copyable type='warning'>warning</Text>
@@ -38,7 +38,7 @@ const IconExemple = () => {
         <div className="flex gap20">
           <Text type='default'>default</Text>
           <Text type='secondary'>secondary</Text>
-          <Text type='base'>base</Text>
+          <Text type='primary'>base</Text>
           <Text type='error'>error</Text>
           <Text type='success'>success</Text>
           <Text type='warning'>warning</Text>
