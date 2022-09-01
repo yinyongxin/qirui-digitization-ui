@@ -74,7 +74,6 @@ const Page = (props: PagePropsType) => {
     main: getClassNames([
       `${prefixCls}-main`,
       {
-        [`${prefixCls}-header-sticky`]: sticky,
         [`${classNamePrefix}-padding-top-lg`]: bodyPadding.top,
         [`${classNamePrefix}-padding-right-lg`]: bodyPadding.right,
         [`${classNamePrefix}-padding-bottom-lg`]: bodyPadding.bottom,

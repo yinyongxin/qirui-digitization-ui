@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode } from "react"
+import React, { ReactNode } from "react"
 import { BreadcrumbBaseType } from "../Breadcrumb/interface";
 import { DesignTypes } from "../typings";
 
