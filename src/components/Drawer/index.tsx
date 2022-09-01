@@ -15,7 +15,6 @@ const DrawerComponent: DrawerComponentInterFace = Drawer as DrawerComponentInter
 const defaultShowConfig = {
   icon: null,
   headerCenter: true,
-  footerCenter: true,
   footerBorder: false,
 }
 

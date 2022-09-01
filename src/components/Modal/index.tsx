@@ -1,5 +1,5 @@
 import Modal from "./Modal";
-import { ModalComponentInterFace, ModalItemProp } from "./interface";
+import { ModalBaseType, ModalComponentInterFace, ModalItemProp } from "./interface";
 import { Root, createRoot } from "react-dom/client";
 import ModalItem from "./ModalItem";
 import { Portal } from "../index";
@@ -14,10 +14,10 @@ let root: Root | null = null
 
 const ModalComponent: ModalComponentInterFace = Modal as ModalComponentInterFace;
 
-const defaultShowConfig = {
+const defaultShowConfig: ModalBaseType = {
   icon: null,
   headerCenter: true,
-  footerCenter: true,
+  footerAlign: 'center',
   footerBorder: false,
 }
 

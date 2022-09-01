@@ -80,7 +80,7 @@ export interface DrawerBaseType {
   /**
    * 底部是否居中
    */
-  footerCenter?: boolean,
+  footerAlign?: 'start' | 'center' | 'end',
   /**
    * 底部边框是否显示
    */
@@ -92,13 +92,8 @@ export interface DrawerBaseType {
   placement?: 'left' | 'right'
 }
 
-export type DrawerHandle = {
-  open: () => void,
-  close: () => void,
-  visible: boolean
-}
 
-export type DrawerPropsType = PropsWithChildren<DrawerBaseType>
+export type DrawerPropsType = PropsWithChildren<DrawerBaseType> & Pick<JSX.IntrinsicElements['div'], 'className' | 'style'>
 
 
 export type DrawerItemProp = Omit<DrawerPropsType, 'visible' | 'mountOnEnter' | 'unmountOnExit'>
@@ -109,4 +104,10 @@ export interface DrawerComponentInterFace extends ForwardRefExoticComponent<Draw
     close: () => void,
     update: (config: DrawerItemProp) => void
   },
+}
+
+export type DrawerHandle = {
+  open: () => void,
+  close: () => void,
+  visible: boolean
 }

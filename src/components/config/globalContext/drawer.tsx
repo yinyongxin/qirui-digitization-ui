@@ -19,7 +19,7 @@ export const DrawerConfig: DrawerConfigType = {
   mountOnEnter: false,
   width: 500,
   headerCenter: false,
-  footerCenter: false,
+  footerAlign: 'start',
   footerBorder: true,
   border: true,
   placement: 'right'

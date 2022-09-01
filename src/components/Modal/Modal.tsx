@@ -2,7 +2,7 @@ import React, { ForwardRefRenderFunction, ReactNode, useContext, useEffect, useI
 import Button from "../Button"
 import { GlobalContext } from "../config/globalContext"
 import Icon from "../Icon"
-import { ClassNameType, getClassNames } from "../utils/tools"
+import { ClassNameType, getClassNames, getStyles } from "../utils/tools"
 import { ModalHandle, ModalPropsType } from "./interface"
 import { Root, createRoot } from "react-dom/client"
 import Mask from "../Mask"
@@ -42,11 +42,14 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
     mountOnEnter,
     isComponent,
     headerCenter,
-    footerCenter,
+    footerAlign = 'end',
     footerBorder,
     border,
     getChildrenPopupContainer,
     getPopupContainer,
+    style,
+    className,
+    ...rest
   } = {
     ...ModalConfig,
     ...props,
@@ -65,7 +68,8 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
     modal: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}`,
       `${prefixCls}-border`,
-      ...classNames
+      ...classNames,
+      className
     ]),
     modalMain: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}-main`,
@@ -90,16 +94,23 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
       },
       ...classNames
     ]),
-    // {`${prefixCls}-footer ${footerCenter ? 'justify-center' : 'justify-end'} ${footerBorder ? prefixCls + '-footer-border' : ''}`}
     modalFooter: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}-footer`,
+      `justify-${footerAlign}`,
       {
-        'justify-center': footerCenter,
-        'justify-end': !footerCenter,
         [`${prefixCls}-footer-border`]: footerBorder
       },
       ...classNames
     ]),
+  }
+
+  const stylesObj = {
+    comp: getStyles([
+      style,
+      {
+        display: visible ? 'unset' : 'none'
+      }
+    ])
   }
 
   const onConfirmModal: React.MouseEventHandler<HTMLElement> = (e: any) => {
@@ -175,7 +186,7 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
           <>
             <Button
               onClick={onCancelHandle}
-              status="secondary"
+              status="primary"
               size='large'
               {...cancelButtonProps}
             >{cancelText}</Button>
@@ -212,7 +223,7 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
   }
 
   const content = (
-    <div style={{ display: visible ? 'unset' : 'none' }} className={classNamesObj.modal()}>
+    <div {...rest} style={stylesObj.comp} className={classNamesObj.modal()}>
       <Mask clickThrough zIndex="unset" visible={mask} />
       <main style={mainStyle} className={classNamesObj.modalMain()}>
         <div

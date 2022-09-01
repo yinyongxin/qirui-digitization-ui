@@ -19,7 +19,7 @@ export const ModalConfig: ModalConfigType = {
   mountOnEnter: false,
   width: 500,
   headerCenter: false,
-  footerCenter: false,
+  footerAlign: 'end',
   footerBorder: true,
   border: true
 }

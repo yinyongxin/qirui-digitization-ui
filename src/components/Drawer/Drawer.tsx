@@ -2,7 +2,7 @@ import React, { ForwardRefRenderFunction, ReactNode, useContext, useEffect, useI
 import Button from "../Button"
 import { GlobalContext } from "../config/globalContext"
 import Icon from "../Icon"
-import { getClassNames } from "../utils/tools"
+import { ClassNameType, getClassNames, getStyles } from "../utils/tools"
 import { DrawerHandle, DrawerPropsType } from "./interface"
 import { Root, createRoot } from "react-dom/client"
 import { useDocumentRender } from "../utils/hooks"
@@ -41,12 +41,15 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
     mountOnEnter,
     isComponent,
     headerCenter,
-    footerCenter,
+    footerAlign = 'left',
     footerBorder,
     border,
     placement,
     getChildrenPopupContainer,
     getPopupContainer,
+    style,
+    className,
+    ...rest
   } = {
     ...DrawerConfig,
     ...props,
@@ -63,22 +66,58 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
   const [visible, setVisible] = useState<boolean>(propsVisible)
   const [loading, setLoading] = useState<boolean>(false)
 
-  const drawerClassName = getClassNames([
-    `${prefixCls}`,
-    `${prefixCls}-border`
-  ])
 
-  const drawerMainClassName = getClassNames([
-    `${prefixCls}-main`,
-    border ? `${prefixCls}-main-border` : '',
-    `${prefixCls}-main-${placement}`
-  ])
 
-  const drawerBodyClassName = getClassNames([
-    `${prefixCls}-body`,
-    border ? `${prefixCls}-body-border` : '',
-    `${prefixCls}-body-keyframes-${placement}`
-  ])
+  const classNamesObj = {
+    drawer: (classNames: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}`,
+      `${prefixCls}-border`,
+      ...classNames,
+      className
+    ]),
+    drawerMain: (classNames: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}-main`,
+      `${prefixCls}-main-${placement}`,
+      {
+        [`${prefixCls}-main-border`]: border,
+        [`${prefixCls}-main-animation`]: true,
+      },
+      ...classNames
+    ]),
+    drawerBody: (classNames: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}-body`,
+      `${prefixCls}-body-keyframes-${placement}`,
+      {
+        [`${prefixCls}-body-border`]: border
+      },
+      ...classNames
+    ]),
+    drawerHeader: (classNames: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}-header`,
+      {
+        'justify-center': headerCenter,
+        'justify-start': !headerCenter,
+      },
+      ...classNames
+    ]),
+    drawerFooter: (classNames: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}-footer`,
+      `justify-${footerAlign}`,
+      {
+        [`${prefixCls}-footer-border`]: footerBorder
+      },
+      ...classNames
+    ]),
+  }
+
+  const stylesObj = {
+    comp: getStyles([
+      style,
+      {
+        display: visible ? 'unset' : 'none'
+      }
+    ])
+  }
 
   const onConfirmDrawer: React.MouseEventHandler<HTMLElement> = (e: any) => {
     let ret;
@@ -146,7 +185,7 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
         footerRes = header
       }
       return (
-        <header className={`${prefixCls}-header ${headerCenter ? 'justify-center' : 'justify-start'}`}>
+        <header className={classNamesObj.drawerFooter()}>
           {footerRes}
         </header>
       )
@@ -168,7 +207,7 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
             <Button
               onClick={onCancelHandle}
               size='large'
-              status="secondary"
+              status="primary"
               {...cancelButtonProps}
             >{cancelText}</Button>
             <Button
@@ -182,7 +221,7 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
         footerRes = footer
       }
       return (
-        <footer className={`${prefixCls}-footer ${footerCenter ? 'justify-center' : 'justify-end'} ${footerBorder ? prefixCls + '-footer-border' : ''}`}>
+        <footer className={classNamesObj.drawerFooter()}>
           {footerRes}
         </footer>
       )
@@ -190,12 +229,12 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
   }
 
   const content = (
-    <div style={{ display: visible ? 'unset' : 'none' }} className={drawerClassName}>
+    <div {...rest} style={stylesObj.comp} className={classNamesObj.drawer()}>
       <Mask clickThrough zIndex="unset" visible={mask} />
-      <main style={mainStyle} className={drawerMainClassName}>
+      <main style={mainStyle} className={classNamesObj.drawerMain()}>
         <div
           style={bodyStyle}
-          className={drawerBodyClassName}
+          className={classNamesObj.drawerBody()}
         >
           {mainContent.iconRender()}
           {mainContent.headerRender()}

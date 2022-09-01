@@ -83,7 +83,7 @@ export interface ModalBaseType {
   /**
    * 底部是否居中
    */
-  footerCenter?: boolean,
+  footerAlign?: 'start' | 'center' | 'end',
   /**
    * 底部边框是否显示
    */
@@ -97,7 +97,7 @@ export type ModalHandle = {
   visible: boolean
 }
 
-export type ModalPropsType = PropsWithChildren<ModalBaseType>
+export type ModalPropsType = PropsWithChildren<ModalBaseType> & Pick<JSX.IntrinsicElements['div'], 'className' | 'style'>
 
 
 export type ModalItemProp = Omit<ModalPropsType, 'visible' | 'mountOnEnter' | 'unmountOnExit'>
