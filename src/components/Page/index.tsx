@@ -1,10 +1,10 @@
-import { title } from "process"
 import React, { FC, useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Breadcrumb from "../Breadcrumb"
 import Button from "../Button"
 import { GlobalContext } from "../config/globalContext"
 import Icon from "../Icon"
+import { DesignTypes } from "../typings"
 import { getClassNames, getStyles } from "../utils/tools"
 import { PagePropsType } from "./interface"
 
@@ -23,11 +23,28 @@ const Page = (props: PagePropsType) => {
     className,
     children,
     pageHeader,
+    pageBody,
     sticky,
     ...rest
   } = {
     ...PageConfig,
     ...props
+  }
+
+  const headerPadding: DesignTypes['Padding'] = {
+    top: true,
+    right: true,
+    bottom: true,
+    left: true,
+    ...pageHeader?.padding
+  }
+
+  const bodyPadding: DesignTypes['Padding'] = {
+    top: true,
+    right: true,
+    bottom: true,
+    left: true,
+    ...pageBody?.padding
   }
 
   const classNamesObj = {
@@ -38,7 +55,11 @@ const Page = (props: PagePropsType) => {
     header: getClassNames([
       `${prefixCls}-header`,
       {
-        [`${prefixCls}-header-sticky`]: sticky
+        [`${prefixCls}-header-sticky`]: sticky,
+        [`${classNamePrefix}-padding-top-lg`]: headerPadding.top,
+        [`${classNamePrefix}-padding-right-lg`]: headerPadding.right,
+        [`${classNamePrefix}-padding-bottom-lg`]: headerPadding.bottom,
+        [`${classNamePrefix}-padding-left-lg`]: headerPadding.left,
       }
     ]),
     toBack: getClassNames([
@@ -52,6 +73,13 @@ const Page = (props: PagePropsType) => {
     ]),
     main: getClassNames([
       `${prefixCls}-main`,
+      {
+        [`${prefixCls}-header-sticky`]: sticky,
+        [`${classNamePrefix}-padding-top-lg`]: bodyPadding.top,
+        [`${classNamePrefix}-padding-right-lg`]: bodyPadding.right,
+        [`${classNamePrefix}-padding-bottom-lg`]: bodyPadding.bottom,
+        [`${classNamePrefix}-padding-left-lg`]: bodyPadding.left,
+      }
     ]),
   }
 

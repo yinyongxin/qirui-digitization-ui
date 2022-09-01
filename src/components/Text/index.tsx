@@ -1,9 +1,9 @@
-import React, { FC, useContext, useEffect, useState } from "react"
+import React, { Children, FC, MouseEventHandler, useContext, useEffect, useState } from "react"
 import Button from "../Button"
 import { GlobalContext } from "../config/globalContext"
 import Icon from "../Icon"
 import { useData } from "../utils/hooks"
-import { getClassNames, getStyles, clipboard, isString } from "../utils/tools"
+import { getClassNames, getStyles, clipboard, isString, isBoolean } from "../utils/tools"
 import { TextPropsType } from "./interface"
 
 const Text = (props: TextPropsType) => {
@@ -36,27 +36,51 @@ const Text = (props: TextPropsType) => {
   } = props
 
   const classNamesObj = {
-    text: getClassNames([
+    comp: getClassNames([
       `${prefixCls}`,
       `${classNamePrefix}-font-level-${level}`,
       {
         [`${classNamePrefix}-font-${type}`]: !disabled,
         [`${prefixCls}-underline`]: underline,
         [`${prefixCls}-delete`]: deleteProps,
-        [`${prefixCls}-mark`]: mark && isString(mark),
-        [`${classNamePrefix}-bg-${mark}`]: mark && isString(mark),
         [`${classNamePrefix}-base-disabled`]: disabled,
       },
       className,
+    ]),
+    text: getClassNames([
+      {
+        [`${prefixCls}-mark`]: mark && isString(mark),
+        [`${classNamePrefix}-bg-${mark}`]: mark && isString(mark),
+      }
     ]),
     copyable: getClassNames([
       `${prefixCls}-copyable`,
     ])
   }
 
-  const copyableHandle = async () => {
+  const stylesObj = {
+    text: getStyles([
+      {
+        style: {
+          backgroundColor: !isString(mark) && mark?.color || ''
+        },
+        condition: !isString(mark) && !!mark?.color
+      }
+    ])
+  }
+
+  /**
+   * 点击复制按键
+   * @param event MouseEvent
+   */
+  const copyableHandle = async (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     if (!isCopyable) {
-      clipboard(children as string).then(() => {
+      let copyableText: string = children as string
+      if (!isBoolean(copyable)) {
+        copyable?.text && (copyableText = copyable?.text)
+        copyable?.onCopy?.(copyableText, event)
+      }
+      clipboard(copyableText).then(() => {
         setIsCopyable(true)
       })
       data.resetIsCopyableId = setTimeout(() => {
@@ -72,22 +96,16 @@ const Text = (props: TextPropsType) => {
         className={classNamesObj.copyable}
         onClick={copyableHandle}
       >
-        <Icon status={isCopyable ? 'success' : 'default'} icon={isCopyable ? 'circle-check' : 'copy'} />
+        {!isBoolean(copyable) && copyable?.icon}
+        {isBoolean(copyable) && (
+          <Icon status={isCopyable ? 'success' : 'default'} icon={isCopyable ? 'circle-check' : 'copy'} />
+        )}
       </span>
     )
   }
 
-  const stylesObj = {
-    text: getStyles([
-      style,
-      {
-        style: {
-          backgroundColor: !isString(mark) && mark?.color || ''
-        },
-        condition: !isString(mark) && !!mark?.color
-      }
-    ])
-  }
+
+
 
   useEffect(() => {
     return () => {
@@ -97,11 +115,13 @@ const Text = (props: TextPropsType) => {
 
   return (
     <span
-      className={classNamesObj.text}
-      style={stylesObj.text}
+      className={classNamesObj.comp}
+      style={style}
       {...rest}
     >
-      {children}
+      <span style={stylesObj.text} className={classNamesObj.text}>
+        {children}
+      </span>
       {copyable && copyableRender()}
     </span>
   )

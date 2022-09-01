@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode } from "react"
+import React, { MouseEventHandler, PropsWithChildren, ReactNode } from "react"
 import { DesignTypes } from "../typings";
 
 /**
@@ -80,7 +80,7 @@ export interface OperationsProps extends Omit<React.HTMLAttributes<HTMLElement>,
   | boolean
   | {
     text?: string;
-    onCopy?: (text: string, e: any) => void;
+    onCopy?: (text: string, e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
     icon?: ReactNode;
     tooltips?: [ReactNode, ReactNode];
   };

@@ -12,10 +12,6 @@ export interface TextBaseType {
    */
   bold?: boolean
   /**
-   * 开启复制功能
-   */
-  copyable?: boolean
-  /**
    * 	下划线样式
    */
   underline?: boolean

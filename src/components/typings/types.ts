@@ -41,4 +41,6 @@ export type DesignTypes = {
   Align: 'left' | 'center' | 'right'
 
   KeyType: string | number | symbol;
+  Padding: Record<DesignTypes['Direction'], boolean>
+  Margin: Record<DesignTypes['Direction'], boolean>
 }

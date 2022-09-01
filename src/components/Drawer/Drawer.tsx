@@ -7,6 +7,7 @@ import { DrawerHandle, DrawerPropsType } from "./interface"
 import { Root, createRoot } from "react-dom/client"
 import { useDocumentRender } from "../utils/hooks"
 import Portal from "../Portal"
+import Mask from "../Mask"
 
 const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) => {
 
@@ -190,9 +191,7 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
 
   const content = (
     <div style={{ display: visible ? 'unset' : 'none' }} className={drawerClassName}>
-      {mask && (
-        <div className={`${prefixCls}-mask`}></div>
-      )}
+      <Mask clickThrough zIndex="unset" visible={mask} />
       <main style={mainStyle} className={drawerMainClassName}>
         <div
           style={bodyStyle}
