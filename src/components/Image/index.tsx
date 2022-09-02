@@ -165,7 +165,7 @@ const Image: FC<ImagePropsType> = (props, ref) => {
           {
             error
             ||
-            <Icon icon="circle-exclamation" style={{ color: 'var(--design-neutral-color-3)' }} size={iconSize} />
+            <Icon icon="circle-exclamation" size={iconSize} />
           }
         </div>
       )
@@ -173,7 +173,7 @@ const Image: FC<ImagePropsType> = (props, ref) => {
       return (
         <div className={classNamesObj.loading()}>
           {isBoolean(loader) ?
-            <Icon icon="image" style={{ color: 'var(--design-neutral-color-3)' }} size={iconSize} />
+            <Icon icon="image" size={iconSize} />
             :
             loader
           }
