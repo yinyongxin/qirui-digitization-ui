@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, useRoutes } from 'react-router-dom';
-import { routes } from './app/routes';
+import { routes } from './doc/routes';
 
 const Main = () => {
   let elements = useRoutes(routes);
