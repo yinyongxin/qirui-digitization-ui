@@ -21,20 +21,22 @@ const BreadcrumbExemple = () => {
         }
       }}
     >
-      <Title type="tooltip" title="基本Icon status" >
-        <Breadcrumb
-          list={[
-            {
-              title: 'Home',
-              // path: '/home'
-            },
-            {
-              title: 'BreadcrumbExemple',
-              path: '/breadcrumbExemple'
-            }
-          ]}
-        />
-      </Title>
+      <div className="exemple-page-content">
+        <Title type="tooltip" title="基本Icon status" >
+          <Breadcrumb
+            list={[
+              {
+                title: 'Home',
+                // path: '/home'
+              },
+              {
+                title: 'BreadcrumbExemple',
+                path: '/breadcrumbExemple'
+              }
+            ]}
+          />
+        </Title>
+      </div>
     </Page>
   )
 }

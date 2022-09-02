@@ -52,21 +52,23 @@ const SideMenuExemple = () => {
         }
       }}
     >
-      <Title type="tooltip" title="borders" >
-        <SideMenu
-          menuTree={menuTree}
-        />
-      </Title>
-      <Title type="tooltip" title="基本使用" >
-        <SideMenu
-          menuTree={menuTree}
-          borders={["right", 'top', 'bottom']}
-        />
-        <SideMenuItemSub title={'SideMenuItemSub'} activeKey={'SideMenuItemSub'} index={0}>
-          <SideMenuItem title={'SideMenuItem'} activeKey="SideMenuItem" key={"activeKey1"} index={1} />
-          <SideMenuItem title={'SideMenuItem'} activeKey="SideMenuItem" key={"activeKey2"} index={1} />
-        </SideMenuItemSub>
-      </Title>
+      <div className="exemple-page-content">
+        <Title type="tooltip" title="borders" >
+          <SideMenu
+            menuTree={menuTree}
+          />
+        </Title>
+        <Title type="tooltip" title="基本使用" >
+          <SideMenu
+            menuTree={menuTree}
+            borders={["right", 'top', 'bottom']}
+          />
+          <SideMenuItemSub title={'SideMenuItemSub'} activeKey={'SideMenuItemSub'} index={0}>
+            <SideMenuItem title={'SideMenuItem'} activeKey="SideMenuItem" key={"activeKey1"} index={1} />
+            <SideMenuItem title={'SideMenuItem'} activeKey="SideMenuItem" key={"activeKey2"} index={1} />
+          </SideMenuItemSub>
+        </Title>
+      </div>
     </Page>
   )
 }

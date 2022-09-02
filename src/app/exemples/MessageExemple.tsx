@@ -21,53 +21,55 @@ const MessageExemple = () => {
         }
       }}
     >
-      <Title type="tooltip" title="四种基本类型" >
-        <div className="flex gap20">
-          <Button
-            onClick={() => {
-              Message.default('DefaultMessage')
-            }}
-          >DefaultMessage</Button>
-          <Button
-            status="primary"
-            onClick={() => {
-              Message.primary('PrimaryMessage')
-            }}
-          >PrimaryMessage</Button>
-          <Button
-            status="success"
-            onClick={() => {
-              Message.success('SuccessMessage')
-            }}
-          >SuccessMessage</Button>
-          <Button
-            status="warning"
-            onClick={() => {
-              Message.warning('WarningMessage')
-            }}
-          >WarningMessage</Button>
-          <Button
-            status="error"
-            onClick={() => {
-              Message.error('ErrorMessage')
-            }}
-          >ErrorMessage</Button>
-        </div>
-      </Title>
-      <Title type="tooltip" title="配置 禁止自动关闭" >
-        <div className="flex gap20">
-          <Button
-            status="error"
-            onClick={() => {
-              Message.error({
-                content: 'ErrorMessage',
-                closable: true,
-                autoClose: false
-              })
-            }}
-          >ErrorMessage</Button>
-        </div>
-      </Title>
+      <div className="exemple-page-content">
+        <Title type="tooltip" title="四种基本类型" >
+          <div className="flex gap20">
+            <Button
+              onClick={() => {
+                Message.default('DefaultMessage')
+              }}
+            >DefaultMessage</Button>
+            <Button
+              status="primary"
+              onClick={() => {
+                Message.primary('PrimaryMessage')
+              }}
+            >PrimaryMessage</Button>
+            <Button
+              status="success"
+              onClick={() => {
+                Message.success('SuccessMessage')
+              }}
+            >SuccessMessage</Button>
+            <Button
+              status="warning"
+              onClick={() => {
+                Message.warning('WarningMessage')
+              }}
+            >WarningMessage</Button>
+            <Button
+              status="error"
+              onClick={() => {
+                Message.error('ErrorMessage')
+              }}
+            >ErrorMessage</Button>
+          </div>
+        </Title>
+        <Title type="tooltip" title="配置 禁止自动关闭" >
+          <div className="flex gap20">
+            <Button
+              status="error"
+              onClick={() => {
+                Message.error({
+                  content: 'ErrorMessage',
+                  closable: true,
+                  autoClose: false
+                })
+              }}
+            >ErrorMessage</Button>
+          </div>
+        </Title>
+      </div>
     </Page>
   )
 }

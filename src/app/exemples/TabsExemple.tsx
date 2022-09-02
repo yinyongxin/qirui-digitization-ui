@@ -59,85 +59,86 @@ const TabsExemple = () => {
         }
       }}
     >
-      <Title type="tooltip" title="type 为 line" >
-
-        <Tabs
-          ref={TabsRef}
-          tabList={tabList}
-          activeTab="key2"
-        />
-        <div style={{ height: 20 }}></div>
-        <Button onClick={() => {
-          handleChange()
-        }}>-</Button>
-      </Title>
-      <Title type="tooltip" title="type 为 miniCard" >
-        <Tabs
-          tabList={[
-            {
-              title: '全部',
-              current: 'key1'
-            },
-            {
-              title: 'A',
-              current: 'key2'
-            },
-            {
-              title: 'B',
-              current: 'key3',
-              disabled: true
-            }
-          ]}
-          activeTab="key2"
-          type="miniCard"
-        />
-      </Title>
-      <Title type="tooltip" title="type 为 text" >
-        <Tabs
-          tabList={[
-            {
-              title: '选中标签',
-              current: 'key1'
-            },
-            {
-              title: '可选标签',
-              current: 'key2'
-            },
-            {
-              title: '不可选中标签',
-              current: 'key3',
-              disabled: true
-            }
-          ]}
-          activeTab="key2"
-          type="text"
-        />
-      </Title>
-      <Title type="tooltip" title="type 为 card" >
-        <Tabs
-          tabList={[
-            {
-              title: 'OVERVIEW',
-              current: 'key1'
-            },
-            {
-              title: 'METRICS',
-              current: 'key2'
-            },
-            {
-              title: 'SCHEMATIC',
-              current: 'key3',
-            },
-            {
-              title: 'INSIGHT TO ACTION',
-              current: 'key4',
-              disabled: true
-            }
-          ]}
-          activeTab="key2"
-          type="card"
-        />
-      </Title>
+      <div className="exemple-page-content">
+        <Title type="tooltip" title="type 为 line" >
+          <Tabs
+            ref={TabsRef}
+            tabList={tabList}
+            activeTab="key2"
+          />
+          <div style={{ height: 20 }}></div>
+          <Button onClick={() => {
+            handleChange()
+          }}>-</Button>
+        </Title>
+        <Title type="tooltip" title="type 为 miniCard" >
+          <Tabs
+            tabList={[
+              {
+                title: '全部',
+                current: 'key1'
+              },
+              {
+                title: 'A',
+                current: 'key2'
+              },
+              {
+                title: 'B',
+                current: 'key3',
+                disabled: true
+              }
+            ]}
+            activeTab="key2"
+            type="miniCard"
+          />
+        </Title>
+        <Title type="tooltip" title="type 为 text" >
+          <Tabs
+            tabList={[
+              {
+                title: '选中标签',
+                current: 'key1'
+              },
+              {
+                title: '可选标签',
+                current: 'key2'
+              },
+              {
+                title: '不可选中标签',
+                current: 'key3',
+                disabled: true
+              }
+            ]}
+            activeTab="key2"
+            type="text"
+          />
+        </Title>
+        <Title type="tooltip" title="type 为 card" >
+          <Tabs
+            tabList={[
+              {
+                title: 'OVERVIEW',
+                current: 'key1'
+              },
+              {
+                title: 'METRICS',
+                current: 'key2'
+              },
+              {
+                title: 'SCHEMATIC',
+                current: 'key3',
+              },
+              {
+                title: 'INSIGHT TO ACTION',
+                current: 'key4',
+                disabled: true
+              }
+            ]}
+            activeTab="key2"
+            type="card"
+          />
+        </Title>
+      </div>
     </Page>
   )
 }

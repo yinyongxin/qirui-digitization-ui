@@ -21,17 +21,19 @@ const PaginationExemple = () => {
         }
       }}
     >
-      <Title type="tooltip" title="基本Icon status" >
-        <div className="flex gap20">
-          <Pagination
-            total={54}
-            onChange={(current, pageSize) => {
-              console.log('current', current);
-              console.log('pageSize', pageSize);
-            }}
-          />
-        </div>
-      </Title>
+      <div className="exemple-page-content">
+        <Title type="tooltip" title="基本Icon status" >
+          <div className="flex gap20">
+            <Pagination
+              total={54}
+              onChange={(current, pageSize) => {
+                console.log('current', current);
+                console.log('pageSize', pageSize);
+              }}
+            />
+          </div>
+        </Title>
+      </div>
     </Page>
   )
 }

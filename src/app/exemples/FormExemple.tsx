@@ -40,11 +40,11 @@ const FormExemple = () => {
         }
       }}
     >
-      <Title type="tooltip" title="基本Icon status" >
-        <div className="flex gap20">
-          <div>
+      <div className="exemple-page-content">
+        <Title type="tooltip" title="基本Form" >
+          <div className="flex flex-column gap20">
             <Form
-              width={1000}
+              width={'100%'}
               initialValues={initialValues}
               // onValuesChange={(value, allValue, oldValue) => {
               //   console.log('onValuesChange', value, allValue, oldValue);
@@ -75,25 +75,26 @@ const FormExemple = () => {
                 label="address"
                 name="address"
               >
-                <Input style={{ flex: 1 }} />
+                <Input />
               </FormItem>
-              <input title="number" type="number" defaultValue={21351542345324523523524352345234534235} />
             </Form>
+            <div>
+              <Button
+                onClick={() => {
+                  // form.setFieldsValue({
+                  //   username: Math.random().toString(),
+                  //   age: 21351542345324523523524352345234534235,
+                  //   address: 'addrescascascs'
+                  // })
+                  console.log(form.getFields());
+
+
+                }}
+              >setMessage</Button>
+            </div>
           </div>
-          <Button
-            onClick={() => {
-              // form.setFieldsValue({
-              //   username: Math.random().toString(),
-              //   age: 21351542345324523523524352345234534235,
-              //   address: 'addrescascascs'
-              // })
-              console.log(form.getFields());
-
-
-            }}
-          >setMessage</Button>
-        </div>
-      </Title>
+        </Title>
+      </div>
     </Page>
   )
 }
