@@ -23,7 +23,7 @@ const BreadcrumbExemple = () => {
       }}
     >
       <ScrollIntoView>
-        <Title type="tooltip" title="基本Icon status" >
+        <Title type="tooltip" title="基本Icon status">
           <Breadcrumb
             list={[
               {

@@ -57,6 +57,7 @@ const IconExemple = () => {
           <Typography.Title margin={{ top: false }} title="基础 text"></Typography.Title>
           <Title tooltip='tooltip' title="带有tooltip"></Title>
           <Title divider={false} title="不带下边框"></Title>
+          <Title title="描述" description="description" ></Title>
         </Title>
       </ScrollIntoView>
     </Page >

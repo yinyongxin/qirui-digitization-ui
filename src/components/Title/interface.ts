@@ -8,6 +8,7 @@ export interface TitleBaseType {
   divider?: boolean
   textProps?: TextBaseType,
   bodyProps?: JSX.IntrinsicElements['div'],
+  description?: ReactNode,
   margin?: {
     top?: boolean | number | string,
     right?: boolean | number | string,
