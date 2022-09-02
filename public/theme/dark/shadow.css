@@ -1,5 +1,4 @@
 /* 基本主题色 */
 :root {
-  /* --design-shadow-color: #bbbbbb; */
-  --design-shadow-color: #383838;
+  --design-shadow-color: var(--design-neutral-color-6);
 }
