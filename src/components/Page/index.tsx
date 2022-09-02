@@ -100,7 +100,7 @@ const Page = (props: PagePropsType) => {
     return pageHeader?.toBack && (
       <div>
         <Button
-          buttonShowType='text'
+          type='text'
           onClick={() => {
             navigate(-1)
           }}
@@ -112,7 +112,7 @@ const Page = (props: PagePropsType) => {
             </span>
           </div>
         </Button>
-      </div>
+      </div >
     )
   }
 
