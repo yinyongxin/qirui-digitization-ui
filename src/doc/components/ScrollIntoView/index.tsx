@@ -48,14 +48,14 @@ const ScrollIntoView = (props: PropsWithChildren) => {
         <ol className={styles.ol}>
           {list.map((item, index) => (
             <li key={index} onClick={() => liHandle(index)} >
-              <Button buttonShowType="text" status={active === index ? 'primary' : 'default'}>
+              <Button type="text" status={active === index ? 'primary' : 'default'}>
                 {item}
               </Button>
             </li>
           ))}
         </ol>
       </aside>
-    </div>
+    </div >
   )
 }
 
