@@ -1,5 +1,6 @@
 import React from "react";
 import { Page, Button, Title } from "../../components";
+import ScrollIntoView from "../components/ScrollIntoView";
 
 const ButtonExemple = () => {
   return (
@@ -21,7 +22,7 @@ const ButtonExemple = () => {
         }
       }}
     >
-      <div className="exemple-page-content">
+      <ScrollIntoView>
         <Title type="tooltip" title="大小 size" >
           <div className="flex gap10">
             <Button size="small">Small</Button>
@@ -68,7 +69,7 @@ const ButtonExemple = () => {
             <Button buttonShowType='text' disabled>disabled</Button>
           </div>
         </Title>
-      </div>
+      </ScrollIntoView>
     </Page>
   )
 }

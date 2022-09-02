@@ -1,6 +1,8 @@
 import React from "react";
 import { Page, Table, Title } from "../../components";
 import { ColumnType } from "../../components/Table/interface";
+import ScrollIntoView from "../components/ScrollIntoView";
+
 type TableDataType = {
   col1: string,
   col2: string,
@@ -47,7 +49,7 @@ const IconExemple = () => {
         }
       }}
     >
-      <div className="exemple-page-content">
+      <ScrollIntoView>
         <Title type="tooltip" title="基本Table" >
           <div>
             <Table<{
@@ -180,7 +182,7 @@ const IconExemple = () => {
             />
           </div>
         </Title>
-      </div>
+      </ScrollIntoView>
     </Page>
   )
 }

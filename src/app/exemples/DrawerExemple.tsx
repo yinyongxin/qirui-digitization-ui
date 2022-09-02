@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Button, Page, Drawer, Title } from "../../components";
 import { DrawerHandle } from "../../components/Drawer/interface";
+import ScrollIntoView from "../components/ScrollIntoView";
 let drawer
 const DrawerExemple = () => {
   const DrawerRef = useRef<DrawerHandle>()
@@ -26,7 +27,7 @@ const DrawerExemple = () => {
         }
       }}
     >
-      <div className="exemple-page-content">
+      <ScrollIntoView>
         <Title type="tooltip" title="默认" >
           <div className="flex gap20">
             <Drawer
@@ -102,7 +103,7 @@ const DrawerExemple = () => {
             }}>自动更新</Button>
           </div>
         </Title>
-      </div>
+      </ScrollIntoView>
     </Page>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Image, Input, Page, Select, Title, Upload } from "../../components";
 import FormItem from "../../components/Form/FormItem";
+import ScrollIntoView from "../components/ScrollIntoView";
 
 const FormExemple = () => {
   const initialValues = {
@@ -40,7 +41,7 @@ const FormExemple = () => {
         }
       }}
     >
-      <div className="exemple-page-content">
+      <ScrollIntoView>
         <Title type="tooltip" title="基本Form" >
           <div className="flex flex-column gap20">
             <Form
@@ -94,7 +95,7 @@ const FormExemple = () => {
             </div>
           </div>
         </Title>
-      </div>
+      </ScrollIntoView>
     </Page>
   )
 }

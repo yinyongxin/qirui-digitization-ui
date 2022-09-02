@@ -1,6 +1,6 @@
 import React from "react";
 import { Page, SideMenu, SideMenuItem, Title, SideMenuItemSub } from "../../components";
-
+import ScrollIntoView from "../components/ScrollIntoView";
 const SideMenuExemple = () => {
   const menuTree = [
     {
@@ -52,7 +52,7 @@ const SideMenuExemple = () => {
         }
       }}
     >
-      <div className="exemple-page-content">
+      <ScrollIntoView>
         <Title type="tooltip" title="borders" >
           <SideMenu
             menuTree={menuTree}
@@ -68,7 +68,7 @@ const SideMenuExemple = () => {
             <SideMenuItem title={'SideMenuItem'} activeKey="SideMenuItem" key={"activeKey2"} index={1} />
           </SideMenuItemSub>
         </Title>
-      </div>
+      </ScrollIntoView>
     </Page>
   )
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, Title, Upload, Page } from "../../components";
+import ScrollIntoView from "../components/ScrollIntoView";
 import Luoxiaohei from '../../assets/images/luoxiaohei.jpg'
-
 const UploadExemple = () => {
   return (
     <Page
@@ -22,7 +22,7 @@ const UploadExemple = () => {
         }
       }}
     >
-      <div className="exemple-page-content">
+      <ScrollIntoView>
         <Title type="tooltip" title="基本Image status" >
           <div className="flex gap20">
             <div>
@@ -49,7 +49,7 @@ const UploadExemple = () => {
             </div>
           </div>
         </Title>
-      </div>
+      </ScrollIntoView>
     </Page>
   )
 }

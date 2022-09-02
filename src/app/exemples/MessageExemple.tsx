@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Message, Title, Page } from "../../components";
-
+import ScrollIntoView from "../components/ScrollIntoView";
 const MessageExemple = () => {
   return (
     <Page
@@ -21,7 +21,7 @@ const MessageExemple = () => {
         }
       }}
     >
-      <div className="exemple-page-content">
+      <ScrollIntoView>
         <Title type="tooltip" title="四种基本类型" >
           <div className="flex gap20">
             <Button
@@ -69,7 +69,7 @@ const MessageExemple = () => {
             >ErrorMessage</Button>
           </div>
         </Title>
-      </div>
+      </ScrollIntoView>
     </Page>
   )
 }

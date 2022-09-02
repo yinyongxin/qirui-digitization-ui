@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon, Page, Title, Text, Typography } from "../../components";
-
+import ScrollIntoView from "../components/ScrollIntoView";
 const IconExemple = () => {
   return (
     <Page
@@ -20,7 +20,7 @@ const IconExemple = () => {
         }
       }}
     >
-      <div className="exemple-page-content">
+      <ScrollIntoView>
         <Title margin={{ top: false }} type="tooltip" title="可交互" >
           <div className="flex gap20">
             <Text copyable type='default'>default</Text>
@@ -58,7 +58,7 @@ const IconExemple = () => {
           <Title tooltip='tooltip' title="带有tooltip"></Title>
           <Title divider={false} title="不带下边框"></Title>
         </Title>
-      </div>
+      </ScrollIntoView>
     </Page >
   )
 }

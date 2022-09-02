@@ -1,5 +1,6 @@
 import React from "react";
 import { Breadcrumb, Page, Title, Text } from "../../components";
+import ScrollIntoView from "../components/ScrollIntoView";
 
 const BreadcrumbExemple = () => {
   return (
@@ -21,7 +22,7 @@ const BreadcrumbExemple = () => {
         }
       }}
     >
-      <div className="exemple-page-content">
+      <ScrollIntoView>
         <Title type="tooltip" title="基本Icon status" >
           <Breadcrumb
             list={[
@@ -36,7 +37,7 @@ const BreadcrumbExemple = () => {
             ]}
           />
         </Title>
-      </div>
+      </ScrollIntoView>
     </Page>
   )
 }

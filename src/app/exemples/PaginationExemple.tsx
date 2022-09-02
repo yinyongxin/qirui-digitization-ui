@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Page, Pagination, Title } from "../../components";
+import ScrollIntoView from "../components/ScrollIntoView";
 
 const PaginationExemple = () => {
   return (
@@ -21,7 +22,7 @@ const PaginationExemple = () => {
         }
       }}
     >
-      <div className="exemple-page-content">
+      <ScrollIntoView>
         <Title type="tooltip" title="基本Icon status" >
           <div className="flex gap20">
             <Pagination
@@ -33,7 +34,7 @@ const PaginationExemple = () => {
             />
           </div>
         </Title>
-      </div>
+      </ScrollIntoView>
     </Page>
   )
 }

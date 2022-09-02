@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
 import { Button, Page, Modal, Title } from "../../components";
 import { ModalHandle } from "../../components/Modal/interface";
+import ScrollIntoView from "../components/ScrollIntoView";
 
 let modal
 const ModalExemple = () => {
-
   const ModalRef = useRef<ModalHandle>()
   const ModalRef1 = useRef<ModalHandle>()
   const ModalRef2 = useRef<ModalHandle>()
@@ -30,7 +30,7 @@ const ModalExemple = () => {
         }
       }}
     >
-      <div className="exemple-page-content">
+      <ScrollIntoView>
         <Title type="tooltip" title="默认" >
           <div className="flex gap20">
             <Modal
@@ -119,7 +119,7 @@ const ModalExemple = () => {
             }}>自动更新</Button>
           </div>
         </Title>
-      </div>
+      </ScrollIntoView>
     </Page>
   )
 }

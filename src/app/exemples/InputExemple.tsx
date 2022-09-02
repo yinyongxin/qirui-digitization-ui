@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Page, Input, Title, Upload } from "../../components";
-
+import ScrollIntoView from "../components/ScrollIntoView";
 const IconExemple = () => {
   const [value, setValue] = useState()
   return (
@@ -22,7 +22,7 @@ const IconExemple = () => {
         }
       }}
     >
-      <div className="exemple-page-content">
+      <ScrollIntoView>
         <Title type="tooltip" title="基本Icon status" >
           <div className="flex gap20">
             <Input />
@@ -56,7 +56,7 @@ const IconExemple = () => {
 
           </div>
         </Title>
-      </div>
+      </ScrollIntoView>
     </Page>
   )
 }

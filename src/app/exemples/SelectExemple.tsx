@@ -1,6 +1,6 @@
 import React from "react";
 import { Select, Title, Page } from "../../components";
-
+import ScrollIntoView from "../components/ScrollIntoView";
 const SelectExemple = () => {
   return (
     <Page
@@ -21,7 +21,7 @@ const SelectExemple = () => {
         }
       }}
     >
-      <div className="exemple-page-content">
+      <ScrollIntoView>
         <Title type="tooltip" title="单选" >
           <Select
             options={[
@@ -82,7 +82,7 @@ const SelectExemple = () => {
             ]}
           />
         </Title>
-      </div>
+      </ScrollIntoView>
     </Page>
   )
 }

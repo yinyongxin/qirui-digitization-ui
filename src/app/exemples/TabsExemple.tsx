@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Button, Tabs, Title, Page } from "../../components";
 import { TabsHandle } from "../../components/Tabs/Tabs/interface";
-
+import ScrollIntoView from "../components/ScrollIntoView";
 const TabsExemple = () => {
 
   const TabsRef = useRef<TabsHandle>()
@@ -59,7 +59,7 @@ const TabsExemple = () => {
         }
       }}
     >
-      <div className="exemple-page-content">
+      <ScrollIntoView>
         <Title type="tooltip" title="type 为 line" >
           <Tabs
             ref={TabsRef}
@@ -138,7 +138,7 @@ const TabsExemple = () => {
             type="card"
           />
         </Title>
-      </div>
+      </ScrollIntoView>
     </Page>
   )
 }

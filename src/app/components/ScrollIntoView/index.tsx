@@ -17,7 +17,7 @@ const ScrollIntoView = (props: PropsWithChildren) => {
   const getList = () => {
     const newList: ReactNode[] = []
     for (const iterator of data.children!) {
-      newList.push(iterator.textContent)
+      newList.push(iterator.querySelector('.design-title-main')?.textContent)
     }
     setList(newList)
   }
