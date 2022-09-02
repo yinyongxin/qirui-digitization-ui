@@ -1,6 +1,6 @@
 import React, { FC, useContext, useState } from "react"
 import { GlobalContext } from "../config/globalContext"
-import { ClassNameType, getClassNames, getStyles } from "../utils/tools"
+import { ClassNameType, getClassNames, getStyles } from "#/utils/tools"
 import { IconPropsType } from "./interface"
 
 const Icon: FC<IconPropsType> = (props, ref) => {

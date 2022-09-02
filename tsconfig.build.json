@@ -5,5 +5,6 @@
     "declaration": true, // 需要设置为 true 来支持类型
     "emitDeclarationOnly": true, // 只生成类型文件
     "declarationDir": "dist" // 类型文件的导出目录
-  }
+  },
+  "include": ["src/components"]
 }
