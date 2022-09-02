@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Page, Title } from "../../components";
+import ScrollIntoView from "../components/ScrollIntoView";
 
 const CardExemple = () => {
   return (
@@ -21,7 +22,7 @@ const CardExemple = () => {
         }
       }}
     >
-      <div className="exemple-page-content">
+      <ScrollIntoView>
 
         <Title type="tooltip" title="基本" >
           <Card>
@@ -29,13 +30,13 @@ const CardExemple = () => {
           </Card>
         </Title>
 
-        <Title type="tooltip" title="具有头部标题 title" >
+        <Title type="tooltip" title="头部标题" >
           <Card title={<div>title</div>}>
             CardContent
           </Card>
         </Title>
 
-        <Title type="tooltip" title="具有头部状态 status" >
+        <Title type="tooltip" title="头部状态" >
           <div className="flex gap10">
             <Card width={400} status="success">
               status
@@ -46,7 +47,7 @@ const CardExemple = () => {
           </div>
         </Title>
 
-        <Title type="tooltip" title="自定义header&footer" >
+        <Title type="tooltip" title="自定义头部底部" >
           <div className="flex gap10">
             <Card
               header={(
@@ -90,7 +91,7 @@ const CardExemple = () => {
           </Card>
         </Title>
 
-      </div>
+      </ScrollIntoView>
     </Page>
   )
 }

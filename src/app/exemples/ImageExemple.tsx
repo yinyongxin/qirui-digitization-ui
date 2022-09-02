@@ -1,12 +1,21 @@
 import React from "react";
-import { Page, Image, Title, Upload } from "../../components";
+import { Page, Image, Title, Upload, Button } from "../../components";
 import Luoxiaohei from '@/assets/images/luoxiaohei.jpg'
+import ScrollIntoView from "../components/ScrollIntoView";
 
 const ImageExemple = () => {
   return (
     <Page
       pageHeader={{
-        title: '图标 Icon',
+        // title: '图标 Icon',
+        title: <Button
+          onClick={() => {
+            document.querySelector('.exemple-page-content')?.children[2]?.scrollIntoView({
+              behavior: 'smooth',
+              // block: 'center'
+            })
+          }}
+        >scrollTo</Button>,
         descriptions: '展示和预览图片。',
         breadcrumb: {
           list: [
@@ -22,8 +31,9 @@ const ImageExemple = () => {
         }
       }}
     >
-      <div className="exemple-page-content">
-        <Title type="tooltip" title="基本Image" >
+
+      <ScrollIntoView>
+        <Title title="基本">
           <div className="flex gap20">
             <Image
               src={Luoxiaohei}
@@ -33,7 +43,7 @@ const ImageExemple = () => {
             />
           </div>
         </Title>
-        <Title type="tooltip" title="预览 preview" >
+        <Title title="预览" >
           <div className="flex gap20">
             <Image
               src={Luoxiaohei}
@@ -43,7 +53,7 @@ const ImageExemple = () => {
             />
           </div>
         </Title>
-        <Title type="tooltip" title="close 关闭按钮" >
+        <Title id="aaa" title="关闭按钮" >
           <div className="flex gap20">
             <Image
               src={Luoxiaohei}
@@ -57,7 +67,7 @@ const ImageExemple = () => {
             />
           </div>
         </Title>
-        <Title type="tooltip" title="mask 遮罩" >
+        <Title title="遮罩" >
           <div className="flex gap20">
             <Image
               src={Luoxiaohei}
@@ -67,7 +77,8 @@ const ImageExemple = () => {
             />
           </div>
         </Title>
-        <Title type="tooltip" title="options 操作 （默认显示预览按钮， 支持自定义）" >
+        {/* （默认显示预览按钮， 支持自定义） */}
+        <Title title="操作" >
           <div className="flex gap20">
             <Image
               src={Luoxiaohei}
@@ -77,7 +88,7 @@ const ImageExemple = () => {
             />
           </div>
         </Title>
-        <Title type="tooltip" title="加载失败 error （支持自定义）" >
+        <Title title="加载失败" >
           <div className="flex gap20">
             <Image
               src={'Luoxiaohei'}
@@ -94,7 +105,7 @@ const ImageExemple = () => {
             />
           </div>
         </Title>
-        <Title type="tooltip" title="默认图片" >
+        <Title title="默认图片">
           <div className="flex gap20">
             <Image
               src={'Luoxiaohei'}
@@ -105,7 +116,7 @@ const ImageExemple = () => {
             />
           </div>
         </Title>
-      </div>
+      </ScrollIntoView>
     </Page>
   )
 }
