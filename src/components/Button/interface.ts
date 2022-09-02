@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react"
+import React, { PropsWithChildren, ReactNode } from "react"
 import { DesignTypes } from "../typings";
 
 export interface ButtonBaseType {
@@ -11,11 +11,9 @@ export interface ButtonBaseType {
    * 状态 
    * 默认：default 成功：warnnig 失败：error 警告：warnning
    */
-  status?: DesignTypes['Status'] | 'secondary';
-  /**
-   * 按钮类型 默认： default  文字：text
-   */
-  buttonShowType?: DesignTypes['ButtonShowType']
+  status?: Omit<DesignTypes['Status'], 'priamry'>;
+
+  type?: 'default' | 'primary' | 'secondary' | 'text'
   /**
    * 是否为禁用状态
    * 默认为false
@@ -34,7 +32,8 @@ export interface ButtonBaseType {
    * 当buttonShowType为text 是否显示下划线
    * 默认：false
    */
-  textBottomLine?: boolean
+  underline?: boolean,
+  icon?: ReactNode
 }
 
-export type ButtonPropsType = ButtonBaseType & JSX.IntrinsicElements['button']
+export type ButtonPropsType = ButtonBaseType & Omit<JSX.IntrinsicElements['button'], 'type'> 

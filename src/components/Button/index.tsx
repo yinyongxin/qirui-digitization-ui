@@ -15,15 +15,17 @@ const Button: FC<ButtonPropsType> = (props) => {
 
 
   const {
-    status = 'default',
-    buttonShowType = 'default',
+    status,
+    type: typeProps,
     children,
     size,
     disabled = false,
     prefix,
     suffix,
     className,
-    textBottomLine = false,
+    underline = false,
+    border = true,
+    icon,
     onClick,
     ...rest
   } = {
@@ -31,61 +33,27 @@ const Button: FC<ButtonPropsType> = (props) => {
     ...props
   }
 
-  const defaultBtn = getValueIfQualified(
-    [
-      `${prefixCls}-size-${size}`,
-      ...(getValueIfQualified(
-        [
-          `${prefixCls}-font-${status}`,
-          `${prefixCls}-font-${status}-hover`,
-
-          `${prefixCls}-bg-${status}`,
-          `${prefixCls}-bg-${status}-hover`,
-
-          `${prefixCls}-border-${status}`,
-          `${prefixCls}-border-${status}-hover`,
-        ],
-        [!disabled]
-      ) || []),
-    ],
-    [buttonShowType === 'default']
-  ) || []
-
-  const textBtn = getValueIfQualified([
-    `${prefixCls}-border-text`,
-    `${prefixCls}-bg-text`,
-    ...(getValueIfQualified([
-      `${prefixCls}-border-text`,
-      `${prefixCls}-bg-text`,
-      `${prefixCls}-font-${status}`,
-      `${prefixCls}-font-${status}-hover`,
-    ], [!disabled]) || []),
-  ], buttonShowType === 'text') || []
+  const type = (typeProps === 'text' ? '' : typeProps) || status || 'default'
 
   const classNamesObj = {
     comp: getClassNames([
       `${prefixCls}`,
-      ...defaultBtn,
-      ...textBtn,
-      ...(getValueIfQualified(
-        [
-          `${prefixCls}-disabled`,
-          `${prefixCls}-font-disabled`,
-          `${prefixCls}-bg-disabled`,
-          `${prefixCls}-border-disabled`,
-        ],
-        [disabled]
-      ) || []),
+      `${prefixCls}-font-${type}`,
+      {
+        [`${prefixCls}-size-${size}${(icon && !children) ? '-icon' : ''}`]: typeProps !== 'text',
+        [`${prefixCls}-bg-${type}-hover`]: typeProps !== 'text' && !disabled,
+        [`${prefixCls}-underline`]: typeProps === 'text' && underline,
+        [`${prefixCls}-font-${type}-hover`]: !disabled,
+        [`${prefixCls}-border-${type}-hover`]: !disabled,
+        [`${prefixCls}-border-none`]: !border || typeProps === 'text',
+        [`${prefixCls}-disabled`]: disabled,
+        [`${prefixCls}-border-${type}`]: typeProps !== 'text',
+        [`${prefixCls}-bg-${type}`]: typeProps !== 'text',
+        [`${prefixCls}-bg-text`]: typeProps === 'text',
+      },
       className
     ])
   }
-
-  const bottomLine = buttonShowType === 'text' ? getClassNames([
-    {
-      [`${prefixCls}-line-base`]: textBottomLine,
-      [`${prefixCls}-line-base-disabled`]: disabled
-    },
-  ]) : ''
 
   /**
    * 点击事件处理
@@ -105,9 +73,19 @@ const Button: FC<ButtonPropsType> = (props) => {
       {prefix && (
         <div>{prefix}</div>
       )}
+
+      {/* 图标 */}
+      {icon && (
+        <div>
+          {icon}
+        </div>
+      )}
+
       {/* 主体 */}
       {children && (
-        <div className={bottomLine}>{children}</div>
+        <div>
+          {children}
+        </div>
       )}
       {/* 后缀 */}
       {suffix && (
