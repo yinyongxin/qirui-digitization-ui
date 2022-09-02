@@ -33,7 +33,8 @@ const IconExemple = () => {
               left: '30%',
               height: 400,
               width: 200,
-              position: 'absolute'
+              position: 'absolute',
+              top: -100
             }}>
 
             </div>
