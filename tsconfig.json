@@ -21,6 +21,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/components", "src/modules.d.ts"],
+  "include": ["src"],
   "exclude": ["node_modules"]
 }

@@ -28,7 +28,7 @@ const ScrollIntoView = (props: PropsWithChildren) => {
   }, [])
 
 
-  const liHandle = (index) => {
+  const liHandle = (index: number) => {
     try {
       data.children?.[index]?.scrollIntoView({
         behavior: 'smooth'
