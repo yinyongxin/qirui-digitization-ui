@@ -19,8 +19,8 @@ const DrawerExemple = () => {
               // path: '/home'
             },
             {
-              title: 'BreadcrumbExemple',
-              path: '/breadcrumbExemple'
+              title: 'DrawerExemple',
+              path: '/drawerExemple'
             }
           ]
         }

@@ -14,8 +14,8 @@ const ButtonExemple = () => {
               // path: '/home'
             },
             {
-              title: 'BreadcrumbExemple',
-              path: '/breadcrumbExemple'
+              title: 'ButtonExemple',
+              path: '/buttonExemple'
             }
           ]
         }

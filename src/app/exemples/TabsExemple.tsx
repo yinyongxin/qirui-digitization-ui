@@ -52,8 +52,8 @@ const TabsExemple = () => {
               // path: '/home'
             },
             {
-              title: 'TableExemple',
-              path: '/tableExemple'
+              title: 'TabsExemple',
+              path: '/tabsExemple'
             }
           ]
         }

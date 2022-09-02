@@ -1,7 +1,7 @@
 @prefix-tabPane: ~'@{nameSpace}-tabPane';
 
 .@{prefix-tabPane} {
-  color: var(--design-neutral-color);
+  color: var(--design-text-color-5);
   font-size: var(--design-font-size-14);
   position: relative;
   .cursor-pointer();
@@ -11,7 +11,7 @@
 .@{prefix-tabPane}-line-base {
   transition: all 0.3s;
   border-bottom: var(--design-border-sm) solid var(--design-neutral-color);
-  color: var(--design-neutral-color-2);
+  color: var(--design-text-color-4);
   padding: 0 0 10px 0;
   display: flex;
   gap: 8px;
@@ -36,11 +36,11 @@
 .@{prefix-tabPane}-line-disabled {
   .cursor-not-allowed();
   border-bottom-color: var(--design-neutral-color-3);
-  color: var(--design-neutral-color-3);
+  color: var(--design-text-color-3);
 
   .@{prefix-tabPane}-line-disabled-num {
     border-bottom-color: var(--design-neutral-color-3);
-    color: var(--design-neutral-color-3);
+    color: var(--design-text-color-3);
   }
 }
 
@@ -59,7 +59,7 @@
 
 .@{prefix-tabPane}-card-disabled {
   .cursor-not-allowed();
-  color: var(--design-neutral-color-3);
+  color: var(--design-text-color-3);
 }
 
 .@{prefix-tabPane}-miniCard-base {
@@ -67,18 +67,18 @@
   transition: all 0.3s;
   box-sizing: border-box;
   padding: 10px 20px;
-  color: var(--design-neutral-color-2);
+  color: var(--design-text-color-4);
   background-color: var(--design-bg-color-2);
 }
 
 .@{prefix-tabPane}-miniCard-checked {
   background-color: var(--design-base-color-10);
-  color: var(--design-base-color);
+  color: var(--design-text-color-5);
 }
 
 .@{prefix-tabPane}-miniCard-disabled {
   .cursor-not-allowed();
-  color: var(--design-neutral-color-3);
+  color: var(--design-text-color-3);
 }
 
 .@{prefix-tabPane}-miniCard-check-border {
@@ -135,7 +135,7 @@
 .@{prefix-tabPane}-text-base {
   transition: all 0.3s;
   position: relative;
-  color: var(--design-neutral-color-2);
+  color: var(--design-text-color-4);
   padding: 0 12px;
 }
 
@@ -145,7 +145,7 @@
 
 .@{prefix-tabPane}-text-disabled {
   .cursor-not-allowed();
-  color: var(--design-neutral-color-3);
+  color: var(--design-text-color-3);
 }
 
 .@{prefix-tabPane}-text-check-left-border {

@@ -14,8 +14,8 @@ const CardExemple = () => {
               // path: '/home'
             },
             {
-              title: 'BreadcrumbExemple',
-              path: '/breadcrumbExemple'
+              title: 'CardExemple',
+              path: '/cardExemple'
             }
           ]
         }
