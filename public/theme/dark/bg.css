@@ -1,7 +1,7 @@
 :root {
-  --design-bg-color-1: #2b2b2b;
-  --design-bg-color-2: #1F1F1F;
-  --design-bg-color-3: #141414;
-  --design-bg-color-4: #0A0A0A;
-  --design-bg-color-5: #000000;
+  --design-bg-color-1: var(--design-neutral-color-6);
+  --design-bg-color-2: var(--design-neutral-color-7);
+  --design-bg-color-3: var(--design-neutral-color-8);
+  --design-bg-color-4: var(--design-neutral-color-9);
+  --design-bg-color-5: var(--design-neutral-color-10);
 }
