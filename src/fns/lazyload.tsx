@@ -2,7 +2,7 @@ import React from 'react';
 import loadable from '@loadable/component';
 
 // https://github.com/gregberge/loadable-components/pull/226
-function load(fn, options) {
+function load(fn: any, options: any) {
   const Component = loadable(fn, options);
 
   Component.preload = fn?.requireAsync || fn;
@@ -26,7 +26,7 @@ function LoadingComponent(props: {
   );
 }
 
-export default (loader) =>
+export default (loader: any) =>
   load(loader, {
     fallback: LoadingComponent({
       pastDelay: true,

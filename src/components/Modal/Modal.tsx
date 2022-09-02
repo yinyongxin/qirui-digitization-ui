@@ -144,7 +144,7 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
         return <></>
       } else if (icon === 'default') {
         iconRes = (
-          <Icon icon={"xmark"} size={24} />
+          <Icon icon={"xmark"} size={22} />
         )
       } else {
         iconRes = icon

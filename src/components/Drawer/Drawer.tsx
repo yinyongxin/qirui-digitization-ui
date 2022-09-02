@@ -164,7 +164,7 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
         return
       } else if (icon === 'default') {
         iconRes = (
-          <Icon icon={"xmark"} />
+          <Icon icon={"xmark"} size={22} />
         )
       } else {
         iconRes = icon
