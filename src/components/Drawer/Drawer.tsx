@@ -185,7 +185,7 @@ const Drawer: ForwardRefRenderFunction<unknown, DrawerPropsType> = (props, ref) 
         footerRes = header
       }
       return (
-        <header className={classNamesObj.drawerFooter()}>
+        <header className={classNamesObj.drawerHeader()}>
           {footerRes}
         </header>
       )
