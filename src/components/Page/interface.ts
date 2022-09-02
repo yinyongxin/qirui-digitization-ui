@@ -39,7 +39,7 @@ export interface PageBaseType {
   },
   pageBody?: {
     padding?: DesignTypes['Padding']
-  }
+  } & JSX.IntrinsicElements['main']
   /**
    * √
    * 吸顶

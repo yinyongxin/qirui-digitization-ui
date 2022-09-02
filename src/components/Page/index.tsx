@@ -23,7 +23,7 @@ const Page = (props: PagePropsType) => {
     className,
     children,
     pageHeader,
-    pageBody,
+    pageBody = {},
     sticky,
     ...rest
   } = {
@@ -39,13 +39,20 @@ const Page = (props: PagePropsType) => {
     ...pageHeader?.padding
   }
 
+  const {
+    padding,
+    className: pageBodyClassName,
+    ...pageBodyRest
+  } = pageBody
+
   const bodyPadding: DesignTypes['Padding'] = {
     top: true,
     right: true,
     bottom: true,
     left: true,
-    ...pageBody?.padding
+    ...padding
   }
+
 
   const classNamesObj = {
     page: getClassNames([
@@ -73,13 +80,14 @@ const Page = (props: PagePropsType) => {
     ]),
     main: getClassNames([
       `${prefixCls}-main`,
+      pageBodyClassName,
       {
         [`${classNamePrefix}-padding-top-lg`]: bodyPadding.top,
         [`${classNamePrefix}-padding-right-lg`]: bodyPadding.right,
         [`${classNamePrefix}-padding-bottom-lg`]: bodyPadding.bottom,
         [`${classNamePrefix}-padding-left-lg`]: bodyPadding.left,
       }
-    ]),
+    ])
   }
 
   const stylesObj = {
@@ -130,7 +138,7 @@ const Page = (props: PagePropsType) => {
           </div>
         )}
       </header>
-      <main className={classNamesObj.main}>
+      <main className={classNamesObj.main} {...pageBodyRest}>
         {children && children}
       </main>
     </div>

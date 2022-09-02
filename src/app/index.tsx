@@ -32,8 +32,6 @@ function App() {
     <div className='app'>
       <SideMenu
         activeMenuItemChange={(menuItems) => {
-          console.log('menuItems', menuItems);
-
           navigate(`/${menuItems?.[0]}`);
         }}
         style={{
