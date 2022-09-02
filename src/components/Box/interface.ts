@@ -2,10 +2,7 @@ import React, { PropsWithChildren } from "react"
 import { DesignTypes } from "../typings";
 
 export interface BoxBaseType {
-  borderDirection?: DesignTypes['Direction'][],
-  borderStatus?: DesignTypes['Status'][],
-  fontStatus: DesignTypes['Status'][]
-  backgroundColor: DesignTypes['Status'][]
+  type?: 'base' | 'blur'
 }
 
 export type BoxPropsType = BoxBaseType & JSX.IntrinsicElements['div']

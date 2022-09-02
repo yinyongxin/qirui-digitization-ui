@@ -26,6 +26,7 @@ import Pagination from "./Pagination/index";
 import Breadcrumb from "./Breadcrumb";
 import Page from "./Page";
 import Text from "./Text";
+import Box from "./Box";
 import Typography from "./Typography";
 
 import { GlobalContext } from './config/globalContext'
@@ -58,4 +59,5 @@ export {
   Page,
   Text,
   Typography,
+  Box
 };

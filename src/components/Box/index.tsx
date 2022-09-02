@@ -14,14 +14,18 @@ const Box = (props: BoxPropsType) => {
     style,
     className,
     children,
+    type,
     ...rest
   } = props
 
   const classNamesObj = {
     box: getClassNames([
       `${prefixCls}`,
+      {
+        [`${classNamePrefix}-base-blur`]: type === 'blur'
+      },
       className,
-    ])
+    ]),
   }
 
   const stylesObj = {
