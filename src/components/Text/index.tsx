@@ -104,9 +104,6 @@ const Text = (props: TextPropsType) => {
     )
   }
 
-
-
-
   useEffect(() => {
     return () => {
       clearTimeout(data.resetIsCopyableId!)
