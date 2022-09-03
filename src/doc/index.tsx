@@ -1,12 +1,16 @@
 import './index.less'
-import React, { useEffect, useState } from 'react'
 import { SideMenu } from '../components'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { exemplesNameList } from './routes';
 import { useData } from '../components/utils/hooks';
+import '/public/theme/dark/index.css';
+// import '/public/theme/light/index.css';
+
+window.matchMedia("prefers-color-scheme").onchange = (themeMedia) => {
+  console.log('themeMedia', themeMedia);
+}
 
 function App() {
-
   let navigate = useNavigate();
   const data = useData({
     menuTree: exemplesNameList.map((exemplesName) => {
