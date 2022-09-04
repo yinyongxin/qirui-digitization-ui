@@ -13,8 +13,11 @@ const Box = (props: BoxPropsType) => {
   const {
     style,
     className,
+    shadow = 'base',
+    shadowShow = 'never',
     children,
     type,
+    radius,
     ...rest
   } = props
 
@@ -22,7 +25,9 @@ const Box = (props: BoxPropsType) => {
     box: getClassNames([
       `${prefixCls}`,
       {
-        [`${classNamePrefix}-base-blur`]: type === 'blur'
+        [`${classNamePrefix}-base-blur`]: type === 'blur',
+        [`${classNamePrefix}-shadow-${shadow}`]: shadowShow === 'always',
+        [`${classNamePrefix}-shadow-${shadow}-hover`]: shadowShow === 'hover',
       },
       className,
     ]),
@@ -30,7 +35,13 @@ const Box = (props: BoxPropsType) => {
 
   const stylesObj = {
     box: getStyles([
-      style
+      style,
+      {
+        style: {
+          borderRadius: radius,
+        },
+        condition: !!radius
+      }
     ])
   }
 
