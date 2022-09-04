@@ -28,6 +28,8 @@ import Page from "./Page";
 import Text from "./Text";
 import Box from "./Box";
 import Typography from "./Typography";
+import * as hooks from './utils/hooks'
+import * as tools from './utils/tools'
 
 import { GlobalContext } from './config/globalContext'
 
@@ -59,5 +61,7 @@ export {
   Page,
   Text,
   Typography,
-  Box
+  Box,
+  hooks,
+  tools
 };
