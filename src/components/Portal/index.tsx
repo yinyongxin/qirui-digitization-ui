@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import ReactDOM, { createPortal } from "react-dom"
+import { createPortal } from "react-dom"
 import { PortalPropsType } from "./interface"
 
 const Portal = (props: PortalPropsType) => {

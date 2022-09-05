@@ -17,7 +17,7 @@ const Box = (props: BoxPropsType) => {
     shadowShow = 'never',
     children,
     type,
-    radius,
+    radius = 0,
     ...rest
   } = props
 

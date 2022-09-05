@@ -7,7 +7,7 @@ export interface BoxBaseType {
    * 圆角
    * @defatult 0
    */
-  radius: number,
+  radius?: number,
   /**
  * 阴影类型
  * @default base
