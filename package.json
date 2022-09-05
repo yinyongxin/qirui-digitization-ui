@@ -26,6 +26,10 @@
       "import": "./dist/icons/less.less",
       "require": "./dist/icons/less.less"
     },
+    "./theme": {
+      "import": "./dist/theme/index.css",
+      "require": "./dist/theme/index.css"
+    },
     "./theme/light": {
       "import": "./dist/theme/light/index.css",
       "require": "./dist/theme/light/index.css"
@@ -35,7 +39,7 @@
       "require": "./dist/theme/dark/index.css"
     }
   },
-  "version": "1.3.8",
+  "version": "1.3.9",
   "scripts": {
     "start": "npm run dev",
     "dev": "vite --host",
