@@ -38,9 +38,9 @@
       "import": "./dist/theme/dark/index.css",
       "require": "./dist/theme/dark/index.css"
     },
-    "./less": {
-      "import": "./dist/less/index.css",
-      "require": "./dist/less/index.css"
+    "./globalLess": {
+      "import": "./dist/globalLess/index.css",
+      "require": "./dist/globalLess/index.css"
     }
   },
   "version": "1.4.0",
