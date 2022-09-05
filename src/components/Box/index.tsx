@@ -18,6 +18,7 @@ const Box = (props: BoxPropsType) => {
     children,
     type,
     radius = 0,
+    blur = 10,
     ...rest
   } = props
 
@@ -25,7 +26,7 @@ const Box = (props: BoxPropsType) => {
     box: getClassNames([
       `${prefixCls}`,
       {
-        [`${classNamePrefix}-base-blur`]: type === 'blur',
+        [`${classNamePrefix}-shadow-blur`]: type === 'blur',
         [`${classNamePrefix}-shadow-${shadow}`]: shadowShow === 'always',
         [`${classNamePrefix}-shadow-${shadow}-hover`]: shadowShow === 'hover',
       },
@@ -37,8 +38,12 @@ const Box = (props: BoxPropsType) => {
     box: getStyles([
       style,
       {
+        backdropFilter: `blur(${blur}px)`,
+      },
+      {
         style: {
           borderRadius: radius,
+          overflow: 'hidden',
         },
         condition: !!radius
       }

@@ -9,6 +9,11 @@ export interface BoxBaseType {
    */
   radius?: number,
   /**
+   * 模糊
+   * @defatult 10
+   */
+  blur?: number,
+  /**
  * 阴影类型
  * @default base
  */

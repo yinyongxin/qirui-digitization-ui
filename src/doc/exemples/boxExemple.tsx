@@ -48,16 +48,6 @@ const IconExemple = () => {
             >
               Im a Box
             </Box>
-            <Box
-              style={{
-                height: 200,
-                width: 400
-              }}
-            >
-              Im a Box
-            </Box>
-
-
           </div>
 
         </Title>
