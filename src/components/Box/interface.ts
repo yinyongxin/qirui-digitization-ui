@@ -14,6 +14,10 @@ export interface BoxBaseType {
    */
   blur?: number,
   /**
+   * @default true
+   */
+  blurShadow?: boolean,
+  /**
  * 阴影类型
  * @default base
  */

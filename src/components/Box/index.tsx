@@ -19,6 +19,7 @@ const Box = (props: BoxPropsType) => {
     type,
     radius = 0,
     blur = 10,
+    blurShadow = true,
     ...rest
   } = props
 
@@ -26,7 +27,8 @@ const Box = (props: BoxPropsType) => {
     box: getClassNames([
       `${prefixCls}`,
       {
-        [`${classNamePrefix}-shadow-blur`]: type === 'blur',
+        [`${classNamePrefix}-shadow-blur`]: type === 'blur' && blurShadow,
+        [`${prefixCls}-blur-bg`]: type === 'blur',
         [`${classNamePrefix}-shadow-${shadow}`]: shadowShow === 'always',
         [`${classNamePrefix}-shadow-${shadow}-hover`]: shadowShow === 'hover',
       },
