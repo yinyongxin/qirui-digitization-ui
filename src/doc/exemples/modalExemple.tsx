@@ -3,7 +3,7 @@ import { Button, Page, Modal, Title } from "../../components";
 import { ModalHandle } from "../../components/Modal/interface";
 import ScrollIntoView from "../components/ScrollIntoView";
 
-let modal
+let modal: { update: any; close?: () => void; }
 const ModalExemple = () => {
   const ModalRef = useRef<ModalHandle>()
   const ModalRef1 = useRef<ModalHandle>()

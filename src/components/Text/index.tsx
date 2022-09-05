@@ -48,6 +48,7 @@ const Text = (props: TextPropsType) => {
       className,
     ]),
     text: getClassNames([
+      `${prefixCls}-text`, ,
       {
         [`${prefixCls}-mark`]: mark && isString(mark),
         [`${classNamePrefix}-bg-${mark}`]: mark && isString(mark),

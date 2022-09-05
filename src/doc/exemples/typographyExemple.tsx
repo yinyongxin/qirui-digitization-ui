@@ -22,7 +22,7 @@ const IconExemple = () => {
     >
       <ScrollIntoView>
         <Title margin={{ top: false }} type="tooltip" title="可交互" >
-          <div className="flex gap20">
+          <div className="flex gap20 flex-warp">
             <Text copyable type='default'>default</Text>
             <Text copyable type='secondary'>secondary</Text>
             <Text copyable type='primary'>base</Text>

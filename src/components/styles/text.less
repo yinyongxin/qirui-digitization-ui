@@ -1,8 +1,13 @@
 @prefix-text: ~'@{nameSpace}-text';
 
 .@{prefix-text} {
-  display: inline-block;
+  display: flex;
+  flex: none;
+
+  .@{prefix-text}-text {}
 }
+
+
 
 .@{prefix-text}-copyable {
   // text-decoration: line-through;
