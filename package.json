@@ -39,11 +39,11 @@
       "require": "./dist/theme/dark/index.css"
     },
     "./globalLess": {
-      "import": "./dist/globalLess/index.css",
-      "require": "./dist/globalLess/index.css"
+      "import": "./dist/globalLess/index.less",
+      "require": "./dist/globalLess/index.less"
     }
   },
-  "version": "1.4.1",
+  "version": "1.4.2",
   "scripts": {
     "start": "npm run dev",
     "dev": "vite --host",
