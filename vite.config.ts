@@ -17,7 +17,7 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         javascriptEnabled: true,
-        additionalData: `@import "${resolve(__dirname, 'src/less/index.less')}";`
+        additionalData: `@import "${resolve(__dirname, 'public/less/index.less')}";`
       },
     }
   },

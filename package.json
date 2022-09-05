@@ -37,6 +37,10 @@
     "./theme/dark": {
       "import": "./dist/theme/dark/index.css",
       "require": "./dist/theme/dark/index.css"
+    },
+    "./less": {
+      "import": "./dist/less/index.css",
+      "require": "./dist/less/index.css"
     }
   },
   "version": "1.4.0",
