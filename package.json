@@ -43,7 +43,7 @@
       "require": "./dist/globalLess/index.less"
     }
   },
-  "version": "1.4.4",
+  "version": "1.4.5",
   "scripts": {
     "start": "npm run dev",
     "dev": "vite --host",
