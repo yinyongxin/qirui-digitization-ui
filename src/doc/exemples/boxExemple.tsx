@@ -40,7 +40,7 @@ const IconExemple = () => {
             </div>
 
             <Box
-              type='blur'
+              // type='blur'
               style={{
                 height: 200,
                 width: 400

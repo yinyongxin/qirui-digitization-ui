@@ -40,7 +40,10 @@ const Box = (props: BoxPropsType) => {
     box: getStyles([
       style,
       {
-        backdropFilter: `blur(${blur}px)`,
+        style: {
+          backdropFilter: `blur(${blur}px)`,
+        },
+        condition: type === 'blur'
       },
       {
         style: {
