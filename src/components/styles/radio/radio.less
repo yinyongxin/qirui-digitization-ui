@@ -1,0 +1,31 @@
+@prefix-radio: ~'@{nameSpace}-radio';
+
+.@{prefix-radio} {
+  font-size: var(--design-font-size-14);
+  color: var(--design-neutral-color);
+  .flex();
+  .align-center();
+  .cursor-pointer();
+
+  .@{prefix-radio}-input {
+    width: 0;
+    height: 0;
+  }
+
+  .@{prefix-radio}-radio {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    border: 1px solid var(--design-base-color);
+    transition: all 0.1s;
+  }
+
+  .@{prefix-radio}-radio-checked {
+    border-width: 4px;
+  }
+
+  .@{prefix-radio}-label {
+    margin-left: 6px;
+  }
+}

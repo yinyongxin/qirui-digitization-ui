@@ -21,7 +21,6 @@ const Group = (props: RadioGroupType) => {
     classNamePrefix
   } = useContext(GlobalContext);
   const formItemContent = useContext(FormItemContext);
-  const formContent = useContext(FormContext);
 
   const id = useId()
 
@@ -35,6 +34,20 @@ const Group = (props: RadioGroupType) => {
   }
 
   const [value, setValue] = useState(formItemContent?.value || defaultValue || valueProps)
+
+  const optionsRender = () => {
+    return options?.map(option => {
+      if (isString(option)) {
+        return (
+          <Radio key={option} value={option}>{option}</Radio>
+        )
+      } else {
+        return (
+          <Radio key={option.value} value={option.value}>{option.label}</Radio>
+        )
+      }
+    })
+  }
 
   useEffect(() => {
     setValue(formItemContent?.value || valueProps)
@@ -54,17 +67,7 @@ const Group = (props: RadioGroupType) => {
     >
       <div className={classNamesObj.radioGroupComp} {...rest}>
         {children}
-        {options?.map(option => {
-          if (isString(option)) {
-            return (
-              <Radio value={option}>{option}</Radio>
-            )
-          } else {
-            return (
-              <Radio value={option.vlaue}>{option.label}</Radio>
-            )
-          }
-        })}
+        {optionsRender()}
       </div>
     </RadioGroupContext.Provider>
   )

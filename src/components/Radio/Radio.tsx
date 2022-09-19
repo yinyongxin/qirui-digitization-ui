@@ -1,13 +1,12 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { FormContext } from "../Form/Context";
 import { FormItemContext } from "../Form/Context";
 import { GlobalContext } from "../config/globalContext"
 import { RadioGroupContext } from './Context'
-import { ClassNameType, getClassNames, getValueIfQualified, omit, isBoolean, isUndefined, isFunction } from "../utils/tools";
+import { ClassNameType, getClassNames, omit, isFunction } from "../utils/tools";
 import { RadioPropsType } from "./interface"
 
 const Radio = (props: RadioPropsType, ref: any) => {
-
   const {
     classNamePrefix
   } = useContext(GlobalContext);
@@ -29,6 +28,8 @@ const Radio = (props: RadioPropsType, ref: any) => {
     children,
   } = props
 
+  const inputRef = useRef<HTMLInputElement>(null)
+
   const [checked, setChecked] = useState(defaultChecked || checkedProps || radioGroupContext.value === value || false)
 
   useEffect(() => {
@@ -40,14 +41,23 @@ const Radio = (props: RadioPropsType, ref: any) => {
   }, [radioGroupContext?.value])
 
   const classNamesObj = {
-    radioComponent: (classNames: ClassNameType[] = []) => getClassNames([
+    radioComp: getClassNames([
       `${prefixCls}`,
       className,
-      ...classNames,
     ]),
-    radio: (classNames: ClassNameType[] = []) => getClassNames([
+    radio: getClassNames([
+      `${prefixCls}-radio`,
+      {
+        [`${prefixCls}-radio-checked`]: checked
+      }
+    ]),
+    radioInput: (classNames: ClassNameType[] = []) => getClassNames([
+      `${prefixCls}-input`,
       inputAttributes?.className,
       ...classNames,
+    ]),
+    label: getClassNames([
+      `${prefixCls}-label`,
     ]),
   }
 
@@ -63,13 +73,15 @@ const Radio = (props: RadioPropsType, ref: any) => {
     type: 'radio',
     name,
     id: name,
-    className: classNamesObj.radio(),
+    ref: inputRef,
+    className: classNamesObj.radioInput(),
     value,
     checked,
     onChange: (e) => {
       onChange && onChange(e.target.checked, e)
       radioGroupContext?.onCheckedChange?.(e.target.value)
       inFormObj?.valueChange()
+      console.log('onChange');
       if (!radioGroupContext.inRadioGroup) {
         setChecked(e.target.checked)
       }
@@ -80,10 +92,20 @@ const Radio = (props: RadioPropsType, ref: any) => {
   return (
     <div
       style={style}
-      className={classNamesObj.radioComponent()}
+      className={classNamesObj.radioComp}
+      onClick={() => {
+        inputRef.current?.click()
+      }}
     >
       <input {...inputProps} />
-      <span>{value}</span>
+      <span className={classNamesObj.radio}>
+
+      </span>
+      {isFunction(children) ? children?.(checked) : (
+        <span className={classNamesObj.label}>
+          {children || value}
+        </span>
+      )}
     </div>
   )
 }
