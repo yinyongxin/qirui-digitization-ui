@@ -71,7 +71,7 @@ export interface ModalBaseType {
    * 	是否在初次打开对话框时才渲染 dom
    */
   mountOnEnter?: boolean,
-  width?: number,
+  width?: React.CSSProperties['width']
   /**
    * 是否作为组件
    */
