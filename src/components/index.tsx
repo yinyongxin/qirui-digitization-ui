@@ -28,6 +28,8 @@ import Page from "./Page";
 import Text from "./Text";
 import Box from "./Box";
 import Typography from "./Typography";
+import Tag from "./Tag";
+import Badge from "./Badge";
 export * from './utils/hooks'
 export * from './utils/tools'
 
@@ -61,5 +63,7 @@ export {
   Page,
   Text,
   Typography,
-  Box
+  Tag,
+  Box,
+  Badge
 };
