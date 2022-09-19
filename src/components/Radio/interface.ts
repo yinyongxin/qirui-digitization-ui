@@ -21,7 +21,8 @@ export interface RadioBaseInterFace {
   inputAttributes?: JSX.IntrinsicElements['input'],
 
   checked?: boolean,
-  value?: ReactNode
+  value?: ReactNode,
+  children?: ReactNode | ((checked: boolean) => ReactNode)
 }
 
 export type RadioPropsType = RadioBaseInterFace & JSX.IntrinsicElements['input']
@@ -30,6 +31,7 @@ export type RadioGroupType = {
   children: ReactNode,
   defaultValue?: string,
   value?: string,
+  options?: (string | { label: ReactNode, vlaue: string })[]
   onCheckedChange?: (value: string) => void
 } & JSX.IntrinsicElements['div']
 

@@ -3,7 +3,7 @@ import { FormContext } from "../Form/Context";
 import { FormItemContext } from "../Form/Context";
 import { GlobalContext } from "../config/globalContext"
 import { RadioGroupContext } from './Context'
-import { ClassNameType, getClassNames, getValueIfQualified, omit, isBoolean, isUndefined } from "../utils/tools";
+import { ClassNameType, getClassNames, getValueIfQualified, omit, isBoolean, isUndefined, isFunction } from "../utils/tools";
 import { RadioPropsType } from "./interface"
 
 const Radio = (props: RadioPropsType, ref: any) => {
@@ -26,21 +26,17 @@ const Radio = (props: RadioPropsType, ref: any) => {
     style,
     className,
     inputAttributes,
+    children,
   } = props
 
-  // 是否为受控组件
-  const isControl = !isUndefined(checkedProps)
-
-  const [checked, setChecked] = useState(checkedProps || radioGroupContext.value === value || false)
+  const [checked, setChecked] = useState(defaultChecked || checkedProps || radioGroupContext.value === value || false)
 
   useEffect(() => {
-    if (!isUndefined(checkedProps)) {
-      setChecked(checkedProps!)
-    }
+    setChecked(checkedProps!)
   }, [checkedProps])
 
   useEffect(() => {
-    setChecked(radioGroupContext?.value === value)
+    setChecked(radioGroupContext?.value === value || defaultChecked || false)
   }, [radioGroupContext?.value])
 
   const classNamesObj = {
@@ -69,16 +65,12 @@ const Radio = (props: RadioPropsType, ref: any) => {
     id: name,
     className: classNamesObj.radio(),
     value,
-    ...(isControl || radioGroupContext?.inRadioGroup ? {
-      checked,
-    } : {
-      defaultChecked,
-    }),
+    checked,
     onChange: (e) => {
       onChange && onChange(e.target.checked, e)
       radioGroupContext?.onCheckedChange?.(e.target.value)
       inFormObj?.valueChange()
-      if (!isUndefined(checkedProps)) {
+      if (!radioGroupContext.inRadioGroup) {
         setChecked(e.target.checked)
       }
     },
@@ -92,7 +84,6 @@ const Radio = (props: RadioPropsType, ref: any) => {
     >
       <input {...inputProps} />
       <span>{value}</span>
-      {String(checked)}
     </div>
   )
 }
