@@ -3,7 +3,7 @@ import { DesignTypes } from "../typings";
 
 export interface TagBaseType {
   style?: CSSProperties;
-  className?: string | string[];
+  className?: string;
   /**
    * @zh 设置标签背景颜色
    * @en The background color of Tag

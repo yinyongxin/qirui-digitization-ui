@@ -39,9 +39,9 @@ const Tag: FC<TagPropsType> = (props, ref) => {
   }
   const classNamesObj = {
     comp: getClassNames([
+      className,
       `${prefixCls}`,
       `${prefixCls}-size-${size}`,
-      className
     ])
   }
   const stylesObj = {

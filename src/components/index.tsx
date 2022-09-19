@@ -15,6 +15,7 @@ import SideMenuItemSub from "./SideMenu/SideMenuItemSub";
 import Title from "./Title/index";
 import Table from "./Table/index";
 import Input from "./Input/index";
+import Radio from './Radio/index'
 import Upload from "./Upload/index";
 import Image from "./Image/index";
 import Steps from "./Steps/index";
@@ -65,5 +66,6 @@ export {
   Typography,
   Tag,
   Box,
-  Badge
+  Badge,
+  Radio
 };
