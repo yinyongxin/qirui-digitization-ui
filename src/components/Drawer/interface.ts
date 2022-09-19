@@ -68,7 +68,6 @@ export interface DrawerBaseType {
    * 	是否在初次打开对话框时才渲染 dom
    */
   mountOnEnter?: boolean,
-  width?: number,
   /**
    * 是否作为组件
    */
@@ -86,6 +85,7 @@ export interface DrawerBaseType {
    */
   footerBorder?: boolean,
   border?: boolean,
+  width?: React.CSSProperties['width']
   /**
    * Drawer 位置
    */
