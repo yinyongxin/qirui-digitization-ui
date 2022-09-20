@@ -91,7 +91,6 @@ const Radio = (props: RadioPropsType, ref: any) => {
       onChange && onChange(e.target.checked, e)
       radioGroupContext?.onCheckedChange?.(value)
       inFormObj?.valueChange()
-      console.log('onChange');
       if (!radioGroupContext.inRadioGroup) {
         setChecked(e.target.checked)
       }
