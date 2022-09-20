@@ -15,6 +15,7 @@ import SideMenuItemSub from "./SideMenu/SideMenuItemSub";
 import Title from "./Title/index";
 import Table from "./Table/index";
 import Input from "./Input/index";
+import InputText from "./Input/InputText/index";
 import Radio from './Radio/index'
 import Checkbox from './Checkbox'
 import Upload from "./Upload/index";
@@ -54,6 +55,7 @@ export {
   GlobalContext,
   Table,
   Input,
+  InputText,
   Upload,
   Image,
   Steps,

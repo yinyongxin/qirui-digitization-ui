@@ -4,11 +4,6 @@ import { DesignTypes } from "../typings";
 
 export interface RadioBaseInterFace {
   /**
-   * 状态 
-   * 默认：default 成功：success 失败：error 警告：warnning
-   */
-  status?: DesignTypes['Status'],
-  /**
    * 是否禁用
    */
   disabled?: boolean,
@@ -28,7 +23,7 @@ export interface RadioBaseInterFace {
   /**
    * Radio值
    */
-  value?: string | number | boolean,
+  value: string | number,
   /**
    * label
    * 没有children是则使用value作为label
@@ -44,17 +39,17 @@ export type RadioGroupType = {
    */
   children?: ReactNode,
   // 默认值
-  defaultValue?: string,
+  defaultValue?: string | number,
   /**
    * RadioGroup值
    * 传入state变量则开启受控模式
    */
-  value?: string,
+  value?: string | number,
   /**
    * 单选组单选对象
    */
   options?: (
-    string | {
+    (string | number) | {
       label: ReactNode,
       value: string
     }
@@ -66,12 +61,12 @@ export type RadioGroupType = {
   /**
    * 选择值变化触发
    */
-  onCheckedChange?: (value: string) => void
+  onCheckedChange?: (value: string | number) => void
 } & JSX.IntrinsicElements['div']
 
 
 export type RadioGroupContextType = {
   name: string,
   inRadioGroup: boolean,
-  value?: string
+  value?: string | number
 } & Pick<RadioGroupType, 'onCheckedChange'>

@@ -11,11 +11,11 @@ const RadioExemple = () => {
           list: [
             {
               title: 'Home',
-              // path: '/home'
+              path: '/home'
             },
             {
               title: 'RadioExemple',
-              path: '/radioExemple'
+              path: '/exemples/radioExemple'
             }
           ]
         }

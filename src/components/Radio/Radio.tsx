@@ -89,7 +89,7 @@ const Radio = (props: RadioPropsType, ref: any) => {
     checked,
     onChange: (e) => {
       onChange && onChange(e.target.checked, e)
-      radioGroupContext?.onCheckedChange?.(e.target.value)
+      radioGroupContext?.onCheckedChange?.(value)
       inFormObj?.valueChange()
       console.log('onChange');
       if (!radioGroupContext.inRadioGroup) {

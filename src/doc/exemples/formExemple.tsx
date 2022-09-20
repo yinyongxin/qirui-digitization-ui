@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Button, Form, Image, Input, Page, Select, Title, Upload } from "../../components";
+import { Button, Checkbox, Form, Image, InputText, Page, Radio, Select, Title, Upload } from "../../components";
 import FormItem from "../../components/Form/FormItem";
 import ScrollIntoView from "../components/ScrollIntoView";
 
 const FormExemple = () => {
   const initialValues = {
     username: 'yyx',
+    radio: 2
     // age: 'age',
     // address: 'address',
     // other: {
@@ -31,11 +32,11 @@ const FormExemple = () => {
           list: [
             {
               title: 'Home',
-              // path: '/home'
+              path: '/home'
             },
             {
               title: 'FormExemple',
-              path: '/formExemple'
+              path: '/exemples/formExemple'
             }
           ]
         }
@@ -63,35 +64,58 @@ const FormExemple = () => {
                 name="username"
                 message="message"
               >
-                <Input />
+                <InputText />
               </FormItem>
               <FormItem
                 label="Age"
                 name="age"
                 message={message}
               >
-                <Input />
+                <InputText />
               </FormItem>
               <FormItem
                 label="address"
                 name="address"
               >
-                <Input />
+                <InputText />
+              </FormItem>
+              <FormItem
+                label="radio"
+                name="radio"
+              >
+                <Radio.Group>
+                  <Radio value={1} />
+                  <Radio value={2} />
+                  <Radio value={3} />
+                </Radio.Group>
+              </FormItem>
+              <FormItem
+                label="checkbox"
+                name="checkbox"
+              >
+                <Checkbox.Group>
+                  <Checkbox value={1} />
+                  <Checkbox value={2} />
+                  <Checkbox value={3} />
+                </Checkbox.Group>
               </FormItem>
             </Form>
             <div>
               <Button
                 onClick={() => {
-                  // form.setFieldsValue({
-                  //   username: Math.random().toString(),
-                  //   age: 21351542345324523523524352345234534235,
-                  //   address: 'addrescascascs'
-                  // })
-                  console.log(form.getFields());
-
-
+                  form.setFieldsValue({
+                    username: Math.random().toString(),
+                    age: 21351542345324523523524352345234534235,
+                    address: 'addrescascascs',
+                    radio: 2
+                  })
                 }}
               >setMessage</Button>
+              <Button
+                onClick={() => {
+                  console.log(form.getFields());
+                }}
+              >getMessage</Button>
             </div>
           </div>
         </Title>
