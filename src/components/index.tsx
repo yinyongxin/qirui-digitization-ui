@@ -16,6 +16,7 @@ import Title from "./Title/index";
 import Table from "./Table/index";
 import Input from "./Input/index";
 import Radio from './Radio/index'
+import Checkbox from './Checkbox'
 import Upload from "./Upload/index";
 import Image from "./Image/index";
 import Steps from "./Steps/index";
@@ -38,6 +39,7 @@ import { GlobalContext } from './config/globalContext'
 
 export {
   Button,
+  Checkbox,
   Message,
   Icon,
   Tabs,
