@@ -11,7 +11,7 @@ export interface RadioBaseInterFace {
  * √
  * 监听数值变化
  */
-  onChange?: (value: boolean, e: React.ChangeEvent<HTMLInputElement>) => void,
+  onChange?: (checked: boolean, e: React.ChangeEvent<HTMLInputElement>) => void,
   /**
    * input属性
    */
@@ -31,7 +31,7 @@ export interface RadioBaseInterFace {
   children?: ReactNode | ((checked: boolean) => ReactNode)
 }
 
-export type RadioPropsType = RadioBaseInterFace & Omit<JSX.IntrinsicElements['input'], 'children'>
+export type RadioPropsType = RadioBaseInterFace & Pick<JSX.IntrinsicElements['input'], 'className' | 'style' | 'defaultChecked' | 'name'>
 
 export type RadioGroupType = {
   /**
@@ -62,7 +62,7 @@ export type RadioGroupType = {
    * 选择值变化触发
    */
   onCheckedChange?: (value: string | number) => void
-} & JSX.IntrinsicElements['div']
+} & Pick<JSX.IntrinsicElements['div'], 'className' | 'style'>
 
 
 export type RadioGroupContextType = {

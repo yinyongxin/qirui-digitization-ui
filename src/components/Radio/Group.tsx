@@ -1,7 +1,7 @@
 import { useContext, useEffect, useId, useState } from "react";
 import { GlobalContext } from "../config/globalContext";
 import { FormItemContext, FormContext } from "../Form/Context";
-import { ClassNameType, getClassNames, isFunction, isString } from "../utils/tools";
+import { ClassNameType, getClassNames, isFunction, isNumber, isString } from "../utils/tools";
 import { RadioGroupContext } from "./Context"
 import { RadioGroupType } from "./interface"
 import Radio from "./Radio";
@@ -43,7 +43,7 @@ const Group = (props: RadioGroupType) => {
 
   const optionsRender = () => {
     return options?.map(option => {
-      if (isString(option)) {
+      if (isString(option) || isNumber(option)) {
         return (
           <Radio key={option} value={option}>
             {customLabel ? (checked) => (

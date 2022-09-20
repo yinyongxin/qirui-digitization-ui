@@ -11,7 +11,7 @@ export interface CheckboxBaseInterFace {
  * √
  * 监听数值变化
  */
-  onChange?: (value: boolean, e: React.ChangeEvent<HTMLInputElement>) => void,
+  onChange?: (checked: boolean, e?: React.ChangeEvent<HTMLInputElement>) => void,
   /**
    * input属性
    */
@@ -31,7 +31,7 @@ export interface CheckboxBaseInterFace {
   children?: ReactNode | ((checked: boolean) => ReactNode)
 }
 
-export type CheckboxPropsType = CheckboxBaseInterFace & Omit<JSX.IntrinsicElements['input'], 'children'>
+export type CheckboxPropsType = CheckboxBaseInterFace & Pick<JSX.IntrinsicElements['input'], 'className' | 'style' | 'defaultChecked' | 'name'>
 
 export type CheckboxGroupType = {
   /**
@@ -62,7 +62,7 @@ export type CheckboxGroupType = {
    * 选择值变化触发
    */
   onCheckedChange?: (value: string | number) => void
-} & JSX.IntrinsicElements['div']
+} & Pick<JSX.IntrinsicElements['div'], 'className' | 'style'>
 
 
 export type CheckboxGroupContextType = {
