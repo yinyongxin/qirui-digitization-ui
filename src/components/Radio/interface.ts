@@ -17,21 +17,55 @@ export interface RadioBaseInterFace {
  * 监听数值变化
  */
   onChange?: (value: boolean, e: React.ChangeEvent<HTMLInputElement>) => void,
-
+  /**
+   * input属性
+   */
   inputAttributes?: JSX.IntrinsicElements['input'],
-
+  /**
+   * 传入state变量则开启受控模式
+   */
   checked?: boolean,
-  value?: string,
+  /**
+   * Radio值
+   */
+  value?: string | number | boolean,
+  /**
+   * label
+   * 没有children是则使用value作为label
+   */
   children?: ReactNode | ((checked: boolean) => ReactNode)
 }
 
 export type RadioPropsType = RadioBaseInterFace & Omit<JSX.IntrinsicElements['input'], 'children'>
 
 export type RadioGroupType = {
+  /**
+   * Radio组内容
+   */
   children?: ReactNode,
+  // 默认值
   defaultValue?: string,
+  /**
+   * RadioGroup值
+   * 传入state变量则开启受控模式
+   */
   value?: string,
-  options?: (string | { label: ReactNode, value: string })[]
+  /**
+   * 单选组单选对象
+   */
+  options?: (
+    string | {
+      label: ReactNode,
+      value: string
+    }
+  )[]
+  /**
+   * 自定义Label
+   */
+  customLabel?: (checked: boolean, label: ReactNode) => ReactNode,
+  /**
+   * 选择值变化触发
+   */
   onCheckedChange?: (value: string) => void
 } & JSX.IntrinsicElements['div']
 

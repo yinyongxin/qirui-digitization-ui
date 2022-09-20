@@ -1,11 +1,16 @@
 import { useContext, useEffect, useId, useState } from "react";
 import { GlobalContext } from "../config/globalContext";
 import { FormItemContext, FormContext } from "../Form/Context";
-import { ClassNameType, getClassNames, isString } from "../utils/tools";
+import { ClassNameType, getClassNames, isFunction, isString } from "../utils/tools";
 import { RadioGroupContext } from "./Context"
 import { RadioGroupType } from "./interface"
 import Radio from "./Radio";
 
+/**
+ * 单选框组
+ * @param props 
+ * @returns 
+ */
 const Group = (props: RadioGroupType) => {
   const {
     children,
@@ -14,6 +19,7 @@ const Group = (props: RadioGroupType) => {
     className,
     onCheckedChange,
     options,
+    customLabel,
     ...rest
   } = props
 
@@ -39,11 +45,19 @@ const Group = (props: RadioGroupType) => {
     return options?.map(option => {
       if (isString(option)) {
         return (
-          <Radio key={option} value={option}>{option}</Radio>
+          <Radio key={option} value={option}>
+            {customLabel ? (checked) => (
+              customLabel(checked, option)
+            ) : option}
+          </Radio>
         )
       } else {
         return (
-          <Radio key={option.value} value={option.value}>{option.label}</Radio>
+          <Radio key={option.value} value={option.value}>
+            {customLabel ? (checked) => (
+              customLabel(checked, option.label)
+            ) : option.label}
+          </Radio>
         )
       }
     })

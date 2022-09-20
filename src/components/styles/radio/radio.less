@@ -2,14 +2,16 @@
 
 .@{prefix-radio} {
   font-size: var(--design-font-size-14);
-  color: var(--design-neutral-color);
-  .flex();
+  color: var(--design-text-color-5);
+  display: inline-flex;
   .align-center();
   .cursor-pointer();
+  position: relative;
 
   .@{prefix-radio}-input {
     width: 0;
     height: 0;
+    position: absolute;
   }
 
   .@{prefix-radio}-radio {
@@ -18,7 +20,11 @@
     width: 16px;
     border-radius: 50%;
     border: 1px solid var(--design-base-color);
-    transition: all 0.1s;
+    transition: border 0.1s;
+
+    &:hover {
+      animation: radioBreathing 1.5s infinite ease-in-out;
+    }
   }
 
   .@{prefix-radio}-radio-checked {
@@ -27,5 +33,24 @@
 
   .@{prefix-radio}-label {
     margin-left: 6px;
+  }
+}
+
+.@{prefix-radio}-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@keyframes radioBreathing {
+  0% {
+    box-shadow: 0 0 0 0 var(--design-base-color);
+  }
+
+  50% {
+    box-shadow: 0 0 8px 0 var(--design-base-color);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 var(--design-base-color);
   }
 }

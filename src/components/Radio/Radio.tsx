@@ -6,6 +6,12 @@ import { RadioGroupContext } from './Context'
 import { ClassNameType, getClassNames, omit, isFunction } from "../utils/tools";
 import { RadioPropsType } from "./interface"
 
+/**
+ * 单选框
+ * @param props 
+ * @param ref 
+ * @returns 
+ */
 const Radio = (props: RadioPropsType, ref: any) => {
   const {
     classNamePrefix
@@ -25,6 +31,7 @@ const Radio = (props: RadioPropsType, ref: any) => {
     style,
     className,
     inputAttributes,
+    disabled,
     children,
   } = props
 
@@ -43,6 +50,9 @@ const Radio = (props: RadioPropsType, ref: any) => {
   const classNamesObj = {
     radioComp: getClassNames([
       `${prefixCls}`,
+      {
+        [`${prefixCls}-disabled`]: disabled
+      },
       className,
     ]),
     radio: getClassNames([
@@ -94,17 +104,17 @@ const Radio = (props: RadioPropsType, ref: any) => {
       style={style}
       className={classNamesObj.radioComp}
       onClick={() => {
-        inputRef.current?.click()
+        !disabled && inputRef.current?.click()
       }}
     >
       <input {...inputProps} />
-      <span className={classNamesObj.radio}>
-
-      </span>
-      {isFunction(children) ? children?.(checked) : (
-        <span className={classNamesObj.label}>
-          {children || value}
-        </span>
+      {isFunction(children) ? children(checked) : (
+        <>
+          <span className={classNamesObj.radio}></span>
+          <span className={classNamesObj.label}>
+            {children || value}
+          </span>
+        </>
       )}
     </div>
   )
