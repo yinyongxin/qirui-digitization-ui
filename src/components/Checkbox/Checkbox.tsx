@@ -80,7 +80,7 @@ const Checkbox = (props: CheckboxPropsType, ref: any) => {
     checked,
     onChange: (e) => {
       onChange && onChange(e.target.checked, e)
-      checkboxGroupContext?.onCheckedChange?.(value!)
+      checkboxGroupContext?.onCheckedChange?.([value])
       if (!checkboxGroupContext.inCheckboxGroup) {
         setChecked(e.target.checked)
       }

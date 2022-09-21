@@ -20,6 +20,7 @@ import Radio from './Radio/index'
 import Checkbox from './Checkbox'
 import Upload from "./Upload/index";
 import Image from "./Image/index";
+import Switch from "./Switch/index";
 import Steps from "./Steps/index";
 import Mask from "./Mask/index";
 import Portal from "./Portal";
@@ -51,6 +52,7 @@ export {
   SideMenu,
   SideMenuItem,
   SideMenuItemSub,
+  Switch,
   Title,
   GlobalContext,
   Table,

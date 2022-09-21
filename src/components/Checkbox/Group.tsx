@@ -83,12 +83,12 @@ const Group = (props: CheckboxGroupType) => {
         value,
         name: formItemContent?.name || id,
         onCheckedChange: (newValue) => {
-          const isHas = value.findIndex(item => item === newValue) !== -1
+          const isHas = value.findIndex(item => item === newValue?.[0]) !== -1
           let arr: any = []
           if (isHas) {
-            arr = value.filter(item => item !== newValue)
+            arr = value.filter(item => item !== newValue?.[0])
           } else {
-            arr = [...new Set([...value, newValue])]
+            arr = [...new Set([...value, newValue?.[0]])]
           }
           inFormObj.valueChange(arr)
           onCheckedChange?.(arr)
