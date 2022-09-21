@@ -1,7 +1,7 @@
 import { useContext, useEffect, useId, useState } from "react";
 import { GlobalContext } from "../config/globalContext";
 import { FormItemContext, FormContext } from "../Form/Context";
-import { ClassNameType, getClassNames, isFunction, isString } from "../utils/tools";
+import { ClassNameType, getClassNames, isFunction, isNumber, isString } from "../utils/tools";
 import { CheckboxGroupContext } from "./Context"
 import { CheckboxGroupType } from "./interface"
 import Checkbox from "./Checkbox";
@@ -53,7 +53,7 @@ const Group = (props: CheckboxGroupType) => {
 
   const optionsRender = () => {
     return options?.map(option => {
-      if (isString(option)) {
+      if (isString(option) || isNumber(option)) {
         return (
           <Checkbox key={option} value={option}>
             {customLabel ? (checked) => (

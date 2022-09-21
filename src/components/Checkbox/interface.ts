@@ -49,7 +49,7 @@ export type CheckboxGroupType = {
    * 单选组单选对象
    */
   options?: (
-    string | {
+    (string | number) | {
       label: ReactNode,
       value: string | number
     }
@@ -61,7 +61,7 @@ export type CheckboxGroupType = {
   /**
    * 选择值变化触发
    */
-  onCheckedChange?: (value: string | number) => void
+  onCheckedChange?: (value: (string | number)[]) => void
 } & Pick<JSX.IntrinsicElements['div'], 'className' | 'style'>
 
 
