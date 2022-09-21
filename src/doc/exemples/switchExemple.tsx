@@ -15,7 +15,7 @@ const SwitchExemple = () => {
             },
             {
               title: 'Switchxemple',
-              path: '/swichExemple'
+              path: '/switchExemple'
             }
           ]
         }
