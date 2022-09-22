@@ -3,7 +3,7 @@ import { RouteObject } from 'react-router-dom';
 import App from '../index'
 import lazyload from '../../fns/lazyload';
 
-const exemples = await import.meta.glob('../exemples/*.tsx')
+const exemples = import.meta.glob('../exemples/*.tsx')
 
 export const exemplesNameList: string[] = Object.keys(exemples).map(key => {
   const path = key.split('/').pop()?.split('.')[0]
