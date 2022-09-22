@@ -4,6 +4,11 @@ import { InputCurrencyType } from "../interface";
 
 export interface InputTextBaseInterFace {
   /**
+* √
+* 	默认值
+*/
+  defaultValue?: string,
+  /**
    * 状态 
    * 默认：default 成功：success 失败：error 警告：warnning
    */
