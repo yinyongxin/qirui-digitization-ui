@@ -16,6 +16,7 @@ import Title from "./Title/index";
 import Table from "./Table/index";
 import Input from "./Input/index";
 import InputText from "./Input/InputText/index";
+import InputNumber from "./Input/InputNumber/index";
 import Radio from './Radio/index'
 import Checkbox from './Checkbox'
 import Upload from "./Upload/index";
@@ -58,6 +59,7 @@ export {
   Table,
   Input,
   InputText,
+  InputNumber,
   Upload,
   Image,
   Steps,
