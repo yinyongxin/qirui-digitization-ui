@@ -22,6 +22,7 @@ import Checkbox from './Checkbox'
 import Upload from "./Upload/index";
 import Image from "./Image/index";
 import Switch from "./Switch/index";
+import Slider from "./Slider/index";
 import Steps from "./Steps/index";
 import Mask from "./Mask/index";
 import Portal from "./Portal";
@@ -52,6 +53,7 @@ export {
   Select,
   SideMenu,
   SideMenuItem,
+  Slider,
   SideMenuItemSub,
   Switch,
   Title,

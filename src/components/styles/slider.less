@@ -1,0 +1,55 @@
+@prefix-slider: ~'@{nameSpace}-slider';
+
+.@{prefix-slider} {
+  font-style: normal;
+  font-size: 14px;
+  width: 100%;
+  display: block;
+  height: 16px;
+  position: relative;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: calc(50% - 2px);
+    height: 4px;
+    width: 100%;
+    background-color: var(--design-bg-color-1);
+  }
+
+  .@{prefix-slider}-button {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--design-base-color);
+    background-color: var(--design-bg-color-5);
+    border-radius: 50%;
+    position: absolute;
+
+    &:hover {
+      transform: scale(1.3, 1.3);
+      cursor: pointer;
+    }
+  }
+
+  .@{prefix-slider}-button-disabled {
+    cursor: not-allowed;
+
+    &:hover {
+      transform: unset;
+      cursor: unset;
+    }
+  }
+
+  .@{prefix-slider}-bar {
+    position: absolute;
+    top: calc(50% - 2px);
+    height: 4px;
+    background-color: var(--design-base-color);
+  }
+}
+
+.@{prefix-slider}-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
