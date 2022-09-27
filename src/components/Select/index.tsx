@@ -4,7 +4,7 @@ import Icon from "../Icon";
 import { DesignTypes } from "../typings";
 import { ClassNameType, getClassNames, isFunction, isNumber, isString } from "../utils/tools";
 import { SelectPropsType, ValueType } from "./interface"
-
+import { FormItemContext, FormContext } from "../Form/Context";
 const valuesMap: Map<DesignTypes['Option']['value'], DesignTypes['Option']> = new Map([])
 
 const Select: FC<SelectPropsType> = (props) => {
@@ -22,7 +22,8 @@ const Select: FC<SelectPropsType> = (props) => {
     onValueChange,
     ...rest
   } = props
-
+  const formItemContent = useContext(FormItemContext);
+  const formContent = useContext(FormContext);
   const prefixCls = `${classNamePrefix}-select`
 
   const [value, setValue] = useState<ValueType>([])
@@ -45,7 +46,16 @@ const Select: FC<SelectPropsType> = (props) => {
     `${prefixCls}-icon`,
   ])
 
+  const innerMethods = formContent.store?.getInnerMethods()
+
+  const inFormObj = {
+    valueChange: (newValue: any) => {
+      innerMethods?.innerSetFieldValue(formItemContent.name, newValue)
+      formContent?.onChange?.({ [formItemContent.name]: newValue }, formContent.store?.getFields(), { [formItemContent.name]: value })
+    }
+  }
   const updateValueFn = (newValue: ValueType) => {
+    inFormObj.valueChange(newValue)
     setValue(newValue)
     onValueChange && onValueChange(newValue)
   }
