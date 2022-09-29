@@ -1,0 +1,8 @@
+:root {
+  /* 0.2 */
+  --design-border-color-1: var(--design-neutral-color-3);
+  /* 0.30 */
+  --design-border-color-2: var(--design-neutral-color-5);
+  /* 0.45 */
+  --design-border-color-3: var(--design-neutral-color-7);
+}

@@ -1,0 +1,12 @@
+:root {
+  /* 0.85 */
+  --design-text-color-5: var(--design-neutral-color-1);
+  /* 0.65 */
+  --design-text-color-4: var(--design-neutral-color-2);
+  /* 0.45 */
+  --design-text-color-3: var(--design-neutral-color-3);
+  /* 0.30 */
+  --design-text-color-2: var(--design-neutral-color-4);
+  /* 0.2 */
+  --design-text-color-1: var(--design-neutral-color-5);
+}

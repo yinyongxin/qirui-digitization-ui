@@ -1,0 +1,8 @@
+@import './size/index.css';
+@import './font.css';
+
+:root {
+  --animation-time-short: 0.2s;
+  --animation-time-base: 0.3s;
+  --animation-time-long: 0.4s;
+}

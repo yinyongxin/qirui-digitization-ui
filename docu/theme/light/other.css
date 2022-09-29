@@ -1,0 +1,7 @@
+:root {
+  --design-blur-bg-color: 255, 255, 255;
+  /* 跟主题接近 */
+  --design-rgba-near: 255, 255, 255;
+  /* 跟主题相反 */
+  --design-rgba-distant: 0, 0, 0;
+}
