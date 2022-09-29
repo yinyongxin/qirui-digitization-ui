@@ -43,12 +43,11 @@
       "require": "./dist/globalLess/index.less"
     }
   },
-  "version": "1.5.6",
+  "version": "1.5.2",
   "scripts": {
     "start": "npm run dev",
     "dev": "vite --host",
-    "build:comp": "vite build --mode comp && tsc -p tsconfig.build.json",
-    "build:docu": "vite build --mode docu",
+    "build": "vite build && tsc -p tsconfig.build.json",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client'
-import { HashRouter, useRoutes } from 'react-router-dom';
+import { BrowserRouter, useRoutes } from 'react-router-dom';
 import { routes } from './doc/routes';
 
 const Main = () => {
@@ -9,8 +9,8 @@ const Main = () => {
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   // <React.StrictMode>
-  <HashRouter>
+  <BrowserRouter>
     <Main />
-  </HashRouter>
+  </BrowserRouter>
   // </React.StrictMode>
 )
