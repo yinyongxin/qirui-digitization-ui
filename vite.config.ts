@@ -14,8 +14,8 @@ export default defineConfig(({ command, mode }) => {
       build: {
         lib: {
           entry: resolve(__dirname, 'src/components/index.tsx'),
-          name: 'magic-ui-react',
-          fileName: 'magic-ui-react',
+          name: 'QiruiDigitizationUI',
+          fileName: 'qirui-digitization-ui',
         },
         rollupOptions: {
           // 确保外部化处理那些你不想打包进库的依赖
