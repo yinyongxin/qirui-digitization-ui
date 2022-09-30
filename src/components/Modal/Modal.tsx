@@ -249,6 +249,16 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
     setVisible(false)
     afterClose && afterClose()
   }
+  useEffect(() => {
+    let body = document.body
+    if (visible) {
+      body.style.overflow = 'hidden'
+    }
+    else {
+      body.style.overflow = 'auto'
+    }
+
+  }, [visible])
 
   useImperativeHandle<unknown, ModalHandle>(
     ref,
