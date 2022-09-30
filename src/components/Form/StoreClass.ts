@@ -10,7 +10,7 @@ export class Store<
   FormData = any,
   FieldValue = FormData[keyof FormData],
   FieldKey extends DesignTypes['KeyType'] = keyof FormData
-  >
+>
 {
   constructor() { }
   // 存储数据
@@ -102,7 +102,7 @@ export class Store<
     for (const key in values) {
       setObjectValueByString(this.store, key as string, values[key])
     }
-    this.updateFieldsName = Object.keys(values) as FieldKey[]
+    this.updateFieldsName = Object.keys(values!) as FieldKey[]
     this.updateCallBack?.()
   }
 

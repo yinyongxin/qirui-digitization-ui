@@ -114,7 +114,7 @@ const InputText: FC<InputTextPropsType> = (props, ref) => {
   }
 
   const inputProps: JSX.IntrinsicElements['input'] = {
-    type: 'text',
+    type: inputAttributes?.type || 'text',
     name,
     id: name,
     className: classNamesObj.inputText(),

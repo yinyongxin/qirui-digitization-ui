@@ -257,7 +257,6 @@ const Modal: ForwardRefRenderFunction<unknown, ModalPropsType> = (props, ref) =>
     else {
       body.style.overflow = 'auto'
     }
-
   }, [visible])
 
   useImperativeHandle<unknown, ModalHandle>(

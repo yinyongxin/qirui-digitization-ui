@@ -27,6 +27,7 @@ const Tabs: ForwardRefRenderFunction<unknown, TabsPropsType> = (props, ref) => {
   }
 
   useEffect(() => {
+    console.log(propsActiveTab);
     setActiveTab(propsActiveTab || tabList?.[0].current)
   }, [propsActiveTab])
 
@@ -84,6 +85,7 @@ const Tabs: ForwardRefRenderFunction<unknown, TabsPropsType> = (props, ref) => {
             {tabContent}
           </div>
         )}
+        <div>9999</div>
       </div>
     </TabsComtext.Provider>
   )
