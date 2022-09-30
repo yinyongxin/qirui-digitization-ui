@@ -28,7 +28,7 @@ const Tabs: ForwardRefRenderFunction<unknown, TabsPropsType> = (props, ref) => {
 
   useEffect(() => {
     setActiveTab(propsActiveTab || tabList?.[0].current)
-  }, [])
+  }, [propsActiveTab])
 
   const tabPanes = useMemo(() => tabList.map(tab => {
     const tabPanesProps = omit(tab, ['content'])
