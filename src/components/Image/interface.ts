@@ -27,6 +27,11 @@ export interface ImageBaseInterface {
    * √
    * 默认图片地址
    */
+  icon?: any,
+  /**
+   * √
+   * 默认图标
+   */
   defaultSrc?: any,
   /**
    * √

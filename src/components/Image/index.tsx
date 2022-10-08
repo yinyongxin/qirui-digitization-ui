@@ -34,6 +34,7 @@ const Image: FC<ImagePropsType> = (props, ref) => {
     closeShow = 'never',
     error,
     loader = true,
+    icon = 'plus',
     defaultSrc,
     mask = false,
     optionsShow = 'never',
@@ -165,7 +166,7 @@ const Image: FC<ImagePropsType> = (props, ref) => {
           {
             error
             ||
-            <Icon icon="circle-exclamation" size={iconSize} />
+            <Icon icon={icon} size={isNumber(width) ? width / 3.5 : 20} />
           }
         </div>
       )
