@@ -14,11 +14,11 @@ const InputPassword: FC<InputPasswordPropsType> = (props, ref) => {
   const {
     classNamePrefix
   } = useContext(GlobalContext);
-  const prefixCls = `${classNamePrefix}-inputText`
+  const prefixCls = `${classNamePrefix}-inputPassword`
 
   const formItemContent = useContext(FormItemContext);
   const formContent = useContext(FormContext);
-  // console.log('formItemContent', formItemContent);
+
 
   const dataRef = useRef<InputDataRef>({
     focusState: 'blur'
@@ -67,7 +67,7 @@ const InputPassword: FC<InputPasswordPropsType> = (props, ref) => {
   }
 
   const classNamesObj = {
-    inputTextComponent: (classNames: ClassNameType[] = []) => getClassNames([
+    inputPasswordComponent: (classNames: ClassNameType[] = []) => getClassNames([
       `${prefixCls}`,
       className,
       `${classNamePrefix}-border-color-default`,
@@ -82,7 +82,7 @@ const InputPassword: FC<InputPasswordPropsType> = (props, ref) => {
       },
       ...classNames,
     ]),
-    inputText: (classNames: ClassNameType[] = []) => getClassNames([
+    inputPassword: (classNames: ClassNameType[] = []) => getClassNames([
       inputAttributes?.className,
       {
         [`${prefixCls}-padding-left`]: !!prefix || !!addBefore,
@@ -119,7 +119,7 @@ const InputPassword: FC<InputPasswordPropsType> = (props, ref) => {
     type: type,
     name,
     id: name,
-    className: classNamesObj.inputText(),
+    className: classNamesObj.inputPassword(),
     readOnly,
     defaultValue,
     ...getValueIfQualified({
@@ -210,7 +210,7 @@ const InputPassword: FC<InputPasswordPropsType> = (props, ref) => {
   return (
     <div
       style={{ width, height, ...style }}
-      className={classNamesObj.inputTextComponent()}
+      className={classNamesObj.inputPasswordComponent()}
     >
       {before.addBefore()}
       {before.prefix()}

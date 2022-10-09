@@ -23,7 +23,6 @@ const InputComp: InputInterface = InputForWard as InputInterface
 InputComp.displayName = 'Input'
 
 InputComp.Text = InputText
-
 InputComp.Number = InputNumber
 InputComp.Password = InputPassword
 
