@@ -17,6 +17,7 @@ import Table from "./Table/index";
 import Input from "./Input/index";
 import InputText from "./Input/InputText/index";
 import InputNumber from "./Input/InputNumber/index";
+import InputPassword from './Input/InputPassword/index';
 import Radio from './Radio/index'
 import Checkbox from './Checkbox'
 import Upload from "./Upload/index";
@@ -40,6 +41,7 @@ export * from './utils/tools'
 
 import { GlobalContext } from './config/globalContext'
 
+
 export {
   Button,
   Checkbox,
@@ -60,6 +62,7 @@ export {
   Input,
   InputText,
   InputNumber,
+  InputPassword,
   Upload,
   Image,
   Steps,
